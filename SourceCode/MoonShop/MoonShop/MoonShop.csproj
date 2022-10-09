@@ -109,6 +109,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Asset\img\banner\bannertop.png" />
+    <Content Include="Asset\img\logo\MoonShop.png" />
+    <Content Include="Asset\img\product\bo-co-trang-diem-naked3-12-cay-cao-cap-1.jpg" />
+    <Content Include="Asset\img\product\f6819bdc586d5e7c9da1fa6bf78173ca.jpg" />
+    <Content Include="Asset\img\product\google-shopping-son-thoi-li-3ce-227-benchmark-mau-cam-do-chay-3-5g-1644639565_img_380x380_64adc6_fit_center.jpg" />
     <Content Include="Asset\img\user\soothienquang.jpg" />
     <Content Include="css\style.css" />
     <Content Include="Global.asax" />
@@ -143,7 +148,8 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\APIController\LoginController.cs" />
+    <Compile Include="APIController\LoginController.cs" />
+    <Compile Include="Controllers\CaroselController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -180,7 +186,6 @@
     <Content Include="Models\dbcosmetic.edmx.diagram">
       <DependentUpon>dbcosmetic.edmx</DependentUpon>
     </Content>
-    <Content Include="css\.DS_Store" />
     <Content Include="css\maps\style.css.map" />
     <None Include="packages.config" />
     <Content Include="Views\Share\_HomeLayout.cshtml" />
@@ -191,6 +196,8 @@
     <Content Include="vendors\ti-icons\fonts\themify.eot" />
     <Content Include="vendors\ti-icons\fonts\themify.ttf" />
     <Content Include="vendors\ti-icons\fonts\themify.woff" />
+    <Content Include="Views\Carosel\CaroselBaner.cshtml" />
+    <Content Include="Views\Carosel\CaroselBanner.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

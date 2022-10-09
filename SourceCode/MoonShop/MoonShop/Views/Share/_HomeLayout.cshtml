@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>RoyalUI Admin</title>
+    <title>MoonShop Wellcome !</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
     <link rel="stylesheet" href="vendors/base/vendor.bundle.base.css">
@@ -25,111 +25,110 @@
 </head>
 <body>
     <div class="container-scroller">
-        <div class="row p-0 m-0 proBanner" id="proBanner">
-            <div class="col-md-12 p-0 m-0">
-                <div class="card-body card-body-padding d-flex align-items-center justify-content-between">
-                    <div class="ps-lg-1">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <p class="mb-0 font-weight-medium me-3 buy-now-text">Free 24/7 customer support, updates, and more with this template!</p>
-                            <a href="https://www.bootstrapdash.com/product/royalui/?utm_source=organic&utm_medium=banner&utm_campaign=buynow_demo" target="_blank" class="btn me-2 buy-now-btn border-0">Get Pro</a>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center justify-content-between">
-                        <a href="https://www.bootstrapdash.com/product/royalui/"><i class="ti-home me-3 text-white"></i></a>
-                        <button id="bannerClose" class="btn border-0 p-0">
-                            <i class="ti-close text-white me-0"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <img src="~/Asset/img/banner/bannertop.png" width="100%" height="40px" style="margin-bottom:auto">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo me-5" href="index.html"><img src="images/logo.svg" class="me-2" alt="logo" /></a>
-                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo" /></a>
+                <a class="navbar-brand brand-logo me-5" href="#"><img src="~/Asset/img/logo/MoonShop.png" class="me-2" alt="MoonShop" />MoonShop</a>
+                <a class="navbar-brand brand-logo-mini" href="#"><img src="~/Asset/img/logo/MoonShop.png" alt="MS" /></a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
                     <span class="ti-view-list"></span>
                 </button>
-                <ul class="navbar-nav mr-lg-2">
-                    <li class="nav-item nav-search d-none d-lg-block">
-                        <div class="input-group">
-                            <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                                <span class="input-group-text" id="search">
-                                    <i class="ti-search"></i>
-                                </span>
-                            </div>
-                            <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
-                        </div>
-                    </li>
-                </ul>
+                @*tìm kiếm khung*@
+            <div class="navbar-nav vw-50">
+                <div class="nav-item nav-search">
+                    <div class="input-group" >
+                        <input type="search" class="form-control" id="navbar-search-input" placeholder="Tìm kiếm..." aria-label="search" aria-describedby="search">
+                        <span class="input-group-text" id="search">
+                            <a class="ti-search" href="#"></a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+
+                @*-------------tin nhắn-------------------*@
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item dropdown me-1">
                         <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-bs-toggle="dropdown">
                             <i class="ti-email mx-0"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="messageDropdown">
-                            <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
+                            <p class="mb-0 font-weight-normal float-left dropdown-header">Tin nhắn</p>
                             <a class="dropdown-item">
                                 <div class="item-thumbnail">
-                                    <img src="images/faces/face4.jpg" alt="image" class="profile-pic">
+                                    <img src="~/Asset/img/product/bo-co-trang-diem-naked3-12-cay-cao-cap-1.jpg" alt="image" class="profile-pic">
                                 </div>
                                 <div class="item-content flex-grow">
                                     <h6 class="ellipsis font-weight-normal">
-                                        David Grey
+                                        Cọ lackbee
                                     </h6>
                                     <p class="font-weight-light small-text text-muted mb-0">
-                                        The meeting is cancelled
+                                        Đã được vận chuyển
                                     </p>
                                 </div>
                             </a>
                             <a class="dropdown-item">
                                 <div class="item-thumbnail">
-                                    <img src="images/faces/face2.jpg" alt="image" class="profile-pic">
+                                    <img src="~/Asset/img/product/f6819bdc586d5e7c9da1fa6bf78173ca.jpg" alt="image" class="profile-pic">
                                 </div>
                                 <div class="item-content flex-grow">
                                     <h6 class="ellipsis font-weight-normal">
-                                        Tim Cook
+                                        Túi xách cầm tay
                                     </h6>
                                     <p class="font-weight-light small-text text-muted mb-0">
-                                        New product launch
+                                        Đang chờ xác nhận
                                     </p>
                                 </div>
                             </a>
                             <a class="dropdown-item">
                                 <div class="item-thumbnail">
-                                    <img src="images/faces/face3.jpg" alt="image" class="profile-pic">
+                                    <img src="~/Asset/img/product/google-shopping-son-thoi-li-3ce-227-benchmark-mau-cam-do-chay-3-5g-1644639565_img_380x380_64adc6_fit_center.jpg" alt="image" class="profile-pic">
                                 </div>
                                 <div class="item-content flex-grow">
                                     <h6 class="ellipsis font-weight-normal">
-                                        Johnson
+                                        Son Dior
                                     </h6>
                                     <p class="font-weight-light small-text text-muted mb-0">
-                                        Upcoming board meeting
+                                        Đang chờ xác nhận
                                     </p>
                                 </div>
                             </a>
                         </div>
                     </li>
+                    @*------------------thông báo---------------------*@
                     <li class="nav-item dropdown">
                         <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
                             <i class="ti-bell mx-0"></i>
                             <span class="count"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
-                            <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
+                            <p class="mb-0 font-weight-normal float-left dropdown-header">Thông báo</p>
                             <a class="dropdown-item">
                                 <div class="item-thumbnail">
                                     <div class="item-icon bg-success">
-                                        <i class="ti-info-alt mx-0"></i>
+                                        <i class="ti-wallet mx-0"></i>
                                     </div>
                                 </div>
                                 <div class="item-content">
-                                    <h6 class="font-weight-normal">Application Error</h6>
+                                    <h6 class="font-weight-normal">Đơn đặt hàng</h6>
                                     <p class="font-weight-light small-text mb-0 text-muted">
-                                        Just now
+                                        2 đơn đặt hàng
+                                    </p>
+                                </div>
+                            </a>
+                            <a class="dropdown-item">
+                                <div class="item-thumbnail">
+                                    <div class="item-icon bg-info">
+                                        <i class="ti-shopping-cart mx-0"></i>
+                                    </div>
+                                </div>
+                                <div class="item-content">
+                                    <h6 class="font-weight-normal">Giỏ hàng</h6>
+                                    <p class="font-weight-light small-text mb-0 text-muted">
+                                        2 item
                                     </p>
                                 </div>
                             </a>
@@ -146,33 +145,25 @@
                                     </p>
                                 </div>
                             </a>
-                            <a class="dropdown-item">
-                                <div class="item-thumbnail">
-                                    <div class="item-icon bg-info">
-                                        <i class="ti-user mx-0"></i>
-                                    </div>
-                                </div>
-                                <div class="item-content">
-                                    <h6 class="font-weight-normal">New user registration</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        2 days ago
-                                    </p>
-                                </div>
-                            </a>
                         </div>
                     </li>
+                    @*----------------------thông tin cá nhân---------------------------------*@
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
                             <img src="~/Asset/img/user/soothienquang.jpg" alt="profile" />
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                             <a class="dropdown-item">
+                                <i class="ti-user text-primary"></i>
+                                Đăng kí tài khoản
+                            </a>
+                            <a class="dropdown-item">
                                 <i class="ti-settings text-primary"></i>
-                                Settings
+                                Cài đặt
                             </a>
                             <a class="dropdown-item">
                                 <i class="ti-power-off text-primary"></i>
-                                Logout
+                                Đăng xuất
                             </a>
                         </div>
                     </li>
@@ -182,13 +173,13 @@
                 </button>
             </div>
         </nav>
-        <!-- partial -->
-        <div class="container-fluid page-body-wrapper">
-            <nav class="sidebar sidebar-offcanvas" id="sidebar"  style="background-color:white">
+        <!-- thanh ẩn hiện menu  slidebar -->
+        <div class="container-fluid page-body-wrapper" style="margin-top:30px">
+            <nav class="sidebar sidebar-offcanvas" id="sidebar" style="background-color:white">
                 <ul class="nav">
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">
-                            <i class="ti-shield menu-icon"></i>
+                            <i class="ti-home menu-icon"></i>
                             <span class="menu-title">MoonShop Beauty</span>
                         </a>
                     </li>
@@ -260,30 +251,16 @@
                 </ul>
             </nav>
             <!-- partial -->
+            @*--------------------------carosel----------------------------------*@
             <div class="main-panel">
-                <div class="content-wrapper">
+                <div class="content-wrapper" style="background-color:white">
                     <div class="row">
-                        <div class="col-md-12 grid-margin">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <h4 class="font-weight-bold mb-0">RoyalUI Dashboard</h4>
-                                </div>
-                                <div>
-                                    <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
-                                        <i class="ti-clipboard btn-icon-prepend"></i>Report
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="col-md-12">
+                            @Html.Action("CaroselBaner", "Carosel")
+                          
                         </div>
+                        
                     </div>
-                    <div class="row" style="height:50px">
-                       
-                    </div>
-                    <div class="row">
-                       
-                    </div>
-
-
                 </div>
 
             </div>
@@ -313,4 +290,3 @@
 </body>
 
 </html>
-
