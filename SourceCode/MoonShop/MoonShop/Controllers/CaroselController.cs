@@ -17,5 +17,9 @@ namespace MoonShop.Controllers
         {
             return PartialView();
         }
+        public ActionResult CaroselProductHot()
+        {
+            return PartialView();
+        }
     }
 }

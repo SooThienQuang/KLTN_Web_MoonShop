@@ -4,7 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBCosmeticModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DBCosmeticModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="char" MaxLength="100" />
+          <Property Name="password" Type="char" MaxLength="100" />
+          <Property Name="img" Type="char" MaxLength="100" />
+          <Property Name="fullname" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBCosmetic.dbo.Tbl_Product' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Tbl_Product">
@@ -15,16 +25,8 @@ warning 6002: The table/view 'DBCosmetic.dbo.Tbl_Product' does not have a primar
           <Property Name="name" Type="nvarchar(max)" />
           <Property Name="price" Type="float" />
         </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="username" Type="nchar" MaxLength="20" />
-          <Property Name="fullname" Type="nvarchar" MaxLength="50" />
-        </EntityType>
         <EntityContainer Name="DBCosmeticModelStoreContainer">
-          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Product" EntityType="Self.Tbl_Product" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Tbl_Product].[id] AS [id], 
@@ -33,17 +35,22 @@ warning 6002: The table/view 'DBCosmetic.dbo.Tbl_Product' does not have a primar
     FROM [dbo].[Tbl_Product] AS [Tbl_Product]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBCosmeticModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="User">
+        <EntityContainer Name="DBCosmeticEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="DBCosmeticModel.Account" />
+          <EntitySet Name="Tbl_Product" EntityType="DBCosmeticModel.Tbl_Product" />
+        </EntityContainer>
+        <EntityType Name="Account">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="username" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="username" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="img" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
           <Property Name="fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Tbl_Product">
@@ -54,31 +61,29 @@ warning 6002: The table/view 'DBCosmetic.dbo.Tbl_Product' does not have a primar
           <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="price" Type="Double" />
         </EntityType>
-        <EntityContainer Name="DBCosmeticEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="Tbl_Product" EntityType="Self.Tbl_Product" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DBCosmeticModelStoreContainer" CdmEntityContainer="DBCosmeticEntities">
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="DBCosmeticModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="username" ColumnName="username" />
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="DBCosmeticModel.Account">
+              <MappingFragment StoreEntitySet="Account">
                 <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tbl_Product">
             <EntityTypeMapping TypeName="DBCosmeticModel.Tbl_Product">
               <MappingFragment StoreEntitySet="Tbl_Product">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

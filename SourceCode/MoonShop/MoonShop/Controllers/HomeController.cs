@@ -17,6 +17,13 @@ namespace MoonShop.Controllers
             return View(db.Tbl_Product.ToList());
         }
 
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+
+
         public ActionResult Create()
         {
             return View();
@@ -27,6 +34,18 @@ namespace MoonShop.Controllers
             db.Tbl_Product.Add(b);
             db.SaveChanges();
             return View();
+        }
+
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
+        public ActionResult Modal(string id)
+        {
+            int ma = int.Parse(id);
+            Tbl_Product pro = db.Tbl_Product.FirstOrDefault(n => n.id ==ma);
+            return PartialView(pro);
         }
     }
 }

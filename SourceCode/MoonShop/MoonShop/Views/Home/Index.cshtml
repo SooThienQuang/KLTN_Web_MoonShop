@@ -5,36 +5,86 @@
     Layout = "~/Views/Share/_HomeLayout.cshtml";
 }
 
-<h2>Index</h2>
+@*<script type="text/javascript">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.price)
-        </th>
-        <th></th>
-    </tr>
+    $(document).ready(function () {
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.price)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+        $('#buttonId').click(function () {
+            var reportDate = $(this).data('id');
+            var url = '@Url.Action("Modal", "Home", new {id = "data"})';
+            $('#divid').load(url.replace('data', reportDate));
+        });
+    });
+</script>
+<div id="divid" style="height:100px; width:400px" ;>
+</div>*@
+    <div class="row">
+        @Html.Action("CaroselBaner", "Carosel")
+    </div>
+    <div class="row" style="border:groove">
+        <div class="col" >
+            <img src="~/Asset/img/producer/hsx1.jpg" style="object-fit:cover; height:100px;width:100px" />
+        </div>
+        <div class="col">
+            <img src="~/Asset/img/producer/hsx2.jpg" style="object-fit:fill; height:100px;width:100px" />
+        </div>
+        <div class="col">
+            <img src="~/Asset/img/producer/hsx3.jpg" style="object-fit:revert; height:100px;width:100px" />
+        </div>
+        <div class="col">
+            <img src="~/Asset/img/producer/hsx4.jpg" style="object-fit:cover; height:100px;width:100px" />
+        </div>
+        <div class="col">
+            <img src="~/Asset/img/producer/hsx5.jpg" style="object-fit:cover; height:100px;width:100px" />
+        </div>
+        <div class="col">
+            <img src="~/Asset/img/producer/hsx6.jpg" style="object-fit:revert; height:100px;width:100px" />
+        </div>
+    </div>
 
-</table>
+
+
+    @*<div class="row">
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.price)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.price)
+                        </td>
+                        <td>
+                            <button data-id="@item.id" id="buttonId" class="btn btn-outline-success">Edit</button>
+                        </td>
+                    </tr>
+
+                }
+
+            </table>
+        </div>*@
+
+
+    <div class="row">
+        @Html.Action("CaroselProductHot", "Carosel")
+    </div>
+<div>
+    <p>Taken from wikpedia</p>
+    <img src="~/Asset/img/producer/hsx6.jpg" alt="Red dot" style="object-fit:cover; height:100px;width:100px"/>
+</div>
+
+

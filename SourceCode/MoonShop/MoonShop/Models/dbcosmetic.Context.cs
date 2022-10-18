@@ -25,7 +25,7 @@ namespace MoonShop.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Tbl_Product> Tbl_Product { get; set; }
     }
 }
