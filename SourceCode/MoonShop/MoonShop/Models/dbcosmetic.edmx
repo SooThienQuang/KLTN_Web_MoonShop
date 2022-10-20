@@ -16,6 +16,21 @@
           <Property Name="fullname" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'DBCosmetic.dbo.Customer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="customerID" />
+          </Key>
+          <Property Name="customerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customerCode" Type="uniqueidentifier" />
+          <Property Name="customerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="customerSex" Type="nvarchar" MaxLength="50" />
+          <Property Name="customerAddress" Type="nvarchar" MaxLength="300" />
+          <Property Name="customerUserName" Type="nchar" MaxLength="100" />
+          <Property Name="customerPassword" Type="nchar" MaxLength="300" />
+          <Property Name="customerPhoto" Type="nchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'DBCosmetic.dbo.Tbl_Product' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Tbl_Product">
           <Key>
@@ -27,6 +42,18 @@ warning 6002: The table/view 'DBCosmetic.dbo.Tbl_Product' does not have a primar
         </EntityType>
         <EntityContainer Name="DBCosmeticModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Customer].[customerID] AS [customerID], 
+    [Customer].[customerCode] AS [customerCode], 
+    [Customer].[customerName] AS [customerName], 
+    [Customer].[customerSex] AS [customerSex], 
+    [Customer].[customerAddress] AS [customerAddress], 
+    [Customer].[customerUserName] AS [customerUserName], 
+    [Customer].[customerPassword] AS [customerPassword], 
+    [Customer].[customerPhoto] AS [customerPhoto]
+    FROM [dbo].[Customer] AS [Customer]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Tbl_Product" EntityType="Self.Tbl_Product" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Tbl_Product].[id] AS [id], 
@@ -42,6 +69,7 @@ warning 6002: The table/view 'DBCosmetic.dbo.Tbl_Product' does not have a primar
         <EntityContainer Name="DBCosmeticEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="DBCosmeticModel.Account" />
           <EntitySet Name="Tbl_Product" EntityType="DBCosmeticModel.Tbl_Product" />
+          <EntitySet Name="Customers" EntityType="DBCosmeticModel.Customer" />
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -60,6 +88,19 @@ warning 6002: The table/view 'DBCosmetic.dbo.Tbl_Product' does not have a primar
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="price" Type="Double" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="customerID" />
+          </Key>
+          <Property Name="customerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customerCode" Type="Guid" />
+          <Property Name="customerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="customerSex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="customerAddress" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="customerUserName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="customerPassword" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
+          <Property Name="customerPhoto" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -84,6 +125,20 @@ warning 6002: The table/view 'DBCosmetic.dbo.Tbl_Product' does not have a primar
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="DBCosmeticModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="customerPhoto" ColumnName="customerPhoto" />
+                <ScalarProperty Name="customerPassword" ColumnName="customerPassword" />
+                <ScalarProperty Name="customerUserName" ColumnName="customerUserName" />
+                <ScalarProperty Name="customerAddress" ColumnName="customerAddress" />
+                <ScalarProperty Name="customerSex" ColumnName="customerSex" />
+                <ScalarProperty Name="customerName" ColumnName="customerName" />
+                <ScalarProperty Name="customerCode" ColumnName="customerCode" />
+                <ScalarProperty Name="customerID" ColumnName="customerID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

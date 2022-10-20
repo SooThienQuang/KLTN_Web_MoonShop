@@ -183,13 +183,18 @@
     <Compile Include="APIController\LoginController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CaroselController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\PartialViewController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Account.cs">
+      <DependentUpon>dbcosmetic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\dbcosmetic.Context.cs">
@@ -245,16 +250,19 @@
     <Content Include="Views\Home\Modal.cshtml" />
     <Content Include="Views\Carosel\CaroselProductHot.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
-    <Content Include="Views\Share\_HomeLayout.cshtml" />
     <None Include="Properties\PublishProfiles\HongHacCosmetic - Web Deploy.pubxml" />
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Carosel\CaroselBaner.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Image\Image.cshtml" />
-    <Content Include="Views\Share\_HomeLayout - Copy.cshtml" />
+    <Content Include="Views\Share\_HomeLayout.cshtml" />
+    <Content Include="Views\Share\_AdminLayout.cshtml" />
+    <Content Include="Views\PartialView\Navbar.cshtml" />
+    <Content Include="Views\PartialView\NavbarTop.cshtml" />
+    <Content Include="Views\Customer\Login.cshtml" />
+    <Content Include="Views\Customer\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

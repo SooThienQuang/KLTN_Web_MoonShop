@@ -11,6 +11,21 @@
     <Property Name="fullname" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <!--Errors Found During Generation:
+warning 6002: The table/view 'DBCosmetic.dbo.Customer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="customerID" />
+    </Key>
+    <Property Name="customerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customerCode" Type="uniqueidentifier" />
+    <Property Name="customerName" Type="nvarchar" MaxLength="50" />
+    <Property Name="customerSex" Type="nvarchar" MaxLength="50" />
+    <Property Name="customerAddress" Type="nvarchar" MaxLength="300" />
+    <Property Name="customerUserName" Type="nchar" MaxLength="100" />
+    <Property Name="customerPassword" Type="nchar" MaxLength="300" />
+    <Property Name="customerPhoto" Type="nchar" MaxLength="100" />
+  </EntityType>
+  <!--Errors Found During Generation:
 warning 6002: The table/view 'DBCosmetic.dbo.Tbl_Product' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Tbl_Product">
     <Key>
@@ -22,6 +37,18 @@ warning 6002: The table/view 'DBCosmetic.dbo.Tbl_Product' does not have a primar
   </EntityType>
   <EntityContainer Name="DBCosmeticModelStoreContainer">
     <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Customer].[customerID] AS [customerID], 
+    [Customer].[customerCode] AS [customerCode], 
+    [Customer].[customerName] AS [customerName], 
+    [Customer].[customerSex] AS [customerSex], 
+    [Customer].[customerAddress] AS [customerAddress], 
+    [Customer].[customerUserName] AS [customerUserName], 
+    [Customer].[customerPassword] AS [customerPassword], 
+    [Customer].[customerPhoto] AS [customerPhoto]
+    FROM [dbo].[Customer] AS [Customer]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="Tbl_Product" EntityType="Self.Tbl_Product" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [Tbl_Product].[id] AS [id], 

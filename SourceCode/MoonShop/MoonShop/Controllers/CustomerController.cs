@@ -6,27 +6,25 @@ using System.Web.Mvc;
 
 namespace MoonShop.Controllers
 {
-    public class AccountController : Controller
+    public class CustomerController : Controller
     {
-        // GET: Account
+        // GET: Customer
         public ActionResult Login()
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult Login(string txt_password)
-        {
-            return View();
-        }
+
         public ActionResult Register()
         {
             return View();
         }
-        public ActionResult Update()
+        [HttpPost]
+        public ActionResult Register(string a)
         {
             return View();
         }
-        public ActionResult Delete()
+
+        public ActionResult Register1()
         {
             return View();
         }

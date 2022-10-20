@@ -7,22 +7,26 @@
 
 @*<script type="text/javascript">
 
-    $(document).ready(function () {
+        $(document).ready(function () {
 
-        $('#buttonId').click(function () {
-            var reportDate = $(this).data('id');
-            var url = '@Url.Action("Modal", "Home", new {id = "data"})';
-            $('#divid').load(url.replace('data', reportDate));
+            $('#buttonId').click(function () {
+                var reportDate = $(this).data('id');
+                var url = '@Url.Action("Modal", "Home", new {id = "data"})';
+                $('#divid').load(url.replace('data', reportDate));
+            });
         });
-    });
-</script>
-<div id="divid" style="height:100px; width:400px" ;>
-</div>*@
+    </script>
+    <div id="divid" style="height:100px; width:400px" ;>
+    </div>*@
+
+<div class="container">
+
     <div class="row">
         @Html.Action("CaroselBaner", "Carosel")
     </div>
+
     <div class="row" style="border:groove">
-        <div class="col" >
+        <div class="col">
             <img src="~/Asset/img/producer/hsx1.jpg" style="object-fit:cover; height:100px;width:100px" />
         </div>
         <div class="col">
@@ -82,9 +86,11 @@
     <div class="row">
         @Html.Action("CaroselProductHot", "Carosel")
     </div>
-<div>
-    <p>Taken from wikpedia</p>
-    <img src="~/Asset/img/producer/hsx6.jpg" alt="Red dot" style="object-fit:cover; height:100px;width:100px"/>
+    <div>
+        <p>Taken from wikpedia</p>
+        <img src="~/Asset/img/producer/hsx6.jpg" alt="Red dot" style="object-fit:cover; height:100px;width:100px" />
+    </div>
+
+
+
 </div>
-
-

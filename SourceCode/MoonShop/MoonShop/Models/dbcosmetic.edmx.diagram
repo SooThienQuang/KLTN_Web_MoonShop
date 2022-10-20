@@ -7,6 +7,7 @@
       <Diagram DiagramId="a16ef1ded7eb421a9ffcca202bf72c66" Name="Diagram1">
         <EntityTypeShape EntityType="DBCosmeticModel.Account" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="DBCosmeticModel.Tbl_Product" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DBCosmeticModel.Customer" Width="1.5" PointX="0.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -27,5 +27,6 @@ namespace MoonShop.Models
     
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Tbl_Product> Tbl_Product { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
     }
 }
