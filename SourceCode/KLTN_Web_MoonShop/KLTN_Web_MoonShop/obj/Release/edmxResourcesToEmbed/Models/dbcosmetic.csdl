@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBCosmeticModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="img" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="customerID" />
+    </Key>
+    <Property Name="customerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customerCode" Type="Guid" />
+    <Property Name="customerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="customerSex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="customerAddress" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="customerUserName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="customerPassword" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
+    <Property Name="customerPhoto" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Tbl_Product">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="price" Type="Double" />
+  </EntityType>
+  <EntityContainer Name="DBCosmeticEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="Self.Account" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Tbl_Product" EntityType="Self.Tbl_Product" />
+  </EntityContainer>
+</Schema>

@@ -101,18 +101,21 @@
                             <input id="password" type="password" name="password" placeholder="Mật khẩu" class="form-control bg-white border-left-0 border-md">
                         </div>
                         <div class="input-group col-lg-6 mb-4">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text bg-white px-4 border-md border-right-0">
-                                        <i class="fa fa-lock text-muted"></i>
-                                    </span>
-                                </div>
-                                <input id="repassword" type="password" name="repassword" placeholder="Nhập lại mật khẩu" class="form-control bg-white border-left-0 border-md">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                    <i class="fa fa-lock text-muted"></i>
+                                </span>
                             </div>
-
-                            <!-- Submit Button -->
-                            <div class="form-group col-lg-12 mx-auto mb-0">
-                                <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Tạo tài khoản</button>
-                            </div>
+                            <input id="repassword" type="password" name="repassword" placeholder="Nhập lại mật khẩu" class="form-control bg-white border-left-0 border-md">
+                        </div>
+                        @if (@ViewBag.CreateSuccess != null)
+                        {
+                            @Html.Action("Success", "Alert")
+                        }
+                        <!-- Submit Button -->
+                        <div class="form-group col-lg-12 mx-auto mb-0">
+                            <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Tạo tài khoản</button>
+                        </div>
                         <!-- Password Confirmation -->
                         <!-- Divider Text -->
                         <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-4">

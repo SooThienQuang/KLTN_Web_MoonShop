@@ -78,3 +78,7 @@ C:\GitLab\KLTN_Web_MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\obj\D
 C:\GitLab\KLTN_Web_MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\obj\Debug\KLTN_Web_MoonShop.csproj.CopyComplete
 C:\GitLab\KLTN_Web_MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\obj\Debug\KLTN_Web_MoonShop.dll
 C:\GitLab\KLTN_Web_MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\obj\Debug\KLTN_Web_MoonShop.pdb
+C:\GitLab\KLTN_Web_MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\EntityFramework.dll
+C:\GitLab\KLTN_Web_MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\EntityFramework.SqlServer.dll
+C:\GitLab\KLTN_Web_MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\EntityFramework.xml
+C:\GitLab\KLTN_Web_MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\EntityFramework.SqlServer.xml

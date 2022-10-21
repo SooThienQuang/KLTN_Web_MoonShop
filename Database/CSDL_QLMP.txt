@@ -1,0 +1,186 @@
+create table KhachHang
+(
+	ID_KhachHang int identity(10000,1) not null primary key,
+	HoTen_KH nvarchar(50) not null,
+	GioiTinh nvarchar(6) not null,
+	DiaChi nvarchar(500) not null,
+	Email varchar(100) not null,
+	TenDangNhap varchar(30) not null unique,
+	MatKhau varchar(30) not null
+)
+go
+create table DienThoai_KhachHang
+(
+	SoDienThoai varchar(11) not null primary key,
+	ID_KhachHang int not null,
+	CONSTRAINT FK_DienThoai_KhachHang_KhachHang FOREIGN KEY (ID_KhachHang) REFERENCES KhachHang(ID_KhachHang) 
+)
+go
+create table LoaiNhanVien
+(
+	ID_LoaiNhanVien int identity(1,1) not null primary key,
+	TenLoaiNhanVien nvarchar(100) not null
+)
+go
+create table NhanVien
+(
+	ID_NhanVien int identity(1,1) not null primary key,
+	HoTen_NV nvarchar(50) not null,
+	GioiTinh nvarchar(6) not null,
+	DiaChi nvarchar(500) not null,
+	Email varchar(100) not null,
+	HinhAnh varchar(50) not null,
+	TenDangNhap varchar(30) not null unique,
+	MatKhau varchar(30) not null,
+	ID_LoaiNhanVien int not null,
+	CONSTRAINT FK_NhanVien_LoaiNhanVien FOREIGN KEY (ID_LoaiNhanVien) REFERENCES LoaiNhanVien(ID_LoaiNhanVien) 
+)
+
+go
+create table DienThoai_NhanVien
+(
+	SoDienThoai varchar(11) not null primary key,
+	ID_NhanVien int not null,
+	CONSTRAINT FK_DienThoai_NhanVien_NhanVien FOREIGN KEY (ID_NhanVien) REFERENCES NhanVien(ID_NhanVien) 
+)
+go
+create table BangTamTaiKhoan
+(
+	TenDangNhap varchar(30) not null primary key,
+	MatKhau varchar(30)
+)
+go
+create table LoaiSanPham
+(
+	ID_LoaiSanPham int identity(1,1) not null primary key,
+	TenLoaiSanPham nvarchar(50) not null
+)
+go
+create table SanPham
+(
+	ID_SanPham int identity(1,1) not null primary key,
+	TenSanPham nvarchar(200) not null,
+	SoLuong int not null,
+	GiaBan int not null,
+	MoTaSanPham nvarchar(1000) not null,
+	ID_LoaiSanPham int not null,
+	CONSTRAINT FK_SanPham_LoaiSanPham FOREIGN KEY (ID_LoaiSanPham) REFERENCES LoaiSanPham(ID_LoaiSanPham)
+)
+go
+create table HinhAnh
+(
+	DuongDanHinh varchar(15) not null,
+	ID_SanPham int not null,
+	TrangThai int not null, -- Nhận 2 giá trị 0 hoặc 1, 1 là ảnh bìa 0 là ảnh thường
+	primary key(DuongDanHinh, ID_SanPham),
+	CONSTRAINT FK_HinhAnh_SanPham FOREIGN KEY (ID_SanPham) REFERENCES SanPham(ID_SanPham)
+)
+go
+create table BinhLuan
+(
+	ID_BinhLuan int identity(1,1) not null primary key,
+	ID_SanPham int not null unique,
+	CONSTRAINT FK_BinhLuan_SanPham FOREIGN KEY (ID_SanPham) REFERENCES SanPham(ID_SanPham)
+)
+go
+create table ChiTietBinhLuan
+(
+	ID int identity(1,1) not null primary key,
+	NgayBinhLuan DateTime not null,
+	NoiDung nvarchar(1000) not null,
+	ID_BinhLuan int not null,
+	ID_KhachHang int not null,
+	CONSTRAINT FK_ChiTietBinhLuan_BinhLuan FOREIGN KEY (ID_BinhLuan) REFERENCES BinhLuan(ID_BinhLuan),
+	CONSTRAINT FK_ChiTietBinhLuan_KhachHang FOREIGN KEY (ID_KhachHang) REFERENCES KhachHang(ID_KhachHang)
+)
+go
+create table GiamGiaTheoNgay
+(
+	ID_GiamGia int identity(1,1) not null primary key,
+	NgayBatDau DateTime not null,
+	NgayKetThuc DateTime not null,
+	SoPhanTram int not null
+)
+go
+create table GiamGiaThanhVien
+(
+	ID_GiamGia int identity(1,1) not null primary key,
+	SoTienBatDau int not null,
+	SoTienKetThuc int not null,
+	SoPhanTram int not null
+)
+go
+create table GiamGiaSanPham
+(
+	ID_SanPham int not null primary key,
+	SoPhanTram int not null,
+	CONSTRAINT FK_GiamGiaSanPham_SanPham FOREIGN KEY (ID_SanPham) REFERENCES SanPham(ID_SanPham)
+)
+go
+create table HoaDonBanHang
+(
+	ID_HoaDonBanHang int identity(1,1) not null primary key,
+	NgayMuaHang DateTime not null,
+	TrangThai int not null,
+	ID_NhanVien int not null,
+	ID_KhachHang int not null,
+	CONSTRAINT FK_HoaDonBanHang_KhachHang FOREIGN KEY (ID_KhachHang) REFERENCES KhachHang(ID_KhachHang),
+	CONSTRAINT FK_HoaDonBanHang_NhanVien FOREIGN KEY (ID_NhanVien) REFERENCES NhanVien(ID_NhanVien)
+)
+go
+create table ChiTietHoaDonBanHang
+(
+	ID_HoaDonBanHang int not null,
+	ID_SanPham int not null,
+	SoLuong int not null,
+	Gia int not null,
+	primary key(ID_HoaDonBanHang, ID_SanPham),
+	CONSTRAINT FK_ChiTietHoaDonBanHang_HoaDonBanHang FOREIGN KEY (ID_HoaDonBanHang) REFERENCES HoaDonBanHang(ID_HoaDonBanHang),
+	CONSTRAINT FK_ChiTietHoaDonBanHang_SanPham FOREIGN KEY (ID_SanPham) REFERENCES SanPham(ID_SanPham)
+)
+go
+create table NhaCungCap
+(
+	ID_NhaCungCap int identity(1,1) not null primary key,
+	TenNhaCungCap nvarchar(200) not null,
+	DiaChi nvarchar(200) not null,
+)
+go
+create table DienThoai_NhaCungCap
+(
+	SoDienThoai varchar(11) not null primary key,
+	ID_NhaCungCap int not null,
+	CONSTRAINT FK_DienThoai_NhaCungCap_NhaCungCap FOREIGN KEY (ID_NhaCungCap) REFERENCES NhaCungCap(ID_NhaCungCap) 
+)
+go
+create table HoaDonNhapHang
+(
+	ID_HoaDonNhapHang int identity(1,1) not null primary key,
+	NgayDatHang datetime not null,
+	NgayNhanHang dateTime,
+	TrangThai int not null,
+	ID_NhanVien int not null,
+	ID_NhaCungCap int not null,
+	CONSTRAINT FK_HoaDonNhapHang_NhaCungCap FOREIGN KEY (ID_NhaCungCap) REFERENCES NhaCungCap(ID_NhaCungCap),
+	CONSTRAINT FK_HoaDonNhapHang_NhanVien FOREIGN KEY (ID_NhanVien) REFERENCES NhanVien(ID_NhanVien)
+)
+go
+create table ChiTietHoaDonNhapHang
+(
+	ID_HoaDonNhapHang int not null,
+	ID_SanPham int not null,
+	SoLuong int not null,
+	Gia int not null,
+	primary key(ID_HoaDonNhapHang, ID_SanPham),
+	CONSTRAINT FK_ChiTietHoaDonNhapHangHoaDonBanHang FOREIGN KEY (ID_HoaDonNhapHang) REFERENCES HoaDonNhapHang(ID_HoaDonNhapHang),
+	CONSTRAINT FK_ChiTietHoaDonNhapHang_SanPham FOREIGN KEY (ID_SanPham) REFERENCES SanPham(ID_SanPham)
+)
+go
+create table BangTamSanPham
+(
+	ID_SanPham int identity(1,1) not null primary key,
+	TenSanPham nvarchar(200) not null,
+	SoLuong int not null,
+	GiaBan int not null,
+	MoTaSanPham nvarchar(1000) not null
+)
