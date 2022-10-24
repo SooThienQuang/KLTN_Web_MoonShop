@@ -143,6 +143,7 @@
     <Content Include="css\bootstrap4\bootstrap.css" />
     <Content Include="css\bootstrap4\bootstrap.min.css" />
     <Content Include="css\caroselhome\style.css" />
+    <Content Include="css\home\navbartop.css" />
     <Content Include="css\style.css" />
     <Content Include="Global.asax" />
     <Content Include="js\bootstrap4\bootstrap.bundle.js" />
@@ -187,6 +188,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PartialViewController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -248,6 +250,9 @@
     <Content Include="Views\Alert\Success.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\PartialView\NavbarProductTop.cshtml" />
+    <Content Include="Views\PartialView\Whatsapp.cshtml" />
+    <Content Include="Views\Product\Home.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

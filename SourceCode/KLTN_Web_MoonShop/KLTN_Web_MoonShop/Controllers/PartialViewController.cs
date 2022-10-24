@@ -13,7 +13,10 @@ namespace KLTN_Web_MoonShop.Controllers
         {
             return PartialView();
         }
-
+        public ActionResult NavbarProductTop()
+        {
+            return PartialView();
+        }
 
         public ActionResult CaroselHome()
         {
@@ -21,6 +24,11 @@ namespace KLTN_Web_MoonShop.Controllers
         }
 
         public ActionResult CaroselProductHome()
+        {
+            return PartialView();
+        }
+
+        public ActionResult Whatsapp()
         {
             return PartialView();
         }
