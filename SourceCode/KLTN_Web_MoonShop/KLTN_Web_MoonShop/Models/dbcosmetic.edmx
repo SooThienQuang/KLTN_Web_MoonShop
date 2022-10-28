@@ -9,19 +9,33 @@
           <Key>
             <PropertyRef Name="customerID" />
           </Key>
-          <Property Name="customerID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="customerName" Type="nvarchar" MaxLength="50" />
-          <Property Name="customerEmail" Type="char" MaxLength="100" />
+          <Property Name="customerID" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="customerName" Type="nvarchar" MaxLength="500" />
+          <Property Name="customerEmail" Type="nchar" MaxLength="500" />
           <Property Name="customerSex" Type="nvarchar" MaxLength="50" />
-          <Property Name="customerAddress" Type="nvarchar" MaxLength="300" />
+          <Property Name="customerAddress" Type="nvarchar" MaxLength="500" />
           <Property Name="customerUserName" Type="nchar" MaxLength="100" />
-          <Property Name="customerPassword" Type="nchar" MaxLength="300" />
-          <Property Name="customerPhoto" Type="nchar" MaxLength="100" />
+          <Property Name="customerPassword" Type="nchar" MaxLength="100" />
+          <Property Name="customerPhoto" Type="nchar" MaxLength="1000" />
           <Property Name="isActive" Type="int" />
           <Property Name="dateCreate" Type="datetime" />
         </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="productID" Type="bigint" Nullable="false" />
+          <Property Name="productName" Type="nvarchar" MaxLength="500" />
+          <Property Name="productQuantity" Type="bigint" />
+          <Property Name="productPrice" Type="bigint" />
+          <Property Name="productDescribe" Type="nvarchar" MaxLength="500" />
+          <Property Name="productImage" Type="nchar" MaxLength="500" />
+          <Property Name="productTypeID" Type="int" />
+          <Property Name="isActive" Type="int" />
+        </EntityType>
         <EntityContainer Name="DBCosmeticModelStoreContainer">
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -29,21 +43,35 @@
       <Schema Namespace="DBCosmeticModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DBCosmeticEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Customers" EntityType="DBCosmeticModel.Customer" />
+          <EntitySet Name="Products" EntityType="DBCosmeticModel.Product" />
         </EntityContainer>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="customerID" />
           </Key>
-          <Property Name="customerID" Type="Guid" Nullable="false" />
-          <Property Name="customerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="customerEmail" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="customerID" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="customerName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="customerEmail" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
           <Property Name="customerSex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="customerAddress" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="customerAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="customerUserName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="customerPassword" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
-          <Property Name="customerPhoto" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="customerPassword" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="customerPhoto" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
           <Property Name="isActive" Type="Int32" />
           <Property Name="dateCreate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="productID" Type="Int64" Nullable="false" />
+          <Property Name="productName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="productQuantity" Type="Int64" />
+          <Property Name="productPrice" Type="Int64" />
+          <Property Name="productDescribe" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="productImage" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="productTypeID" Type="Int32" />
+          <Property Name="isActive" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -64,6 +92,20 @@
                 <ScalarProperty Name="customerEmail" ColumnName="customerEmail" />
                 <ScalarProperty Name="customerName" ColumnName="customerName" />
                 <ScalarProperty Name="customerID" ColumnName="customerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="DBCosmeticModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="productTypeID" ColumnName="productTypeID" />
+                <ScalarProperty Name="productImage" ColumnName="productImage" />
+                <ScalarProperty Name="productDescribe" ColumnName="productDescribe" />
+                <ScalarProperty Name="productPrice" ColumnName="productPrice" />
+                <ScalarProperty Name="productQuantity" ColumnName="productQuantity" />
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

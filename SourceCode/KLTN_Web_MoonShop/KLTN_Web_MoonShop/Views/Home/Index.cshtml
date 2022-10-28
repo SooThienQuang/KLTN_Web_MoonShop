@@ -3,6 +3,12 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
-
+@*----------------loại sản phẩm :như son môi,phấn mắt...-------------------------------------*@
+@Html.Action("NavbarProductTop", "PartialView")
+@*-------------------------------carosel trang chủ các hình banner-----------------------------*@
 @Html.Action("CaroselHome", "PartialView")
 @Html.Action("CaroselProductHome", "PartialView")
+@Html.Action("Home", "Product")
+
+
+@Html.ActionLink("Test","Tesst", "Home")

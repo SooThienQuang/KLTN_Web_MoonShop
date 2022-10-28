@@ -15,7 +15,39 @@
     <Property Name="isActive" Type="int" />
     <Property Name="dateCreate" Type="datetime" />
   </EntityType>
+  <EntityType Name="CustomerAddress">
+    <Key>
+      <PropertyRef Name="customerID" />
+    </Key>
+    <Property Name="customerID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="customerPhone" Type="char" MaxLength="10" />
+    <Property Name="customerAddress" Type="nvarchar" MaxLength="500" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="isActive" Type="int" />
+    <Property Name="isMain" Type="int" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="productID" />
+    </Key>
+    <Property Name="productID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="productName" Type="nvarchar" MaxLength="500" />
+    <Property Name="productQuantity" Type="bigint" />
+    <Property Name="productPrice" Type="bigint" />
+    <Property Name="productDescribe" Type="nvarchar" MaxLength="500" />
+    <Property Name="productTypeID" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="ProductType">
+    <Key>
+      <PropertyRef Name="productTypeID" />
+    </Key>
+    <Property Name="productTypeID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="productTypeName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityContainer Name="DBCosmeticModelStoreContainer">
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CustomerAddress" EntityType="Self.CustomerAddress" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductType" EntityType="Self.ProductType" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

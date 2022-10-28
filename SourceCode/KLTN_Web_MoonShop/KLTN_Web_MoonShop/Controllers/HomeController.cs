@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KLTN_Web_MoonShop.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,11 @@ namespace KLTN_Web_MoonShop.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+        DBCosmeticEntities db = new DBCosmeticEntities();
+        public ActionResult Tesst()
+        {
+            return View(db.Products.ToList());
         }
     }
 }

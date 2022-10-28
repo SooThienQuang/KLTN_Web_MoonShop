@@ -2,6 +2,9 @@
 <Schema Namespace="DBCosmeticModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="DBCosmeticEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Customers" EntityType="DBCosmeticModel.Customer" />
+    <EntitySet Name="CustomerAddresses" EntityType="DBCosmeticModel.CustomerAddress" />
+    <EntitySet Name="Products" EntityType="DBCosmeticModel.Product" />
+    <EntitySet Name="ProductTypes" EntityType="DBCosmeticModel.ProductType" />
   </EntityContainer>
   <EntityType Name="Customer">
     <Key>
@@ -17,5 +20,34 @@
     <Property Name="customerPhoto" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
     <Property Name="isActive" Type="Int32" />
     <Property Name="dateCreate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="CustomerAddress">
+    <Key>
+      <PropertyRef Name="customerID" />
+    </Key>
+    <Property Name="customerID" Type="Guid" Nullable="false" />
+    <Property Name="customerPhone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="customerAddress1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="isActive" Type="Int32" />
+    <Property Name="isMain" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="productID" />
+    </Key>
+    <Property Name="productID" Type="Guid" Nullable="false" />
+    <Property Name="productName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="productQuantity" Type="Int64" />
+    <Property Name="productPrice" Type="Int64" />
+    <Property Name="productDescribe" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="productTypeID" Type="Guid" />
+  </EntityType>
+  <EntityType Name="ProductType">
+    <Key>
+      <PropertyRef Name="productTypeID" />
+    </Key>
+    <Property Name="productTypeID" Type="Guid" Nullable="false" />
+    <Property Name="productTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

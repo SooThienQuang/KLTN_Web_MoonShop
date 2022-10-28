@@ -9,8 +9,14 @@ namespace KLTN_Web_MoonShop.Controllers
     public class AlertController : Controller
     {
         // GET: Alert
-        public ActionResult Success()
+        public ActionResult Success(string message)
         {
+            ViewBag.message = message;
+            return PartialView();
+        }
+        public ActionResult Fail(string message)
+        {
+            ViewBag.message = message;
             return PartialView();
         }
     }

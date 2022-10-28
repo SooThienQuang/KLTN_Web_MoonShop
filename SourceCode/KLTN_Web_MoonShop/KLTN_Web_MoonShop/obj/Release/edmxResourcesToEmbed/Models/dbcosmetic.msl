@@ -1,37 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="DBCosmeticModelStoreContainer" CdmEntityContainer="DBCosmeticEntities">
-    <EntitySetMapping Name="Accounts">
-      <EntityTypeMapping TypeName="DBCosmeticModel.Account">
-        <MappingFragment StoreEntitySet="Account">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="username" ColumnName="username" />
-          <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="img" ColumnName="img" />
-          <ScalarProperty Name="fullname" ColumnName="fullname" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Customers">
       <EntityTypeMapping TypeName="DBCosmeticModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
-          <ScalarProperty Name="customerID" ColumnName="customerID" />
-          <ScalarProperty Name="customerCode" ColumnName="customerCode" />
-          <ScalarProperty Name="customerName" ColumnName="customerName" />
-          <ScalarProperty Name="customerSex" ColumnName="customerSex" />
-          <ScalarProperty Name="customerAddress" ColumnName="customerAddress" />
-          <ScalarProperty Name="customerUserName" ColumnName="customerUserName" />
-          <ScalarProperty Name="customerPassword" ColumnName="customerPassword" />
+          <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
           <ScalarProperty Name="customerPhoto" ColumnName="customerPhoto" />
+          <ScalarProperty Name="customerPassword" ColumnName="customerPassword" />
+          <ScalarProperty Name="customerUserName" ColumnName="customerUserName" />
+          <ScalarProperty Name="customerAddress" ColumnName="customerAddress" />
+          <ScalarProperty Name="customerSex" ColumnName="customerSex" />
+          <ScalarProperty Name="customerEmail" ColumnName="customerEmail" />
+          <ScalarProperty Name="customerName" ColumnName="customerName" />
+          <ScalarProperty Name="customerID" ColumnName="customerID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Tbl_Product">
-      <EntityTypeMapping TypeName="DBCosmeticModel.Tbl_Product">
-        <MappingFragment StoreEntitySet="Tbl_Product">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="price" ColumnName="price" />
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="DBCosmeticModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="productTypeID" ColumnName="productTypeID" />
+          <ScalarProperty Name="productImage" ColumnName="productImage" />
+          <ScalarProperty Name="productDescribe" ColumnName="productDescribe" />
+          <ScalarProperty Name="productPrice" ColumnName="productPrice" />
+          <ScalarProperty Name="productQuantity" ColumnName="productQuantity" />
+          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="productID" ColumnName="productID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

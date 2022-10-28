@@ -12551,13 +12551,12 @@ fieldset:disabled .btn {
 }
 
 .navbar {
+    margin-top:0px;
   position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
 }
 
 .navbar > .container,
@@ -12566,11 +12565,12 @@ fieldset:disabled .btn {
   flex-wrap: inherit;
   align-items: center;
   justify-content: space-between;
+  padding:revert;
 }
 
 .navbar-brand {
-  padding-top: 0.3125rem;
-  padding-bottom: 0.3125rem;
+  padding-top:0;
+  padding-bottom: 0;
   margin-right: 1rem;
   font-size: 1.25rem;
   text-decoration: none;

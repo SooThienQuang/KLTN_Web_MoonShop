@@ -26,5 +26,6 @@ namespace KLTN_Web_MoonShop.Models
         }
     
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
     }
 }

@@ -17,8 +17,22 @@ namespace KLTN_Web_MoonShop.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(string txt_email)
+        public ActionResult Login(string txt_email,string txt_password)
         {
+            if(txt_email.Equals("admin@gmail.com")&&txt_password.Equals("123"))
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+            Customer cus = db.Customers.FirstOrDefault(n => n.customerEmail.Equals(txt_email) && n.customerPassword.Equals(txt_password));
+            if (cus!=null)
+            {
+                Session["user"] = cus;
+                return RedirectToAction("Index", "Home");
+            }   
+            else
+            {
+                ViewBag.LoginFail = "Tài khoản hoặc mật khẩu chưa chính xác!";
+            }
             return View();
         }
 
@@ -28,7 +42,7 @@ namespace KLTN_Web_MoonShop.Controllers
         }
         [HttpPost]
         public ActionResult Register(string firstname,string lastname,string email,string phone,string password,string repassword)
-        {
+        {   
             if(!password.Equals(repassword))
             {
                 ViewBag.ErrorPassword = "Lỗi nhập sai mật khẩu ? Vui lòng thử lại !";
@@ -36,6 +50,7 @@ namespace KLTN_Web_MoonShop.Controllers
           try
             {
                 Customer customer = new Customer();
+                customer.customerID =DateTime.Now.ToString("yyyyMMddHHmmss");
                 customer.customerName = firstname + "" + lastname;
                 customer.customerEmail = email;
                 customer.customerSex = "";
@@ -44,10 +59,18 @@ namespace KLTN_Web_MoonShop.Controllers
                 customer.customerPassword = password;
                 customer.customerPhoto = "sothienquang.jpg";
                 customer.isActive = 1;
-                customer.dateCreate = DateTime.Now;
-                db.Customers.AddOrUpdate(customer);
-                db.SaveChanges();
-                ViewBag.CreateSuccess = "Tạo tài khoản thành công";
+                customer.dateCreate = DateTime.Now;  
+                if(db.Customers.FirstOrDefault(n=>n.customerEmail.Equals(email))==null)
+                {
+                    db.Customers.Add(customer);
+                    db.SaveChanges();
+                    ViewBag.CreateSuccess = "Tạo tài khoản thành công";
+                }    
+                else
+                {
+                    ViewBag.CreateFail = "Tài khoản đã bị trùng vui lòng thử lại";
+                }    
+              
                 return View();
             }
             catch

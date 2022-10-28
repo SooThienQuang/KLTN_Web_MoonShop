@@ -26,7 +26,7 @@
     @using (Html.BeginForm())
     {
     <div class="container">
-        <a href="#" class="navbar">
+        <a href="@Url.Action("Index","Home")" class="navbar">
             <img src="~/Asset/img/logo/MoonShop.png" alt="logo" width="150">
         </a>
         <div class="row py-5 mt-4 align-items-center">
@@ -110,9 +110,14 @@
                         </div>
                         @if (@ViewBag.CreateSuccess != null)
                         {
-                            @Html.Action("Success", "Alert")
+                            @Html.Action("Success", "Alert", new { message = @ViewBag.CreateSuccess })
                         }
                         <!-- Submit Button -->
+                      
+                        @if (@ViewBag.CreateFail != null)
+                        {
+                            @Html.Action("Fail", "Alert", new { message = @ViewBag.CreateFail})
+                        }
                         <div class="form-group col-lg-12 mx-auto mb-0">
                             <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Tạo tài khoản</button>
                         </div>
@@ -138,7 +143,7 @@
 
                         <!-- Already Registered -->
                         <div class="text-center w-100">
-                            <p class="text-muted font-weight-bold">Bạn đã có tài khoản ? <a href="@Url.Action("Login", "Account")" class="text-primary ml-2">Đăng nhập ngay</a></p>
+                            <p class="text-muted font-weight-bold">Bạn đã có tài khoản ? <a href="@Url.Action("Login", "Customer")" class="text-primary ml-2">Đăng nhập ngay</a></p>
                         </div>
 
                     </div>
