@@ -1,0 +1,350 @@
+﻿ <nav class="navbar" style="padding:0px;background-color:white">
+     <div class="navbar-menu-wrapper" style="background-color: white">
+         <ul class="navbar-nav navbar-nav-right">
+             <li class="nav-item dropdown">
+                 <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                     <i class="ti-face-smile">&#xf07a;</i>
+                     <div class="item-content">Chăm sóc da mặt</div>
+                 </a>
+                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+                     <p class="mb-0 font-weight-normal float-left dropdown-header">Sản phẩm chăm sóc da</p>
+                     <a class="dropdown-item">
+                         <div class="item-thumbnail">
+                             <div class="item-icon bg-success">
+                                 <img src="~/Asset/img/product/google-shopping-son-thoi-li-3ce-227-benchmark-mau-cam-do-chay-3-5g-1644639565_img_380x380_64adc6_fit_center.jpg" />
+                             </div>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal">Tẩy trang</h6>
+                             <p class="font-weight-light small-text mb-0 text-muted">
+                                 Còn hàng
+                             </p>
+                         </div>
+                     </a>
+                     <a class="dropdown-item">
+                         <div class="item-thumbnail">
+                             <div class="item-icon bg-info">
+                                 <i class="ti-shopping-cart mx-0"></i>
+                             </div>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal">Giỏ hàng</h6>
+                             <p class="font-weight-light small-text mb-0 text-muted">
+                                 2 item
+                             </p>
+                         </div>
+                     </a>
+                     <a class="dropdown-item">
+                         <div class="item-thumbnail">
+                             <div class="item-icon bg-warning">
+                                 <i class="ti-settings mx-0"></i>
+                             </div>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal">Settings</h6>
+                             <p class="font-weight-light small-text mb-0 text-muted">
+                                 Private message
+                             </p>
+                         </div>
+                     </a>
+                 </div>
+             </li>
+             @*--------------------------------------chăm sóc cơ thể------------------------------------------*@
+             <li class="nav-item dropdown">
+                 <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                     <i class="ti-user mx-0">&#xf07a;</i>
+
+                     <div class="item-content">Chăm sóc cơ thể</div>
+
+                 </a>
+                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+                     <p class="mb-0 font-weight-normal float-left dropdown-header">Thông báo</p>
+                     <a class="dropdown-item" href="#">
+                         <div class="item-thumbnail">
+                             <div class="item-icon bg-info">
+                                 <img src="~/Asset/img/product/google-shopping-son-thoi-li-3ce-227-benchmark-mau-cam-do-chay-3-5g-1644639565_img_380x380_64adc6_fit_center.jpg" />
+                                 @*<i class="ti-shopping-cart mx-0"></i>*@
+                             </div>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal">Cọ trang điểm</h6>
+                             <p class="font-weight-light small-text mb-0 text-muted">
+                                 2 sản phẩm
+                             </p>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal" style="color:red">@String.Format("{0:0,0 vnđ}", 20000000)</h6>
+                         </div>
+                     </a>
+                     <a class="dropdown-item">
+                         <div class="item-thumbnail">
+                             <div class="item-icon bg-info">
+                                 <img src="~/Asset/img/product/bo-co-trang-diem-naked3-12-cay-cao-cap-1.jpg" />
+                                 @*<i class="ti-shopping-cart mx-0"></i>*@
+                             </div>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal">Cọ trang điểm</h6>
+                             <p class="font-weight-light small-text mb-0 text-muted">
+                                 2 sản phẩm
+                             </p>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal" style="color:red">@String.Format("{0:0,0 vnđ}", 20000000)</h6>
+                         </div>
+                     </a>
+                     <a class="mb-0 font-weight-normal float-sm-right dropdown-header" href="@Url.Action("AllCart","ShoppingCart")">Xem tất cả</a>
+                 </div>
+             </li>
+             @*---------------------------------------------trang điểm-------------------------------------------------------*@
+             <li class="nav-item dropdown">
+                 <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                     <i class="ti-wand mx-0">&#xf07a;</i>
+
+                     <div class="item-content">Trang điểm</div>
+
+                 </a>
+                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+                     <p class="mb-0 font-weight-normal float-left dropdown-header">Thông báo</p>
+                     <a class="dropdown-item" href="#">
+                         <div class="item-thumbnail">
+                             <div class="item-icon bg-info">
+                                 <img src="~/Asset/img/product/google-shopping-son-thoi-li-3ce-227-benchmark-mau-cam-do-chay-3-5g-1644639565_img_380x380_64adc6_fit_center.jpg" />
+                                 @*<i class="ti-shopping-cart mx-0"></i>*@
+                             </div>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal">Cọ trang điểm</h6>
+                             <p class="font-weight-light small-text mb-0 text-muted">
+                                 2 sản phẩm
+                             </p>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal" style="color:red">@String.Format("{0:0,0 vnđ}", 20000000)</h6>
+                         </div>
+                     </a>
+                     <a class="dropdown-item">
+                         <div class="item-thumbnail">
+                             <div class="item-icon bg-info">
+                                 <img src="~/Asset/img/product/bo-co-trang-diem-naked3-12-cay-cao-cap-1.jpg" />
+                                 @*<i class="ti-shopping-cart mx-0"></i>*@
+                             </div>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal">Cọ trang điểm</h6>
+                             <p class="font-weight-light small-text mb-0 text-muted">
+                                 2 sản phẩm
+                             </p>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal" style="color:red">@String.Format("{0:0,0 vnđ}", 20000000)</h6>
+                         </div>
+                     </a>
+                     <a class="mb-0 font-weight-normal float-sm-right dropdown-header" href="@Url.Action("AllCart","ShoppingCart")">Xem tất cả</a>
+                 </div>
+             </li>
+             @*-----------------------------------------------------phụ kiện--------------------------------------------*@
+             <li class="nav-item dropdown">
+                 <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                     <i class="ti-panel mx-0">&#xf07a;</i>
+
+                     <div class="item-content">Phụ kiện</div>
+                 </a>
+                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+                     <p class="mb-0 font-weight-normal float-left dropdown-header">Thông báo</p>
+                     <a class="dropdown-item">
+                         <div class="item-thumbnail">
+                             <div class="item-icon bg-success">
+                                 <i class="ti-wallet mx-0"></i>
+                             </div>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal">Đơn đặt hàng</h6>
+                             <p class="font-weight-light small-text mb-0 text-muted">
+                                 2 đơn đặt hàng
+                             </p>
+                         </div>
+                     </a>
+                     <a class="dropdown-item">
+                         <div class="item-thumbnail">
+                             <div class="item-icon bg-info">
+                                 <i class="ti-shopping-cart mx-0"></i>
+                             </div>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal">Giỏ hàng</h6>
+                             <p class="font-weight-light small-text mb-0 text-muted">
+                                 2 item
+                             </p>
+                         </div>
+                     </a>
+                     <a class="dropdown-item">
+                         <div class="item-thumbnail">
+                             <div class="item-icon bg-warning">
+                                 <i class="ti-settings mx-0"></i>
+                             </div>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal">Settings</h6>
+                             <p class="font-weight-light small-text mb-0 text-muted">
+                                 Private message
+                             </p>
+                         </div>
+                     </a>
+                 </div>
+             </li>
+             @*----------------------------------------------sản phẩm mới------------------------------*@
+             <li class="nav-item dropdown">
+                 <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                     <i class="ti-crown mx-0">&#xf07a;</i>
+
+                     <div class="item-content">Sản phẩm mới</div>
+                 </a>
+                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+                     <p class="mb-0 font-weight-normal float-left dropdown-header">Thông báo</p>
+                     <a class="dropdown-item">
+                         <div class="item-thumbnail">
+                             <div class="item-icon bg-success">
+                                 <i class="ti-new-window mx-0"></i>
+                             </div>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal">Đơn đặt hàng</h6>
+                             <p class="font-weight-light small-text mb-0 text-muted">
+                                 2 đơn đặt hàng
+                             </p>
+                         </div>
+                     </a>
+                     <a class="dropdown-item">
+                         <div class="item-thumbnail">
+                             <div class="item-icon bg-info">
+                                 <i class="ti-shopping-cart mx-0"></i>
+                             </div>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal">Giỏ hàng</h6>
+                             <p class="font-weight-light small-text mb-0 text-muted">
+                                 2 item
+                             </p>
+                         </div>
+                     </a>
+                     <a class="dropdown-item">
+                         <div class="item-thumbnail">
+                             <div class="item-icon bg-warning">
+                                 <i class="ti-settings mx-0"></i>
+                             </div>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal">Settings</h6>
+                             <p class="font-weight-light small-text mb-0 text-muted">
+                                 Private message
+                             </p>
+                         </div>
+                     </a>
+                 </div>
+             </li>
+             @*-------------------------------------------------------kem chống nắng-----------------------------------*@
+             <li class="nav-item dropdown">
+                 <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                     <i class="ti-shine mx-0">&#xf07a;</i>
+
+                     <div class="item-content">Kem chống nắng</div>
+                 </a>
+                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+                     <p class="mb-0 font-weight-normal float-left dropdown-header">Thông báo</p>
+                     <a class="dropdown-item">
+                         <div class="item-thumbnail">
+                             <div class="item-icon bg-success">
+                                 <i class="ti-wallet mx-0"></i>
+                             </div>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal">Đơn đặt hàng</h6>
+                             <p class="font-weight-light small-text mb-0 text-muted">
+                                 2 đơn đặt hàng
+                             </p>
+                         </div>
+                     </a>
+                     <a class="dropdown-item">
+                         <div class="item-thumbnail">
+                             <div class="item-icon bg-info">
+                                 <i class="ti-shopping-cart mx-0"></i>
+                             </div>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal">Giỏ hàng</h6>
+                             <p class="font-weight-light small-text mb-0 text-muted">
+                                 2 item
+                             </p>
+                         </div>
+                     </a>
+                     <a class="dropdown-item">
+                         <div class="item-thumbnail">
+                             <div class="item-icon bg-warning">
+                                 <i class="ti-settings mx-0"></i>
+                             </div>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal">Settings</h6>
+                             <p class="font-weight-light small-text mb-0 text-muted">
+                                 Private message
+                             </p>
+                         </div>
+                     </a>
+                 </div>
+             </li>
+             @*--------------------------------xu hướng làm đẹp-----------------------------*@
+             <li class="nav-item dropdown">
+                 <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                     <i class="ti-arrow-top-right mx-0">&#xf07a;</i>
+
+                     <div class="item-content">Xu hướng</div>
+                 </a>
+                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+                     <p class="mb-0 font-weight-normal float-left dropdown-header">Thông báo</p>
+                     <a class="dropdown-item">
+                         <div class="item-thumbnail">
+                             <div class="item-icon bg-success">
+                                 <i class="ti-wallet mx-0"></i>
+                             </div>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal">Đơn đặt hàng</h6>
+                             <p class="font-weight-light small-text mb-0 text-muted">
+                                 2 đơn đặt hàng
+                             </p>
+                         </div>
+                     </a>
+                     <a class="dropdown-item">
+                         <div class="item-thumbnail">
+                             <div class="item-icon bg-info">
+                                 <i class="ti-shopping-cart mx-0"></i>
+                             </div>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal">Giỏ hàng</h6>
+                             <p class="font-weight-light small-text mb-0 text-muted">
+                                 2 item
+                             </p>
+                         </div>
+                     </a>
+                     <a class="dropdown-item">
+                         <div class="item-thumbnail">
+                             <div class="item-icon bg-warning">
+                                 <i class="ti-settings mx-0"></i>
+                             </div>
+                         </div>
+                         <div class="item-content">
+                             <h6 class="font-weight-normal">Settings</h6>
+                             <p class="font-weight-light small-text mb-0 text-muted">
+                                 Private message
+                             </p>
+                         </div>
+                     </a>
+                 </div>
+             </li>
+
+
+         </ul>
+     </div>
+</nav>

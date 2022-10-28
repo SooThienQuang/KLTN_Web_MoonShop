@@ -3,6 +3,7 @@
   <EntityContainer Name="DBCosmeticEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Customers" EntityType="DBCosmeticModel.Customer" />
     <EntitySet Name="Products" EntityType="DBCosmeticModel.Product" />
+    <EntitySet Name="ActionLogs" EntityType="DBCosmeticModel.ActionLog" />
   </EntityContainer>
   <EntityType Name="Customer">
     <Key>
@@ -31,5 +32,19 @@
     <Property Name="productImage" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
     <Property Name="productTypeID" Type="Int32" />
     <Property Name="isActive" Type="Int32" />
+  </EntityType>
+  <EntityType Name="ActionLog">
+    <Key>
+      <PropertyRef Name="actionLogID" />
+    </Key>
+    <Property Name="actionLogID" Type="Int64" Nullable="false" />
+    <Property Name="userID" Type="Int64" />
+    <Property Name="userName" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
+    <Property Name="actionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modun" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="actionType" Type="Int32" />
+    <Property Name="actionDate" Type="DateTime" Precision="3" />
+    <Property Name="idOject" Type="Int64" />
+    <Property Name="nameTable" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
   </EntityType>
 </Schema>

@@ -1,0 +1,4 @@
+﻿@if (ViewBag.DeleteSuccess != null)
+{
+    @Html.Action("Success", "Alert", new { message = ViewBag.DeleteSuccess })
+}

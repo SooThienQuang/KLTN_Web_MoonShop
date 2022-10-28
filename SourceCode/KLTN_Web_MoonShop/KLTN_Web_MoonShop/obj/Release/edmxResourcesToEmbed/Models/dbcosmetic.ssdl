@@ -1,5 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DBCosmeticModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ActionLog">
+    <Key>
+      <PropertyRef Name="actionLogID" />
+    </Key>
+    <Property Name="actionLogID" Type="bigint" Nullable="false" />
+    <Property Name="userID" Type="bigint" />
+    <Property Name="userName" Type="char" MaxLength="500" />
+    <Property Name="actionName" Type="nvarchar" MaxLength="50" />
+    <Property Name="modun" Type="nvarchar" MaxLength="500" />
+    <Property Name="actionType" Type="int" />
+    <Property Name="actionDate" Type="datetime" />
+    <Property Name="idOject" Type="bigint" />
+    <Property Name="nameTable" Type="nchar" MaxLength="500" />
+  </EntityType>
   <EntityType Name="Customer">
     <Key>
       <PropertyRef Name="customerID" />
@@ -29,6 +43,7 @@
     <Property Name="isActive" Type="int" />
   </EntityType>
   <EntityContainer Name="DBCosmeticModelStoreContainer">
+    <EntitySet Name="ActionLog" EntityType="Self.ActionLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
   </EntityContainer>

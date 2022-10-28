@@ -5,6 +5,20 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DBCosmeticModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ActionLog">
+          <Key>
+            <PropertyRef Name="actionLogID" />
+          </Key>
+          <Property Name="actionLogID" Type="bigint" Nullable="false" />
+          <Property Name="userID" Type="bigint" />
+          <Property Name="userName" Type="char" MaxLength="500" />
+          <Property Name="actionName" Type="nvarchar" MaxLength="50" />
+          <Property Name="modun" Type="nvarchar" MaxLength="500" />
+          <Property Name="actionType" Type="int" />
+          <Property Name="actionDate" Type="datetime" />
+          <Property Name="idOject" Type="bigint" />
+          <Property Name="nameTable" Type="nchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="customerID" />
@@ -34,6 +48,7 @@
           <Property Name="isActive" Type="int" />
         </EntityType>
         <EntityContainer Name="DBCosmeticModelStoreContainer">
+          <EntitySet Name="ActionLog" EntityType="Self.ActionLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -44,6 +59,7 @@
         <EntityContainer Name="DBCosmeticEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Customers" EntityType="DBCosmeticModel.Customer" />
           <EntitySet Name="Products" EntityType="DBCosmeticModel.Product" />
+          <EntitySet Name="ActionLogs" EntityType="DBCosmeticModel.ActionLog" />
         </EntityContainer>
         <EntityType Name="Customer">
           <Key>
@@ -72,6 +88,20 @@
           <Property Name="productImage" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
           <Property Name="productTypeID" Type="Int32" />
           <Property Name="isActive" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ActionLog">
+          <Key>
+            <PropertyRef Name="actionLogID" />
+          </Key>
+          <Property Name="actionLogID" Type="Int64" Nullable="false" />
+          <Property Name="userID" Type="Int64" />
+          <Property Name="userName" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
+          <Property Name="actionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="modun" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="actionType" Type="Int32" />
+          <Property Name="actionDate" Type="DateTime" Precision="3" />
+          <Property Name="idOject" Type="Int64" />
+          <Property Name="nameTable" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -106,6 +136,21 @@
                 <ScalarProperty Name="productQuantity" ColumnName="productQuantity" />
                 <ScalarProperty Name="productName" ColumnName="productName" />
                 <ScalarProperty Name="productID" ColumnName="productID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActionLogs">
+            <EntityTypeMapping TypeName="DBCosmeticModel.ActionLog">
+              <MappingFragment StoreEntitySet="ActionLog">
+                <ScalarProperty Name="nameTable" ColumnName="nameTable" />
+                <ScalarProperty Name="idOject" ColumnName="idOject" />
+                <ScalarProperty Name="actionDate" ColumnName="actionDate" />
+                <ScalarProperty Name="actionType" ColumnName="actionType" />
+                <ScalarProperty Name="modun" ColumnName="modun" />
+                <ScalarProperty Name="actionName" ColumnName="actionName" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="actionLogID" ColumnName="actionLogID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

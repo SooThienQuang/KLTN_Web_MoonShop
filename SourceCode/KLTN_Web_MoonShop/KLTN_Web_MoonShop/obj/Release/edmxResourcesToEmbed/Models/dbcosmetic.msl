@@ -31,5 +31,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ActionLogs">
+      <EntityTypeMapping TypeName="DBCosmeticModel.ActionLog">
+        <MappingFragment StoreEntitySet="ActionLog">
+          <ScalarProperty Name="nameTable" ColumnName="nameTable" />
+          <ScalarProperty Name="idOject" ColumnName="idOject" />
+          <ScalarProperty Name="actionDate" ColumnName="actionDate" />
+          <ScalarProperty Name="actionType" ColumnName="actionType" />
+          <ScalarProperty Name="modun" ColumnName="modun" />
+          <ScalarProperty Name="actionName" ColumnName="actionName" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="actionLogID" ColumnName="actionLogID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
