@@ -110,6 +110,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Asset\img\36-365828_navbar-toggle-icon-menu-hamburger-png-white.png" />
     <Content Include="Asset\img\banner\4327ee1f7bca83cf039c03ff9e97c50b.png" />
     <Content Include="Asset\img\banner\50a82d79d6e17e0dc489401b5a97263a.png" />
     <Content Include="Asset\img\banner\ad336ade20ae3b327cf9a32b93b9ec17.png" />
@@ -159,6 +160,7 @@
     <Content Include="Asset\img\product\Untitled.png" />
     <Content Include="Asset\img\product\vitamin.jpg" />
     <Content Include="Asset\img\tu1.jpg" />
+    <Content Include="Asset\img\user\36-365828_navbar-toggle-icon-menu-hamburger-png-white.png" />
     <Content Include="Asset\img\user\soothienquang.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="css\admin\assets\css\style.css" />
@@ -466,7 +468,9 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\Admin\ActionLogController.cs" />
+    <Compile Include="Controllers\Admin\AdminController.cs" />
+    <Compile Include="Controllers\Admin\ProductTypeController.cs" />
     <Compile Include="Controllers\AlertController.cs" />
     <Compile Include="Controllers\API\CustomerController.cs" />
     <Compile Include="Controllers\API\ImageController.cs" />
@@ -501,7 +505,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbcosmetic.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Notification.cs">
+      <DependentUpon>dbcosmetic.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Product.cs">
+      <DependentUpon>dbcosmetic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductDetail.cs">
+      <DependentUpon>dbcosmetic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductType.cs">
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -619,7 +632,6 @@
     <Content Include="Views\Customer\Register.cshtml" />
     <Content Include="Views\PartialView\CaroselHome.cshtml" />
     <Content Include="Views\PartialView\CaroselProductHome.cshtml" />
-    <None Include="Properties\PublishProfiles\HongHacCosmetic - Web Deploy.pubxml" />
     <Content Include="Views\Error\Page404.cshtml" />
     <Content Include="Views\Alert\Success.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
@@ -633,7 +645,6 @@
     <Content Include="Views\Image\GetImage.cshtml" />
     <Content Include="Views\Product\AddOrUpdate.cshtml" />
     <Content Include="Views\Admin\AddProduct.cshtml" />
-    <None Include="Properties\PublishProfiles\moonshopcosmetic - Web Deploy.pubxml" />
     <Content Include="Views\Home\Tesst.cshtml" />
     <Content Include="Views\Alert\Fail.cshtml" />
     <Content Include="Views\Admin\UpdateProduct.cshtml" />
@@ -643,6 +654,10 @@
     <Content Include="Views\ShoppingCart\EmryCart.cshtml" />
     <Content Include="Views\Product\CaroselProductHome.cshtml" />
     <Content Include="Views\Product\Detail.cshtml" />
+    <Content Include="Views\ActionLog\List.cshtml" />
+    <Content Include="Views\ProductType\List.cshtml" />
+    <Content Include="Views\ProductType\AddOrUpdate.cshtml" />
+    <None Include="Properties\PublishProfiles\moonshopcosmetic - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<KLTN_Web_MoonShop.Models.ActionLog>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-body">
+    <h5 class="card-title">Recent Sales <span>| Today</span></h5>
+    @*<button data-id="null" id="buttonId" class="btn btn-outline-success">Thêm mới</button>*@
+    @*@Html.Action("AddProduct", "Admin")*@
+    <a class="btn btn-primary" onclick="ConfirmUpdate(0)">Thêm mới </a>
+    <table class="table table-borderless datatable">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Tên hành động</th>
+                <th scope="col">Bảng tác động</th>
+                <th scope="col">ID trong bảng</th>
+                <th scope="col"> Tên người dùng</th>
+                <th scope="col"> Thời gian</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+
+                    <th scope="row"><a href="#">@item.actionLogID</a></th>
+                    <td>@item.actionName</td>
+                    <td>@item.nameTable</td>
+                    <td>@item.idOject</td>
+                    <td>@item.userName</td>
+                    <td>@item.actionDate</td>
+
+
+                </tr>
+
+
+
+
+
+            }
+        </tbody>
+
+
+    </table>
+
+</div>

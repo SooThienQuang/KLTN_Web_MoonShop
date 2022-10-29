@@ -29,23 +29,17 @@ namespace KLTN_Web_MoonShop.Controllers.API
             }
         }
 
-        [ResponseType(typeof(string))]
         public HttpResponseMessage GetUser(HttpRequestMessage request, string username, string password)
         {
             Customer account = new Customer();
-            account = db.Customers.FirstOrDefault(n => n.customerUserName.Equals(username) && n.customerPassword.Equals(password));
+            account = db.Customers.FirstOrDefault(n => n.customerEmail.Equals(username) && n.customerPassword.Equals(password));
             if (account == null)
             {
-                Customer a = new Customer();
-                a.customerName = username;
-                a.customerPassword = password;
-                db.Customers.AddOrUpdate(a);
-                db.SaveChanges();
-                return new HttpResponseMessage(HttpStatusCode.Created);
+                return request.CreateResponse(false);
             }
             else
             {
-                return request.CreateResponse(HttpStatusCode.OK, "Đăng nhập thành công");
+                return request.CreateResponse(account);
             }
         }
         // GET: api/Customer/5

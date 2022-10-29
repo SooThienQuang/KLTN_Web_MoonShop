@@ -1,15 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DBCosmeticModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="DBCosmeticEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Customers" EntityType="DBCosmeticModel.Customer" />
-    <EntitySet Name="Products" EntityType="DBCosmeticModel.Product" />
     <EntitySet Name="ActionLogs" EntityType="DBCosmeticModel.ActionLog" />
+    <EntitySet Name="Customers" EntityType="DBCosmeticModel.Customer" />
+    <EntitySet Name="Notifications" EntityType="DBCosmeticModel.Notification" />
+    <EntitySet Name="Products" EntityType="DBCosmeticModel.Product" />
+    <EntitySet Name="ProductDetails" EntityType="DBCosmeticModel.ProductDetail" />
+    <EntitySet Name="ProductTypes" EntityType="DBCosmeticModel.ProductType" />
   </EntityContainer>
+  <EntityType Name="ActionLog">
+    <Key>
+      <PropertyRef Name="actionLogID" />
+    </Key>
+    <Property Name="actionLogID" Type="Int64" Nullable="false" />
+    <Property Name="userID" Type="Int64" />
+    <Property Name="userName" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
+    <Property Name="actionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modun" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="actionType" Type="Int32" />
+    <Property Name="actionDate" Type="DateTime" Precision="3" />
+    <Property Name="idOject" Type="Int64" />
+    <Property Name="nameTable" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+  </EntityType>
   <EntityType Name="Customer">
     <Key>
       <PropertyRef Name="customerID" />
     </Key>
-    <Property Name="customerID" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="customerID" Type="Int64" Nullable="false" />
     <Property Name="customerName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="customerEmail" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
     <Property Name="customerSex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -19,6 +36,15 @@
     <Property Name="customerPhoto" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
     <Property Name="isActive" Type="Int32" />
     <Property Name="dateCreate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="notiID" />
+    </Key>
+    <Property Name="notiID" Type="Int64" Nullable="false" />
+    <Property Name="notiName" Type="String" MaxLength="590" FixedLength="false" Unicode="true" />
+    <Property Name="customerID" Type="Int64" />
+    <Property Name="customerName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -33,18 +59,26 @@
     <Property Name="productTypeID" Type="Int32" />
     <Property Name="isActive" Type="Int32" />
   </EntityType>
-  <EntityType Name="ActionLog">
+  <EntityType Name="ProductDetail">
     <Key>
-      <PropertyRef Name="actionLogID" />
+      <PropertyRef Name="ProductID" />
     </Key>
-    <Property Name="actionLogID" Type="Int64" Nullable="false" />
-    <Property Name="userID" Type="Int64" />
-    <Property Name="userName" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
-    <Property Name="actionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="modun" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="actionType" Type="Int32" />
-    <Property Name="actionDate" Type="DateTime" Precision="3" />
-    <Property Name="idOject" Type="Int64" />
-    <Property Name="nameTable" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+    <Property Name="ProductID" Type="Int64" Nullable="false" />
+    <Property Name="Size" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="Color" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="img1" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+    <Property Name="img2" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+    <Property Name="img3" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+    <Property Name="origin" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="brand" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="desciption" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ProductType">
+    <Key>
+      <PropertyRef Name="proTypeID" />
+    </Key>
+    <Property Name="proTypeID" Type="Int32" Nullable="false" />
+    <Property Name="proTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="isActive" Type="Int32" />
   </EntityType>
 </Schema>

@@ -1,6 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="DBCosmeticModelStoreContainer" CdmEntityContainer="DBCosmeticEntities">
+    <EntitySetMapping Name="ActionLogs">
+      <EntityTypeMapping TypeName="DBCosmeticModel.ActionLog">
+        <MappingFragment StoreEntitySet="ActionLog">
+          <ScalarProperty Name="nameTable" ColumnName="nameTable" />
+          <ScalarProperty Name="idOject" ColumnName="idOject" />
+          <ScalarProperty Name="actionDate" ColumnName="actionDate" />
+          <ScalarProperty Name="actionType" ColumnName="actionType" />
+          <ScalarProperty Name="modun" ColumnName="modun" />
+          <ScalarProperty Name="actionName" ColumnName="actionName" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="actionLogID" ColumnName="actionLogID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Customers">
       <EntityTypeMapping TypeName="DBCosmeticModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
@@ -14,6 +29,16 @@
           <ScalarProperty Name="customerEmail" ColumnName="customerEmail" />
           <ScalarProperty Name="customerName" ColumnName="customerName" />
           <ScalarProperty Name="customerID" ColumnName="customerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notifications">
+      <EntityTypeMapping TypeName="DBCosmeticModel.Notification">
+        <MappingFragment StoreEntitySet="Notification">
+          <ScalarProperty Name="customerName" ColumnName="customerName" />
+          <ScalarProperty Name="customerID" ColumnName="customerID" />
+          <ScalarProperty Name="notiName" ColumnName="notiName" />
+          <ScalarProperty Name="notiID" ColumnName="notiID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -31,18 +56,27 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ActionLogs">
-      <EntityTypeMapping TypeName="DBCosmeticModel.ActionLog">
-        <MappingFragment StoreEntitySet="ActionLog">
-          <ScalarProperty Name="nameTable" ColumnName="nameTable" />
-          <ScalarProperty Name="idOject" ColumnName="idOject" />
-          <ScalarProperty Name="actionDate" ColumnName="actionDate" />
-          <ScalarProperty Name="actionType" ColumnName="actionType" />
-          <ScalarProperty Name="modun" ColumnName="modun" />
-          <ScalarProperty Name="actionName" ColumnName="actionName" />
-          <ScalarProperty Name="userName" ColumnName="userName" />
-          <ScalarProperty Name="userID" ColumnName="userID" />
-          <ScalarProperty Name="actionLogID" ColumnName="actionLogID" />
+    <EntitySetMapping Name="ProductDetails">
+      <EntityTypeMapping TypeName="DBCosmeticModel.ProductDetail">
+        <MappingFragment StoreEntitySet="ProductDetail">
+          <ScalarProperty Name="desciption" ColumnName="desciption" />
+          <ScalarProperty Name="brand" ColumnName="brand" />
+          <ScalarProperty Name="origin" ColumnName="origin" />
+          <ScalarProperty Name="img3" ColumnName="img3" />
+          <ScalarProperty Name="img2" ColumnName="img2" />
+          <ScalarProperty Name="img1" ColumnName="img1" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductTypes">
+      <EntityTypeMapping TypeName="DBCosmeticModel.ProductType">
+        <MappingFragment StoreEntitySet="ProductType">
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="proTypeName" ColumnName="proTypeName" />
+          <ScalarProperty Name="proTypeID" ColumnName="proTypeID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

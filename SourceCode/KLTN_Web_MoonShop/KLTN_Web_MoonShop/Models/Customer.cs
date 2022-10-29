@@ -14,7 +14,7 @@ namespace KLTN_Web_MoonShop.Models
     
     public partial class Customer
     {
-        public string customerID { get; set; }
+        public long customerID { get; set; }
         public string customerName { get; set; }
         public string customerEmail { get; set; }
         public string customerSex { get; set; }

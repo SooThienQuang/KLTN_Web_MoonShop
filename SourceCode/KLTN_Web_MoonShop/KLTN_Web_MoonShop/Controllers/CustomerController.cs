@@ -50,12 +50,12 @@ namespace KLTN_Web_MoonShop.Controllers
           try
             {
                 Customer customer = new Customer();
-                customer.customerID =DateTime.Now.ToString("yyyyMMddHHmmss");
-                customer.customerName = firstname + "" + lastname;
-                customer.customerEmail = email;
+                customer.customerID =long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+                customer.customerName = (firstname + "" + lastname).Trim();
+                customer.customerEmail = email.Trim();
                 customer.customerSex = "";
                 customer.customerAddress = "";
-                customer.customerUserName = phone;
+                customer.customerUserName = phone.Trim();
                 customer.customerPassword = password;
                 customer.customerPhoto = "sothienquang.jpg";
                 customer.isActive = 1;
