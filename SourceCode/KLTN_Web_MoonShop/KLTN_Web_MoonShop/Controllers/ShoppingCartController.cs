@@ -13,5 +13,9 @@ namespace KLTN_Web_MoonShop.Controllers
         {
             return View();
         }
+        public ActionResult EmryCart()
+        {
+            return View();
+        }
     }
 }

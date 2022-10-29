@@ -5,10 +5,10 @@
     @foreach (var item in Model)
     {
         <div class="col-sm-2">
-            <div class="cardpro" style="height:450px;margin-top:10px">
+            <div class="cardpro mh-100 mw-100">
 
                 <div class="text-center">
-                    <a href="#">
+                    <a href="@Url.Action("Detail","Product",new {id=item.productID})">
                         <img src="~/Asset/img/product/@item.productImage" width="150" height="200">
                     </a>
                 </div>

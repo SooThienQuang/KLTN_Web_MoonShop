@@ -640,6 +640,9 @@
     <Content Include="Views\Admin\DeleteProduct.cshtml" />
     <Content Include="Views\Admin\Delete.cshtml" />
     <Content Include="Views\Shared\_demo.cshtml" />
+    <Content Include="Views\ShoppingCart\EmryCart.cshtml" />
+    <Content Include="Views\Product\CaroselProductHome.cshtml" />
+    <Content Include="Views\Product\Detail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

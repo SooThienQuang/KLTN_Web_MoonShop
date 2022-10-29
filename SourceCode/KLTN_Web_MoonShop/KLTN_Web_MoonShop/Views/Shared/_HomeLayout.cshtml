@@ -20,7 +20,7 @@
     </style>
 </head>
 <body>
- <div class="row">
+ <!--<div class="row">
             <nav class="navbar col-lg-12 col-12 p-0 d-flex flex-row">
                 <img src="~/Asset/img/banner/bannertop.png" width="100%" height="40px" style="margin-bottom:auto">
                 <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -33,9 +33,9 @@
                     </a>
 
                 </div>
-                <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">-->
                     @*tìm kiếm khung*@
-                    <form action="@Url.Action("Search","Search")">
+                    <!--<form action="@Url.Action("Search","Search")">
                         <div class="navbar-nav">
                             <div class="nav-item nav-search">
                                 <div class="input-group">
@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </form>-->
                     @*<form action="@Url.Action("Search","Search")">
                         <ul class="navbar-nav mr-lg-2">
                             <li class="nav-item nav-search d-none d-lg-block">
@@ -65,9 +65,9 @@
 
 
                     @*----------------------------------thanh thông báo bên phải---------------------------*@
-                    <ul class="navbar-nav navbar-nav-right">
+                    <!--<ul class="navbar-nav navbar-nav-right">-->
                         @*--------------------------------------------đơn đặt hàng---------------------*@
-                        <li class="nav-item dropdown">
+                        <!--<li class="nav-item dropdown">
                             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
                                 <i class="ti-wallet mx-0">&#xf07a;</i>
                                 <span class='badge badge-warning' id='lblCartCount'> 5 </span>
@@ -115,9 +115,9 @@
                                     </div>
                                 </a>
                             </div>
-                        </li>
+                        </li>-->
                         @*------------------------------------------gio hang----------------------------*@
-                        <li class="nav-item dropdown">
+                        <!--<li class="nav-item dropdown">
                             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
                                 <i class="ti-shopping-cart mx-0">&#xf07a;</i>
                                 <span class='badge badge-warning' id='lblCartCount'> 5 </span>
@@ -129,9 +129,9 @@
                                 <a class="dropdown-item" href="#">
                                     <div class="item-thumbnail">
                                         <div class="item-icon bg-info">
-                                            <img src="~/Asset/img/product/google-shopping-son-thoi-li-3ce-227-benchmark-mau-cam-do-chay-3-5g-1644639565_img_380x380_64adc6_fit_center.jpg" />
+                                            <img src="~/Asset/img/product/google-shopping-son-thoi-li-3ce-227-benchmark-mau-cam-do-chay-3-5g-1644639565_img_380x380_64adc6_fit_center.jpg" />-->
                                             @*<i class="ti-shopping-cart mx-0"></i>*@
-                                        </div>
+                                        <!--</div>
                                     </div>
                                     <div class="item-content">
                                         <h6 class="font-weight-normal">Cọ trang điểm</h6>
@@ -146,9 +146,9 @@
                                 <a class="dropdown-item">
                                     <div class="item-thumbnail">
                                         <div class="item-icon bg-info">
-                                            <img src="~/Asset/img/product/bo-co-trang-diem-naked3-12-cay-cao-cap-1.jpg" />
+                                            <img src="~/Asset/img/product/bo-co-trang-diem-naked3-12-cay-cao-cap-1.jpg" />-->
                                             @*<i class="ti-shopping-cart mx-0"></i>*@
-                                        </div>
+                                        <!--</div>
                                     </div>
                                     <div class="item-content">
                                         <h6 class="font-weight-normal">Cọ trang điểm</h6>
@@ -162,9 +162,9 @@
                                 </a>
                                 <a class="mb-0 font-weight-normal float-sm-right dropdown-header" href="@Url.Action("AllCart","ShoppingCart")">Xem tất cả</a>
                             </div>
-                        </li>
+                        </li>-->
                         @*------------------thông báo---------------------*@
-                        <li class="nav-item dropdown">
+                        <!--<li class="nav-item dropdown">
                             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
                                 <i class="ti-bell mx-0">&#xf07a;</i>
                                 <span class='badge badge-warning' id='lblCartCount'> 5 </span>
@@ -212,9 +212,9 @@
                                     </div>
                                 </a>
                             </div>
-                        </li>
+                        </li>-->
                         @*----------------------thông tin cá nhân---------------------------------*@
-                        <li class="nav-item nav-profile dropdown">
+                        <!--<li class="nav-item nav-profile dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
                                 <img src="~/Asset/img/user/soothienquang.jpg" alt="profile" />
                             </a>
@@ -240,7 +240,7 @@
                 </div>
             </nav>
 
-        </div>
+        </div>-->
         <div class="row">
             @Html.Action("NavbarTop", "PartialView")
         </div>
@@ -488,3 +488,4 @@
             color: #fff;
         }
 </style>
+
