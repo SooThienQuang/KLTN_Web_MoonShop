@@ -505,6 +505,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbcosmetic.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\MD5.cs" />
     <Compile Include="Models\Notification.cs">
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>

@@ -3,14 +3,17 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Security.Policy;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
-
 namespace KLTN_Web_MoonShop.Controllers
 {
     public class CustomerController : Controller
     {
         DBCosmeticEntities db = new DBCosmeticEntities();
+        MD5 md5 = new MD5();
         // GET: Customer
         public ActionResult Login()
         {
@@ -23,7 +26,8 @@ namespace KLTN_Web_MoonShop.Controllers
             {
                 return RedirectToAction("Index", "Admin");
             }
-            Customer cus = db.Customers.FirstOrDefault(n => n.customerEmail.Equals(txt_email) && n.customerPassword.Equals(txt_password));
+            string pass = md5.CreateMD5(txt_password);
+            Customer cus = db.Customers.FirstOrDefault(n => n.customerEmail.Equals(txt_email) && n.customerPassword.Equals(pass));
             if (cus!=null)
             {
                 Session["user"] = cus;
@@ -35,7 +39,6 @@ namespace KLTN_Web_MoonShop.Controllers
             }
             return View();
         }
-
         public ActionResult Register()
         {
             return View();
@@ -56,7 +59,7 @@ namespace KLTN_Web_MoonShop.Controllers
                 customer.customerSex = "";
                 customer.customerAddress = "";
                 customer.customerUserName = phone.Trim();
-                customer.customerPassword = password;
+                customer.customerPassword = md5.CreateMD5(password);
                 customer.customerPhoto = "sothienquang.jpg";
                 customer.isActive = 1;
                 customer.dateCreate = DateTime.Now;  
