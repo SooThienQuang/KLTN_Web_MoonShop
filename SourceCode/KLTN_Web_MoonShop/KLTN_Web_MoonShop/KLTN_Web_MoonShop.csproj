@@ -131,13 +131,17 @@
     <Content Include="Asset\img\producer\hsx4.jpg" />
     <Content Include="Asset\img\producer\hsx5.jpg" />
     <Content Include="Asset\img\producer\hsx6.jpg" />
+    <Content Include="Asset\img\product\001.png" />
     <Content Include="Asset\img\product\0022be6c4da54248016c31454f17251e.jpg" />
     <Content Include="Asset\img\product\15372e9256b0d3c96c27039d66c1df27.jpg" />
     <Content Include="Asset\img\product\203eb8c2f22283fe10e491ee53793eb0.jpg" />
     <Content Include="Asset\img\product\360934566faa7b4beec119be1e9c79ca.jpg" />
+    <Content Include="Asset\img\product\39eafac4ab2645cf609aa57e40584885.jpg" />
+    <Content Include="Asset\img\product\4.png" />
     <Content Include="Asset\img\product\496394b9b5e612b86f880f4665866223.jpg" />
     <Content Include="Asset\img\product\5404444dfba4c90634b2be63b6ea908d.jpg" />
     <Content Include="Asset\img\product\58a6e65ec5adadd49e5281e185156696.jpg" />
+    <Content Include="Asset\img\product\616805156399633798093904609249950411845063n.jpg" />
     <Content Include="Asset\img\product\703d5bd915334d8fabdd428a72c939f5.jpg" />
     <Content Include="Asset\img\product\9615bb6b95cf43ab9b94434614d5d6fc.jpg" />
     <Content Include="Asset\img\product\aeafc797a977fe0eea313d6a1404d679.jpg" />
@@ -145,11 +149,15 @@
     <Content Include="Asset\img\product\bo-co-trang-diem-naked3-12-cay-cao-cap-1.jpg" />
     <Content Include="Asset\img\product\cotrangdiem.jpg" />
     <Content Include="Asset\img\product\deccf3ae0587796a32b6de2ae2953b78.jpg" />
+    <Content Include="Asset\img\product\dior-addict-lip-glow000000000001874494f.png" />
+    <Content Include="Asset\img\product\dior-lip-glow-2021-orchardvn-anh3.png" />
+    <Content Include="Asset\img\product\dior-lip-glow-2021-orchardvn-anh9.png" />
     <Content Include="Asset\img\product\f6819bdc586d5e7c9da1fa6bf78173ca.jpg" />
     <Content Include="Asset\img\product\google-shopping-son-thoi-li-3ce-227-benchmark-mau-cam-do-chay-3-5g-1644639565_img_380x380_64adc6_fit_center.jpg" />
     <Content Include="Asset\img\product\image_2022_10_21T07_37_13_564Z.png" />
     <Content Include="Asset\img\product\kemchongnang.jpg" />
     <Content Include="Asset\img\product\kemduongda.jpg" />
+    <Content Include="Asset\img\product\lamerthelipvolumizer1.png" />
     <Content Include="Asset\img\product\matna.jpg" />
     <Content Include="Asset\img\product\MoonShop.png" />
     <Content Include="Asset\img\product\nuochoa.jpg" />
@@ -161,6 +169,8 @@
     <Content Include="Asset\img\product\vitamin.jpg" />
     <Content Include="Asset\img\tu1.jpg" />
     <Content Include="Asset\img\user\36-365828_navbar-toggle-icon-menu-hamburger-png-white.png" />
+    <Content Include="Asset\img\user\Sample_User_Icon.png" />
+    <Content Include="Asset\img\user\sothienquang.jpg" />
     <Content Include="Asset\img\user\soothienquang.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="css\admin\assets\css\style.css" />
@@ -474,6 +484,7 @@
     <Compile Include="Controllers\AlertController.cs" />
     <Compile Include="Controllers\API\CustomerController.cs" />
     <Compile Include="Controllers\API\ImageController.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -663,6 +674,12 @@
     <None Include="Properties\PublishProfiles\moonshopcosmetic - Web Deploy.pubxml" />
     <Content Include="Views\Payment\Checkout.cshtml" />
     <Content Include="Views\Payment\Detail.cshtml" />
+    <Content Include="Views\Chat\Index.cshtml" />
+    <Content Include="Views\PartialView\Profile.cshtml" />
+    <Content Include="Views\Customer\Profile.cshtml" />
+    <Content Include="Views\Customer\Notification.cshtml" />
+    <Content Include="Views\Customer\Cart.cshtml" />
+    <Content Include="Views\Customer\Order.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

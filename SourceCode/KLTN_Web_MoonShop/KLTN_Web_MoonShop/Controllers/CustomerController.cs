@@ -17,6 +17,7 @@ namespace KLTN_Web_MoonShop.Controllers
         // GET: Customer
         public ActionResult Login()
         {
+            Session["user"] = null;
             return View();
         }
         [HttpPost]
@@ -54,13 +55,13 @@ namespace KLTN_Web_MoonShop.Controllers
             {
                 Customer customer = new Customer();
                 customer.customerID =long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
-                customer.customerName = (firstname + "" + lastname).Trim();
+                customer.customerName = (firstname + " " + lastname);
                 customer.customerEmail = email.Trim();
                 customer.customerSex = "";
                 customer.customerAddress = "";
                 customer.customerUserName = phone.Trim();
                 customer.customerPassword = md5.CreateMD5(password);
-                customer.customerPhoto = "sothienquang.jpg";
+                customer.customerPhoto = "Sample_User_Icon.png".Trim();
                 customer.isActive = 1;
                 customer.dateCreate = DateTime.Now;  
                 if(db.Customers.FirstOrDefault(n=>n.customerEmail.Equals(email))==null)
@@ -80,6 +81,67 @@ namespace KLTN_Web_MoonShop.Controllers
             {
                 return RedirectToAction("Page404", "Error");
             }
+        }
+
+
+        //----------------------------------------------------navbar----------------------------------
+        public ActionResult Profile()
+        {
+
+            Customer cs = Session["user"] as Customer;
+            if (cs != null)
+            {
+                string ten = cs.customerName.ToString().Split(' ').Last();
+                ViewBag.name = ten;
+                ViewBag.user = cs;
+            }
+
+            return PartialView();
+
+        }
+
+
+        public ActionResult Notification()
+        {
+
+            Customer cs = Session["user"] as Customer;
+            if (cs != null)
+            {
+                string ten = cs.customerName.ToString().Split(' ').Last();
+                ViewBag.name = ten;
+                ViewBag.user = cs;
+            }
+
+            return PartialView();
+
+        }
+        public ActionResult Cart()
+        {
+
+            Customer cs = Session["user"] as Customer;
+            if (cs != null)
+            {
+                string ten = cs.customerName.ToString().Split(' ').Last();
+                ViewBag.name = ten;
+                ViewBag.user = cs;
+            }
+
+            return PartialView();
+
+        }
+        public ActionResult Order()
+        {
+
+            Customer cs = Session["user"] as Customer;
+            if (cs != null)
+            {
+                string ten = cs.customerName.ToString().Split(' ').Last();
+                ViewBag.name = ten;
+                ViewBag.user = cs;
+            }
+
+            return PartialView();
+
         }
     }
 }

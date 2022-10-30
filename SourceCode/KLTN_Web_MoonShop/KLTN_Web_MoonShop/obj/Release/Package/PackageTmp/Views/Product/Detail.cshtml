@@ -10,7 +10,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <div class="container d-lg-inline-flex">
     <div class="box-1 bg-light user">
-        <div class="box-inner-1 pb-3 mb-3 ">
+        <div class="box-inner-1">
             
             <div id="my" class="carousel slide carousel-fade img-details" data-bs-ride="carousel"
                  data-bs-interval="2000">
@@ -53,6 +53,7 @@
                 sed officiis odio
             </p>
             <div class="radiobtn">
+                Voucher mua kèm
                 <input type="radio" name="box" id="one">
                 <input type="radio" name="box" id="two">
                 <input type="radio" name="box" id="three">
@@ -170,12 +171,6 @@
         </div>
     </div>
 </div>
-@*----------------loại sản phẩm :như son môi,phấn mắt...-------------------------------------*@
-@*@Html.Action("NavbarProductTop", "PartialView")*@
-@*-------------------------------carosel sanr phaame home------------------------------------*@
-@Html.Action("NavbarProductTop", "PartialView")
-@Html.Action("CaroselProductHome", "Product")
-@Html.Action("Home", "Product")
 <style>
 
     p {
@@ -184,8 +179,9 @@
 
     .box-1 {
         min-width: 450px;
+        width:150%;
         width:100%;
-        padding: 10px 40px;
+       /* padding: 10px 40px;*/
         user-select: none;
     }
 
@@ -384,6 +380,7 @@
     .carousel-item img {
         object-fit: cover;
         height: 100%;
+        width:100%;
     }
 
     .carousel-control-prev {
