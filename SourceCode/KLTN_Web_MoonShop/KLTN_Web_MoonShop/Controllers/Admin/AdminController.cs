@@ -109,25 +109,31 @@ namespace KLTN_Web_MoonShop.Controllers
             try
             {
                 //copy hình vào folder
-                if(file!=null&&img1!=null&&img2!=null&&img3!=null)
+                if(file!=null)
                 {
                     string _FileName = Path.GetFileName(file.FileName);
                     string _path = Path.Combine(Server.MapPath("~/Asset/img/product"), _FileName);
                     file.SaveAs(_path);
-
+                }
+                if ( img1 != null)
+                {
                     string _FileName1 = Path.GetFileName(img1.FileName);
                     string _path1 = Path.Combine(Server.MapPath("~/Asset/img/product"), _FileName1);
                     img1.SaveAs(_path1);
-
+                }
+                if (img2 != null)
+                {
                     string _FileName2 = Path.GetFileName(img2.FileName);
                     string _path2 = Path.Combine(Server.MapPath("~/Asset/img/product"), _FileName2);
                     img2.SaveAs(_path2);
-
+                }
+                if (img3 != null)
+                {
                     string _FileName3 = Path.GetFileName(img3.FileName);
                     string _path3 = Path.Combine(Server.MapPath("~/Asset/img/product"), _FileName3);
                     img3.SaveAs(_path3);
-                }    
-                Product pro = new Product();
+                }
+                    Product pro = new Product();
                 ProductDetail prod = new ProductDetail();
                 //thêm mới
                 if (id == 0)

@@ -478,6 +478,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PartialViewController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
@@ -658,7 +659,10 @@
     <Content Include="Views\ActionLog\List.cshtml" />
     <Content Include="Views\ProductType\List.cshtml" />
     <Content Include="Views\ProductType\AddOrUpdate.cshtml" />
+    <None Include="Properties\PublishProfiles\honghaccosmetic - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\moonshopcosmetic - Web Deploy.pubxml" />
+    <Content Include="Views\Payment\Checkout.cshtml" />
+    <Content Include="Views\Payment\Detail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
