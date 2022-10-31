@@ -3,49 +3,57 @@
 }
 else
 {
-    <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
-        <i class="ti-shopping-cart mx-0">&#xf07a;</i>
-        <span class='badge badge-warning' id='lblCartCount'> 5 </span>
-        <div class="item-content">Giỏ hàng</div>
+    if (@ViewBag.lstCart != null)
+    {
+        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+            <i class="ti-shopping-cart mx-0">&#xf07a;</i>
+            <span class='badge badge-warning' id='lblCartCount'>  @ViewBag.size </span>
+            <div class="item-content">Giỏ hàng</div>
 
-    </a>
-    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
-        <p class="mb-0 font-weight-normal float-left dropdown-header">Thông báo</p>
-        <a class="dropdown-item" href="#">
-            <div class="item-thumbnail">
-                <div class="item-icon bg-info">
-                    <img src="~/Asset/img/product/google-shopping-son-thoi-li-3ce-227-benchmark-mau-cam-do-chay-3-5g-1644639565_img_380x380_64adc6_fit_center.jpg" />
-                    @*<i class="ti-shopping-cart mx-0"></i>*@
-                </div>
-            </div>
-            <div class="item-content">
-                <h6 class="font-weight-normal">Cọ trang điểm</h6>
-                <p class="font-weight-light small-text mb-0 text-muted">
-                    2 sản phẩm
-                </p>
-            </div>
-            <div class="item-content">
-                <h6 class="font-weight-normal" style="color:red">@String.Format("{0:0,0 vnđ}", 20000000)</h6>
-            </div>
         </a>
-        <a class="dropdown-item">
-            <div class="item-thumbnail">
-                <div class="item-icon bg-info">
-                    <img src="~/Asset/img/product/bo-co-trang-diem-naked3-12-cay-cao-cap-1.jpg" />
-                    @*<i class="ti-shopping-cart mx-0"></i>*@
-                </div>
-            </div>
-            <div class="item-content">
-                <h6 class="font-weight-normal">Cọ trang điểm</h6>
-                <p class="font-weight-light small-text mb-0 text-muted">
-                    2 sản phẩm
-                </p>
-            </div>
-            <div class="item-content">
-                <h6 class="font-weight-normal" style="color:red">@String.Format("{0:0,0 vnđ}", 20000000)</h6>
-            </div>
+        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+            <p class="mb-0 font-weight-normal float-left dropdown-header">Giỏ hàng của bạn</p>
+            <p class="mb-0 font-weight-normal float-md-left dropdown-header">Giá thành</p>
+            <p class="mb-0 font-weight-normal float-lg-right dropdown-header">Tổng tiền</p>
+            @foreach (var item in @ViewBag.lstCart)
+            {
+                <a class="dropdown-item" href="#">
+                    <div class="item-thumbnail">
+                        <div class="item-icon bg-info">
+                            <img src="~/Asset/img/product/@item.img" />
+                        </div>
+                    </div>
+                    <div class="item-content">
+                        <h6 class="font-weight-normal">@item.name</h6>
+                        <p class="font-weight-light small-text mb-0 text-muted">
+                            @item.quantity sản phẩm
+                        </p>
+                    </div>
+                    <div class="item-content">
+                        <h6 class="font-weight-normal" style="color:red">@String.Format("{0:0,0 vnđ}", item.price)</h6>
+                    </div>
+                    <div class="item-content">
+                        <h6 class="font-weight-normal" style="color:red">@String.Format("{0:0,0 vnđ}", item.money)</h6>
+                    </div>
+                </a>
+            }
+        <a class="mb-0  float-md-left dropdown-header" href=""><h3 class="font-weight-normal" style="color:red">Tổng tiền : @String.Format("{0:0,0 vnđ}", @ViewBag.AllMoney)</h3></a>
+                <a class="mb-0 font-weight-normal float-sm-right dropdown-header" href="@Url.Action("AllCart", "ShoppingCart")">Xem tất cả</a>
+            
+        </div>
+        
+    }
+    else
+    {
+        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+            <i class="ti-shopping-cart mx-0">&#xf07a;</i>
+            <span class='badge badge-warning' id='lblCartCount'> 0 </span>
+            <div class="item-content">Giỏ hàng</div>
+
         </a>
-        <a class="mb-0 font-weight-normal float-sm-right dropdown-header" href="@Url.Action("AllCart","ShoppingCart")">Xem tất cả</a>
-    </div>
+        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+            <p class="mb-0 font-weight-normal float-left dropdown-header">Bạn chưa có sản phẩm nào ?</p>
+        </div>
+    }
 }
 

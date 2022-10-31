@@ -124,6 +124,7 @@
     <Content Include="Asset\img\caroselhome\img_4.jpg" />
     <Content Include="Asset\img\caroselhome\img_5.jpg" />
     <Content Include="Asset\img\caroselhome\img_6.jpg" />
+    <Content Include="Asset\img\cart.png" />
     <Content Include="Asset\img\logo\MoonShop.png" />
     <Content Include="Asset\img\producer\hsx1.jpg" />
     <Content Include="Asset\img\producer\hsx2.jpg" />
@@ -482,6 +483,7 @@
     <Compile Include="Controllers\Admin\AdminController.cs" />
     <Compile Include="Controllers\Admin\ProductTypeController.cs" />
     <Compile Include="Controllers\AlertController.cs" />
+    <Compile Include="Controllers\API\CartController.cs" />
     <Compile Include="Controllers\API\CustomerController.cs" />
     <Compile Include="Controllers\API\ImageController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
@@ -497,6 +499,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ActionLog.cs">
+      <DependentUpon>dbcosmetic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cart.cs">
+      <DependentUpon>dbcosmetic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CartDetail.cs">
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs">
@@ -680,6 +688,7 @@
     <Content Include="Views\Customer\Notification.cshtml" />
     <Content Include="Views\Customer\Cart.cshtml" />
     <Content Include="Views\Customer\Order.cshtml" />
+    <Content Include="Views\ShoppingCart\AddOrUpdate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -689,6 +698,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

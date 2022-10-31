@@ -12,7 +12,7 @@ namespace KLTN_Web_MoonShop.Controllers
         // GET: Product
         DBCosmeticEntities db = new DBCosmeticEntities();
         public ActionResult Home()
-        {
+        {   
             return PartialView(db.Products.Where(n=>n.isActive==1).ToList());
         }
         public ActionResult AddOrUpdate(int id)
@@ -33,6 +33,5 @@ namespace KLTN_Web_MoonShop.Controllers
             ViewBag.ProductDetail = db.ProductDetails.FirstOrDefault(n => n.ProductID == id);
             return View();
         }
-
     }
 }

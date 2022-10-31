@@ -4,6 +4,7 @@
     <h2>Sản phẩm <b>về chúng tôi</b></h2>
     @foreach (var item in Model)
     {
+        var user = Session["user"] as KLTN_Web_MoonShop.Models.Customer;
         <div class="col-sm-2">
             <div class="cardpro mh-100 mw-100">
 
@@ -38,11 +39,16 @@
                     <br />
                     <span style="color:red">@String.Format("{0:0,0 vnđ}", item.productPrice)</span>
                     <br />
-
+                    
+                    @if (user != null)
+                    {
                     <div class="buttons d-flex flex-row">
-                        <div class="cartpro"><i class="fa fa-shopping-cart"></i></div> <button class="btn btn-success cartpro-button btn-block"><span class="dot">1</span>Thêm </button>
-                    </div>
+                        <div class="cartpro"><i class="fa fa-shopping-cart"></i></div>
+                        <a class="btn btn-success" data-toggle="modal" data-target="#modalPush" onclick="ConfirmDelete(@item.productID,@user.customerID)">Thêm </a>
 
+                        @*<button type="submit"  class="btn btn-success cartpro-button btn-block"><span class="dot">1</span>Thêm </button>*@
+                    </div>
+                    }
                     <div class="weight">
                         <small>Còn hàng</small>
                     </div>
@@ -57,8 +63,71 @@
         </div>
     }
 </div>
+<div class="modal fade" id="modalPush" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-info" role="document">
+        <!--Content-->
+        <div class="modal-content text-center">
+            <!--Header-->
+            <div class="modal-header d-flex justify-content-center">
+                <p class="heading">Thêm giỏ hàng thành công</p>
+            </div>
 
+            <!--Body-->
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-3">
+                        <p></p>
+                        <p class="text-center">
+                            <img src="~/Asset/img/cart.png" height="50" width="50"/>
+                        </p>
+                    </div>
+
+                    <div class="col-9">            
+                        <p>Bạn cần thêm thời gian để đưa ra quyết định mua hàng?</p>
+                        <p>Đừng lo lắng, sản phẩm của bạn sẽ đợi bạn trong giỏ hàng.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+                <a href="#" type="button" class="btn btn-info">Đến giỏ hàng ngay</a>
+                <a href="#" type="button" class="btn btn-outline-info waves-effect" data-dismiss="modal">Đóng</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!--Modal: modalPush-->
 <script>
+    var ConfirmDelete = function (productID,cusID) {
+        //$.ajax({
+
+        //    type: "GET",
+        //    url: "/api/cart/",
+        //    data: { id: productID }
+        //})
+        var person = new Object();
+        person.proID = productID;
+        person.cusID = cusID;
+        person.quantity = 1;
+        $.ajax({
+            url: '/api/cart/',
+            type: 'POST',
+            dataType: 'json',
+            data: person,
+            success: function (data, textStatus, xhr) {
+                console.log(data);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log('Error in Operation');
+            }
+        });
+
+    }
     document.addEventListener("DOMContentLoaded", function (event) {
 
 
@@ -80,8 +149,7 @@
     });
 </script>
 <style>
-    i
-    {
-        color:orange;
+    i {
+        color: orange;
     }
 </style>

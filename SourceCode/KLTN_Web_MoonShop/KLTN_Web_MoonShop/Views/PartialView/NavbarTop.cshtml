@@ -12,7 +12,7 @@
             <form action="@Url.Action("Search","Search")">
                 <div class="nav-item nav-search">
                     <div class="input-group">
-                        <input type="search" style="border-radius:52px" class="form-control" placeholder="Nhập từ khóa..." aria-label="search" aria-describedby="search" name="keyword">
+                        <input type="search" style="border-radius:52px;min-width:100px" class="form-control" placeholder="Nhập từ khóa..." aria-label="search" aria-describedby="search" name="keyword">
                        &nbsp;
                         <button class="btn btn-outline-primary" style="border-radius:52px">
                             <span class="ti-search" type="submit">Tìm kiếm</span>
@@ -22,9 +22,9 @@
             </form>
         </div>
         <div class="col">
-            <div class="navbar-menu-wrapper d-flex mw-100">
+            <div class="navbar-menu-wrapper d-flex">
 
-                <ul class="navbar-nav mw-100">
+                <ul class="navbar-nav">
                     @*------------------------------------------gio hang----------------------------*@
                     <li class="nav-item dropdown">
                         @Html.Action("Cart", "Customer")

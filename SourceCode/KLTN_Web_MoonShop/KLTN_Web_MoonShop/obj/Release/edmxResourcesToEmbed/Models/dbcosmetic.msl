@@ -80,5 +80,26 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Carts">
+      <EntityTypeMapping TypeName="DBCosmeticModel.Cart">
+        <MappingFragment StoreEntitySet="Cart">
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="customerID" ColumnName="customerID" />
+          <ScalarProperty Name="cartID" ColumnName="cartID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CartDetails">
+      <EntityTypeMapping TypeName="DBCosmeticModel.CartDetail">
+        <MappingFragment StoreEntitySet="CartDetail">
+          <ScalarProperty Name="cartMoney" ColumnName="cartMoney" />
+          <ScalarProperty Name="cartQuantity" ColumnName="cartQuantity" />
+          <ScalarProperty Name="productID" ColumnName="productID" />
+          <ScalarProperty Name="cartID" ColumnName="cartID" />
+          <ScalarProperty Name="cartDetailID" ColumnName="cartDetailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

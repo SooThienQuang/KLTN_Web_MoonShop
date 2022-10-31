@@ -10,6 +10,15 @@ using System.Web;
 using System.Web.Mvc;
 namespace KLTN_Web_MoonShop.Controllers
 {
+  public class cartTam
+    {
+        public long id { get; set; }
+        public string name { get; set; }
+        public long quantity { get; set; }
+        public long price { get; set; }
+        public string img { get; set; }
+        public long money { get; set; }
+    }
     public class CustomerController : Controller
     {
         DBCosmeticEntities db = new DBCosmeticEntities();
@@ -124,6 +133,33 @@ namespace KLTN_Web_MoonShop.Controllers
                 string ten = cs.customerName.ToString().Split(' ').Last();
                 ViewBag.name = ten;
                 ViewBag.user = cs;
+                Cart cart = new Cart();
+                cart=db.Carts.ToList().FirstOrDefault(n=>n.customerID==cs.customerID);
+                List<CartDetail> lst = new List<CartDetail>();
+                if(cart!=null)
+                {
+                      lst = db.CartDetails.Where(n => n.cartID == cart.cartID).ToList();
+                    List<cartTam> lsttam = new List<cartTam>();
+                     if(lst.Count>0)
+                    {
+                        foreach (var item in lst)
+                        {
+                            cartTam c = new cartTam();
+                            c.id = (long)item.productID;
+                            Product pro = db.Products.ToList().FirstOrDefault(n => n.productID == item.productID);
+                            c.name = pro.productName;
+                            c.img = pro.productImage;
+                            c.price = (long)pro.productPrice;
+                            c.quantity = (long)item.cartQuantity;
+                            c.money = (long)item.cartMoney;
+                            lsttam.Add(c);
+                            
+                        }
+                        ViewBag.AllMoney = lst.Sum(n => n.cartMoney);
+                        ViewBag.lstCart = lsttam;
+                    }    
+                }
+                ViewBag.size = lst.Count;
             }
 
             return PartialView();

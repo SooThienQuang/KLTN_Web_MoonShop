@@ -7,6 +7,8 @@
     <EntitySet Name="Products" EntityType="DBCosmeticModel.Product" />
     <EntitySet Name="ProductDetails" EntityType="DBCosmeticModel.ProductDetail" />
     <EntitySet Name="ProductTypes" EntityType="DBCosmeticModel.ProductType" />
+    <EntitySet Name="Carts" EntityType="DBCosmeticModel.Cart" />
+    <EntitySet Name="CartDetails" EntityType="DBCosmeticModel.CartDetail" />
   </EntityContainer>
   <EntityType Name="ActionLog">
     <Key>
@@ -80,5 +82,24 @@
     <Property Name="proTypeID" Type="Int32" Nullable="false" />
     <Property Name="proTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="isActive" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="cartID" />
+    </Key>
+    <Property Name="cartID" Type="Int64" Nullable="false" />
+    <Property Name="customerID" Type="Int64" />
+    <Property Name="createDate" Type="DateTime" Precision="3" />
+    <Property Name="isActive" Type="Int32" />
+  </EntityType>
+  <EntityType Name="CartDetail">
+    <Key>
+      <PropertyRef Name="cartDetailID" />
+    </Key>
+    <Property Name="cartDetailID" Type="Int32" Nullable="false" />
+    <Property Name="cartID" Type="Int64" />
+    <Property Name="productID" Type="Int64" />
+    <Property Name="cartQuantity" Type="Int32" />
+    <Property Name="cartMoney" Type="Int64" />
   </EntityType>
 </Schema>

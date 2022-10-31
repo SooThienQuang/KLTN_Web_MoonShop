@@ -1,17 +1,18 @@
 ﻿<div class="row">
     <nav class="navbar col-lg-12 col-12 p-0 d-flex flex-row">
         <img src="~/Asset/img/banner/bannertop.png" width="100%" height="40px" style="margin-bottom:auto">
-        <div class="col">
+        <div class="col-sm-2">
             <a class="navbar-brand brand-logo" href="@Url.Action("Index","Home")">
                 <img src="~/Asset/img/logo/MoonShop.png" height="100" width="100" />
                 Moonshop
             </a>
+           
         </div>
         <div class="col-sm-5">
             <form action="@Url.Action("Search","Search")">
                 <div class="nav-item nav-search">
                     <div class="input-group">
-                        <input type="search" style="border-radius:52px" class="form-control" placeholder="Nhập từ khóa nổi bật..." aria-label="search" aria-describedby="search" name="keyword">
+                        <input type="search" style="border-radius:52px;min-width:100px" class="form-control" placeholder="Nhập từ khóa..." aria-label="search" aria-describedby="search" name="keyword">
                        &nbsp;
                         <button class="btn btn-outline-primary" style="border-radius:52px">
                             <span class="ti-search" type="submit">Tìm kiếm</span>
@@ -21,172 +22,24 @@
             </form>
         </div>
         <div class="col">
-            <div class="navbar-menu-wrapper d-flex mw-100">
+            <div class="navbar-menu-wrapper d-flex">
 
-                <ul class="navbar-nav mw-100">
+                <ul class="navbar-nav">
                     @*------------------------------------------gio hang----------------------------*@
                     <li class="nav-item dropdown">
-                        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
-                            <i class="ti-shopping-cart mx-0">&#xf07a;</i>
-                            <span class='badge badge-warning' id='lblCartCount'> 5 </span>
-                            <div class="item-content">Giỏ hàng</div>
-
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
-                            <p class="mb-0 font-weight-normal float-left dropdown-header">Thông báo</p>
-                            <a class="dropdown-item" href="#">
-                                <div class="item-thumbnail">
-                                    <div class="item-icon bg-info">
-                                        <img src="~/Asset/img/product/google-shopping-son-thoi-li-3ce-227-benchmark-mau-cam-do-chay-3-5g-1644639565_img_380x380_64adc6_fit_center.jpg" />
-                                        @*<i class="ti-shopping-cart mx-0"></i>*@
-                                    </div>
-                                </div>
-                                <div class="item-content">
-                                    <h6 class="font-weight-normal">Cọ trang điểm</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        2 sản phẩm
-                                    </p>
-                                </div>
-                                <div class="item-content">
-                                    <h6 class="font-weight-normal" style="color:red">@String.Format("{0:0,0 vnđ}", 20000000)</h6>
-                                </div>
-                            </a>
-                            <a class="dropdown-item">
-                                <div class="item-thumbnail">
-                                    <div class="item-icon bg-info">
-                                        <img src="~/Asset/img/product/bo-co-trang-diem-naked3-12-cay-cao-cap-1.jpg" />
-                                        @*<i class="ti-shopping-cart mx-0"></i>*@
-                                    </div>
-                                </div>
-                                <div class="item-content">
-                                    <h6 class="font-weight-normal">Cọ trang điểm</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        2 sản phẩm
-                                    </p>
-                                </div>
-                                <div class="item-content">
-                                    <h6 class="font-weight-normal" style="color:red">@String.Format("{0:0,0 vnđ}", 20000000)</h6>
-                                </div>
-                            </a>
-                            <a class="mb-0 font-weight-normal float-sm-right dropdown-header" href="@Url.Action("AllCart","ShoppingCart")">Xem tất cả</a>
-                        </div>
+                        @Html.Action("Cart", "Customer")
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
-                            <i class="ti-wallet mx-0">&#xf07a;</i>
-                            <span class='badge badge-warning' id='lblCartCount'> 5 </span>
-                            <div class="item-content">Đơn đặt hàng</div>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
-                            <p class="mb-0 font-weight-normal float-left dropdown-header">Thông báo</p>
-                            <a class="dropdown-item">
-                                <div class="item-thumbnail">
-                                    <div class="item-icon bg-success">
-                                        <i class="ti-wallet mx-0"></i>
-                                    </div>
-                                </div>
-                                <div class="item-content">
-                                    <h6 class="font-weight-normal">Đơn đặt hàng</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        2 đơn đặt hàng
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item">
-                                <div class="item-thumbnail">
-                                    <div class="item-icon bg-info">
-                                        <i class="ti-shopping-cart mx-0"></i>
-                                    </div>
-                                </div>
-                                <div class="item-content">
-                                    <h6 class="font-weight-normal">Giỏ hàng</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        2 item
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item">
-                                <div class="item-thumbnail">
-                                    <div class="item-icon bg-warning">
-                                        <i class="ti-settings mx-0"></i>
-                                    </div>
-                                </div>
-                                <div class="item-content">
-                                    <h6 class="font-weight-normal">Settings</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        Private message
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
+                        @Html.Action("Order", "Customer")
                     </li>
                     @*----------------------------------thông báo--------------------------------*@
-                    <li class="nav-item dropdown">
-                        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
-                            <i class="ti-bell mx-0">&#xf07a;</i>
-                            <span class='badge badge-warning' id='lblCartCount'> 5 </span>
-                            <div class="item-content">Thông báo</div>
-
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
-                            <p class="mb-0 font-weight-normal float-left dropdown-header">Thông báo</p>
-                            <a class="dropdown-item" href="#">
-                                <div class="item-thumbnail">
-                                    <div class="item-icon bg-info">
-                                        <img src="~/Asset/img/product/google-shopping-son-thoi-li-3ce-227-benchmark-mau-cam-do-chay-3-5g-1644639565_img_380x380_64adc6_fit_center.jpg" />
-                                        @*<i class="ti-shopping-cart mx-0"></i>*@
-                                    </div>
-                                </div>
-                                <div class="item-content">
-                                    <h6 class="font-weight-normal">Cọ trang điểm</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        2 sản phẩm
-                                    </p>
-                                </div>
-                                <div class="item-content">
-                                    <h6 class="font-weight-normal" style="color:red">@String.Format("{0:0,0 vnđ}", 20000000)</h6>
-                                </div>
-                            </a>
-                            <a class="dropdown-item">
-                                <div class="item-thumbnail">
-                                    <div class="item-icon bg-info">
-                                        <img src="~/Asset/img/product/bo-co-trang-diem-naked3-12-cay-cao-cap-1.jpg" />
-                                        @*<i class="ti-shopping-cart mx-0"></i>*@
-                                    </div>
-                                </div>
-                                <div class="item-content">
-                                    <h6 class="font-weight-normal">Cọ trang điểm</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        2 sản phẩm
-                                    </p>
-                                </div>
-                                <div class="item-content">
-                                    <h6 class="font-weight-normal" style="color:red">@String.Format("{0:0,0 vnđ}", 20000000)</h6>
-                                </div>
-                            </a>
-                            <a class="mb-0 font-weight-normal float-sm-right dropdown-header" href="@Url.Action("AllCart","ShoppingCart")">Xem tất cả</a>
-                        </div>
-                    </li>
+                <li class="nav-item dropdown">
+                    @Html.Action("Notification", "Customer")
+                </li>
                     @*----------------------thông tin cá nhân---------------------------------*@
-                    <li class="nav-item nav-profile dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
-                            <img src="~/Asset/img/user/soothienquang.jpg" alt="profile" />
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                            <a class="dropdown-item" href="@Url.Action("Register","Customer")">
-                                <i class="ti-user text-primary"></i>
-                                Đăng kí tài khoản
-                            </a>
-                            <a class="dropdown-item">
-                                <i class="ti-settings text-primary"></i>
-                                Cài đặt
-                            </a>
-                            <a class="dropdown-item" href="@Url.Action("Login","Customer")">
-                                <i class="ti-power-off text-primary"></i>
-                                Đăng xuất
-                            </a>
-                        </div>
-                    </li>
+                <li class="nav-item nav-profile dropdown">
+                    @Html.Action("Profile", "Customer")
+                </li>
 
                 </ul>
             </div>
