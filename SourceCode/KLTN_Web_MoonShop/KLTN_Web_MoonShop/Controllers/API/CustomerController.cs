@@ -32,7 +32,9 @@ namespace KLTN_Web_MoonShop.Controllers.API
         public HttpResponseMessage GetUser(HttpRequestMessage request, string username, string password)
         {
             Customer account = new Customer();
-            account = db.Customers.FirstOrDefault(n => n.customerEmail.Equals(username) && n.customerPassword.Equals(password));
+            MD5 m=new MD5();
+            string pass = m.CreateMD5(password);
+            account = db.Customers.FirstOrDefault(n => n.customerEmail.Equals(username) && n.customerPassword.Equals(pass));
             if (account == null)
             {
                 return request.CreateResponse(false);

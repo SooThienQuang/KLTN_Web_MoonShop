@@ -102,10 +102,21 @@
                                                     <label class="col-sm-2 col-form-label">Loại sản phẩm</label>
                                                     <div class="col-sm-10">
                                                         <select class="form-select" aria-label="Default select example" name="cbbloaisp">
+
                                                             <option selected value="0">Chọn loại sản phẩm</option>
                                                             @foreach (var item in ViewBag.ProductType)
                                                             {
+
                                                                 <option value="@item.proTypeID">@item.proTypeName</option>
+                                                                if (Model != null)
+                                                                {
+                                                                    if (Model.productTypeID == item.proTypeID)
+                                                                    {
+                                                                        <option selected value="@item.proTypeID">@item.proTypeName</option>
+                                                                    }
+                                                                }
+
+
                                                             }
                                                         </select>
                                                     </div>

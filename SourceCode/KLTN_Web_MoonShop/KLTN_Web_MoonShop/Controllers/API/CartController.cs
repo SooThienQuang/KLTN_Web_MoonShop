@@ -106,6 +106,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
         }
 
         // DELETE: api/Cart/5
+        [HttpDelete]
         public void Delete(long id)
         {
         }

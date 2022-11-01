@@ -125,6 +125,7 @@
     <Content Include="Asset\img\caroselhome\img_5.jpg" />
     <Content Include="Asset\img\caroselhome\img_6.jpg" />
     <Content Include="Asset\img\cart.png" />
+    <Content Include="Asset\img\delete.png" />
     <Content Include="Asset\img\logo\MoonShop.png" />
     <Content Include="Asset\img\producer\hsx1.jpg" />
     <Content Include="Asset\img\producer\hsx2.jpg" />
@@ -168,6 +169,7 @@
     <Content Include="Asset\img\product\tu1.jpg" />
     <Content Include="Asset\img\product\Untitled.png" />
     <Content Include="Asset\img\product\vitamin.jpg" />
+    <Content Include="Asset\img\sucess.png" />
     <Content Include="Asset\img\tu1.jpg" />
     <Content Include="Asset\img\user\36-365828_navbar-toggle-icon-menu-hamburger-png-white.png" />
     <Content Include="Asset\img\user\Sample_User_Icon.png" />
@@ -486,6 +488,7 @@
     <Compile Include="Controllers\API\CartController.cs" />
     <Compile Include="Controllers\API\CustomerController.cs" />
     <Compile Include="Controllers\API\ImageController.cs" />
+    <Compile Include="Controllers\API\ProductController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />

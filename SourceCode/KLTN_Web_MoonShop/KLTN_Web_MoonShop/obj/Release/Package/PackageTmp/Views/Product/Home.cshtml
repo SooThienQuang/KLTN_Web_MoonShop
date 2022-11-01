@@ -7,13 +7,13 @@
         var user = Session["user"] as KLTN_Web_MoonShop.Models.Customer;
         <div class="col-sm-2">
             <div class="cardpro mh-100 mw-100">
-
                 <div class="text-center">
                     <a href="@Url.Action("Detail","Product",new {id=item.productID})">
                         <img src="~/Asset/img/product/@item.productImage" width="150" height="200">
                     </a>
-                </div>
 
+                </div>
+                <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i></a><br />
                 @if (@item.productName.Length > 30)
                 {
                     string name = @item.productName.Substring(0, 30);
@@ -39,15 +39,15 @@
                     <br />
                     <span style="color:red">@String.Format("{0:0,0 vnđ}", item.productPrice)</span>
                     <br />
-                    
+
                     @if (user != null)
                     {
-                    <div class="buttons d-flex flex-row">
-                        <div class="cartpro"><i class="fa fa-shopping-cart"></i></div>
-                        <a class="btn btn-success" data-toggle="modal" data-target="#modalPush" onclick="ConfirmDelete(@item.productID,@user.customerID)">Thêm </a>
+                        <div class="buttons d-flex flex-row">
+                            <div class="cartpro"><i class="fa fa-shopping-cart"></i></div>
+                            <a class="btn btn-success" data-toggle="modal" data-target="#modalPush" onclick="ConfirmDelete(@item.productID,@user.customerID)">Thêm </a>
 
-                        @*<button type="submit"  class="btn btn-success cartpro-button btn-block"><span class="dot">1</span>Thêm </button>*@
-                    </div>
+                            @*<button type="submit"  class="btn btn-success cartpro-button btn-block"><span class="dot">1</span>Thêm </button>*@
+                        </div>
                     }
                     <div class="weight">
                         <small>Còn hàng</small>
@@ -153,3 +153,5 @@
         color: orange;
     }
 </style>
+
+

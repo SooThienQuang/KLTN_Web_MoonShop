@@ -98,8 +98,37 @@
     </div>
 
 </div>
-    <div id="divid" style="height:100px; width:400px" ;>
+
+<!--Modal: modalConfirmDelete-->
+<div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+        <!--Content-->
+        <div class="modal-content text-center">
+            <!--Header-->
+            <div class="modal-header d-flex justify-content-center">
+                <p class="heading">Bạn có chắc chắn muốn xóa ?</p>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+
+               <img src="~/Asset/img/delete.png" height="100" width="100"/>
+
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer flex-center">
+                <a href="" onclick="DeleteEmployee()" class="btn  btn-outline-danger">yes</a>
+                <a href="" type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">no</a>
+            </div>
+        </div>
+        <!--/.Content-->
     </div>
+</div>
+<!--Modal: modalConfirmDelete-->
+<div id="divid" style="height:100px; width:400px" ;>
+</div>
 <input type="hidden" id="hiddenEmployeeId" />
 <script>
     var ConfirmUpdate = function (productID) {
@@ -123,7 +152,7 @@
     var ConfirmDelete = function (productID) {
         $("#hiddenEmployeeId").val(productID);
         $("#txtidpro").val(productID);
-        $("#myModal1").modal('show');
+        $("#modalConfirmDelete").modal('show');
 
     }
     var HideModalDel = function () {
@@ -132,22 +161,62 @@
 
     }
     var DeleteEmployee = function () {
+     
+        //$.ajax({
+
+        //    type: "DELETE",
+        //    url: "/api/Product/",
+        //    data: { id: 1 },
+        //    success: function (result) {
+        //        $("#modalConfirmDelete").modal("hide");
+        //        $("#row_" + empId).remove();
+
+        //    }
+
+        //})
         var empId = $("#hiddenEmployeeId").val();
+        var person = new Object();
+        person.proID = empId;
+        person.cusID = 11;
+        person.quantity = 1;
         $.ajax({
-
-            type: "POST",
-            url: "/Admin/DeleteProduct",
-            data: { id: empId },
-            success: function (result) {
-                $("#myModal1").modal("hide");
-                $("#row_" + empId).remove();
-
-            }
-
-        })
-
+            url: '/api/product/',
+            type: 'DELETE',
+            dataType: 'json',
+            data: person
+              
+        });
+        $("#modalConfirmDelete").modal("hide");
+        $("#modalSuceess").modal('show');
+      
     }
 
 
 
 </script>
+
+<div class="modal fade" id="modalSuceess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+        <!--Content-->
+        <div class="modal-content text-center">
+            <!--Header-->
+            <div class="modal-header d-flex justify-content-center">
+                <p class="heading">Xóa thành công</p>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+
+                <img src="~/Asset/img/sucess.png" height="100" width="100" />
+
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer flex-center">
+                <a href="" type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Đóng</a>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
