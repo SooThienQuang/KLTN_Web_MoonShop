@@ -24,7 +24,17 @@ else
                         </div>
                     </div>
                     <div class="item-content">
-                        <h6 class="font-weight-normal">@item.name</h6>
+                        <h6 class="font-weight-normal">
+                            @if (@item.name.Length > 30)
+                            {
+                                string name1 = @item.name.Substring(0, 30);
+                                <h6> @name1 ...</h6>
+                               
+                            }
+                            else
+                            {
+                                    @item.name                            }
+                        </h6>
                         <p class="font-weight-light small-text mb-0 text-muted">
                             @item.quantity sản phẩm
                         </p>

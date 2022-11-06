@@ -1,8 +1,9 @@
 ﻿@model KLTN_Web_MoonShop.Models.Product
-
+@using KLTN_Web_MoonShop.Models
 @{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    Customer user = Session["user"] as Customer;
 }
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" />
 @*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>*@
@@ -11,7 +12,6 @@
 <div class="container d-lg-inline-flex">
     <div class="box-1 bg-light user">
         <div class="box-inner-1">
-            
             <div id="my" class="carousel slide carousel-fade img-details" data-bs-ride="carousel"
                  data-bs-interval="2000">
                 <div class="carousel-indicators">
@@ -49,57 +49,8 @@
                 </button>
             </div>
             <p class="dis info my-3">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate quos ipsa
-                sed officiis odio
+                @ViewBag.Product.productDescribe
             </p>
-            <div class="radiobtn">
-                Voucher mua kèm
-                <input type="radio" name="box" id="one">
-                <input type="radio" name="box" id="two">
-                <input type="radio" name="box" id="three">
-                <label for="one" class="box py-2 first">
-                    <div class="d-flex align-items-start">
-                        <span class="circle"></span>
-                        <div class="course">
-                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                <span class="fw-bold">
-                                    Collection 01
-                                </span>
-                                <span class="fas fa-dollar-sign">29</span>
-                            </div>
-                            <span>10 x Presets. Released in 2018</span>
-                        </div>
-                    </div>
-                </label>
-                <label for="two" class="box py-2 second">
-                    <div class="d-flex">
-                        <span class="circle"></span>
-                        <div class="course">
-                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                <span class="fw-bold">
-                                    Collection 01
-                                </span>
-                                <span class="fas fa-dollar-sign">29</span>
-                            </div>
-                            <span>10 x Presets. Released in 2018</span>
-                        </div>
-                    </div>
-                </label>
-                <label for="three" class="box py-2 third">
-                    <div class="d-flex">
-                        <span class="circle"></span>
-                        <div class="course">
-                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                <span class="fw-bold">
-                                    Collection 01
-                                </span>
-                                <span class="fas fa-dollar-sign">29</span>
-                            </div>
-                            <span>10 x Presets. Released in 2018</span>
-                        </div>
-                    </div>
-                </label>
-            </div>
         </div>
     </div>
     <div class="box-2">
@@ -108,62 +59,67 @@
                 <h3>@ViewBag.Product.productName</h3>
                 <p class="dis mb-3">còn hàng</p>
             </div>
-            <h2>Giá thành :  <span style="color:red">@String.Format("{0:0,0 vnđ}", @ViewBag.Product.productPrice)</span></h2>
+            <h3>Giá thành :  <span style="color:red">@String.Format("{0:0,0 vnđ}", @ViewBag.Product.productPrice)</span></h3>
             <form action="">
                 <div class="mb-3">
-                    <p class="dis fw-bold mb-2">Email address</p>
-                    <input class="form-control" type="email" value="luke@skywalker.com">
+                    Giao đến
+                    @if (user == null)
+                    {
+                        <a href="" style="color:black">
+                            Q.Tân Phú,P.Tây Thạnh, TP HCM
+                        </a>
+                        <a href="#">- Đổi địa chỉ</a>
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <select name="" id="province" class="form-control coupon">
+                            </select>
+                            <br />
+                            <select name="" id="district" class="form-control coupon">
+                                <option value="">chọn quận</option>
+                            </select>
+                            <br />
+                            <select name="" id="ward" class="form-control coupon">
+                                <option value="">chọn phường</option>
+                            </select>
+                            <br />
+                            Địa chỉ cụ thể
+                            <input type="text" id="txt" class="form-control coupon" name="txt">
+                            <button class="btn btn-outline-primary" type="submit">Thêm địa chỉ</button>
+
+                        </div>
+                    }
+
                 </div>
                 <div>
-                    <p class="dis fw-bold mb-2">Card details</p>
-                    <div class="d-flex align-items-center justify-content-between card-atm border rounded">
-                        <div class="fab fa-cc-visa ps-3"></div>
-                        <input type="text" class="form-control" placeholder="Card Details">
-                        <div class="d-flex w-50">
-                            <input type="text" class="form-control px-0" placeholder="MM/YY">
-                            <input type="password" maxlength=3 class="form-control px-0" placeholder="CVV">
-                        </div>
-                    </div>
-                    <div class="my-3 cardname">
-                        <p class="dis fw-bold mb-2">Cardholder name</p>
-                        <input class="form-control" type="text">
-                    </div>
+                    <p class="dis fw-bold mb-2">Chi tiết sản phẩm</p>
                     <div class="address">
-                        <p class="dis fw-bold mb-3">Billing address</p>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected hidden>United States</option>
-                            <option value="1">India</option>
-                            <option value="2">Australia</option>
-                            <option value="3">Canada</option>
-                        </select>
-                        <div class="d-flex">
-                            <input class="form-control zip" type="text" placeholder="ZIP">
-                            <input class="form-control state" type="text" placeholder="State">
-                        </div>
-                        <div class=" my-3">
-                            <p class="dis fw-bold mb-2">VAT Number</p>
-                            <div class="inputWithcheck">
-                                <input class="form-control" type="text" value="GB012345B9">
-                                <span class="fas fa-check"></span>
-
-                            </div>
-                        </div>
                         <div class="d-flex flex-column dis">
                             <div class="d-flex align-items-center justify-content-between mb-2">
-                                <p>Subtotal</p>
-                                <p><span class="fas fa-dollar-sign"></span>33.00</p>
+                                <p>Số lượng</p>
+                                <div class="sign"> <span id="minus"><i class="fa fa-minus"></i></span> <p id="quantity">1</p> <span id="plus"><i class="fa fa-plus"></i></span> </div>
+
                             </div>
                             <div class="d-flex align-items-center justify-content-between mb-2">
-                                <p>VAT<span>(20%)</span></p>
-                                <p><span class="fas fa-dollar-sign"></span>2.80</p>
+                                <p class="fw-bold">Tổng tiền</p>
+                                <p class="fw-bold"><input type="hidden" value="@ViewBag.Product.productPrice" id="product_input_price"></p>
+                                <h3 id="price">@ViewBag.Product.productPrice</h3><h3>VND</h3>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                <p class="fw-bold">Total</p>
-                                <p class="fw-bold"><span class="fas fa-dollar-sign"></span>35.80</p>
+                            <div>
+                                <div class="buttons">
+                                    <button class="cart-button">
+                                        <span class="add-to-cart">Add to cart</span>
+                                        <span class="added">Item added</span> <i class="fa fa-plus"></i>
+                                        <i class="fa fa-circle-thin"></i> <i class="fa fa-check"></i>
+                                    </button>
+                                    <button class="cart-button1">
+                                        <h5 class="add-to-cart">Chọn mua</h5>
+                                    </button>
+                                </div>
+                               
                             </div>
-                            <div class="btn btn-primary mt-2">
-                                Pay<span class="fas fa-dollar-sign px-1"></span>35.80
-                            </div>
+                          
                         </div>
                     </div>
                 </div>
@@ -171,7 +127,163 @@
         </div>
     </div>
 </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+@*--gio hang--*@
+<link rel="stylesheet" href="~/css/cart.css " />
+<link rel=" stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<script>
+    //---------------------------------------gio hang---------------------------------------
+    document.addEventListener("DOMContentLoaded", function (event) {
+
+
+        const cartButtons = document.querySelectorAll('.cart-button');
+
+        cartButtons.forEach(button => {
+
+            button.addEventListener('click', cartClick);
+
+        });
+
+        function cartClick() {
+            let button = this;
+            button.classList.add('clicked');
+        }
+    });
+    //--------------------------------------dia chi-------------------------------
+    const host = "https://provinces.open-api.vn/api/";
+    var callAPI = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data, "province");
+            });
+    }
+    callAPI('https://provinces.open-api.vn/api/?depth=1');
+    var callApiDistrict = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data.districts, "district");
+            });
+    }
+    var callApiWard = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data.wards, "ward");
+            });
+    }
+
+    var renderData = (array, select) => {
+        let row = ' <option disable value="">chọn</option>';
+        array.forEach(element => {
+            row += `<option value="${element.code}">${element.name}</option>`
+        });
+        document.querySelector("#" + select).innerHTML = row
+    }
+
+    $("#province").change(() => {
+        callApiDistrict(host + "p/" + $("#province").val() + "?depth=2");
+        printResult();
+    });
+    $("#district").change(() => {
+        callApiWard(host + "d/" + $("#district").val() + "?depth=2");
+        printResult();
+    });
+    $("#ward").change(() => {
+        printResult();
+    })
+
+    var printResult = () => {
+        if ($("#district").val() != "" && $("#province").val() != "" &&
+            $("#ward").val() != "") {
+            let result = $("#province option:selected").text() +
+                " | " + $("#district option:selected").text() + " | " +
+                $("#ward option:selected").text();
+
+            $("#result").text(result)
+
+            var diachi = result;
+            document.getElementById("txt").value = $("#ward option:selected").text() + "," + $("#district option:selected").text() + "," + $("#province option:selected").text();
+
+
+
+        }
+
+    }
+    //----------------------------------------end dia chi----------------------------
+    var plus = document.querySelector("#plus");
+    var quantity = document.querySelector("#quantity");
+    var minus = document.querySelector("#minus");
+    var product_price = document.querySelector("#product_input_price");
+    var price_show = document.querySelector("#price");
+
+
+    plus.addEventListener('click', function () {
+
+        var increment = parseInt(quantity.innerHTML);
+        var price_p = parseInt(product_price.value);
+
+        if (increment < 8) {
+            increment = increment + 1;
+            increment_price = price_p * increment;
+
+            quantity.innerHTML = increment;
+
+            price_show.innerHTML = increment_price;
+        }
+    });
+
+
+    minus.addEventListener('click', function () {
+
+        var increment = parseInt(quantity.innerHTML);
+        var price_p = parseInt(product_price.value);
+        if (increment > 1) {
+            increment = increment - 1;
+            decrease_price = price_p * increment;
+
+            quantity.innerHTML = increment;
+            price_show.innerHTML = decrease_price;
+        }
+
+    });
+</script>
 <style>
+    .sign {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: center
+    }
+
+        .sign span {
+            height: 30px;
+            width: 30px;
+            background-color: black;
+            display: flex;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 12px;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer
+        }
+
+        .sign small {
+            font-weight: 700;
+            margin-top: -14px;
+            margin-right: 4px;
+            height: 2px;
+            width: 2px
+        }
+
+        .sign span i {
+            margin-top: 5px
+        }
+
+
+
 
     p {
         margin: 0%;
@@ -179,9 +291,9 @@
 
     .box-1 {
         min-width: 450px;
-        width:150%;
-        width:100%;
-       /* padding: 10px 40px;*/
+        max-width: 700px;
+        width: 100%;
+        /* padding: 10px 40px;*/
         user-select: none;
     }
 
@@ -380,7 +492,7 @@
     .carousel-item img {
         object-fit: cover;
         height: 100%;
-        width:100%;
+        width: 100%;
     }
 
     .carousel-control-prev {
@@ -427,5 +539,9 @@
 
     ::placeholder {
         font-size: 12px;
+    }
+
+    p {
+        font-size: 16px;
     }
 </style>

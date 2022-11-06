@@ -1,19 +1,19 @@
-﻿
+﻿@model IEnumerable<KLTN_Web_MoonShop.Models.Product>
 @{
     ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+@*<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>*@
 <!------ Include the above in your HEAD tag ---------->
 
 <link rel="stylesheet" href="https://fontawesome.com/v4.7.0/assets/font-awesome/css/font-awesome.css">
-
 <div class="container">
     <div class="row">
         <aside class="col-md-3">
-
+            @using (Html.BeginForm("Search", "Search"))
+            {
             <div class="card">
                 <article class="filter-group">
                     <header class="card-header">
@@ -26,36 +26,36 @@
                         <div class="card-body">
                             <label class="custom-control custom-checkbox">
                                 <input type="checkbox" checked="" class="custom-control-input">
-                                <div class="custom-control-label">
-                                    Mercedes
+                                <i class="custom-control-label">
+                                    Việt Nam
                                     <b class="badge badge-pill badge-light float-right">120</b>
-                                </div>
+                                </i>
                             </label>
                             <label class="custom-control custom-checkbox">
                                 <input type="checkbox" checked="" class="custom-control-input">
                                 <div class="custom-control-label">
-                                    Toyota
+                                   Hàn quốc
                                     <b class="badge badge-pill badge-light float-right">15</b>
                                 </div>
                             </label>
                             <label class="custom-control custom-checkbox">
                                 <input type="checkbox" checked="" class="custom-control-input">
                                 <div class="custom-control-label">
-                                    Mitsubishi
+                                    Nhật bản
                                     <b class="badge badge-pill badge-light float-right">35</b>
                                 </div>
                             </label>
                             <label class="custom-control custom-checkbox">
                                 <input type="checkbox" checked="" class="custom-control-input">
                                 <div class="custom-control-label">
-                                    Nissan
+                                    Mỹ
                                     <b class="badge badge-pill badge-light float-right">89</b>
                                 </div>
                             </label>
                             <label class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input">
                                 <div class="custom-control-label">
-                                    Honda
+                                    Anh
                                     <b class="badge badge-pill badge-light float-right">30</b>
                                 </div>
                             </label>
@@ -66,7 +66,7 @@
                     <header class="card-header">
                         <a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
                             <i class="icon-control fa fa-chevron-down"></i>
-                            <h6 class="title">Price range </h6>
+                            <h6 class="title">Giá thành </h6>
                         </a>
                     </header>
                     <div class="filter-content collapse show" id="collapse_3" style="">
@@ -74,26 +74,27 @@
                             <input type="range" class="custom-range" min="0" max="100" name="">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label>Min</label>
-                                    <input class="form-control" placeholder="$0" type="number">
+                                    <label>Từ</label>
+                                    <input class="form-control" placeholder="0" type="number" name="txtmin">
                                 </div>
                                 <div class="form-group text-right col-md-6">
-                                    <label>Max</label>
-                                    <input class="form-control" placeholder="$1,0000" type="number">
+                                    <label>Đến</label>
+                                    <input class="form-control" placeholder="1000000" type="number" name="txtmax">
                                 </div>
                             </div> <!-- form-row.// -->
-                            <button class="btn btn-block btn-primary">Apply</button>
+                            <button class="btn btn-block btn-primary" type="submit">Tìm kiếm</button>
                         </div><!-- card-body.// -->
                     </div>
                 </article> <!-- filter-group .// -->
             </div> <!-- card.// -->
+            }
 
         </aside>
         <main class="col-md-9">
 
             <header class="border-bottom mb-4 pb-3">
                 <div class="form-inline">
-                    <span class="mr-md-auto">32 Items found </span>
+                    <span class="mr-md-auto">Tổng số sản phẩm theo từ khóa :@ViewBag.keyword </span>
                     <select class="mr-2 form-control">
                         <option>Latest items</option>
                         <option>Trending</option>
@@ -112,152 +113,47 @@
             </header><!-- sect-heading -->
 
             <div class="row">
-                <div class="col-md-4">
-                    <figure class="card card-product-grid">
-                        <div class="img-wrap">
-                            <span class="badge badge-danger"> NEW </span>
-                            <img src="~/Asset/img/product/15372e9256b0d3c96c27039d66c1df27.jpg" class="img-fluid">
-                            <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i> Quick view</a>
-                        </div> 
-    <!-- img-wrap.// -->
-                        <figcaption class="info-wrap">
-                            <div class="fix-height">
-                                <a href="#" class="title">Great item name goes here</a>
-                                <div class="price-wrap mt-2">
-                                    <span class="price">$1280</span>
-                                    <del class="price-old">$1980</del>
-                                </div> <!-- price-wrap.// -->
-                            </div>
-                            <a href="#" class="btn btn-block btn-primary">Add to cart </a>
-                        </figcaption>
-                    </figure>
-                </div> <!-- col.// -->
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-3">
+                        <figure class="card card-product-grid">
+                            <div class="img-wrap">
+                                <span class="badge badge-danger"> NEW </span>
+                                <a href="#">
+                                    <img src="~/Asset/img/product/@item.productImage" class="img-fluid">
+                                </a>
 
-                <div class="col-md-4">
-                    <figure class="card card-product-grid">
-                        <div class="img-wrap">
-                            <img src="http://bootstrap-ecommerce.com/bootstrap-ecommerce-html/images/items/7.jpg" class="img-fluid">
-                            <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i> Quick view</a>
-                        </div> <!-- img-wrap.// -->
-                        <figcaption class="info-wrap">
-                            <div class="fix-height">
-                                <a href="#" class="title">Product name goes here just for demo item</a>
-                                <div class="price-wrap mt-2">
-                                    <span class="price">$1280</span>
-                                </div> <!-- price-wrap.// -->
+                                <a class="btn-overlay" href="#"><i class="fa fa-search-plus">Xem thêm</i></a>
                             </div>
-                            <a href="#" class="btn btn-block btn-primary">Add to cart </a>
-                        </figcaption>
-                    </figure>
-                </div> <!-- col.// -->
+                            <!-- img-wrap.// -->
+                            <figcaption class="info-wrap">
+                                <div class="fix-height">
+                                    <p href="#" class="title">
+                                        @if (@item.productName.Length > 30)
+                                        {
+                                            string name = @item.productName.Substring(0, 30);
+                                            <span>
+                                                @name...
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <h6 style="height:40px">
+                                                @item.productName
+                                            </h6>
+                                        }
+                                    </p>
+                                    <div class="price-wrap mt-2">
+                                        <span class="price">@item.productPrice</span>
+                                        <del class="price-old">@item.productPrice</del>
+                                    </div> <!-- price-wrap.// -->
+                                </div>
+                                <a href="#" class="btn btn-block btn-outline-success">Thêm vào giỏ hàng</a>
+                            </figcaption>
+                        </figure>
+                    </div> <!-- col.// -->
 
-                <div class="col-md-4">
-                    <figure class="card card-product-grid">
-                        <div class="img-wrap">
-                            <img src="http://bootstrap-ecommerce.com/bootstrap-ecommerce-html/images/items/7.jpg" class="img-fluid">
-                            <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i> Quick view</a>
-                        </div> <!-- img-wrap.// -->
-                        <figcaption class="info-wrap">
-                            <div class="fix-height">
-                                <a href="#" class="title">Product name goes here just for demo item</a>
-                                <div class="price-wrap mt-2">
-                                    <span class="price">$1280</span>
-                                </div> <!-- price-wrap.// -->
-                            </div>
-                            <a href="#" class="btn btn-block btn-primary">Add to cart </a>
-                        </figcaption>
-                    </figure>
-                </div> <!-- col.// -->
-
-                <div class="col-md-4">
-                    <figure class="card card-product-grid">
-                        <div class="img-wrap">
-                            <img src="http://bootstrap-ecommerce.com/bootstrap-ecommerce-html/images/items/7.jpg" class="img-fluid">
-                            <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i> Quick view</a>
-                        </div> <!-- img-wrap.// -->
-                        <figcaption class="info-wrap">
-                            <div class="fix-height">
-                                <a href="#" class="title">Product name goes here just for demo item</a>
-                                <div class="price-wrap mt-2">
-                                    <span class="price">$1280</span>
-                                </div> <!-- price-wrap.// -->
-                            </div>
-                            <a href="#" class="btn btn-block btn-primary">Add to cart </a>
-                        </figcaption>
-                    </figure>
-                </div> <!-- col.// -->
-
-                <div class="col-md-4">
-                    <figure class="card card-product-grid">
-                        <div class="img-wrap">
-                            <img src="http://bootstrap-ecommerce.com/bootstrap-ecommerce-html/images/items/7.jpg" class="img-fluid">
-                            <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i> Quick view</a>
-                        </div> <!-- img-wrap.// -->
-                        <figcaption class="info-wrap">
-                            <div class="fix-height">
-                                <a href="#" class="title">Product name goes here just for demo item</a>
-                                <div class="price-wrap mt-2">
-                                    <span class="price">$1280</span>
-                                </div> <!-- price-wrap.// -->
-                            </div>
-                            <a href="#" class="btn btn-block btn-primary">Add to cart </a>
-                        </figcaption>
-                    </figure>
-                </div> <!-- col.// -->
-
-                <div class="col-md-4">
-                    <figure class="card card-product-grid">
-                        <div class="img-wrap">
-                            <img src="http://bootstrap-ecommerce.com/bootstrap-ecommerce-html/images/items/7.jpg" class="img-fluid">
-                            <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i> Quick view</a>
-                        </div> <!-- img-wrap.// -->
-                        <figcaption class="info-wrap">
-                            <div class="fix-height">
-                                <a href="#" class="title">Product name goes here just for demo item</a>
-                                <div class="price-wrap mt-2">
-                                    <span class="price">$1280</span>
-                                </div> <!-- price-wrap.// -->
-                            </div>
-                            <a href="#" class="btn btn-block btn-primary">Add to cart </a>
-                        </figcaption>
-                    </figure>
-                </div> <!-- col.// -->
-
-                <div class="col-md-4">
-                    <figure class="card card-product-grid">
-                        <div class="img-wrap">
-                            <img src="http://bootstrap-ecommerce.com/bootstrap-ecommerce-html/images/items/7.jpg" class="img-fluid">
-                            <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i> Quick view</a>
-                        </div> <!-- img-wrap.// -->
-                        <figcaption class="info-wrap">
-                            <div class="fix-height">
-                                <a href="#" class="title">Product name goes here just for demo item</a>
-                                <div class="price-wrap mt-2">
-                                    <span class="price">$1280</span>
-                                </div> <!-- price-wrap.// -->
-                            </div>
-                            <a href="#" class="btn btn-block btn-primary">Add to cart </a>
-                        </figcaption>
-                    </figure>
-                </div> <!-- col.// -->
-
-                <div class="col-md-4">
-                    <figure class="card card-product-grid">
-                        <div class="img-wrap">
-                            <img src="http://bootstrap-ecommerce.com/bootstrap-ecommerce-html/images/items/7.jpg" class="img-fluid">
-                            <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i> Quick view</a>
-                        </div> <!-- img-wrap.// -->
-                        <figcaption class="info-wrap">
-                            <div class="fix-height">
-                                <a href="#" class="title">Product name goes here just for demo item</a>
-                                <div class="price-wrap mt-2">
-                                    <span class="price">$1280</span>
-                                </div> <!-- price-wrap.// -->
-                            </div>
-                            <a href="#" class="btn btn-block btn-primary">Add to cart </a>
-                        </figcaption>
-                    </figure>
-                </div> <!-- col.// -->
+                }
             </div> <!-- row end.// -->
 
 

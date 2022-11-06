@@ -19,5 +19,9 @@ namespace KLTN_Web_MoonShop.Controllers
         {
             return View(db.Products.ToList());
         }
+        public ActionResult Tesst1()
+        {
+            return View();
+        }
     }
 }

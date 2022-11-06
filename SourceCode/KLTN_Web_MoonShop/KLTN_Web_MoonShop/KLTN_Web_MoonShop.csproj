@@ -441,6 +441,7 @@
     <Content Include="css\bootstrap4\bootstrap.css" />
     <Content Include="css\bootstrap4\bootstrap.min.css" />
     <Content Include="css\caroselhome\style.css" />
+    <Content Include="css\cart.css" />
     <Content Include="css\home\navbartop.css" />
     <Content Include="css\home\product.css" />
     <Content Include="css\style.css" />
@@ -692,6 +693,7 @@
     <Content Include="Views\Customer\Cart.cshtml" />
     <Content Include="Views\Customer\Order.cshtml" />
     <Content Include="Views\ShoppingCart\AddOrUpdate.cshtml" />
+    <Content Include="Views\Home\Tesst1.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
