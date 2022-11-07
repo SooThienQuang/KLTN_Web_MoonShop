@@ -2,12 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Security.Policy;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using static System.Net.WebRequestMethods;
+
 namespace KLTN_Web_MoonShop.Controllers
 {
   public class cartTam
@@ -122,7 +125,26 @@ namespace KLTN_Web_MoonShop.Controllers
             return View();
 
         }
+        [HttpPost]
+        public ActionResult DetailProfile(HttpPostedFileBase imguser)
+        {
+            if (imguser.ContentLength > 0)
+            {
+                string _FileName = Path.GetFileName(imguser.FileName);
+                string _path = Path.Combine(Server.MapPath("~/Asset/img/user"), _FileName);
+                imguser.SaveAs(_path);
+            }
+            Customer cs = Session["user"] as Customer;
+            if (cs != null)
+            {
+                string ten = cs.customerName.ToString().Split(' ').Last();
+                ViewBag.name = ten;
+                ViewBag.user = cs;
+            }
 
+            return View();
+
+        }
         public ActionResult Notification()
         {
 
@@ -189,6 +211,38 @@ namespace KLTN_Web_MoonShop.Controllers
                 ViewBag.user = cs;
             }
 
+            return PartialView();
+
+        }
+        public ActionResult img()
+        {
+            return PartialView();
+
+        }
+        [HttpPost]
+        public ActionResult img(HttpPostedFileBase image)
+        {
+            if (image != null)
+            {
+                string _FileName = Path.GetFileName(image.FileName);
+                string _path = Path.Combine(Server.MapPath("~/Asset/img/user"), _FileName);
+                image.SaveAs(_path);
+            }
+            Customer cs = Session["user"] as Customer;
+            
+            if(cs!=null)
+            {
+                cs.customerPhoto = image.FileName;
+                db.Customers.AddOrUpdate(cs);
+                db.SaveChanges();
+                Session["user"]=cs;
+            }
+            return RedirectToAction("DetailProfile");
+        }
+
+
+        public ActionResult Address()
+        {
             return PartialView();
 
         }

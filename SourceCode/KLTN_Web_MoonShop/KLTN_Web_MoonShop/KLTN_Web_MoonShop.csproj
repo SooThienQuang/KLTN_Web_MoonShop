@@ -698,6 +698,8 @@
     <Content Include="Views\Home\Tesst1cart.cshtml" />
     <None Include="Properties\PublishProfiles\thienquang-001-site1 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\thienquang-001-site1 - Web Deploy.pubxml" />
+    <Content Include="Views\Customer\img.cshtml" />
+    <Content Include="Views\Customer\Address.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
