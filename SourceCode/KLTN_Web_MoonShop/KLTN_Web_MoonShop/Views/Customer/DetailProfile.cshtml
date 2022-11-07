@@ -14,8 +14,6 @@
                 </div>
                 <div class="ml-4 mt-0">
                     <span class="font-weight-bold">@ViewBag.user.customerName</span><br />
-                    <span class="text-black-50">@ViewBag.user.customerEmail</span>
-                    <span>@ViewBag.user.customerAddress</span>
                 </div>
                   
 
@@ -42,13 +40,20 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="headline" value="@ViewBag.user.customerEmail"></div>
-                            <div class="col-md-12"><label class="labels">Số điện thoại</label><input type="text" class="form-control" placeholder="headline" value=""></div>
+                            <div class="col-md-12"><label class="labels">Số điện thoại</label><input type="text" class="form-control" placeholder="headline" value="@ViewBag.user.customerUserName"></div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-md-12"><label class="labels">Địa chỉ giao hàng</label>
-                            <input type="text" class="form-control" placeholder="country" value="USA"></div>
-                            @Html.Action("Address","Customer")
-                        </div>
+                            <div class="col-md-12">
+                                <label class="labels">Địa chỉ giao hàng</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                                    <label class="form-check-label" for="gridRadios1">
+                                        @ViewBag.user.customerAddress  <p class="fa fa-check" style="color:green"></p>
+                                    </label>
+                                   
+                                </div>
+                                @Html.Action("Address", "Customer")
+                            </div>
                         <div class="mt-5 text-center"><button class="btn btn-primary" type="button">Lưu thông tin</button></div>
                     </div>
                 </div>

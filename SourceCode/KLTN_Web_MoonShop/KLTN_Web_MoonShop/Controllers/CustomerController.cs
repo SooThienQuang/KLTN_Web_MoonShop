@@ -40,7 +40,7 @@ namespace KLTN_Web_MoonShop.Controllers
                 return RedirectToAction("Index", "Admin");
             }
             string pass = md5.CreateMD5(txt_password);
-            Customer cus = db.Customers.FirstOrDefault(n => n.customerEmail.Equals(txt_email) && n.customerPassword.Equals(pass));
+            Customer cus = db.Customers.FirstOrDefault(n => n.customerEmail.Equals(txt_email) && n.customerPassword.Equals(pass) || n.customerUserName.Equals(txt_email) && n.customerPassword.Equals(pass));
             if (cus!=null)
             {
                 Session["user"] = cus;
@@ -244,6 +244,21 @@ namespace KLTN_Web_MoonShop.Controllers
         public ActionResult Address()
         {
             return PartialView();
+
+        }
+        [HttpPost]
+        public ActionResult Address(string txt,string txtduong)
+        {
+            Customer cs = Session["user"] as Customer;
+
+            if (cs != null)
+            {
+                cs.customerAddress = txtduong+","+txt;
+                db.Customers.AddOrUpdate(cs);
+                db.SaveChanges();
+                Session["user"] = cs;
+            }
+            return RedirectToAction("DetailProfile");
 
         }
     }
