@@ -19,5 +19,10 @@ namespace KLTN_Web_MoonShop.Controllers
             ViewBag.message = message;
             return PartialView();
         }
+
+        public ActionResult NotLogin()
+        {
+            return PartialView();
+        }
     }
 }

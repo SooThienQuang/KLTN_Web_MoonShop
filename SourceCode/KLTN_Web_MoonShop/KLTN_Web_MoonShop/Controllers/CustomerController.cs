@@ -108,7 +108,20 @@ namespace KLTN_Web_MoonShop.Controllers
             return PartialView();
 
         }
+        public ActionResult DetailProfile()
+        {
 
+            Customer cs = Session["user"] as Customer;
+            if (cs != null)
+            {
+                string ten = cs.customerName.ToString().Split(' ').Last();
+                ViewBag.name = ten;
+                ViewBag.user = cs;
+            }
+
+            return View();
+
+        }
 
         public ActionResult Notification()
         {

@@ -434,6 +434,7 @@
     <Content Include="css\admin\assets\vendor\tinymce\themes\silver\theme.min.js" />
     <Content Include="css\admin\assets\vendor\tinymce\tinymce.js" />
     <Content Include="css\admin\assets\vendor\tinymce\tinymce.min.js" />
+    <Content Include="css\alert\notlogin.css" />
     <Content Include="css\bootstrap4\bootstrap-grid.css" />
     <Content Include="css\bootstrap4\bootstrap-grid.min.css" />
     <Content Include="css\bootstrap4\bootstrap-reboot.css" />
@@ -682,8 +683,6 @@
     <Content Include="Views\ActionLog\List.cshtml" />
     <Content Include="Views\ProductType\List.cshtml" />
     <Content Include="Views\ProductType\AddOrUpdate.cshtml" />
-    <None Include="Properties\PublishProfiles\honghaccosmetic - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\moonshopcosmetic - Web Deploy.pubxml" />
     <Content Include="Views\Payment\Checkout.cshtml" />
     <Content Include="Views\Payment\Detail.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
@@ -694,6 +693,11 @@
     <Content Include="Views\Customer\Order.cshtml" />
     <Content Include="Views\ShoppingCart\AddOrUpdate.cshtml" />
     <Content Include="Views\Home\Tesst1.cshtml" />
+    <Content Include="Views\Alert\NotLogin.cshtml" />
+    <Content Include="Views\Customer\DetailProfile.cshtml" />
+    <Content Include="Views\Home\Tesst1cart.cshtml" />
+    <None Include="Properties\PublishProfiles\thienquang-001-site1 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\thienquang-001-site1 - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

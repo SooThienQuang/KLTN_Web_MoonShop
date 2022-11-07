@@ -23,5 +23,9 @@ namespace KLTN_Web_MoonShop.Controllers
         {
             return View();
         }
+        public ActionResult Tesst1cart()
+        {
+            return View();
+        }
     }
 }

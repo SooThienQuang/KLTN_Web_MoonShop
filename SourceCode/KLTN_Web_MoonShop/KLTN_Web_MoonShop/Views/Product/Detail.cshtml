@@ -49,6 +49,7 @@
                 </button>
             </div>
             <p class="dis info my-3">
+                Chi tiết sản phẩm :<br />
                 @ViewBag.Product.productDescribe
             </p>
         </div>
@@ -108,14 +109,23 @@
                             </div>
                             <div>
                                 <div class="buttons">
-                                    <button class="cart-button">
-                                        <span class="add-to-cart">Add to cart</span>
-                                        <span class="added">Item added</span> <i class="fa fa-plus"></i>
-                                        <i class="fa fa-circle-thin"></i> <i class="fa fa-check"></i>
-                                    </button>
+                                    @if (user == null)
+                                    {
+                                        @Html.Action("NotLogin", "Alert")
+                                    }
+                                    else
+                                    {
+                                        <button class="cart-button">
+                                            <span class="add-to-cart">Add to cart</span>
+                                            <span class="added">Item added</span> <i class="fa fa-plus"></i>
+                                            <i class="fa fa-circle-thin"></i> <i class="fa fa-check"></i>
+                                        </button>
+                                    }
+
                                     <button class="cart-button1">
                                         <h5 class="add-to-cart">Chọn mua</h5>
                                     </button>
+
                                 </div>
                                
                             </div>
@@ -127,6 +137,14 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+    <h4>Sản phẩm tương tự</h4>
+</div>
+
+
+
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -224,7 +242,7 @@
         var increment = parseInt(quantity.innerHTML);
         var price_p = parseInt(product_price.value);
 
-        if (increment < 8) {
+        if (increment < 100) {
             increment = increment + 1;
             increment_price = price_p * increment;
 

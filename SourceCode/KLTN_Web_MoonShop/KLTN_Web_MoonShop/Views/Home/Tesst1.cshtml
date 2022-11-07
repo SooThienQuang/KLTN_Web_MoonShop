@@ -1,26 +1,10 @@
-﻿<div class="buttons"> <button class="cart-button"> <span class="add-to-cart">Add to cart</span> 
-    <span class="added">Item added</span> <i class="fa fa-plus"></i>
-    <i class="fa fa-circle-thin"></i> <i class="fa fa-check"></i> </button> </div>
-<link rel="stylesheet" href="~/css/cart.css "/>
+﻿<div class="form-group">
+    <label for="input-url">Timezone</label>
+    <input type="text" class="form-control" placeholder="Timezone" id="input-url" data-filter="https://iqbalfn.com/timezone/?q=#QUERY#">
+</div>
+
 <script>
-    document.addEventListener("DOMContentLoaded", function (event) {
-
-
-        const cartButtons = document.querySelectorAll('.cart-button');
-
-        cartButtons.forEach(button => {
-
-            button.addEventListener('click', cartClick);
-
-        });
-
-        function cartClick() {
-            let button = this;
-            button.classList.add('clicked');
-        }
-
-
-
-    });
+    document.addEventListener('DOMContentLoaded', e => {
+        $('#input-url').autocomplete()
+    }, false);
 </script>
-<link rel=" stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
