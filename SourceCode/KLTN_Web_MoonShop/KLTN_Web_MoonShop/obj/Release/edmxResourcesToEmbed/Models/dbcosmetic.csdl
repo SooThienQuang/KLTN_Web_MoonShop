@@ -2,13 +2,14 @@
 <Schema Namespace="DBCosmeticModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="DBCosmeticEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="ActionLogs" EntityType="DBCosmeticModel.ActionLog" />
+    <EntitySet Name="Carts" EntityType="DBCosmeticModel.Cart" />
+    <EntitySet Name="CartDetails" EntityType="DBCosmeticModel.CartDetail" />
     <EntitySet Name="Customers" EntityType="DBCosmeticModel.Customer" />
+    <EntitySet Name="CustomerAddresses" EntityType="DBCosmeticModel.CustomerAddress" />
     <EntitySet Name="Notifications" EntityType="DBCosmeticModel.Notification" />
     <EntitySet Name="Products" EntityType="DBCosmeticModel.Product" />
     <EntitySet Name="ProductDetails" EntityType="DBCosmeticModel.ProductDetail" />
     <EntitySet Name="ProductTypes" EntityType="DBCosmeticModel.ProductType" />
-    <EntitySet Name="Carts" EntityType="DBCosmeticModel.Cart" />
-    <EntitySet Name="CartDetails" EntityType="DBCosmeticModel.CartDetail" />
   </EntityContainer>
   <EntityType Name="ActionLog">
     <Key>
@@ -24,20 +25,49 @@
     <Property Name="idOject" Type="Int64" />
     <Property Name="nameTable" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
   </EntityType>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="cartID" />
+    </Key>
+    <Property Name="cartID" Type="Int64" Nullable="false" />
+    <Property Name="customerID" Type="Int64" />
+    <Property Name="createDate" Type="DateTime" Precision="3" />
+    <Property Name="isActive" Type="Int32" />
+  </EntityType>
+  <EntityType Name="CartDetail">
+    <Key>
+      <PropertyRef Name="cartDetailID" />
+    </Key>
+    <Property Name="cartDetailID" Type="Int32" Nullable="false" />
+    <Property Name="cartID" Type="Int64" />
+    <Property Name="productID" Type="Int64" />
+    <Property Name="cartQuantity" Type="Int32" />
+    <Property Name="cartMoney" Type="Int64" />
+  </EntityType>
   <EntityType Name="Customer">
     <Key>
       <PropertyRef Name="customerID" />
     </Key>
     <Property Name="customerID" Type="Int64" Nullable="false" />
     <Property Name="customerName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="customerEmail" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
     <Property Name="customerSex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="customerAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="customerUserName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
     <Property Name="customerPassword" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
     <Property Name="customerPhoto" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
     <Property Name="isActive" Type="Int32" />
     <Property Name="dateCreate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="CustomerAddress">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="customerID" Type="Int64" />
+    <Property Name="customerAdd" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="customerPhone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="isMain" Type="Int32" />
+    <Property Name="customerMail" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="isActive" Type="Int32" />
   </EntityType>
   <EntityType Name="Notification">
     <Key>
@@ -82,24 +112,5 @@
     <Property Name="proTypeID" Type="Int32" Nullable="false" />
     <Property Name="proTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="isActive" Type="Int32" />
-  </EntityType>
-  <EntityType Name="Cart">
-    <Key>
-      <PropertyRef Name="cartID" />
-    </Key>
-    <Property Name="cartID" Type="Int64" Nullable="false" />
-    <Property Name="customerID" Type="Int64" />
-    <Property Name="createDate" Type="DateTime" Precision="3" />
-    <Property Name="isActive" Type="Int32" />
-  </EntityType>
-  <EntityType Name="CartDetail">
-    <Key>
-      <PropertyRef Name="cartDetailID" />
-    </Key>
-    <Property Name="cartDetailID" Type="Int32" Nullable="false" />
-    <Property Name="cartID" Type="Int64" />
-    <Property Name="productID" Type="Int64" />
-    <Property Name="cartQuantity" Type="Int32" />
-    <Property Name="cartMoney" Type="Int64" />
   </EntityType>
 </Schema>

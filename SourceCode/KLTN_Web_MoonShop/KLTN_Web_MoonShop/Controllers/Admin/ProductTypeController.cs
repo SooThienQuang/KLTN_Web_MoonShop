@@ -38,8 +38,16 @@ namespace KLTN_Web_MoonShop.Controllers.Admin
             if(id==0)
             {
                 ProductType proid = db.ProductTypes.ToList().LastOrDefault();
+              
                 ProductType protype = new ProductType();
-                protype.proTypeID = proid.proTypeID + 1;
+                if (proid == null)
+                {
+                    protype.proTypeID = 0;
+                }
+                else
+                {
+                    protype.proTypeID = proid.proTypeID + 1;
+                }
                 protype.proTypeName = txtprotypename;
                 protype.isActive = 1;
                 db.ProductTypes.AddOrUpdate(protype);

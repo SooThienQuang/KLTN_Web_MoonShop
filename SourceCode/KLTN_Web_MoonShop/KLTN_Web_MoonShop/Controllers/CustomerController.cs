@@ -40,7 +40,7 @@ namespace KLTN_Web_MoonShop.Controllers
                 return RedirectToAction("Index", "Admin");
             }
             string pass = md5.CreateMD5(txt_password);
-            Customer cus = db.Customers.FirstOrDefault(n => n.customerEmail.Equals(txt_email) && n.customerPassword.Equals(pass) || n.customerUserName.Equals(txt_email) && n.customerPassword.Equals(pass));
+            Customer cus = db.Customers.FirstOrDefault(n => n.customerUserName.Equals(txt_email) && n.customerPassword.Equals(pass) || n.customerUserName.Equals(txt_email) && n.customerPassword.Equals(pass));
             if (cus!=null)
             {
                 Session["user"] = cus;
@@ -57,7 +57,7 @@ namespace KLTN_Web_MoonShop.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Register(string firstname,string lastname,string email,string phone,string password,string repassword)
+        public ActionResult Register(string firstname,string lastname,string phone,string password,string repassword)
         {   
             if(!password.Equals(repassword))
             {
@@ -66,18 +66,23 @@ namespace KLTN_Web_MoonShop.Controllers
           try
             {
                 Customer customer = new Customer();
-                customer.customerID =long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+                long id= long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+                customer.customerID = id;
                 customer.customerName = (firstname + " " + lastname);
-                customer.customerEmail = email.Trim();
-                customer.customerSex = "";
-                customer.customerAddress = "";
-                customer.customerUserName = phone.Trim();
+                customer.customerUserName = ("0"+phone).Trim();
                 customer.customerPassword = md5.CreateMD5(password);
                 customer.customerPhoto = "Sample_User_Icon.png".Trim();
                 customer.isActive = 1;
-                customer.dateCreate = DateTime.Now;  
-                if(db.Customers.FirstOrDefault(n=>n.customerEmail.Equals(email))==null)
+                customer.dateCreate = DateTime.Now; 
+                if(db.Customers.FirstOrDefault(n=>n.customerUserName.Equals(phone))==null)
                 {
+                    CustomerAddress cd = new CustomerAddress();
+                    cd.ID = long.Parse(DateTime.Now.ToString("MMddHHmmssyyyy"));
+                    cd.customerID = id;
+                    cd.isActive = 1;
+                    cd.isMain = 1;
+                    cd.customerPhone = ("0" + phone).Trim();
+                    db.CustomerAddresses.Add(cd);
                     db.Customers.Add(customer);
                     db.SaveChanges();
                     ViewBag.CreateSuccess = "Tạo tài khoản thành công";
@@ -120,9 +125,10 @@ namespace KLTN_Web_MoonShop.Controllers
                 string ten = cs.customerName.ToString().Split(' ').Last();
                 ViewBag.name = ten;
                 ViewBag.user = cs;
+                ViewBag.useradd=db.CustomerAddresses.Where(n=>n.customerID==cs.customerID).ToList();
             }
 
-            return View();
+            return View(cs);
 
         }
         [HttpPost]
@@ -253,9 +259,27 @@ namespace KLTN_Web_MoonShop.Controllers
 
             if (cs != null)
             {
-                cs.customerAddress = txtduong+","+txt;
-                db.Customers.AddOrUpdate(cs);
-                db.SaveChanges();
+                CustomerAddress cd = db.CustomerAddresses.FirstOrDefault(n => n.customerID == cs.customerID);
+                if(cd.customerAdd==null)
+                {
+                    cd.customerAdd = txtduong + "," + txt;
+                    db.CustomerAddresses.AddOrUpdate(cd);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    CustomerAddress cd1 = new CustomerAddress();
+                    cd1.ID = long.Parse(DateTime.Now.ToString("MMddHHmmssyyyy"));
+                    cd1.customerID = cs.customerID;
+                   // cd1.customerPhone = cs.customerUserName;
+                    cd1.customerAdd= txtduong + "," + txt;
+                    cd1.isMain = 0;
+                    cd1.isActive = 1;
+                    db.CustomerAddresses.Add(cd1);
+                    db.SaveChanges();
+                }    
+             
+              
                 Session["user"] = cs;
             }
             return RedirectToAction("DetailProfile");

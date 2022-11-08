@@ -3,7 +3,15 @@
 @{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    DBCosmeticEntities db = new DBCosmeticEntities();
     Customer user = Session["user"] as Customer;
+    CustomerAddress ca = new CustomerAddress();
+    if (user!=null)
+    {
+
+        ca=db.CustomerAddresses.FirstOrDefault(n => n.customerID == user.customerID && n.isMain == 1);
+    }
+
 }
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" />
 @*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>*@
@@ -63,33 +71,18 @@
             <h3>Giá thành :  <span style="color:red">@String.Format("{0:0,0 vnđ}", @ViewBag.Product.productPrice)</span></h3>
             <form action="">
                 <div class="mb-3">
-                    Giao đến
+                    Giao đến:
                     @if (user == null)
                     {
-                        <a href="" style="color:black">
+                        <a href="#" style="color:black">
                             Q.Tân Phú,P.Tây Thạnh, TP HCM
                         </a>
-                        <a href="#">- Đổi địa chỉ</a>
+                        <a style="color:blue" href="@Url.Action("Login","Customer")">- Đổi địa chỉ</a>
                     }
                     else
                     {
-                        <div class="form-group">
-                            <select name="" id="province" class="form-control coupon">
-                            </select>
-                            <br />
-                            <select name="" id="district" class="form-control coupon">
-                                <option value="">chọn quận</option>
-                            </select>
-                            <br />
-                            <select name="" id="ward" class="form-control coupon">
-                                <option value="">chọn phường</option>
-                            </select>
-                            <br />
-                            Địa chỉ cụ thể
-                            <input type="text" id="txt" class="form-control coupon" name="txt">
-                            <button class="btn btn-outline-primary" type="submit">Thêm địa chỉ</button>
-
-                        </div>
+                         @ca.customerAdd
+                        <a style="color:blue" href="@Url.Action("DetailProfile","Customer")">- Đổi địa chỉ</a>
                     }
 
                 </div>
@@ -97,13 +90,13 @@
                     <p class="dis fw-bold mb-2">Chi tiết sản phẩm</p>
                     <div class="address">
                         <div class="d-flex flex-column dis">
-                            <div class="d-flex align-items-center justify-content-between mb-2">
+                            <div class="d-flex mb-2">
                                 <p>Số lượng</p>
                                 <div class="sign"> <span id="minus"><i class="fa fa-minus"></i></span> <p id="quantity">1</p> <span id="plus"><i class="fa fa-plus"></i></span> </div>
 
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                <p class="fw-bold">Tổng tiền</p>
+                            <div class="d-flex align-items-center  mb-2">
+                                <p class="fw-bold mr-4">Tổng tiền:</p>
                                 <p class="fw-bold"><input type="hidden" value="@ViewBag.Product.productPrice" id="product_input_price"></p>
                                 <h3 id="price">@ViewBag.Product.productPrice</h3><h3>VND</h3>
                             </div>
@@ -115,11 +108,11 @@
                                     }
                                     else
                                     {
-                                        <button class="cart-button">
+                                        <a class="cart-button"  data-toggle="modal" data-target="#modalPush" onclick="ConfirmDelete(@ViewBag.Product.productID,@user.customerID)">
                                             <span class="add-to-cart">Add to cart</span>
                                             <span class="added">Item added</span> <i class="fa fa-plus"></i>
                                             <i class="fa fa-circle-thin"></i> <i class="fa fa-check"></i>
-                                        </button>
+                                        </a>
                                     }
 
                                     <button class="cart-button1">
@@ -127,9 +120,9 @@
                                     </button>
 
                                 </div>
-                               
+
                             </div>
-                          
+
                         </div>
                     </div>
                 </div>
@@ -137,7 +130,91 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="modalPush" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-info" role="document">
+        <!--Content-->
+        <div class="modal-content text-center">
+            <!--Header-->
+            <div class="modal-header d-flex justify-content-center">
+                <p class="heading">Thêm giỏ hàng thành công</p>
+            </div>
 
+            <!--Body-->
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-3">
+                        <p></p>
+                        <p class="text-center">
+                            <img src="~/Asset/img/cart.png" height="50" width="50" />
+                        </p>
+                    </div>
+
+                    <div class="col-9">
+                        <p>Bạn cần thêm thời gian để đưa ra quyết định mua hàng?</p>
+                        <p>Đừng lo lắng, sản phẩm của bạn sẽ đợi bạn trong giỏ hàng.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+                <a href="#" type="button" class="btn btn-info">Đến giỏ hàng ngay</a>
+                <a href="#" type="button" class="btn btn-outline-info waves-effect" data-dismiss="modal">Đóng</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!--Modal: modalPush-->
+<script>
+    var ConfirmDelete = function (productID, cusID) {
+        //$.ajax({
+
+        //    type: "GET",
+        //    url: "/api/cart/",
+        //    data: { id: productID }
+        //})
+        var person = new Object();
+        person.proID = productID;
+        person.cusID = cusID;
+        person.quantity = 1;
+        $.ajax({
+            url: '/api/cart/',
+            type: 'POST',
+            dataType: 'json',
+            data: person,
+            success: function (data, textStatus, xhr) {
+                console.log(data);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log('Error in Operation');
+            }
+        });
+
+    }
+    document.addEventListener("DOMContentLoaded", function (event) {
+
+
+        const cartButtons = document.querySelectorAll('.cartpro-button');
+
+        cartButtons.forEach(button => {
+
+            button.addEventListener('click', cartClick);
+
+        });
+
+        function cartClick() {
+            let button = this;
+            button.classList.add('clicked');
+        }
+
+
+
+    });
+</script>
 <div class="row">
     <h4>Sản phẩm tương tự</h4>
 </div>
@@ -309,7 +386,7 @@
 
     .box-1 {
         min-width: 450px;
-        max-width: 700px;
+        max-width: 500px;
         width: 100%;
         /* padding: 10px 40px;*/
         user-select: none;

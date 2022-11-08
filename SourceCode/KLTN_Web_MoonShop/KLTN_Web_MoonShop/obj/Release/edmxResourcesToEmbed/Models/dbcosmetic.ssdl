@@ -39,14 +39,24 @@
     </Key>
     <Property Name="customerID" Type="bigint" Nullable="false" />
     <Property Name="customerName" Type="nvarchar" MaxLength="500" />
-    <Property Name="customerEmail" Type="nchar" MaxLength="500" />
     <Property Name="customerSex" Type="nvarchar" MaxLength="50" />
-    <Property Name="customerAddress" Type="nvarchar" MaxLength="500" />
     <Property Name="customerUserName" Type="nchar" MaxLength="100" />
     <Property Name="customerPassword" Type="nchar" MaxLength="100" />
     <Property Name="customerPhoto" Type="nchar" MaxLength="1000" />
     <Property Name="isActive" Type="int" />
     <Property Name="dateCreate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CustomerAddress">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="customerID" Type="bigint" />
+    <Property Name="customerAdd" Type="nvarchar" MaxLength="500" />
+    <Property Name="customerPhone" Type="nchar" MaxLength="10" />
+    <Property Name="isMain" Type="int" />
+    <Property Name="customerMail" Type="char" MaxLength="100" />
+    <Property Name="isActive" Type="int" />
   </EntityType>
   <EntityType Name="Notification">
     <Key>
@@ -97,6 +107,7 @@
     <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CartDetail" EntityType="Self.CartDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CustomerAddress" EntityType="Self.CustomerAddress" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductDetail" EntityType="Self.ProductDetail" Schema="dbo" store:Type="Tables" />

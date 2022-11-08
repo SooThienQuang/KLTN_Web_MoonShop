@@ -588,6 +588,9 @@
     <Compile Include="Models\Customer.cs">
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomerAddress.cs">
+      <DependentUpon>dbcosmetic.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\dbcosmetic.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

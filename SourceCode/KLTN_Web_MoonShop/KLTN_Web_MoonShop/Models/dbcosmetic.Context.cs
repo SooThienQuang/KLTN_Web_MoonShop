@@ -26,12 +26,13 @@ namespace KLTN_Web_MoonShop.Models
         }
     
         public virtual DbSet<ActionLog> ActionLogs { get; set; }
+        public virtual DbSet<Cart> Carts { get; set; }
+        public virtual DbSet<CartDetail> CartDetails { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<CustomerAddress> CustomerAddresses { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductDetail> ProductDetails { get; set; }
         public virtual DbSet<ProductType> ProductTypes { get; set; }
-        public virtual DbSet<Cart> Carts { get; set; }
-        public virtual DbSet<CartDetail> CartDetails { get; set; }
     }
 }

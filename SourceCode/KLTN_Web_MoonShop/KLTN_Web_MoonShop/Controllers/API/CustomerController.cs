@@ -34,7 +34,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
             Customer account = new Customer();
             MD5 m=new MD5();
             string pass = m.CreateMD5(password);
-            account = db.Customers.FirstOrDefault(n => n.customerEmail.Equals(username) && n.customerPassword.Equals(pass));
+            account = db.Customers.FirstOrDefault(n => n.customerUserName.Equals(username) && n.customerPassword.Equals(pass));
             if (account == null)
             {
                 return request.CreateResponse(false);

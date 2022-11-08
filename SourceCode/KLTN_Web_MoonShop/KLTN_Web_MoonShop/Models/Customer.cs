@@ -16,9 +16,7 @@ namespace KLTN_Web_MoonShop.Models
     {
         public long customerID { get; set; }
         public string customerName { get; set; }
-        public string customerEmail { get; set; }
         public string customerSex { get; set; }
-        public string customerAddress { get; set; }
         public string customerUserName { get; set; }
         public string customerPassword { get; set; }
         public string customerPhoto { get; set; }

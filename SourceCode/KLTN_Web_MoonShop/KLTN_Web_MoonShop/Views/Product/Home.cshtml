@@ -1,157 +1,108 @@
 ﻿@model IEnumerable<KLTN_Web_MoonShop.Models.Product>
-<link rel="stylesheet" href="~/css/home/product.css" />
+<link rel="stylesheet" href="https://fontawesome.com/v4.7.0/assets/font-awesome/css/font-awesome.css">
 <div class="row">
-    <h2>Sản phẩm <b>về chúng tôi</b></h2>
-    @foreach (var item in Model)
-    {
-        var user = Session["user"] as KLTN_Web_MoonShop.Models.Customer;
-        <div class="col-sm-2">
-            <div class="cardpro mh-100 mw-100">
-                <div class="text-center">
-                    <a href="@Url.Action("Detail","Product",new {id=item.productID})">
-                        <img src="~/Asset/img/product/@item.productImage" width="150" height="200">
-                    </a>
-
-                </div>
-                <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i></a><br />
-                @if (@item.productName.Length > 30)
+        <main class="col-md-12">
+            <div class="row">
+                @foreach (var item in Model)
                 {
-                    string name = @item.productName.Substring(0, 30);
-                    <span>
-                        @name...
-                    </span>
+                    <div class="col-md-2">
+                        <figure class="card card-product-grid" style="min-height:350px">
+                            <div class="img-wrap">
+                                <span class="badge badge-danger"> NEW </span>
+                                <a href="@Url.Action("Detail","Product",new {id=item.productID})">
+                                    <img src="~/Asset/img/product/@item.productImage" class="img-fluid">
+                                </a>
+
+                                <a class="btn-overlay" href="#"><i class="fa fa-search-plus">Xem thêm</i></a>
+                            </div>
+                            <!-- img-wrap.// -->
+                            <figcaption class="info-wrap">
+                                <div class="fix-height">
+                                    <p href="#" class="title">
+                                        @if (@item.productName.Length > 30)
+                                        {
+                                            string name = @item.productName.Substring(0, 30);
+                                            <span>
+                                                @name...
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <h6 style="height:40px">
+                                                @item.productName
+                                            </h6>
+                                        }
+                                    </p>
+                                    <div class="price-wrap mt-2">
+                                        <span class="price" style="color:red">@String.Format("{0:0,0 vnđ}", item.productPrice)</span>
+                                    </div>
+                                    
+                                </div>
+                            </figcaption>
+                        </figure>
+                    </div> <!-- col.// -->
+
                 }
-                else
-                {
-                    <h6 style="height:40px">
-                        @item.productName
-                    </h6>
-                }
-                <ul class="list-inline">
-                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                    <li class="list-inline-item"><i class="fa fa-star"></i></li>||Đã bán hơn 1000
-                </ul>
-                <div class="product-details">
-                    <span class="font-weight-bold">Giá thành :</span>
-                    <br />
-                    <span style="color:red">@String.Format("{0:0,0 vnđ}", item.productPrice)</span>
-                    <br />
-
-                    @if (user != null)
-                    {
-                        <div class="buttons d-flex flex-row">
-                            <div class="cartpro"><i class="fa fa-shopping-cart"></i></div>
-                            <a class="btn btn-success" data-toggle="modal" data-target="#modalPush" onclick="ConfirmDelete(@item.productID,@user.customerID)">Thêm </a>
-
-                            @*<button type="submit"  class="btn btn-success cartpro-button btn-block"><span class="dot">1</span>Thêm </button>*@
-                        </div>
-                    }
-                    <div class="weight">
-                        <small>Còn hàng</small>
-                    </div>
-
-                </div>
+            </div> <!-- row end.// -->
 
 
+        </main>
+ </div>
 
-            </div>
-
-
-        </div>
+<style>
+    .icon-control {
+        margin-top: 5px;
+        float: right;
+        font-size: 80%;
     }
-</div>
-<div class="modal fade" id="modalPush" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog modal-notify modal-info" role="document">
-        <!--Content-->
-        <div class="modal-content text-center">
-            <!--Header-->
-            <div class="modal-header d-flex justify-content-center">
-                <p class="heading">Thêm giỏ hàng thành công</p>
-            </div>
 
-            <!--Body-->
-            <div class="modal-body">
 
-                <div class="row">
-                    <div class="col-3">
-                        <p></p>
-                        <p class="text-center">
-                            <img src="~/Asset/img/cart.png" height="50" width="50"/>
-                        </p>
-                    </div>
 
-                    <div class="col-9">            
-                        <p>Bạn cần thêm thời gian để đưa ra quyết định mua hàng?</p>
-                        <p>Đừng lo lắng, sản phẩm của bạn sẽ đợi bạn trong giỏ hàng.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!--Footer-->
-            <div class="modal-footer justify-content-center">
-                <a href="#" type="button" class="btn btn-info">Đến giỏ hàng ngay</a>
-                <a href="#" type="button" class="btn btn-outline-info waves-effect" data-dismiss="modal">Đóng</a>
-            </div>
-        </div>
-
-    </div>
-
-</div>
-<!--Modal: modalPush-->
-<script>
-    var ConfirmDelete = function (productID,cusID) {
-        //$.ajax({
-
-        //    type: "GET",
-        //    url: "/api/cart/",
-        //    data: { id: productID }
-        //})
-        var person = new Object();
-        person.proID = productID;
-        person.cusID = cusID;
-        person.quantity = 1;
-        $.ajax({
-            url: '/api/cart/',
-            type: 'POST',
-            dataType: 'json',
-            data: person,
-            success: function (data, textStatus, xhr) {
-                console.log(data);
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                console.log('Error in Operation');
-            }
-        });
-       
+    .btn-light {
+        background-color: #fff;
+        border-color: #e4e4e4;
     }
-    document.addEventListener("DOMContentLoaded", function (event) {
 
+    .list-menu {
+        list-style: none;
+        margin: 0;
+        padding-left: 0;
+    }
 
-        const cartButtons = document.querySelectorAll('.cartpro-button');
-
-        cartButtons.forEach(button => {
-
-            button.addEventListener('click', cartClick);
-
-        });
-
-        function cartClick() {
-            let button = this;
-            button.classList.add('clicked');
+        .list-menu a {
+            color: #343a40;
         }
 
+    .card-product-grid .info-wrap {
+        overflow: hidden;
+        padding: 18px 20px;
+    }
 
+    [class*='card-product'] a.title {
+        color: #212529;
+        display: block;
+    }
 
-    });
-</script>
-<style>
-    i {
-        color: orange;
+    .card-product-grid:hover .btn-overlay {
+        opacity: 1;
+    }
+
+    .card-product-grid .btn-overlay {
+        -webkit-transition: .5s;
+        transition: .5s;
+        opacity: 0;
+        left: 0;
+        bottom: 0;
+        color: #fff;
+        width: 100%;
+        padding: 5px 0;
+        text-align: center;
+        position: absolute;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .img-wrap {
+        overflow: hidden;
+        position: relative;
     }
 </style>
-
-

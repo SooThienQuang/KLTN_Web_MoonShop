@@ -25,100 +25,108 @@
                         <li data-target="#CarouselPro" data-slide-to="2"></li>
                     </ol>
                     <!-- Wrapper for carousel items -->
+                   
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="row">
-                                @foreach (var item in @ViewBag.Active)
-                                {
-                                    <div class="col-sm-2 h-100 w-100 d-block" >
-                                        <div class="thumb-wrapper">
-                                            <div class="img-box">
-                                                    <a href="@Url.Action("Detail","Product",new {id=item.productID})">
+                        @if (ViewBag.Active != null)
+                        {
+                            <div class="carousel-item active">
+                                <div class="row">
+
+                                    @foreach (var item in @ViewBag.Active)
+                                    {
+                                        <div class="col-sm-2 h-100 w-100 d-block">
+                                            <div class="thumb-wrapper">
+                                                <div class="img-box">
+                                                    <a href="@Url.Action("Detail", "Product", new { id = item.productID })">
                                                         <img src="~/Asset/img/product/@item.productImage" width="150" height="200">
                                                     </a>
-                                            </div>
-                                            <div class="thumb-content">
+                                                </div>
+                                                <div class="thumb-content">
 
-                                                @if (@item.productName.Length > 30)
-                                                {
-                                                    string name = @item.productName.Substring(0, 30);
-                                                    <span>
-                                                        @name...
-                                                    </span>
-                                                }
-                                                else
-                                                {
-                                                    <h6 style="height:40px">
-                                                        @item.productName
-                                                    </h6>
-                                                }
-                                                <p class="item-price"><strike>400.000</strike> <span style="color:red">@String.Format("{0:0,0 vnđ}", @item.productPrice)</span></p>
-                                                <div class="star-rating">
-                                                    <ul class="list-inline">
-                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    </ul>
+                                                    @if (@item.productName.Length > 30)
+                                                    {
+                                                        string name = @item.productName.Substring(0, 30);
+                                                        <span>
+                                                            @name...
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h6 style="height:40px">
+                                                            @item.productName
+                                                        </h6>
+                                                    }
+                                                    <p class="item-price"><strike>400.000</strike> <span style="color:red">@String.Format("{0:0,0 vnđ}", @item.productPrice)</span></p>
+                                                    <div class="star-rating">
+                                                        <ul class="list-inline">
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                }
+                                    }
+                                </div>
                             </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="row">
-                                @foreach (var item in @ViewBag.Pro)
-                                {
-                                    <div class="col-sm-2">
-                                        <div class="thumb-wrapper">
-                                            <div class="img-box">
-                                                <img src="~/Asset/img/product/@item.productImage" class="img-fluid" alt="">
-                                            </div>
-                                            <div class="thumb-content">
-
-                                                @if (@item.productName.Length > 30)
-                                                {
-                                                    string name = @item.productName.Substring(0, 30);
-                                                    <span>
-                                                        @name...
-                                                    </span>
-                                                }
-                                                else
-                                                {
-                                                    <h6 style="height:40px">
-                                                        @item.productName
-                                                    </h6>
-                                                }
-                                                <p class="item-price"><strike>$400.00</strike> <span>@String.Format("{0:0,0 vnđ}", @item.productPrice)</span></p>
-                                                <div class="star-rating">
-                                                    <ul class="list-inline">
-                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                    </ul>
+                        }
+                        @if (ViewBag.Pro != null)
+                        {
+                            <div class="carousel-item">
+                                <div class="row">
+                                    @foreach (var item in @ViewBag.Pro)
+                                    {
+                                        <div class="col-sm-2">
+                                            <div class="thumb-wrapper">
+                                                <div class="img-box">
+                                                    <img src="~/Asset/img/product/@item.productImage" class="img-fluid" alt="">
                                                 </div>
-                                                <a href="#" class="btn btn-primary">Add to Cart</a>
+                                                <div class="thumb-content">
+
+                                                    @if (@item.productName.Length > 30)
+                                                    {
+                                                        string name = @item.productName.Substring(0, 30);
+                                                        <span>
+                                                            @name...
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h6 style="height:40px">
+                                                            @item.productName
+                                                        </h6>
+                                                    }
+                                                    <p class="item-price"><strike>$400.00</strike> <span>@String.Format("{0:0,0 vnđ}", @item.productPrice)</span></p>
+                                                    <div class="star-rating">
+                                                        <ul class="list-inline">
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                }
+                                    }
 
+                                </div>
                             </div>
+                        }
+                            <!-- Carousel controls -->
+                            <a class="carousel-control-prev" href="#CarouselPro" data-slide="prev">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a class="carousel-control-next" href="#CarouselPro" data-slide="next">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         </div>
-                        <!-- Carousel controls -->
-                        <a class="carousel-control-prev" href="#CarouselPro" data-slide="prev">
-                            <i class="fa fa-angle-left"></i>
-                        </a>
-                        <a class="carousel-control-next" href="#CarouselPro" data-slide="next">
-                            <i class="fa fa-angle-right"></i>
-                        </a>
                     </div>
-                </div>
             </div>
         </div>
     </div>
