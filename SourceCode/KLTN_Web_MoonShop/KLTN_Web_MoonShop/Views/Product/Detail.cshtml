@@ -6,13 +6,14 @@
     DBCosmeticEntities db = new DBCosmeticEntities();
     Customer user = Session["user"] as Customer;
     CustomerAddress ca = new CustomerAddress();
-    if (user!=null)
+    if (user != null)
     {
 
-        ca=db.CustomerAddresses.FirstOrDefault(n => n.customerID == user.customerID && n.isMain == 1);
+        ca = db.CustomerAddresses.FirstOrDefault(n => n.customerID == user.customerID && n.isMain == 1);
     }
 
 }
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" />
 @*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>*@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
@@ -81,7 +82,7 @@
                     }
                     else
                     {
-                         @ca.customerAdd
+                        @ca.customerAdd
                         <a style="color:blue" href="@Url.Action("DetailProfile","Customer")">- Đổi địa chỉ</a>
                     }
 
@@ -108,7 +109,7 @@
                                     }
                                     else
                                     {
-                                        <a class="cart-button"  data-toggle="modal" data-target="#modalPush" onclick="ConfirmDelete(@ViewBag.Product.productID,@user.customerID)">
+                                        <a class="cart-button" data-toggle="modal" data-target="#modalPush" onclick="ConfirmDelete(@ViewBag.Product.productID,@user.customerID)">
                                             <span class="add-to-cart">Add to cart</span>
                                             <span class="added">Item added</span> <i class="fa fa-plus"></i>
                                             <i class="fa fa-circle-thin"></i> <i class="fa fa-check"></i>
@@ -193,7 +194,7 @@
                 console.log('Error in Operation');
             }
         });
-
+        location.reload();
     }
     document.addEventListener("DOMContentLoaded", function (event) {
 

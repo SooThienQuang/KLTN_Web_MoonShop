@@ -54,21 +54,20 @@
             </form>
         </div>
 
-        <div class="col">
+        <div class="col-md-3">
             <div class="navbar-menu-wrapper d-flex">
-
                 <ul class="navbar-nav">
                     @*------------------------------------------gio hang----------------------------*@
                     <li class="nav-item dropdown">
                         @Html.Action("Cart", "Customer")
                     </li>
-                    <li class="nav-item dropdown">
+                    @*<li class="nav-item dropdown">
                         @Html.Action("Order", "Customer")
-                    </li>
+                    </li>*@
                     @*----------------------------------thông báo--------------------------------*@
-                <li class="nav-item dropdown">
+                @*<li class="nav-item dropdown">
                     @Html.Action("Notification", "Customer")
-                </li>
+                </li>*@
                     @*----------------------thông tin cá nhân---------------------------------*@
                 <li class="nav-item nav-profile dropdown">
                     @Html.Action("Profile", "Customer")

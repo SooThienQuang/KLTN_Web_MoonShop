@@ -1,6 +1,9 @@
 ﻿using KLTN_Web_MoonShop.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
@@ -10,6 +13,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using static System.Net.WebRequestMethods;
+using System.Runtime.Remoting.Contexts;
 
 namespace KLTN_Web_MoonShop.Controllers
 {
@@ -26,6 +30,7 @@ namespace KLTN_Web_MoonShop.Controllers
     {
         DBCosmeticEntities db = new DBCosmeticEntities();
         MD5 md5 = new MD5();
+     
         // GET: Customer
         public ActionResult Login()
         {
@@ -165,9 +170,14 @@ namespace KLTN_Web_MoonShop.Controllers
             return PartialView();
 
         }
+        public void RefreshAll()
+        {
+            this.db = new DBCosmeticEntities();
+        }
         public ActionResult Cart()
         {
-
+           int sl= db.Carts.Count();
+            db = new DBCosmeticEntities();
             Customer cs = Session["user"] as Customer;
             if (cs != null)
             {
