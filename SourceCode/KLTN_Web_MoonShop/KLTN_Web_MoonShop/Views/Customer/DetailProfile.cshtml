@@ -4,80 +4,113 @@
     ViewBag.Title = "DetailProfile";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
-    <div class="container rounded bg-white mt-5 mb-5">
-        <div class="row">
-            <div class="col-md-3 border-right">
-                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    @Html.Action("img", "Customer")
-                    @*<input type="file" name="imguser"/>
-                <img src="~/Asset/img/user/@ViewBag.user.customerPhoto" width="90"/>*@
-                </div>
-                <div class="ml-4 mt-0">
-                    <span class="font-weight-bold">@ViewBag.user.customerName</span><br />
-                </div>
+<style>
+    .tab-vertical .nav.nav-tabs {
+        float: left;
+        display: block;
+        margin-right: 0px;
+        border-bottom: 0;
+    }
+    .nav-item
+    {
+        padding:5px;
+    }
+</style>
 
-
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center">
+                @Html.Action("img", "Customer")
+                @*<input type="file" name="imguser"/>
+                    <img src="~/Asset/img/user/@ViewBag.user.customerPhoto" width="90"/>*@
             </div>
-            <div class="col-md-5 border-right">
-                <div class="p-3 py-5">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h6 class="text-right">Thông tin cá nhân</h6>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-md-12"><label class="labels">Họ và tên</label><input type="text" class="form-control" placeholder="first name" value="@ViewBag.user.customerName"></div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-md-12">
-                            <label class="labels">Giới tính</label>
-                            <div class="form">
-                                <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                    <option selected>Giới tính</option>
-                                    <option value="1">Nam</option>
-                                    <option value="2">Nữ</option>
-                                </select>
+            <div class="ml-4 mt-3">
+                <span class="font-weight-bold">@ViewBag.user.customerName</span><br />
+            </div>
+            <ul class="nav mt-3 ml-5">
+                <li class="nav-item">
+                    <a class="btn btn-outline-primary" id="home-vertical-tab" data-toggle="tab" href="#home-vertical" role="tab" aria-controls="home" aria-selected="true">Thông tin cá nhân</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-primary" id="profile-vertical-tab" data-toggle="tab" href="#profile-vertical" role="tab" aria-controls="profile" aria-selected="false">Đơn đặt hàng</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-primary" id="contact-vertical-tab" data-toggle="tab" href="#contact-vertical" role="tab" aria-controls="contact" aria-selected="false">Tab Vertical #3</a>
+                </li>
+            </ul>
+
+        </div>
+        <div class="col-md-6">
+            <div class="tab-content" id="myTabContent3">
+                <div class="tab-pane fade show active" id="home-vertical" role="tabpanel" aria-labelledby="home-vertical-tab">
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="text-right">Thông tin cá nhân</h6>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12"><label class="labels">Họ và tên</label><input type="text" class="form-control" placeholder="first name" value="@ViewBag.user.customerName"></div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <label class="labels">Giới tính</label>
+                                <div class="form">
+                                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                        <option selected>Giới tính</option>
+                                        <option value="1">Nam</option>
+                                        <option value="2">Nữ</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="headline" value=""></div>
-                        <div class="col-md-12"><label class="labels">Số điện thoại</label><input type="text" class="form-control" placeholder="headline" value="@ViewBag.user.customerUserName" disabled></div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <label class="labels">Địa chỉ giao hàng</label>
-                            <div class="form-check">
-
-
-                                @foreach (var item in @ViewBag.useradd)
-                                {
-                                    if (item.isMain == 1)
-                                    {
-
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="@item.ID" checked>
-                                        <label class="form-check-label" for="gridRadios1">
-                                            @item.customerAdd (Mặc định)
-                                            <p class="fa fa-check" style="color:green"></p>
-                                        </label>
-                                    }
-                                    else
-                                    {
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="@item.ID">
-                                        <label class="form-check-label" for="gridRadios1">
-                                            @item.customerAdd
-                                        </label>
-                                    }
-                                }
-
-
-                            </div>
-                            @Html.Action("Address", "Customer")
+                        <div class="row mt-3">
+                            <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="headline" value=""></div>
+                            <div class="col-md-12"><label class="labels">Số điện thoại</label><input type="text" class="form-control" placeholder="headline" value="@ViewBag.user.customerUserName" disabled></div>
                         </div>
-                        <div class="mt-5 text-center"><button class="btn btn-primary" type="button">Lưu thông tin</button></div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <label class="labels">Địa chỉ giao hàng</label>
+                                <div class="form-check">
+
+
+                                    @foreach (var item in @ViewBag.useradd)
+                                    {
+                                        if (item.isMain == 1)
+                                        {
+
+                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="@item.ID" checked>
+                                            <label class="form-check-label" for="gridRadios1">
+                                                @item.customerAdd (Mặc định)
+                                                <p class="fa fa-check" style="color:green"></p>
+                                                <span class="ti-pencil-alt"></span>
+                                            </label>
+                                        }
+                                        else
+                                        {
+                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="@item.ID">
+                                            <label class="form-check-label" for="gridRadios1">
+                                                @item.customerAdd <span class="ti-pencil-alt"></span>
+                                            </label>
+                                        }
+                                    }
+
+
+                                </div>
+                                @Html.Action("Address", "Customer")
+                            </div>
+                            <div class="mt-5 text-center"><button class="btn btn-primary" type="button">Lưu thông tin</button></div>
+                        </div>
                     </div>
                 </div>
-
+                @*-------------------------------------------tab2-------------------------------------------------*@
+            <div class="tab-pane fade" id="profile-vertical" role="tabpanel" aria-labelledby="profile-vertical-tab">
+                @Html.Action("CaroselProductHome", "Product")
             </div>
-            <div class="col-md-4">
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="col-2">
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span></div>
                     <div class="d-flex flex-row mt-3 exp-container">
@@ -98,47 +131,48 @@
             </div>
         </div>
     </div>
-      
-    <style>
-        .form-control:focus {
-    box-shadow: none;
-    border-color: #BA68C8;
+</div>
+
+<style>
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #BA68C8;
+    }
+
+    .profile-button {
+        background: #BA68C8;
+        box-shadow: none;
+        border: none;
+    }
+
+        .profile-button:hover {
+            background: #682773;
         }
 
-        .profile-button {
-background: #BA68C8;
+        .profile-button:focus {
+            background: #682773;
             box-shadow: none;
-border: none;
-}
-
-            .profile-button:hover {
-background: #682773;
-            }
-
-            .profile-button:focus {
-background: #682773;
-                box-shadow: none;
-}
-
-            .profile-button:active {
-background: #682773;
-                box-shadow: none;
-}
-
-        .back:hover {
-color: #682773;
-            cursor: pointer;
-}
-
-        .labels {
-    font-size: 11px;
-}
-
-        .add-experience:hover {
-background: #BA68C8;
-            color: #fff;
-            cursor: pointer;
-border: solid 1px #BA68C8;
         }
-    </style>
+
+        .profile-button:active {
+            background: #682773;
+            box-shadow: none;
+        }
+
+    .back:hover {
+        color: #682773;
+        cursor: pointer;
+    }
+
+    .labels {
+        font-size: 11px;
+    }
+
+    .add-experience:hover {
+        background: #BA68C8;
+        color: #fff;
+        cursor: pointer;
+        border: solid 1px #BA68C8;
+    }
+</style>
 

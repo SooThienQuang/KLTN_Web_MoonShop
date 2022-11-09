@@ -2,11 +2,23 @@
 @{
     ViewBag.Title = "Tesst";
 }
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-</button>
+<script>
 
+    function show() {
+        $("#exampleModal").modal("show");
+    }
+
+
+    //$(document).ready(function () {
+    //    $("#exampleModal").modal("show");
+    //});
+    //var HideModalUpPro = function () {
+
+    //    $("#exampleModal").modal("hide");
+
+    //}
+</script>
+<button onclick="show()">Show</button>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -16,16 +28,20 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="container-fluid d-flex justify-content-center align-items-center vh-100 bg-white">
-                    <div class="card rounded-3 ">
-                        <div class="top p-3 d-flex justify-content-between"> <i class="fa fa-arrow-left"></i> <i class="fa fa-heart-o"></i> </div>
+                <div class="container-fluid">
+                    <div class="card rounded-3 " style="min-width:300px; height: auto; background-color: #a7a3d2; font-family: 'Rubik', sans-serif">
+                        <div class="top p-3 d-flex justify-content-between"> <i class="fa fa-heart-o"></i> </div>
                         <div id="carouselExampleIndicators" class="carousel slide p-3 " data-bs-ride="carousel">
                             <div class="carousel-indicators"> <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button> <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button> <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button> </div>
                             <div class="carousel-inner">
                                 <div class="carousel-item active"> <img src="https://imgur.com/lwpXFT6.jpg" class="d-block w-100 h-100" alt="..."> </div>
                                 <div class="carousel-item"> <img src="https://imgur.com/tkRPEJU.jpg" class="d-block w-100" alt="..."> </div>
                                 <div class="carousel-item"> <img src="https://imgur.com/y0MsoYt.jpg" class="d-block w-100" alt="..."> </div>
-                            </div> <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span> </button> <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span> </button>
+                            </div> <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev"> 
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span> </button> 
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span> </button>
                         </div>
                         <div class="card2 w-100">
                             <h5>Adidas</h5>
@@ -38,18 +54,16 @@
                                 <h6 class="mt-2 fw-bold">Color</h6>
                                 <div class="diff_color d-flex gap-3"> <span></span> <span></span> <span></span> </div>
                             </div>
-                            <div class="button mt-4">
-                                <button>Add to cart</button>
-                                <p>$280</p>
-                            </div>
                         </div>
+                        <button type="button" class="btn btn-success">Thêm vào giỏ hàng</button>
                     </div>
+
                 </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
+                  
                 </div>
             </div>
     </div>
@@ -61,13 +75,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 <style>
 
-    .card {
-        margin: 50px 0px;
-        width: 330px;
-        height: auto;
-        background-color: #a7a3d2;
-        font-family: 'Rubik', sans-serif
-    }
 
     .card2 {
         height: auto;
@@ -181,42 +188,6 @@
                 border: 2px solid black !important
             }
 
-    .button {
-        position: relative
-    }
-
-        .button button {
-            height: 45px;
-            width: 100%;
-            background-color: #ff8a00;
-            border: none;
-            outline: 0;
-            border-radius: 9px;
-            font-size: 13px;
-            color: #fff;
-            cursor: pointer;
-            transition: all 0.5s
-        }
-
-            .button button:hover {
-                background-color: #bf6e0e;
-                font-weight: bold;
-                letter-spacing: 1px
-            }
-
-        .button p {
-            position: absolute;
-            right: 10px;
-            top: 24px;
-            font-size: 13px;
-            color: #fff;
-            cursor: pointer;
-            transition: all 0.5s
-        }
-
-        .button:hover p {
-            font-weight: bold !important;
-            letter-spacing: 1px !important
-        }
+  
 </style>
 

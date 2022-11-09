@@ -1,54 +1,68 @@
 ﻿@model IEnumerable<KLTN_Web_MoonShop.Models.Product>
-<link rel="stylesheet" href="https://fontawesome.com/v4.7.0/assets/font-awesome/css/font-awesome.css">
+@*<link rel="stylesheet" href="https://fontawesome.com/v4.7.0/assets/font-awesome/css/font-awesome.css">*@
 <div class="row">
-        <main class="col-md-12">
-            <div class="row">
-                @foreach (var item in Model)
-                {
-                    <div class="col-md-2">
-                        <figure class="card card-product-grid" style="min-height:350px">
-                            <div class="img-wrap">
-                                <span class="badge badge-danger"> NEW </span>
-                                <a href="@Url.Action("Detail","Product",new {id=item.productID})">
-                                    <img src="~/Asset/img/product/@item.productImage" class="img-fluid">
-                                </a>
+    <main class="col-md-12">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-2">
+                    <figure class="card card-product-grid" style="min-height:350px">
+                        <div class="img-wrap">
+                            <span class="badge badge-danger"> NEW </span>
+                            <a href="@Url.Action("Detail","Product",new {id=item.productID})">
+                                <img src="~/Asset/img/product/@item.productImage" class="img-fluid">
+                            </a>
 
-                                <a class="btn-overlay" href="#"><i class="fa fa-search-plus">Xem thêm</i></a>
-                            </div>
-                            <!-- img-wrap.// -->
-                            <figcaption class="info-wrap">
-                                <div class="fix-height">
-                                    <p href="#" class="title">
-                                        @if (@item.productName.Length > 30)
-                                        {
-                                            string name = @item.productName.Substring(0, 30);
-                                            <span>
-                                                @name...
-                                            </span>
-                                        }
-                                        else
-                                        {
-                                            <h6 style="height:40px">
-                                                @item.productName
-                                            </h6>
-                                        }
-                                    </p>
-                                    <div class="price-wrap mt-2">
-                                        <span class="price" style="color:red">@String.Format("{0:0,0 vnđ}", item.productPrice)</span>
-                                    </div>
-                                    
+                            <button class="btn-overlay" onclick="ConfirmUpdate(@item.productID)"><i class="fa fa-search-plus">Xem thêm</i></button>
+                        </div>
+                        <!-- img-wrap.// -->
+                        <figcaption class="info-wrap">
+                            <div class="fix-height">
+                                <p href="#" class="title">
+                                    @if (@item.productName.Length > 30)
+                                    {
+                                        string name = @item.productName.Substring(0, 30);
+                                        <span>
+                                            @name...
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <h6 style="height:40px">
+                                            @item.productName
+                                        </h6>
+                                    }
+                                </p>
+                                <div class="price-wrap mt-2">
+                                    <span class="price" style="color:red">@String.Format("{0:0,0 vnđ}", item.productPrice)</span>
                                 </div>
-                            </figcaption>
-                        </figure>
-                    </div> <!-- col.// -->
+                                @*<a class="btn btn-primary" onclick="ConfirmUpdate(@item.productID)">Sửa </a>*@
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div> <!-- col.// -->
 
-                }
-            </div> <!-- row end.// -->
+            }
+        </div> <!-- row end.// -->
 
 
-        </main>
- </div>
+    </main>
+</div>
+<div id="divid" style="height:100px; width:400px" ;>
+</div>
+<input type="hidden" id="hiddenEmployeeId" />
+<script>
+     //-----------------------------------------show detail-------------------------------------------------
+      var ConfirmUpdate = function (productID) {
 
+
+        $("#hiddenEmployeeId").val(productID);
+        var empId = $("#hiddenEmployeeId").val();
+        var url = '@Url.Action("ShowDetail", "Product", new {id = "data"})';
+        $('#divid').load(url.replace('data', empId));
+
+    }
+</script>
 <style>
     .icon-control {
         margin-top: 5px;

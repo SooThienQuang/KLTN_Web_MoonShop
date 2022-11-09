@@ -7,8 +7,12 @@
     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
         <p class="mb-0 font-weight-normal float-left dropdown-header">@ViewBag.user.customerName</p>
         <a class="dropdown-item" href="@Url.Action("DetailProfile","Customer")">
+            <i class="ti-wallet text-primary"></i>
+            Đơn mua
+        </a>
+        <a class="dropdown-item" href="@Url.Action("DetailProfile","Customer")">
             <i class="ti-settings text-primary"></i>
-            Cài đặt
+            Thông tin cá nhân
         </a>
         <a class="dropdown-item" href="@Url.Action("Login","Customer")">
             <i class="ti-power-off text-primary"></i>

@@ -15,6 +15,14 @@ namespace KLTN_Web_MoonShop.Controllers
         {
             return PartialView();
         }
+        public ActionResult Countdown()
+        {
+            return PartialView();
+        }
+        public ActionResult NavbarProducer()
+        {
+            return PartialView();
+        }
         public ActionResult NavbarProductTop()
         {
             return PartialView();

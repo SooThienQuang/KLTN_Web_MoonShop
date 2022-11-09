@@ -21,12 +21,12 @@ namespace KLTN_Web_MoonShop.Controllers
         }
         public ActionResult CaroselProductHome()
         {
-            List<Product> lst = db.Products.Where(n=>n.isActive==1).Take(6).ToList();
+            List<Product> lst = db.Products.Where(n=>n.isActive==1).Take(4).ToList();
             if (lst.Count > 0)
             {
                 long id = lst.LastOrDefault().productID;
                 ViewBag.Active = lst;
-                ViewBag.Pro = db.Products.Where(n => n.productID >= id && n.isActive == 1).Take(6).ToList();
+                ViewBag.Pro = db.Products.Where(n => n.productID >= id && n.isActive == 1).Take(4).ToList();
             }
             return PartialView();
         }
@@ -34,6 +34,16 @@ namespace KLTN_Web_MoonShop.Controllers
         {
             ViewBag.Product = db.Products.FirstOrDefault(n => n.productID == id);
             ViewBag.ProductDetail = db.ProductDetails.FirstOrDefault(n => n.ProductID == id);
+            return View();
+        }
+        public ActionResult ShowDetail(long id)
+        {
+            if(id>0)
+            {
+                ViewBag.Product = db.Products.FirstOrDefault(n => n.productID == id);
+                ViewBag.ProductDetail = db.ProductDetails.FirstOrDefault(n => n.ProductID == id);
+            }    
+         
             return View();
         }
     }
