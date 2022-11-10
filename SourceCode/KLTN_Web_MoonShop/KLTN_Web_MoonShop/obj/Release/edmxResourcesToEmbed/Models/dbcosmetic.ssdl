@@ -58,6 +58,45 @@
     <Property Name="customerMail" Type="char" MaxLength="100" />
     <Property Name="isActive" Type="int" />
   </EntityType>
+  <EntityType Name="Discount">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="percentDiscount" Type="int" />
+    <Property Name="productID" Type="bigint" />
+    <Property Name="dateTo" Type="datetime" />
+    <Property Name="dateFrom" Type="datetime" />
+    <Property Name="description" Type="nvarchar" MaxLength="500" />
+    <Property Name="productType" Type="int" />
+    <Property Name="isActive" Type="int" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="emID" />
+    </Key>
+    <Property Name="emID" Type="bigint" Nullable="false" />
+    <Property Name="UserName" Type="nchar" MaxLength="100" />
+    <Property Name="Password" Type="nchar" MaxLength="100" />
+    <Property Name="dateCreate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="EmployeeDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="emID" Type="bigint" />
+    <Property Name="fullName" Type="nvarchar" MaxLength="500" />
+    <Property Name="sex" Type="nvarchar" MaxLength="50" />
+    <Property Name="photo" Type="nchar" MaxLength="1000" />
+    <Property Name="phone" Type="char" MaxLength="10" />
+    <Property Name="mail" Type="char" MaxLength="200" />
+    <Property Name="posID" Type="nvarchar" MaxLength="500" />
+    <Property Name="roleID" Type="int" />
+    <Property Name="addressID" Type="int" />
+    <Property Name="isActive" Type="int" />
+  </EntityType>
   <EntityType Name="Notification">
     <Key>
       <PropertyRef Name="notiID" />
@@ -66,6 +105,35 @@
     <Property Name="notiName" Type="nvarchar" MaxLength="590" />
     <Property Name="customerID" Type="bigint" />
     <Property Name="customerName" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="orderID" />
+    </Key>
+    <Property Name="orderID" Type="bigint" Nullable="false" />
+    <Property Name="customerID" Type="bigint" />
+    <Property Name="createDate" Type="datetime" />
+    <Property Name="isActive" Type="int" />
+    <Property Name="employeeID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="orderDetailID" />
+    </Key>
+    <Property Name="orderDetailID" Type="int" Nullable="false" />
+    <Property Name="orderID" Type="bigint" />
+    <Property Name="productID" Type="bigint" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Money" Type="bigint" />
+    <Property Name="idAdd" Type="nvarchar" MaxLength="500" />
+    <Property Name="statusID" Type="int" />
+  </EntityType>
+  <EntityType Name="Position">
+    <Key>
+      <PropertyRef Name="posID" />
+    </Key>
+    <Property Name="posID" Type="int" Nullable="false" />
+    <Property Name="posName" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -102,15 +170,41 @@
     <Property Name="proTypeName" Type="nvarchar" MaxLength="50" />
     <Property Name="isActive" Type="int" />
   </EntityType>
+  <EntityType Name="Salary">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="emID" Type="bigint" />
+    <Property Name="salary" Type="bigint" />
+    <Property Name="bonus" Type="bigint" />
+    <Property Name="dateUpdate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="statusID" />
+    </Key>
+    <Property Name="statusID" Type="int" Nullable="false" />
+    <Property Name="statusName" Type="nvarchar" MaxLength="50" />
+    <Property Name="isActive" Type="int" />
+  </EntityType>
   <EntityContainer Name="DBCosmeticModelStoreContainer">
     <EntitySet Name="ActionLog" EntityType="Self.ActionLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CartDetail" EntityType="Self.CartDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CustomerAddress" EntityType="Self.CustomerAddress" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Discount" EntityType="Self.Discount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeDetail" EntityType="Self.EmployeeDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductDetail" EntityType="Self.ProductDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductType" EntityType="Self.ProductType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

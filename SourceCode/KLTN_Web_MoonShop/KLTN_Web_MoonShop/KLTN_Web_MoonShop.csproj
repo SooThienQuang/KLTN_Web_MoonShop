@@ -134,10 +134,16 @@
     <Content Include="Asset\img\producer\hsx4.jpg" />
     <Content Include="Asset\img\producer\hsx5.jpg" />
     <Content Include="Asset\img\producer\hsx6.jpg" />
+    <Content Include="Asset\img\product\-mediaimagesskii-milem-sgproduct-detai.png" />
     <Content Include="Asset\img\product\001.png" />
     <Content Include="Asset\img\product\0022be6c4da54248016c31454f17251e.jpg" />
+    <Content Include="Asset\img\product\1.png" />
+    <Content Include="Asset\img\product\1177568.png" />
     <Content Include="Asset\img\product\15372e9256b0d3c96c27039d66c1df27.jpg" />
     <Content Include="Asset\img\product\203eb8c2f22283fe10e491ee53793eb0.jpg" />
+    <Content Include="Asset\img\product\2f-2fmedia2fimages2fskii-sg2fproduct-details2ffacial-treatment-gentle-cleanser2fhow-to2ffacial-treatment-gentle-cleanser-how-to-use-1.png" />
+    <Content Include="Asset\img\product\3.png" />
+    <Content Include="Asset\img\product\36028586489936004836118149268517470863360n.jpg" />
     <Content Include="Asset\img\product\360934566faa7b4beec119be1e9c79ca.jpg" />
     <Content Include="Asset\img\product\39eafac4ab2645cf609aa57e40584885.jpg" />
     <Content Include="Asset\img\product\4.png" />
@@ -145,19 +151,34 @@
     <Content Include="Asset\img\product\5404444dfba4c90634b2be63b6ea908d.jpg" />
     <Content Include="Asset\img\product\58a6e65ec5adadd49e5281e185156696.jpg" />
     <Content Include="Asset\img\product\616805156399633798093904609249950411845063n.jpg" />
+    <Content Include="Asset\img\product\683f8f2b87894a67bcb86860ca4f55cc.jpg" />
+    <Content Include="Asset\img\product\6dce2aabe2a4acfb96716659c46cf81b.jpg" />
     <Content Include="Asset\img\product\703d5bd915334d8fabdd428a72c939f5.jpg" />
+    <Content Include="Asset\img\product\76120170562033lmgs0xgbr94n00da.jpg" />
+    <Content Include="Asset\img\product\76120170562034ds81m29nde6tjhxj.jpg" />
     <Content Include="Asset\img\product\9615bb6b95cf43ab9b94434614d5d6fc.jpg" />
+    <Content Include="Asset\img\product\aaaebc96388582ce241ab0f3fdb4a36d.jpeg" />
     <Content Include="Asset\img\product\aeafc797a977fe0eea313d6a1404d679.jpg" />
     <Content Include="Asset\img\product\anhchuky.png" />
     <Content Include="Asset\img\product\bo-co-trang-diem-naked3-12-cay-cao-cap-1.jpg" />
+    <Content Include="Asset\img\product\cart.png" />
+    <Content Include="Asset\img\product\center-illuminate-foamer.png" />
+    <Content Include="Asset\img\product\center.png" />
     <Content Include="Asset\img\product\cotrangdiem.jpg" />
+    <Content Include="Asset\img\product\d2ce2c30c5b6348b66730acdd8560f7a.jpg" />
     <Content Include="Asset\img\product\deccf3ae0587796a32b6de2ae2953b78.jpg" />
     <Content Include="Asset\img\product\dior-addict-lip-glow000000000001874494f.png" />
     <Content Include="Asset\img\product\dior-lip-glow-2021-orchardvn-anh3.png" />
     <Content Include="Asset\img\product\dior-lip-glow-2021-orchardvn-anh9.png" />
     <Content Include="Asset\img\product\f6819bdc586d5e7c9da1fa6bf78173ca.jpg" />
     <Content Include="Asset\img\product\google-shopping-son-thoi-li-3ce-227-benchmark-mau-cam-do-chay-3-5g-1644639565_img_380x380_64adc6_fit_center.jpg" />
+    <Content Include="Asset\img\product\huxley-cleansing-foam-deep-clean-deep-moist-product.png" />
+    <Content Include="Asset\img\product\huxley-cleansing-foam-info.png" />
+    <Content Include="Asset\img\product\huxley-cleansing-gel-info.jpg" />
+    <Content Include="Asset\img\product\huxley-product-secret-of-sahara-cleansing-gel-be-clean-be-moist-%282%29.png" />
+    <Content Include="Asset\img\product\huxleycleansingfoamtexture72dpi720x.png" />
     <Content Include="Asset\img\product\image_2022_10_21T07_37_13_564Z.png" />
+    <Content Include="Asset\img\product\img6284.jpg" />
     <Content Include="Asset\img\product\kemchongnang.jpg" />
     <Content Include="Asset\img\product\kemduongda.jpg" />
     <Content Include="Asset\img\product\lamerthelipvolumizer1.png" />
@@ -166,7 +187,15 @@
     <Content Include="Asset\img\product\nuochoa.jpg" />
     <Content Include="Asset\img\product\phanmat.jpeg" />
     <Content Include="Asset\img\product\Screenshot 2022-10-20 113921.png" />
+    <Content Include="Asset\img\product\sk-ii-facial-treatment-gentle-cleanser-23.png" />
+    <Content Include="Asset\img\product\sk-ii-lxp-ultimate-perfecting-serum-milem-1.png" />
+    <Content Include="Asset\img\product\sk-ii-lxp-ultimate-perfecting-serum-milem-2.png" />
+    <Content Include="Asset\img\product\sk-ii-lxp.png" />
+    <Content Include="Asset\img\product\skii-facial-treatment-gentle-cleanser-bottom-2.png" />
     <Content Include="Asset\img\product\sonmoi.png" />
+    <Content Include="Asset\img\product\sua-rua-mat-dang-gel-huxley-cleansing-gel-be-clean-be-moist-1495178864-3143295-9ddd77dac178ebb6b75773411aea0a41.jpg" />
+    <Content Include="Asset\img\product\sua-rua-mat-skii.png" />
+    <Content Include="Asset\img\product\sucess.png" />
     <Content Include="Asset\img\product\tu1.jpg" />
     <Content Include="Asset\img\product\Untitled.png" />
     <Content Include="Asset\img\product\vitamin.jpg" />
@@ -535,8 +564,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbcosmetic.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Discount.cs">
+      <DependentUpon>dbcosmetic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employee.cs">
+      <DependentUpon>dbcosmetic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmployeeDetail.cs">
+      <DependentUpon>dbcosmetic.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MD5.cs" />
     <Compile Include="Models\Notification.cs">
+      <DependentUpon>dbcosmetic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>dbcosmetic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderDetail.cs">
+      <DependentUpon>dbcosmetic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Position.cs">
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs">
@@ -546,6 +593,12 @@
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductType.cs">
+      <DependentUpon>dbcosmetic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Salary.cs">
+      <DependentUpon>dbcosmetic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Status.cs">
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -15,33 +15,19 @@ namespace KLTN_Web_MoonShop.Controllers.API
     {
         // GET: api/Customer
         DBCosmeticEntities db = new DBCosmeticEntities();
-        [ResponseType(typeof(List<Customer>))]
-        public HttpResponseMessage GetUser(HttpRequestMessage request)
-        {
-          try
-            {
-                
-                return request.CreateResponse(HttpStatusCode.OK, db.Customers.ToList());
-            }
-            catch
-            {
-                return request.CreateResponse(HttpStatusCode.NotFound,"Lỗi hệ thống");
-            }
-        }
-
-        public HttpResponseMessage GetUser(HttpRequestMessage request, string username, string password)
+        public string GetUser( string cusPhone, string cusPassword)
         {
             Customer account = new Customer();
             MD5 m=new MD5();
-            string pass = m.CreateMD5(password);
-            account = db.Customers.FirstOrDefault(n => n.customerUserName.Equals(username) && n.customerPassword.Equals(pass));
-            if (account == null)
+            string pass = m.CreateMD5(cusPassword);
+            account=db.Customers.FirstOrDefault(n=>n.customerUserName.Equals(cusPhone) &&n.customerPassword.Equals(pass));
+            if (account != null)
             {
-                return request.CreateResponse(false);
+                return "Đăng nhập thành công";
             }
             else
             {
-                return request.CreateResponse(account);
+                return "Username hoặc Password chưa chính xác ! Vui lòng thử lại";
             }
         }
         // GET: api/Customer/5

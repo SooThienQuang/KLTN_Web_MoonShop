@@ -78,7 +78,7 @@
                         <a href="#" style="color:black">
                             Q.Tân Phú,P.Tây Thạnh, TP HCM
                         </a>
-                        <a style="color:blue" href="@Url.Action("Login","Customer")">- Đổi địa chỉ</a>
+                        <a style="color:blue" class="link-primary" data-toggle="modal" data-target="#loginModal">- Đổi địa chỉ</a>
                     }
                     else
                     {
@@ -92,7 +92,7 @@
                     <div class="address">
                         <div class="d-flex flex-column dis">
                             <div class="d-flex mb-2">
-                                <p>Số lượng</p>
+                                <p>Số lượng  :</p>
                                 <div class="sign"> <span id="minus"><i class="fa fa-minus"></i></span> <p id="quantity">1</p> <span id="plus"><i class="fa fa-plus"></i></span> </div>
 
                             </div>
@@ -105,7 +105,12 @@
                                 <div class="buttons">
                                     @if (user == null)
                                     {
-                                        @Html.Action("NotLogin", "Alert")
+                                        <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-success w-25 btn-rounded" style="border-radius:25px">
+                                            <i class="ti-shopping-cart"></i> Thêm giỏ hàng
+                                        </button>
+                                        <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-danger w-50 btn-rounded btn-block" style="border-radius:25px">
+                                            <i class="ti-truck"></i> Chọn mua
+                                        </button>
                                     }
                                     else
                                     {
@@ -114,11 +119,12 @@
                                             <span class="added">Item added</span> <i class="fa fa-plus"></i>
                                             <i class="fa fa-circle-thin"></i> <i class="fa fa-check"></i>
                                         </a>
+
+                                        <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-danger btn-rounded btn-block" style="border-radius:25px">
+                                            Chọn mua
+                                        </button>
                                     }
 
-                                    <button class="cart-button1">
-                                        <h5 class="add-to-cart">Chọn mua</h5>
-                                    </button>
 
                                 </div>
 
@@ -170,9 +176,63 @@
 
 </div>
 <!--Modal: modalPush-->
-
+<link rel="stylesheet" href="~/css/alert/notlogin.css" />
 <script>
-   
+    function HideModalUp() {
+
+        $("#modalLogin").modal("hide");
+    }
+</script>
+
+@using (Html.BeginForm("NotLogin", "Alert"))
+{
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-title text-center">
+                        <h4>Đăng nhập</h4>
+                    </div>
+                    <div class="d-flex flex-column text-center">
+                        <form>
+                            <div class="form-group">
+                                <input type="number" class="form-control" name="txtphone" id="email1" placeholder="Nhập vào số điện thoại...">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="txtpws" id="password1" placeholder="Nhập vào mật khẩu...">
+                            </div>
+                            <button type="submit" class="btn btn-info btn-block btn-round">Đăng nhập</button>
+                        </form>
+
+                        <div class="text-center text-muted delimiter">or use a social network</div>
+                        <div class="d-flex justify-content-center social-buttons">
+                            <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Facebook">
+                                <i class="fab fa-facebook"></i>
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Linkedin">
+                                <i class="fab fa-linkedin"></i>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <div class="signup-section">Bạn chưa có tài khoản ? <a href="@Url.Action("Register", "Customer")" class="text-info"> Đăng kí ngay</a>.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+
 
     var ConfirmDelete = function (productID, cusID) {
         //$.ajax({
@@ -349,299 +409,299 @@
     });
 </script>
 <style>
-/*    -----------------------------so luong----------------------------------
-*/    .sign {
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-        align-items: center
-    }
-
-        .sign span {
-            height: 30px;
-            width: 30px;
-            background-color: black;
+        /*    -----------------------------so luong----------------------------------
+    */ .sign {
             display: flex;
-            border-radius: 50%;
-            color: #fff;
-            font-size: 12px;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer
+            flex-direction: row;
+            gap: 10px;
+            align-items: center
         }
 
-        .sign small {
-            font-weight: 700;
-            margin-top: -14px;
-            margin-right: 4px;
-            height: 2px;
-            width: 2px
-        }
-
-        .sign span i {
-            margin-top: 5px
-        }
-
-
-
-
-    p {
-        margin: 0%;
-    }
-
-    .box-1 {
-        min-width: 450px;
-        max-width: 500px;
-        width: 100%;
-        /* padding: 10px 40px;*/
-        user-select: none;
-    }
-
-        .box-1 div .fs-12 {
-            font-size: 8px;
-            color: white;
-        }
-
-        .box-1 div .fs-14 {
-            font-size: 15px;
-            color: white;
-        }
-
-        .box-1 img.pic {
-            width: 20px;
-            height: 20px;
-            object-fit: cover;
-        }
-
-        .box-1 img.mobile-pic {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .box-1 .name {
-            font-size: 11px;
-            font-weight: 600;
-        }
-
-    .dis {
-        font-size: 12px;
-        font-weight: 500;
-    }
-
-    label.box {
-        width: 100%;
-        font-size: 12px;
-        background: #ddd;
-        margin-top: 12px;
-        padding: 10px 12px;
-        border-radius: 5px;
-        cursor: pointer;
-        border: 1px solid transparent;
-    }
-
-    #one:checked ~ label.first,
-    #two:checked ~ label.second,
-    #three:checked ~ label.third {
-        border-color: #7700ff;
-    }
-
-        #one:checked ~ label.first .circle,
-        #two:checked ~ label.second .circle,
-        #three:checked ~ label.third .circle {
-            border-color: #7a34ca;
-            background-color: #fff;
-        }
-
-    label.box .course {
-        width: 100%;
-    }
-
-    label.box .circle {
-        height: 12px;
-        width: 12px;
-        background: #ccc;
-        border-radius: 50%;
-        margin-right: 15px;
-        border: 4px solid transparent;
-        display: inline-block;
-    }
-
-    input[type="radio"] {
-        display: none;
-    }
-
-    .box-2 {
-        min-width: 450px;
-        padding: 10px 40px;
-    }
-
-
-        .box-2 .box-inner-2 input.form-control {
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .box-2 .box-inner-2 .inputWithIcon {
-            position: relative;
-        }
-
-            .box-2 .box-inner-2 .inputWithIcon span {
-                position: absolute;
-                left: 15px;
-                top: 8px;
+            .sign span {
+                height: 30px;
+                width: 30px;
+                background-color: black;
+                display: flex;
+                border-radius: 50%;
+                color: #fff;
+                font-size: 12px;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer
             }
 
-        .box-2 .box-inner-2 .inputWithcheck {
-            position: relative;
+            .sign small {
+                font-weight: 700;
+                margin-top: -14px;
+                margin-right: 4px;
+                height: 2px;
+                width: 2px
+            }
+
+            .sign span i {
+                margin-top: 5px
+            }
+
+
+
+
+        p {
+            margin: 0%;
         }
 
-            .box-2 .box-inner-2 .inputWithcheck span {
-                position: absolute;
+        .box-1 {
+            min-width: 450px;
+            max-width: 500px;
+            width: 100%;
+            /* padding: 10px 40px;*/
+            user-select: none;
+        }
+
+            .box-1 div .fs-12 {
+                font-size: 8px;
+                color: white;
+            }
+
+            .box-1 div .fs-14 {
+                font-size: 15px;
+                color: white;
+            }
+
+            .box-1 img.pic {
                 width: 20px;
                 height: 20px;
-                border-radius: 50%;
-                background-color: green;
-                font-size: 12px;
-                color: white;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                right: 15px;
-                top: 6px;
+                object-fit: cover;
             }
 
-    .form-control:focus,
-    .form-select:focus {
-        box-shadow: none;
-        outline: none;
-        border: 1px solid #7700ff;
-    }
+            .box-1 img.mobile-pic {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+            }
 
-    .border:focus-within {
-        border: 1px solid #7700ff !important;
-    }
+            .box-1 .name {
+                font-size: 11px;
+                font-weight: 600;
+            }
 
-    .box-2 .card-atm .form-control {
-        border: none;
-        box-shadow: none;
-    }
-
-    .form-select {
-        border-radius: 0;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-    }
-
-    .address .form-control.zip {
-        border-radius: 0;
-        border-bottom-left-radius: 10px;
-    }
-
-    .address .form-control.state {
-        border-radius: 0;
-        border-bottom-right-radius: 10px;
-    }
-
-    .box-2 .box-inner-2 .btn.btn-outline-primary {
-        width: 120px;
-        padding: 10px;
-        font-size: 11px;
-        padding: 0% !important;
-        display: flex;
-        align-items: center;
-        border: none;
-        border-radius: 0;
-        background-color: whitesmoke;
-        color: black;
-        font-weight: 600;
-    }
-
-    .box-2 .box-inner-2 .btn.btn-primary {
-        background-color: #7700ff;
-        color: whitesmoke;
-        font-size: 14px;
-        display: flex;
-        align-items: center;
-        font-weight: 600;
-        justify-content: center;
-        border: none;
-        padding: 10px;
-    }
-
-        .box-2 .box-inner-2 .btn.btn-primary:hover {
-            background-color: #7a34ca;
+        .dis {
+            font-size: 12px;
+            font-weight: 500;
         }
 
-        .box-2 .box-inner-2 .btn.btn-primary .fas {
-            font-size: 13px !important;
+        label.box {
+            width: 100%;
+            font-size: 12px;
+            background: #ddd;
+            margin-top: 12px;
+            padding: 10px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        #one:checked ~ label.first,
+        #two:checked ~ label.second,
+        #three:checked ~ label.third {
+            border-color: #7700ff;
+        }
+
+            #one:checked ~ label.first .circle,
+            #two:checked ~ label.second .circle,
+            #three:checked ~ label.third .circle {
+                border-color: #7a34ca;
+                background-color: #fff;
+            }
+
+        label.box .course {
+            width: 100%;
+        }
+
+        label.box .circle {
+            height: 12px;
+            width: 12px;
+            background: #ccc;
+            border-radius: 50%;
+            margin-right: 15px;
+            border: 4px solid transparent;
+            display: inline-block;
+        }
+
+        input[type="radio"] {
+            display: none;
+        }
+
+        .box-2 {
+            min-width: 450px;
+            padding: 10px 40px;
+        }
+
+
+            .box-2 .box-inner-2 input.form-control {
+                font-size: 12px;
+                font-weight: 600;
+            }
+
+            .box-2 .box-inner-2 .inputWithIcon {
+                position: relative;
+            }
+
+                .box-2 .box-inner-2 .inputWithIcon span {
+                    position: absolute;
+                    left: 15px;
+                    top: 8px;
+                }
+
+            .box-2 .box-inner-2 .inputWithcheck {
+                position: relative;
+            }
+
+                .box-2 .box-inner-2 .inputWithcheck span {
+                    position: absolute;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    background-color: green;
+                    font-size: 12px;
+                    color: white;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    right: 15px;
+                    top: 6px;
+                }
+
+        .form-control:focus,
+        .form-select:focus {
+            box-shadow: none;
+            outline: none;
+            border: 1px solid #7700ff;
+        }
+
+        .border:focus-within {
+            border: 1px solid #7700ff !important;
+        }
+
+        .box-2 .card-atm .form-control {
+            border: none;
+            box-shadow: none;
+        }
+
+        .form-select {
+            border-radius: 0;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .address .form-control.zip {
+            border-radius: 0;
+            border-bottom-left-radius: 10px;
+        }
+
+        .address .form-control.state {
+            border-radius: 0;
+            border-bottom-right-radius: 10px;
+        }
+
+        .box-2 .box-inner-2 .btn.btn-outline-primary {
+            width: 120px;
+            padding: 10px;
+            font-size: 11px;
+            padding: 0% !important;
+            display: flex;
+            align-items: center;
+            border: none;
+            border-radius: 0;
+            background-color: whitesmoke;
+            color: black;
+            font-weight: 600;
+        }
+
+        .box-2 .box-inner-2 .btn.btn-primary {
+            background-color: #7700ff;
             color: whitesmoke;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            justify-content: center;
+            border: none;
+            padding: 10px;
         }
 
-    .carousel-indicators [data-bs-target] {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-    }
+            .box-2 .box-inner-2 .btn.btn-primary:hover {
+                background-color: #7a34ca;
+            }
 
-    .carousel-inner {
-        width: 100%;
-        height: 250px;
-    }
+            .box-2 .box-inner-2 .btn.btn-primary .fas {
+                font-size: 13px !important;
+                color: whitesmoke;
+            }
 
-    .carousel-item img {
-        object-fit: cover;
-        height: 100%;
-        width: 100%;
-    }
-
-    .carousel-control-prev {
-        transform: translateX(-50%);
-        opacity: 1;
-    }
-
-        .carousel-control-prev:hover .fas.fa-arrow-left {
-            transform: translateX(-5px);
+        .carousel-indicators [data-bs-target] {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
         }
 
-    .carousel-control-next {
-        transform: translateX(50%);
-        opacity: 1;
-    }
-
-        .carousel-control-next:hover .fas.fa-arrow-right {
-            transform: translateX(5px);
+        .carousel-inner {
+            width: 100%;
+            height: 250px;
         }
 
-    .fas.fa-arrow-left,
-    .fas.fa-arrow-right {
-        font-size: 0.8rem;
-        transition: all .2s ease;
-    }
+        .carousel-item img {
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+        }
 
-    .icon {
-        width: 30px;
-        height: 30px;
-        background-color: #f8f9fa;
-        color: black;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        transform-origin: center;
-        opacity: 1;
-    }
+        .carousel-control-prev {
+            transform: translateX(-50%);
+            opacity: 1;
+        }
 
-    .fas,
-    .fab {
-        color: #6d6c6d;
-    }
+            .carousel-control-prev:hover .fas.fa-arrow-left {
+                transform: translateX(-5px);
+            }
 
-    ::placeholder {
-        font-size: 12px;
-    }
+        .carousel-control-next {
+            transform: translateX(50%);
+            opacity: 1;
+        }
 
-    p {
-        font-size: 16px;
-    }
+            .carousel-control-next:hover .fas.fa-arrow-right {
+                transform: translateX(5px);
+            }
+
+        .fas.fa-arrow-left,
+        .fas.fa-arrow-right {
+            font-size: 0.8rem;
+            transition: all .2s ease;
+        }
+
+        .icon {
+            width: 30px;
+            height: 30px;
+            background-color: #f8f9fa;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transform-origin: center;
+            opacity: 1;
+        }
+
+        .fas,
+        .fab {
+            color: #6d6c6d;
+        }
+
+        ::placeholder {
+            font-size: 12px;
+        }
+
+        p {
+            font-size: 16px;
+        }
 </style>

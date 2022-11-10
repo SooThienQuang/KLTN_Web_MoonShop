@@ -63,6 +63,45 @@
           <Property Name="customerMail" Type="char" MaxLength="100" />
           <Property Name="isActive" Type="int" />
         </EntityType>
+        <EntityType Name="Discount">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="percentDiscount" Type="int" />
+          <Property Name="productID" Type="bigint" />
+          <Property Name="dateTo" Type="datetime" />
+          <Property Name="dateFrom" Type="datetime" />
+          <Property Name="description" Type="nvarchar" MaxLength="500" />
+          <Property Name="productType" Type="int" />
+          <Property Name="isActive" Type="int" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="emID" />
+          </Key>
+          <Property Name="emID" Type="bigint" Nullable="false" />
+          <Property Name="UserName" Type="nchar" MaxLength="100" />
+          <Property Name="Password" Type="nchar" MaxLength="100" />
+          <Property Name="dateCreate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EmployeeDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="emID" Type="bigint" />
+          <Property Name="fullName" Type="nvarchar" MaxLength="500" />
+          <Property Name="sex" Type="nvarchar" MaxLength="50" />
+          <Property Name="photo" Type="nchar" MaxLength="1000" />
+          <Property Name="phone" Type="char" MaxLength="10" />
+          <Property Name="mail" Type="char" MaxLength="200" />
+          <Property Name="posID" Type="nvarchar" MaxLength="500" />
+          <Property Name="roleID" Type="int" />
+          <Property Name="addressID" Type="int" />
+          <Property Name="isActive" Type="int" />
+        </EntityType>
         <EntityType Name="Notification">
           <Key>
             <PropertyRef Name="notiID" />
@@ -71,6 +110,35 @@
           <Property Name="notiName" Type="nvarchar" MaxLength="590" />
           <Property Name="customerID" Type="bigint" />
           <Property Name="customerName" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="orderID" />
+          </Key>
+          <Property Name="orderID" Type="bigint" Nullable="false" />
+          <Property Name="customerID" Type="bigint" />
+          <Property Name="createDate" Type="datetime" />
+          <Property Name="isActive" Type="int" />
+          <Property Name="employeeID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="orderDetailID" />
+          </Key>
+          <Property Name="orderDetailID" Type="int" Nullable="false" />
+          <Property Name="orderID" Type="bigint" />
+          <Property Name="productID" Type="bigint" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Money" Type="bigint" />
+          <Property Name="idAdd" Type="nvarchar" MaxLength="500" />
+          <Property Name="statusID" Type="int" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="posID" />
+          </Key>
+          <Property Name="posID" Type="int" Nullable="false" />
+          <Property Name="posName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -107,16 +175,42 @@
           <Property Name="proTypeName" Type="nvarchar" MaxLength="50" />
           <Property Name="isActive" Type="int" />
         </EntityType>
+        <EntityType Name="Salary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="emID" Type="bigint" />
+          <Property Name="salary" Type="bigint" />
+          <Property Name="bonus" Type="bigint" />
+          <Property Name="dateUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="statusID" />
+          </Key>
+          <Property Name="statusID" Type="int" Nullable="false" />
+          <Property Name="statusName" Type="nvarchar" MaxLength="50" />
+          <Property Name="isActive" Type="int" />
+        </EntityType>
         <EntityContainer Name="DBCosmeticModelStoreContainer">
           <EntitySet Name="ActionLog" EntityType="Self.ActionLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CartDetail" EntityType="Self.CartDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerAddress" EntityType="Self.CustomerAddress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Discount" EntityType="Self.Discount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeDetail" EntityType="Self.EmployeeDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductDetail" EntityType="Self.ProductDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductType" EntityType="Self.ProductType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -132,6 +226,14 @@
           <EntitySet Name="Products" EntityType="DBCosmeticModel.Product" />
           <EntitySet Name="ProductDetails" EntityType="DBCosmeticModel.ProductDetail" />
           <EntitySet Name="ProductTypes" EntityType="DBCosmeticModel.ProductType" />
+          <EntitySet Name="Orders" EntityType="DBCosmeticModel.Order" />
+          <EntitySet Name="OrderDetails" EntityType="DBCosmeticModel.OrderDetail" />
+          <EntitySet Name="Status" EntityType="DBCosmeticModel.Status" />
+          <EntitySet Name="Discounts" EntityType="DBCosmeticModel.Discount" />
+          <EntitySet Name="Employees" EntityType="DBCosmeticModel.Employee" />
+          <EntitySet Name="EmployeeDetails" EntityType="DBCosmeticModel.EmployeeDetail" />
+          <EntitySet Name="Positions" EntityType="DBCosmeticModel.Position" />
+          <EntitySet Name="Salaries" EntityType="DBCosmeticModel.Salary" />
         </EntityContainer>
         <EntityType Name="ActionLog">
           <Key>
@@ -234,6 +336,92 @@
           <Property Name="proTypeID" Type="Int32" Nullable="false" />
           <Property Name="proTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="isActive" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="orderID" />
+          </Key>
+          <Property Name="orderID" Type="Int64" Nullable="false" />
+          <Property Name="customerID" Type="Int64" />
+          <Property Name="createDate" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Int32" />
+          <Property Name="employeeID" Type="Int64" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="orderDetailID" />
+          </Key>
+          <Property Name="orderDetailID" Type="Int32" Nullable="false" />
+          <Property Name="orderID" Type="Int64" />
+          <Property Name="productID" Type="Int64" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Money" Type="Int64" />
+          <Property Name="idAdd" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="statusID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="statusID" />
+          </Key>
+          <Property Name="statusID" Type="Int32" Nullable="false" />
+          <Property Name="statusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Discount">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="percentDiscount" Type="Int32" />
+          <Property Name="productID" Type="Int64" />
+          <Property Name="dateTo" Type="DateTime" Precision="3" />
+          <Property Name="dateFrom" Type="DateTime" Precision="3" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="productType" Type="Int32" />
+          <Property Name="isActive" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="emID" />
+          </Key>
+          <Property Name="emID" Type="Int64" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="dateCreate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="EmployeeDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="emID" Type="Int64" />
+          <Property Name="fullName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="sex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="photo" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="mail" Type="String" MaxLength="200" FixedLength="true" Unicode="false" />
+          <Property Name="posID" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="roleID" Type="Int32" />
+          <Property Name="addressID" Type="Int32" />
+          <Property Name="isActive" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="posID" />
+          </Key>
+          <Property Name="posID" Type="Int32" Nullable="false" />
+          <Property Name="posName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Salary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="emID" Type="Int64" />
+          <Property Name="salary1" Type="Int64" />
+          <Property Name="bonus" Type="Int64" />
+          <Property Name="dateUpdate" Type="DateTime" Precision="3" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -349,6 +537,100 @@
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="proTypeName" ColumnName="proTypeName" />
                 <ScalarProperty Name="proTypeID" ColumnName="proTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="DBCosmeticModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="customerID" ColumnName="customerID" />
+                <ScalarProperty Name="orderID" ColumnName="orderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="DBCosmeticModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetail">
+                <ScalarProperty Name="statusID" ColumnName="statusID" />
+                <ScalarProperty Name="idAdd" ColumnName="idAdd" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="orderID" ColumnName="orderID" />
+                <ScalarProperty Name="orderDetailID" ColumnName="orderDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="DBCosmeticModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="statusName" ColumnName="statusName" />
+                <ScalarProperty Name="statusID" ColumnName="statusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Discounts">
+            <EntityTypeMapping TypeName="DBCosmeticModel.Discount">
+              <MappingFragment StoreEntitySet="Discount">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="productType" ColumnName="productType" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="dateFrom" ColumnName="dateFrom" />
+                <ScalarProperty Name="dateTo" ColumnName="dateTo" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="percentDiscount" ColumnName="percentDiscount" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="DBCosmeticModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="emID" ColumnName="emID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeDetails">
+            <EntityTypeMapping TypeName="DBCosmeticModel.EmployeeDetail">
+              <MappingFragment StoreEntitySet="EmployeeDetail">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="addressID" ColumnName="addressID" />
+                <ScalarProperty Name="roleID" ColumnName="roleID" />
+                <ScalarProperty Name="posID" ColumnName="posID" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="emID" ColumnName="emID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="DBCosmeticModel.Position">
+              <MappingFragment StoreEntitySet="Position">
+                <ScalarProperty Name="posName" ColumnName="posName" />
+                <ScalarProperty Name="posID" ColumnName="posID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salaries">
+            <EntityTypeMapping TypeName="DBCosmeticModel.Salary">
+              <MappingFragment StoreEntitySet="Salary">
+                <ScalarProperty Name="dateUpdate" ColumnName="dateUpdate" />
+                <ScalarProperty Name="bonus" ColumnName="bonus" />
+                <ScalarProperty Name="salary1" ColumnName="salary" />
+                <ScalarProperty Name="emID" ColumnName="emID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
