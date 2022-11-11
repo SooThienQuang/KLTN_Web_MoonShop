@@ -476,6 +476,7 @@
     <Content Include="css\cart.css" />
     <Content Include="css\home\navbartop.css" />
     <Content Include="css\home\product.css" />
+    <Content Include="css\productDetail.css" />
     <Content Include="css\style.css" />
     <Content Include="Global.asax" />
     <Content Include="js\bootstrap4\bootstrap.bundle.js" />
@@ -540,6 +541,7 @@
     <Compile Include="Models\Cart.cs">
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CartClass.cs" />
     <Compile Include="Models\CartDetail.cs">
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>

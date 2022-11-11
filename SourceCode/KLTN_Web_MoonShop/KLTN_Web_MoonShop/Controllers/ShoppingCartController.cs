@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KLTN_Web_MoonShop.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,7 @@ namespace KLTN_Web_MoonShop.Controllers
 {
     public class ShoppingCartController : Controller
     {
+        DBCosmeticEntities db = new DBCosmeticEntities();
         // GET: ShoppingCart
         public ActionResult AddOrUpdate()
         {
@@ -16,7 +18,15 @@ namespace KLTN_Web_MoonShop.Controllers
         }
         public ActionResult AllCart()
         {
-            return View();
+            Customer user = Session["user"] as Customer;
+            List<CartDetail> lst = new List<CartDetail>();
+            if (user!=null)
+            {
+              Cart cart=  db.Carts.FirstOrDefault(n => n.customerID == user.customerID);
+               lst = db.CartDetails.Where(n => n.cartID == cart.cartID).ToList();
+               return View(lst);
+            }    
+            return View(lst);
         }
         public ActionResult EmryCart()
         {
