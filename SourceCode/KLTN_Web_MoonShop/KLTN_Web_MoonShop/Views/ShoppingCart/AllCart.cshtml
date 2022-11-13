@@ -14,14 +14,14 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h5>Cart</h5>
+                        <h5>Giỏ hàng của bạn</h5>
                     </div>
                     <div class="card-body cart">
                         <div class="col-sm-12 empty-cart-cls text-center">
                             <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
-                            <h3><strong>Your Cart is Empty</strong></h3>
-                            <h4>Add something to make me happy :)</h4>
-                            <a href="#" class="btn btn-primary cart-btn-transform m-3" data-abc="true">continue shopping</a>
+                            <h3><strong>Bạn chưa có sản phẩm nào trong giỏ hàng</strong></h3>
+                            <h4>Thêm một vài sản phẩm sẽ khiến bạn vui hơn :)</h4>
+                            <a href="@Url.Action("Index","Home")" class="btn btn-primary cart-btn-transform m-3" data-abc="true">Tiếp tục mua sắm</a>
 
 
                         </div>
@@ -41,16 +41,16 @@ else
         <div class="container">
             <div class="row w-100">
                 <div class="col-lg-12 col-md-12 col-12">
-                    <h3 class="display-5 mb-2 text-center">Shopping Cart</h3>
+                    <h3 class="display-5 mb-2 text-center">Giỏ hàng của bạn</h3>
                     <p class="mb-5 text-center">
-                        <i class="text-info font-weight-bold">@Model.Count()</i>sản phẩm trong giỏ hàng của bạn
+                      Có tất   <i class="text-info font-weight-bold">@Model.Count() </i> sản phẩm trong giỏ hàng của bạn
                     </p>
                     <table id="shoppingCart" class="table table-condensed table-responsive">
                         <thead>
                             <tr>
-                                <th style="width:60%">Product</th>
-                                <th style="width:12%">Price</th>
-                                <th style="width:12%">Quantity</th>
+                                <th style="width:60%">Tên sản phẩm</th>
+                                <th style="width:12%">Giá thành</th>
+                                <th style="width:12%">Số lượng</th>
                                 <th style="width:16%"></th>
                             </tr>
                         </thead>
@@ -113,10 +113,13 @@ else
                 </div>
                 <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
                     <a href="@Url.Action("Index","Home")">
-                        <i class="fas fa-arrow-left mr-2"></i> Continue Shopping
+                        <i class="ti-back-left"></i> Tiếp tục mua hàng
                     </a>
                 </div>
             </div>
         </div>
     </section>
 }
+<div class="row">
+    @Html.Action("pa","Home")
+</div>

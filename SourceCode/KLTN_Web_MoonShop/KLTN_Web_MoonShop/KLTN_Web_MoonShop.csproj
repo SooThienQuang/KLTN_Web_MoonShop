@@ -116,6 +116,8 @@
     <Content Include="Asset\img\banner\6d5228ff244c89beb121fca21d553275.png" />
     <Content Include="Asset\img\banner\ad336ade20ae3b327cf9a32b93b9ec17.png" />
     <Content Include="Asset\img\banner\bannertop.png" />
+    <Content Include="Asset\img\banner\en-elixir20anshomepagedesktopeng-%281%29.png" />
+    <Content Include="Asset\img\banner\milemskiiantiaging %281%29.png" />
     <Content Include="Asset\img\caroselhome\hero_1.jpg" />
     <Content Include="Asset\img\caroselhome\hero_2.jpg" />
     <Content Include="Asset\img\caroselhome\hero_3.jpg" />
@@ -522,6 +524,7 @@
     <Compile Include="Controllers\API\CartController.cs" />
     <Compile Include="Controllers\API\CustomerController.cs" />
     <Compile Include="Controllers\API\ImageController.cs" />
+    <Compile Include="Controllers\API\PayController.cs" />
     <Compile Include="Controllers\API\ProductController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
@@ -761,6 +764,8 @@
     <Content Include="Views\Product\ShowDetail.cshtml" />
     <Content Include="Views\PartialView\NavbarProducer.cshtml" />
     <Content Include="Views\PartialView\Countdown.cshtml" />
+    <Content Include="Views\Home\pa.cshtml" />
+    <Content Include="Views\ShoppingCart\Detail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -794,7 +799,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49675</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49675/</IISUrl>
+          <IISUrl>http://localhost:8888/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

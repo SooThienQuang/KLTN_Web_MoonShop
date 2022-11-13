@@ -39,11 +39,10 @@ namespace KLTN_Web_MoonShop.Controllers
                 else
                 {
                     ViewBag.LoginFail = "Tài khoản hoặc mật khẩu chưa chính xác!";
-                    
                 }   
 
             }
-            return PartialView();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

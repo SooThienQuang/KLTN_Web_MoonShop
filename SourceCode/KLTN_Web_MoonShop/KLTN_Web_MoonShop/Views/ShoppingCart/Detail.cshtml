@@ -1,0 +1,303 @@
+﻿@model IEnumerable<KLTN_Web_MoonShop.Models.CartDetail>
+@using KLTN_Web_MoonShop.Models
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    DBCosmeticEntities db = new DBCosmeticEntities();
+}
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+@if (Model == null)
+{
+    <div class="container-fluid  mt-100">
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Giỏ hàng của bạn</h5>
+                    </div>
+                    <div class="card-body cart">
+                        <div class="col-sm-12 empty-cart-cls text-center">
+                            <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+                            <h3><strong>Bạn chưa có sản phẩm nào trong giỏ hàng</strong></h3>
+                            <h4>Thêm một vài sản phẩm sẽ khiến bạn vui hơn :)</h4>
+                            <a href="@Url.Action("Index","Home")" class="btn btn-primary cart-btn-transform m-3" data-abc="true">Tiếp tục mua sắm</a>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+}
+else
+{
+<div class="container">
+    <div class="table-wrap">
+        <table class="table table-responsive table-borderless">
+            <thead>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th>Sản phẩm</th>
+            <th>Giá thành</th>
+            <th>Số lượng</th>
+            <th>Tổng tiền</th>
+            <th>&nbsp;</th>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    KLTN_Web_MoonShop.Models.Product pro = db.Products.FirstOrDefault(n => n.productID == item.productID);
+                    <tr class="align-middle alert border-bottom" role="alert">
+                        <td>
+                            <input class="checkbox" type="checkbox" value="@item.productID" id="checkbox" onclick="setVal(@item.cartMoney)">
+                        </td>
+                        <td class="text-center">
+                            <img class="pic"
+                                 src="~/Asset/img/product/@pro.productImage"
+                                 alt="">
+                        </td>
+                        <td>
+                            <div>
+                                @if (pro.productName.Length > 30)
+                                {
+                                    string name = pro.productName.Substring(0, 30);
+                                    <p class="m-0 fw-bold">@name ...</p>
+                                }
+                                else
+                                {
+                                    <p class="m-0 fw-bold">@pro.productName</p>
+                                }
+
+                                @if (pro.productDescribe.Length > 50)
+                                {
+                                    string name = pro.productDescribe.Substring(0, 50);
+                                    <p class="m-0 fw-bold">@name ...</p>
+                                }
+                                else
+                                {
+                                    <p class="m-0 fw-bold">@pro.productDescribe</p>
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            <div class="fw-600">@pro.productPrice</div>
+                        </td>
+                        <td class="d-">
+                            <input class="form-control" type="number" value="@item.cartQuantity">
+                        </td>
+                        <td>
+                            @item.cartMoney
+                        </td>
+                        <td>
+                            <div class="btn" data-bs-dismiss="alert">
+                                <span class="fas fa-times"></span>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+    <div class="row mt-4 d-flex align-items-center">
+        <div class="col-sm-2 order-md-2">
+            <h3>Tổng tiền :</h3>
+        </div>
+        <div class="col-sm-2 order-md-2">
+            <h3 style="color:red" id="txtmoney">0</h3>
+        </div>
+        <div class="col-sm-4 order-md-2 text-right">
+            <a href="@Url.Action("Payment","Payment")" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Thanh toán</a>
+        </div>
+        <div class="col-sm-4 mb-3 mb-m-1 order-md-1 text-md-left">
+            <a href="@Url.Action("Index","Home")">
+                <i class="ti-back-left"></i> Tiếp tục mua hàng
+            </a>
+        </div>
+        
+    </div>
+</div>
+}
+<button onclick="check()">check</button>
+<input type="number" id="txtgia" hidden />
+<script>
+    function setVal(money) {
+        document.getElementById('txtgia').value = money;
+    }
+    $(".checkbox").change(function () {
+        if (this.checked) {
+            var money = +document.getElementById('txtmoney').innerText;
+            var price = + document.getElementById('txtgia').value;
+            document.getElementById('txtmoney').innerHTML = money + price;
+        }
+        else {
+            var money = +document.getElementById('txtmoney').innerText;
+            var price = + document.getElementById('txtgia').value;
+            document.getElementById('txtmoney').innerHTML = money - price;
+        }
+    });
+
+    //var checkedValue = null;
+    //var inputElements = document.getElementsByClassName('checkbox');
+    //for (var i = 0; inputElements[i]; ++i) {
+    //    if (inputElements[i].checked) {
+    //        checkedValue = inputElements[i].value;
+    //        break;
+    //    }
+    //}
+    //alert(checkedValue)
+
+    //$(".checkbox").change(function () {
+    //    var str = "";
+    //    $("input:checked").each(function () {
+    //        str += $(this).next().val() + "_";
+    //    });
+    //    str = str.substr(0, str.length - 1);
+    //    alert(str);
+    //});
+
+
+    function check() {
+        var markedCheckbox = document.getElementsByName('checkbox');
+        for (var checkbox of markedCheckbox) {
+            if (checkbox.checked)
+               alert(checkbox.value);
+        }
+    }
+
+</script>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif
+    }
+
+
+
+    .pic {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+    }
+
+    .table thead {
+        background-color: #21cf95;
+    }
+
+        .table thead th {
+            padding: 30px;
+            font-size: 14px;
+            color: white;
+        }
+
+    .table tbody td input[type="checkbox"] {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        background-color: #eee;
+        position: relative;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .container .table-wrap {
+        margin: 20px auto;
+        overflow-x: auto
+    }
+
+        .container .table-wrap::-webkit-scrollbar {
+            height: 5px;
+        }
+
+        .container .table-wrap::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            background-image: linear-gradient(to right, #5D7ECD, #0C91E6);
+        }
+
+    .table > :not(caption) > * > * {
+        padding: 2rem 0.5rem;
+    }
+
+    .input {
+        width: 30px;
+        height: 30px;
+        color: black;
+        font-weight: 600;
+        outline: none;
+        padding: 8px;
+    }
+
+    ::placeholder {
+        color: black;
+        font-weight: 600;
+    }
+
+    .table tbody td input[type="checkbox"]:after {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 600;
+        content: "\f00c";
+        color: #fff;
+        font-size: 15px;
+        display: none
+    }
+
+    .table tbody td input[type="checkbox"]:checked,
+    .table tbody td input[type="checkbox"]:checked:hover {
+        background-color: #21cf95;
+    }
+
+        .table tbody td input[type="checkbox"]:checked::after {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+    .table tbody td input[type="checkbox"]:hover {
+        background-color: #ddd;
+    }
+
+    .table tbody td {
+        padding: 30px;
+        margin: 0;
+        font-size: 14.5px;
+        font-weight: 600;
+    }
+
+        .table tbody td .fa-times {
+            color: #D32F2F;
+        }
+
+
+    .text-muted {
+        font-size: 12.5px;
+    }
+
+    .table tbody tr td:nth-of-type(3) {
+        min-width: 320px;
+    }
+</style>
+

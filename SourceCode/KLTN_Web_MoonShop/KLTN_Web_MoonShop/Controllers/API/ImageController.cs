@@ -17,7 +17,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
             return base.File(path, "image/jpeg");
         }
         [HttpPost]
-        public Boolean UpLoad(HttpPostedFileBase file)
+        public bool UpLoad(string data)
         {
             return true;
         }

@@ -28,6 +28,18 @@ namespace KLTN_Web_MoonShop.Controllers
             }    
             return View(lst);
         }
+        public ActionResult Detail()
+        {
+            Customer user = Session["user"] as Customer;
+            List<CartDetail> lst = new List<CartDetail>();
+            if (user != null)
+            {
+                Cart cart = db.Carts.FirstOrDefault(n => n.customerID == user.customerID);
+                lst = db.CartDetails.Where(n => n.cartID == cart.cartID).ToList();
+                return PartialView(lst);
+            }
+            return PartialView(lst);
+        }
         public ActionResult EmryCart()
         {
             return View();

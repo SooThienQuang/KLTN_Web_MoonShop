@@ -123,6 +123,7 @@
     <Property Name="orderDetailID" Type="int" Nullable="false" />
     <Property Name="orderID" Type="bigint" />
     <Property Name="productID" Type="bigint" />
+    <Property Name="price" Type="bigint" />
     <Property Name="Quantity" Type="int" />
     <Property Name="Money" Type="bigint" />
     <Property Name="idAdd" Type="nvarchar" MaxLength="500" />

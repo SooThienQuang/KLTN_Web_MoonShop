@@ -1,0 +1,53 @@
+﻿@if (@ViewBag.user == null)
+{
+}
+else
+{
+    <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+        <i class="ti-wallet mx-0">&#xf07a;</i>
+        <span class='badge badge-warning' id='lblCartCount'> 5 </span>
+        <div class="item-content">Đơn đặt hàng</div>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+        <p class="mb-0 font-weight-normal float-left dropdown-header">Thông báo</p>
+        <a class="dropdown-item">
+            <div class="item-thumbnail">
+                <div class="item-icon bg-success">
+                    <i class="ti-wallet mx-0"></i>
+                </div>
+            </div>
+            <div class="item-content">
+                <h6 class="font-weight-normal">Đơn đặt hàng</h6>
+                <p class="font-weight-light small-text mb-0 text-muted">
+                    2 đơn đặt hàng
+                </p>
+            </div>
+        </a>
+        <a class="dropdown-item">
+            <div class="item-thumbnail">
+                <div class="item-icon bg-info">
+                    <i class="ti-shopping-cart mx-0"></i>
+                </div>
+            </div>
+            <div class="item-content">
+                <h6 class="font-weight-normal">Giỏ hàng</h6>
+                <p class="font-weight-light small-text mb-0 text-muted">
+                    2 item
+                </p>
+            </div>
+        </a>
+        <a class="dropdown-item">
+            <div class="item-thumbnail">
+                <div class="item-icon bg-warning">
+                    <i class="ti-settings mx-0"></i>
+                </div>
+            </div>
+            <div class="item-content">
+                <h6 class="font-weight-normal">Settings</h6>
+                <p class="font-weight-light small-text mb-0 text-muted">
+                    Private message
+                </p>
+            </div>
+        </a>
+    </div>
+}

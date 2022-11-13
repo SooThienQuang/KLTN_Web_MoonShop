@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    string mess = ViewBag.DeleteSuccess;
+}
+
+
+    @if (ViewBag.DeleteSuccess != null)
+    {
+        @Html.Action("Success", "Alert", new { message = ViewBag.DeleteSuccess })
+    }
+
+

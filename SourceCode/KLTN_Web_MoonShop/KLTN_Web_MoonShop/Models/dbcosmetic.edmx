@@ -128,6 +128,7 @@
           <Property Name="orderDetailID" Type="int" Nullable="false" />
           <Property Name="orderID" Type="bigint" />
           <Property Name="productID" Type="bigint" />
+          <Property Name="price" Type="bigint" />
           <Property Name="Quantity" Type="int" />
           <Property Name="Money" Type="bigint" />
           <Property Name="idAdd" Type="nvarchar" MaxLength="500" />
@@ -358,6 +359,7 @@
           <Property Name="Money" Type="Int64" />
           <Property Name="idAdd" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="statusID" Type="Int32" />
+          <Property Name="price" Type="Int64" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -554,6 +556,7 @@
           <EntitySetMapping Name="OrderDetails">
             <EntityTypeMapping TypeName="DBCosmeticModel.OrderDetail">
               <MappingFragment StoreEntitySet="OrderDetail">
+                <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="statusID" ColumnName="statusID" />
                 <ScalarProperty Name="idAdd" ColumnName="idAdd" />
                 <ScalarProperty Name="Money" ColumnName="Money" />

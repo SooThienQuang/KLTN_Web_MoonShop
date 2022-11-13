@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DBCosmeticEntities-Web.config Connection String" description="DBCosmeticEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.dbcosmetic.csdl|res://*/Models.dbcosmetic.ssdl|res://*/Models.dbcosmetic.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=DBCosmetic.mssql.somee.com;initial catalog=DBCosmetic;user id=sothienquang_SQLLogin_1;password=u28qrlg5t7;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\GitLab\\MoonShop\\SourceCode\\KLTN_Web_MoonShop\\KLTN_Web_MoonShop\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DBCosmeticEntities']/@connectionString" />
+  </parameter>
+</parameters>

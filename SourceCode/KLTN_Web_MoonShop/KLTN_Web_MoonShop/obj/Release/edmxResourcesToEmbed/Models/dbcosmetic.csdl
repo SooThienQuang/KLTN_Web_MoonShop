@@ -142,6 +142,7 @@
     <Property Name="Money" Type="Int64" />
     <Property Name="idAdd" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="statusID" Type="Int32" />
+    <Property Name="price" Type="Int64" />
   </EntityType>
   <EntityType Name="Status">
     <Key>

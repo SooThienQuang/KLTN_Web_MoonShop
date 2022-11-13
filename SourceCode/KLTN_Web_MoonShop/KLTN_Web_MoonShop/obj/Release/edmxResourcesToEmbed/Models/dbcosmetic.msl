@@ -126,6 +126,7 @@
     <EntitySetMapping Name="OrderDetails">
       <EntityTypeMapping TypeName="DBCosmeticModel.OrderDetail">
         <MappingFragment StoreEntitySet="OrderDetail">
+          <ScalarProperty Name="price" ColumnName="price" />
           <ScalarProperty Name="statusID" ColumnName="statusID" />
           <ScalarProperty Name="idAdd" ColumnName="idAdd" />
           <ScalarProperty Name="Money" ColumnName="Money" />

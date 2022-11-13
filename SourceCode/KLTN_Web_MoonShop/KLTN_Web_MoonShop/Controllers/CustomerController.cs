@@ -1,23 +1,15 @@
 ﻿using KLTN_Web_MoonShop.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core.Objects;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Security.Policy;
-using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using static System.Net.WebRequestMethods;
-using System.Runtime.Remoting.Contexts;
 
 namespace KLTN_Web_MoonShop.Controllers
 {
-  public class cartTam
+    public class cartTam
     {
         public long id { get; set; }
         public string name { get; set; }
@@ -207,7 +199,7 @@ namespace KLTN_Web_MoonShop.Controllers
                             
                         }
                         ViewBag.AllMoney = lst.Sum(n => n.cartMoney);
-                        ViewBag.lstCart = lsttam;
+                        ViewBag.lstCart = lsttam.Take(3);
                     }    
                 }
                 ViewBag.size = lst.Count;
@@ -220,14 +212,13 @@ namespace KLTN_Web_MoonShop.Controllers
         {
 
             Customer cs = Session["user"] as Customer;
-            if (cs != null)
+            Order d = db.Orders.FirstOrDefault(n => n.customerID == cs.customerID);
+            List<OrderDetail> lst = new List<OrderDetail>();
+            if(d!=null)
             {
-                string ten = cs.customerName.ToString().Split(' ').Last();
-                ViewBag.name = ten;
-                ViewBag.user = cs;
+                lst = db.OrderDetails.Where(n => n.orderID == d.orderID).ToList();
             }
-
-            return PartialView();
+            return PartialView(lst);
 
         }
         public ActionResult img()
