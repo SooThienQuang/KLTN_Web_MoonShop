@@ -525,6 +525,7 @@
     <Compile Include="Controllers\API\CustomerController.cs" />
     <Compile Include="Controllers\API\ImageController.cs" />
     <Compile Include="Controllers\API\PayController.cs" />
+    <Compile Include="Controllers\API\PaymoreController.cs" />
     <Compile Include="Controllers\API\ProductController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
@@ -766,6 +767,7 @@
     <Content Include="Views\PartialView\Countdown.cshtml" />
     <Content Include="Views\Home\pa.cshtml" />
     <Content Include="Views\ShoppingCart\Detail.cshtml" />
+    <Content Include="Views\Payment\Paymore.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

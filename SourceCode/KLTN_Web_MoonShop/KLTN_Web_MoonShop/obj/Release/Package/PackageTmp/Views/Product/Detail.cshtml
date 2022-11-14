@@ -442,7 +442,18 @@
         showSwal = function (type) {
             'use strict';
             if (type === 'success-message') {
-              /*  $("#checkoutModal").modal("hide");*/
+                /*  $("#checkoutModal").modal("hide");*/
+                swal({
+                    title: 'Thành công!',
+                    text: 'Bấm vào cá nhân để theo dõi đơn hàng',
+                    type: 'success',
+                    button: {
+                        text: "Continue",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-primary"
+                    }
+                })
                 var pro = document.getElementById("txtproid").value;
                 var price = document.getElementById("txtprice").value;
                 var userid = document.getElementById("txtuserid").value;
@@ -458,17 +469,7 @@
                     dataType: 'json',
                     data: person,
                     success: function (result) {
-                        swal({
-                            title: 'Thành công!',
-                            text: 'Bấm vào cá nhân để theo dõi đơn hàng',
-                            type: 'success',
-                            button: {
-                                text: "Continue",
-                                value: true,
-                                visible: true,
-                                className: "btn btn-primary"
-                            }
-                        })
+                        
                     },
                     error: function (err) {
                         alert(err.statusText);

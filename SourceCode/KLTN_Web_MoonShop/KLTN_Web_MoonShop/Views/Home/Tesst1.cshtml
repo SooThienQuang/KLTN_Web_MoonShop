@@ -9,257 +9,352 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<div class="container">
-    <div class="table-wrap">
-        <table class="table table-responsive table-borderless">
-            <thead>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>total</th>
-            <th>&nbsp;</th>
-            </thead>
-            <tbody>
-                <tr class="align-middle alert border-bottom" role="alert">
-                    <td>
-                        <input type="checkbox" id="check">
-                    </td>
-                    <td class="text-center">
-                        <img class="pic"
-                             src="https://www.freepnglogos.com/uploads/shoes-png/dance-shoes-png-transparent-dance-shoes-images-5.png"
-                             alt="">
-                    </td>
-                    <td>
-                        <div>
-                            <p class="m-0 fw-bold">Sneakers Shoes 2020 For Men</p>
-                            <p class="m-0 text-muted">Fugiat Voluptates quasi nemo,ipsa perferencis</p>
+
+<div class="wrapper mt-sm-5 bg-white">
+    <div class="progresses py-4">
+        <ul class="d-flex align-items-center justify-content-between">
+            <li id="step-1" class="blue"></li>
+            <li id="step-2"></li>
+            <li id="step-3"></li>
+        </ul>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0"
+                 aria-valuemax="100"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-7 col-md-6 border-top border-end p-sm-4 p-2">
+            <div id="products-list" class="bg-light me-sm-3">
+                <div class="row product bg-white shadow-sm m-sm-4 m-2">
+                    <div class="col px-sm-3 px-2 pt-3 d-flex justify-content-center">
+                        <img src="https://www.freepnglogos.com/uploads/shoes-png/shoes-wasatch-running-3.png" alt=""
+                             class="product-img">
+                    </div>
+                    <div class="col px-sm-3 px-2 pt-3">
+                        <div class="d-flex flex-column justify-content-between">
+                            <a href="#" class="text-decoration-none">Nike Men's Kyire 4</a>
+                            <div class="d-flex">
+                                <div class="d-flex flex-column w-50">
+                                    <div class="font-weight-bold">Price:</div>
+                                    <div class="font-weight-bold">Number:</div>
+                                </div>
+                                <div class="d-flex flex-column w-50">
+                                    <div class="text-muted">100$</div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="btn btn-primary"><span class="fas fa-plus"></span></div>
+                                        <div class="bg-light number">3</div>
+                                        <div class="btn btn-primary"><span class="fas fa-minus"></span></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </td>
-                    <td>
-                        <div class="fw-600">$44.99</div>
-                    </td>
-                    <td class="d-">
-                        <input class="input" type="text" placeholder="2">
-                    </td>
-                    <td>
-                        $89.98
-                    </td>
-                    <td>
-                        <div class="btn" data-bs-dismiss="alert">
-                            <span class="fas fa-times"></span>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <div class="btn btn-dark delete border-0">
+                            <span class="fas fa-trash-alt"></span>
                         </div>
-                    </td>
-                </tr>
-                <tr class="align-middle alert border-bottom" role="alert">
-                    <td>
-                        <input type="checkbox" id="check">
-                    </td>
-                    <td class="text-center">
-                        <img class="pic"
-                             src="https://www.freepnglogos.com/uploads/shoes-png/download-vector-shoes-image-png-image-pngimg-2.png"
-                             alt="">
-                    </td>
-                    <td>
-                        <div>
-                            <p class="m-0 fw-bold">Sneakers Shoes 2020 For Men</p>
-                            <p class="m-0 text-muted">Fugiat Voluptates quasi nemo,ipsa perferencis</p>
+                    </div>
+                </div>
+                <div class="row product bg-white shadow-sm m-sm-4 m-2">
+                    <div class="col px-sm-3 px-2 pt-3 d-flex justify-content-center">
+                        <img src="https://www.freepnglogos.com/uploads/shoes-png/shoes-wasatch-running-3.png" alt=""
+                             class="product-img">
+                    </div>
+                    <div class="col px-sm-3 px-2 pt-3">
+                        <div class="d-flex flex-column justify-content-between">
+                            <a href="#" class="text-decoration-none">Nike Men's Kyire 4</a>
+                            <div class="d-flex">
+                                <div class="d-flex flex-column w-50">
+                                    <div class="font-weight-bold">Price:</div>
+                                    <div class="font-weight-bold">Number:</div>
+                                </div>
+                                <div class="d-flex flex-column w-50">
+                                    <div class="text-muted">100$</div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="btn btn-primary"><span class="fas fa-plus"></span></div>
+                                        <div class="bg-light number">3</div>
+                                        <div class="btn btn-primary"><span class="fas fa-minus"></span></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </td>
-                    <td>
-                        <div class="fw-600">$54.99</div>
-                    </td>
-                    <td class="d-">
-                        <input class="input" type="text" placeholder="2">
-                    </td>
-                    <td>
-                        $108.98
-                    </td>
-                    <td>
-                        <div class="btn" data-bs-dismiss="alert">
-                            <span class="fas fa-times"></span>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <div class="btn btn-dark delete border-0">
+                            <span class="fas fa-trash-alt"></span>
                         </div>
-                    </td>
-                </tr>
-                <tr class="align-middle alert border-bottom" role="alert">
-                    <td>
-                        <input type="checkbox" id="check">
-                    </td>
-                    <td class="text-center">
-                        <img class="pic"
-                             src="https://www.freepnglogos.com/uploads/shoes-png/running-shoes-png-transparent-running-shoes-images-6.png"
-                             alt="">
-                    </td>
-                    <td>
-                        <div>
-                            <p class="m-0 fw-bold">Sneakers Shoes 2020 For Men</p>
-                            <p class="m-0 text-muted">Fugiat Voluptates quasi nemo,ipsa perferencis</p>
+                    </div>
+                </div>
+                <div class="row product bg-white shadow-sm m-sm-4 m-2">
+                    <div class="col px-sm-3 px-2 pt-3 d-flex justify-content-center">
+                        <img src="https://www.freepnglogos.com/uploads/shoes-png/shoes-wasatch-running-3.png" alt=""
+                             class="product-img">
+                    </div>
+                    <div class="col px-sm-3 px-2 pt-3">
+                        <div class="d-flex flex-column justify-content-between">
+                            <a href="#" class="text-decoration-none">Nike Men's Kyire 4</a>
+                            <div class="d-flex">
+                                <div class="d-flex flex-column w-50">
+                                    <div class="font-weight-bold">Price:</div>
+                                    <div class="font-weight-bold">Number:</div>
+                                </div>
+                                <div class="d-flex flex-column w-50">
+                                    <div class="text-muted">100$</div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="btn btn-primary"><span class="fas fa-plus"></span></div>
+                                        <div class="bg-light number">3</div>
+                                        <div class="btn btn-primary"><span class="fas fa-minus"></span></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </td>
-                    <td>
-                        <div class="fw-600">$50.99</div>
-                    </td>
-                    <td class="d-">
-                        <input class="input" type="text" placeholder="2">
-                    </td>
-                    <td>
-                        $100.98
-                    </td>
-                    <td>
-                        <div class="btn" data-bs-dismiss="alert">
-                            <span class="fas fa-times"></span>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <div class="btn btn-dark delete border-0">
+                            <span class="fas fa-trash-alt"></span>
                         </div>
-                    </td>
-                </tr>
-                <tr class="align-middle alert border-bottom" role="alert">
-                    <td>
-                        <input type="checkbox" id="check">
-                    </td>
-                    <td class="text-center">
-                        <img class="pic"
-                             src="https://www.freepnglogos.com/uploads/shoes-png/find-your-perfect-running-shoes-26.png"
-                             alt="">
-                    </td>
-                    <td>
-                        <div>
-                            <p class="m-0 fw-bold">Sneakers Shoes 2020 For Men</p>
-                            <p class="m-0 text-muted">Fugiat Voluptates quasi nemo,ipsa perferencis</p>
+                    </div>
+                </div>
+                <div class="row product bg-white shadow-sm m-sm-4 m-2">
+                    <div class="col px-sm-3 px-2 pt-3 d-flex justify-content-center">
+                        <img src="https://www.freepnglogos.com/uploads/shoes-png/shoes-wasatch-running-3.png" alt=""
+                             class="product-img">
+                    </div>
+                    <div class="col px-sm-3 px-2 pt-3">
+                        <div class="d-flex flex-column justify-content-between">
+                            <a href="#" class="text-decoration-none">Nike Men's Kyire 4</a>
+                            <div class="d-flex">
+                                <div class="d-flex flex-column w-50">
+                                    <div class="font-weight-bold">Price:</div>
+                                    <div class="font-weight-bold">Number:</div>
+                                </div>
+                                <div class="d-flex flex-column w-50">
+                                    <div class="text-muted">100$</div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="btn btn-primary"><span class="fas fa-plus"></span></div>
+                                        <div class="bg-light number">3</div>
+                                        <div class="btn btn-primary"><span class="fas fa-minus"></span></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </td>
-                    <td>
-                        <div class="fw-600">$74.99</div>
-                    </td>
-                    <td>
-                        <input class="input" type="text" placeholder="2">
-                    </td>
-                    <td>
-                        $148.98
-                    </td>
-                    <td>
-                        <div class="btn" data-bs-dismiss="alert">
-                            <span class="fas fa-times"></span>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <div class="btn btn-dark delete border-0">
+                            <span class="fas fa-trash-alt"></span>
                         </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-6 border-top border-start p-sm-4 p-2">
+            <div id="billing">
+                <div class="form-group d-flex flex-fill">
+                    <input type="text" placeholder="Promo code" class="flex-grow-1 bg-light">
+                    <input type="submit" value="Apply" class="btn btn-dark">
+                </div>
+                <div class="d-flex align-items-center flex-fill my-1 mt-4" id="discount">
+                    <div class="bg-dark text-white w-50 border-0">Discount</div>
+                    <div class="amount text-center w-50 border">0 $</div>
+                </div>
+                <div class="d-flex align-items-center flex-fill my-1" id="total">
+                    <div class="bg-dark text-white w-50 border-0">Total</div>
+                    <div class="amount text-center w-50 border">300 $</div>
+                </div>
+                <div class="d-flex justify-content-between text-center mt-4" id="btns">
+                    <div class="btn btn-primary me-2">Continue</div>
+                    <div class="btn btn-default ms-2">Back to website</div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
 <style>
+/* Resetting */
 * {
-    margin: 0;
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif
+    font-family: 'Poppins', sans-serif;
 }
 
 
-
-.pic {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
+.wrapper {
+    max-width: 100%;
+    margin: auto;
 }
 
-.table thead {
-    background-color: #21cf95;
+.wrapper .row {
+    padding: 0;
+    --bs-gutter-x: var(--bs-gutter-x)
 }
 
-.table thead th {
-    padding: 30px;
-    font-size: 14px;
-    color: white;
-}
-
-.table tbody td input[type="checkbox"] {
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    background-color: #eee;
+.progresses {
     position: relative;
-    border-radius: 3px;
-    cursor: pointer;
+    max-width: 70%;
+    margin: auto;
 }
 
-.container .table-wrap {
-
-    margin: 20px auto;
-    overflow-x: auto
+.progresses ul {
+    list-style: none;
+    /* border: 1px solid red; */
+    padding: 0;
 }
 
-.container .table-wrap::-webkit-scrollbar {
-    height: 5px;
-}
-
-.container .table-wrap::-webkit-scrollbar-thumb {
-    border-radius: 5px;
-    background-image: linear-gradient(to right, #5D7ECD, #0C91E6);
-}
-
-.table>:not(caption)>*>* {
-    padding: 2rem 0.5rem;
-}
-
-.input {
+.progresses ul li {
     width: 30px;
     height: 30px;
-    color: black;
-    font-weight: 600;
-    outline: none;
-    padding: 8px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    z-index: 200;
+    position: relative;
 }
 
-::placeholder {
-    color: black;
-    font-weight: 600;
+.progresses ul li.blue {
+    color: #3268ff;
+    background-color: #3268ff;
 }
 
-.table tbody td input[type="checkbox"]:after {
+.progresses ul li::after {
     position: absolute;
+    top: 35px;
+    left: -15px;
+    font-size: 0.8rem;
+    width: 90px;
+}
+
+#step-1::after {
+    content: "Review order";
+}
+
+#step-2::after {
+    content: "Sign In";
+    left: -5px;
+}
+
+#step-3::after {
+    content: "Payment";
+}
+
+.progresses .progress {
+    height: 0.8rem;
     width: 100%;
+    top: 33px;
+    position: absolute;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+}
+
+#products-list {
+    height: 250px;
+    overflow-y: scroll;
+}
+
+#products-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+#products-list::-webkit-scrollbar-track {
+    background-color: #7c7c7c;
+    border-radius: 5px;
+}
+
+#products-list::-webkit-scrollbar-thumb {
+    border: 2px solid #cfcfcf;
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+#products-list .product .product-img {
+    width: 100%;
+    height: 80px;
+    object-fit: contain;
+    background-color: #e8e8e8;
+}
+
+#products-list .product .btn.btn-primary {
+    font-size: 0.6rem;
+    padding: .2rem;
+    border-radius: 0;
+    width: 20px;
+}
+
+#products-list .product .number {
+    border-radius: 0;
+    width: 20px;
+    text-align: center;
+}
+
+/* #products-list .product {
+    font-size: 0.85rem;
+} */
+
+#products-list .btn.btn-dark {
+    border-radius: 0;
+    border-top-left-radius: 15px;
+    font-size: 0.7rem;
+    width: 50px;
+    border: none;
+    background-color: #616161 !important;
+}
+
+#billing .form-group input[type="text"] {
+    border: none;
+    height: 40px;
+    padding: 10px;
+    outline: none;
+}
+
+#billing .form-group .btn.btn-dark {
+    background-color: #616161 !important;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+}
+
+#billing .form-group .btn.btn-dark:focus {
+    box-shadow: none;
+}
+
+#billing #discount,
+#billing #total {
+    height: 45px;
+    font-size: 1.2rem;
+    color: #bbb;
+}
+
+#billing #discount div,
+#billing #total div {
     height: 100%;
-    font-family: "Font Awesome 5 Free";
-    font-weight: 600;
-    content: "\f00c";
-    color: #fff;
-    font-size: 15px;
-    display: none
-}
-
-.table tbody td input[type="checkbox"]:checked,
-.table tbody td input[type="checkbox"]:checked:hover {
-    background-color: #21cf95;
-}
-
-.table tbody td input[type="checkbox"]:checked::after {
     display: flex;
     align-items: center;
-    justify-content: center;
+    padding-left: 50px;
 }
 
-.table tbody td input[type="checkbox"]:hover {
-    background-color: #ddd;
+#billing #btns .btn {
+    width: 100%;
+    border-radius: 0;
+    padding: 8px 10px;
+    color: #3268ff;
+    border: 1px solid #3268ff;
 }
 
-.table tbody td {
-    padding: 30px;
-    margin: 0;
-    font-size: 14.5px;
-    font-weight: 600;
+#billing #btns .btn.btn-default:hover {
+    background-color: #3268ff;
+    color: #fff;
 }
 
-.table tbody td .fa-times {
-    color: #D32F2F;
+#billing #btns .btn.btn-primary {
+    background-color: #6890ff !important;
+    color: #fff;
 }
 
 
-.text-muted {
-    font-size: 12.5px;
-}
-
-.table tbody tr td:nth-of-type(3) {
-    min-width: 320px;
+/* Backgrounds */
+.bg-dark {
+    background-color: #616161 !important;
 }
 
 </style>
+
