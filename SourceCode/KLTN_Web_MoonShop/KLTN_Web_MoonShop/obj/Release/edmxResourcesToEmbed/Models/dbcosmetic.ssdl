@@ -32,6 +32,7 @@
     <Property Name="productID" Type="bigint" />
     <Property Name="cartQuantity" Type="int" />
     <Property Name="cartMoney" Type="bigint" />
+    <Property Name="isActive" Type="int" />
   </EntityType>
   <EntityType Name="Customer">
     <Key>

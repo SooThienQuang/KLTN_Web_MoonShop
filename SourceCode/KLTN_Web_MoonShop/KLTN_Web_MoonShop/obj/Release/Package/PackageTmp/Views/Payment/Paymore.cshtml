@@ -22,7 +22,7 @@
                 <h3 style="color:white;text-align:center">Thông tin đặt hàng</h3>
             </div>
             <div class="text-right">
-                <i class="fa fa-close close" style="color:red" onclick="clickclose">Đóng</i>
+                <i class="fa fa-close close" style="color:red" onclick="clickclose()">Đóng</i>
             </div>
             <div class="modal-body" style="padding-bottom:0">
                 <div class="row">
@@ -148,9 +148,10 @@
                     </div>
                     <div class="d-flex justify-content-between align-items-center mt-3">
                         Thành tiền:<h3 id="price2" style="color:red">@ViewBag.allMoney </h3>VND
-                        <button onclick="showSwalSuccess('success-message')" data-dismiss="modal" class="btn btn-danger btn-lg mt-5 mb-0" style="border-radius:0px">Đặt hàng ngay</button>
 
                     </div>
+                    <button onclick="showSwalSuccess('success-message')" data-dismiss="modal" class="btn btn-danger btn-lg mt-5 mb-0" style="border-radius:0px">Đặt hàng ngay</button>
+
                 </div>
 
             </div>
@@ -158,6 +159,7 @@
         </div>
         </div>
     </div>
+
 <script>
     (function ($) {
         showSwalSuccess = function (type) {

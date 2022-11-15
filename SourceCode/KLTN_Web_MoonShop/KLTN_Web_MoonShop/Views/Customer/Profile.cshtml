@@ -6,11 +6,11 @@
     </a>
     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
         <p class="mb-0 font-weight-normal float-left dropdown-header">@ViewBag.user.customerName</p>
-        <a class="dropdown-item" href="@Url.Action("DetailProfile","Customer")">
+        <a class="dropdown-item" href="@Url.Action("DetailProfile","Customer",new {id=2})">
             <i class="ti-wallet text-primary"></i>
             Đơn mua
         </a>
-        <a class="dropdown-item" href="@Url.Action("DetailProfile","Customer")">
+        <a class="dropdown-item" href="@Url.Action("DetailProfile","Customer",new {id=1})">
             <i class="ti-settings text-primary"></i>
             Thông tin cá nhân
         </a>

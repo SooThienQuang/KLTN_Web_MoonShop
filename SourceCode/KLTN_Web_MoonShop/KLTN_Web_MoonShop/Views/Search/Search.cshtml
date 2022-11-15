@@ -9,79 +9,79 @@
         <aside class="col-md-3">
             @using (Html.BeginForm("Search", "Search"))
             {
-            <div class="card">
-                <article class="filter-group">
-                    <header class="card-header">
-                        <a href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="true" class="">
-                            <i class="icon-control fa fa-chevron-down"></i>
-                            <h6 class="title">Xuất xứ </h6>
-                        </a>
-                    </header>
-                    <div class="filter-content collapse show" id="collapse_2" style="">
-                        <div class="card-body">
-                            <label class="custom-control custom-checkbox">
-                                <input type="checkbox" checked="" class="custom-control-input">
-                                <i class="custom-control-label">
-                                    Việt Nam
-                                    <b class="badge badge-pill badge-light float-right">120</b>
-                                </i>
-                            </label>
-                            <label class="custom-control custom-checkbox">
-                                <input type="checkbox" checked="" class="custom-control-input">
-                                <div class="custom-control-label">
-                                   Hàn quốc
-                                    <b class="badge badge-pill badge-light float-right">15</b>
-                                </div>
-                            </label>
-                            <label class="custom-control custom-checkbox">
-                                <input type="checkbox" checked="" class="custom-control-input">
-                                <div class="custom-control-label">
-                                    Nhật bản
-                                    <b class="badge badge-pill badge-light float-right">35</b>
-                                </div>
-                            </label>
-                            <label class="custom-control custom-checkbox">
-                                <input type="checkbox" checked="" class="custom-control-input">
-                                <div class="custom-control-label">
-                                    Mỹ
-                                    <b class="badge badge-pill badge-light float-right">89</b>
-                                </div>
-                            </label>
-                            <label class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input">
-                                <div class="custom-control-label">
-                                    Anh
-                                    <b class="badge badge-pill badge-light float-right">30</b>
-                                </div>
-                            </label>
-                        </div> <!-- card-body.// -->
-                    </div>
-                </article> <!-- filter-group .// -->
-                <article class="filter-group">
-                    <header class="card-header">
-                        <a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
-                            <i class="icon-control fa fa-chevron-down"></i>
-                            <h6 class="title">Giá thành </h6>
-                        </a>
-                    </header>
-                    <div class="filter-content collapse show" id="collapse_3" style="">
-                        <div class="card-body">
-                            <input type="range" class="custom-range" min="0" max="100" name="">
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label>Từ</label>
-                                    <input class="form-control" placeholder="0" type="number" name="txtmin">
-                                </div>
-                                <div class="form-group text-right col-md-6">
-                                    <label>Đến</label>
-                                    <input class="form-control" placeholder="1000000" type="number" name="txtmax">
-                                </div>
-                            </div> <!-- form-row.// -->
-                            <button class="btn btn-block btn-primary" type="submit">Tìm kiếm</button>
-                        </div><!-- card-body.// -->
-                    </div>
-                </article> <!-- filter-group .// -->
-            </div> <!-- card.// -->
+                <div class="card">
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="true" class="">
+                                <i class="icon-control fa fa-chevron-down"></i>
+                                <h6 class="title">Xuất xứ </h6>
+                            </a>
+                        </header>
+                        <div class="filter-content collapse show" id="collapse_2" style="">
+                            <div class="card-body">
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" checked="" class="custom-control-input">
+                                    <i class="custom-control-label">
+                                        Việt Nam
+                                        <b class="badge badge-pill badge-light float-right">120</b>
+                                    </i>
+                                </label>
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" checked="" class="custom-control-input">
+                                    <div class="custom-control-label">
+                                        Hàn quốc
+                                        <b class="badge badge-pill badge-light float-right">15</b>
+                                    </div>
+                                </label>
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" checked="" class="custom-control-input">
+                                    <div class="custom-control-label">
+                                        Nhật bản
+                                        <b class="badge badge-pill badge-light float-right">35</b>
+                                    </div>
+                                </label>
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" checked="" class="custom-control-input">
+                                    <div class="custom-control-label">
+                                        Mỹ
+                                        <b class="badge badge-pill badge-light float-right">89</b>
+                                    </div>
+                                </label>
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input">
+                                    <div class="custom-control-label">
+                                        Anh
+                                        <b class="badge badge-pill badge-light float-right">30</b>
+                                    </div>
+                                </label>
+                            </div> <!-- card-body.// -->
+                        </div>
+                    </article> <!-- filter-group .// -->
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
+                                <i class="icon-control fa fa-chevron-down"></i>
+                                <h6 class="title">Giá thành </h6>
+                            </a>
+                        </header>
+                        <div class="filter-content collapse show" id="collapse_3" style="">
+                            <div class="card-body">
+                                <input type="range" class="custom-range" min="0" max="100" name="">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label>Từ</label>
+                                        <input class="form-control" placeholder="0" type="number" name="txtmin" required>
+                                    </div>
+                                    <div class="form-group text-right col-md-6">
+                                        <label>Đến</label>
+                                        <input class="form-control" placeholder="1000000" type="number" name="txtmax" required>
+                                    </div>
+                                </div> <!-- form-row.// -->
+                                <button class="btn btn-block btn-primary" type="submit">Tìm kiếm</button>
+                            </div><!-- card-body.// -->
+                        </div>
+                    </article> <!-- filter-group .// -->
+                </div> <!-- card.// -->
             }
 
         </aside>
@@ -114,11 +114,11 @@
                         <figure class="card card-product-grid">
                             <div class="img-wrap">
                                 <span class="badge badge-danger"> NEW </span>
-                                <a href="#">
+                                <a href="@Url.Action("Detail","Product",new {id=item.productID})">
                                     <img src="~/Asset/img/product/@item.productImage" class="img-fluid">
                                 </a>
 
-                                <a class="btn-overlay" href="#"><i class="fa fa-search-plus">Xem thêm</i></a>
+                                <button class="btn-overlay" onclick="ConfirmUpdate(@item.productID)"><i class="fa fa-search-plus">Xem thêm</i></button>
                             </div>
                             <!-- img-wrap.// -->
                             <figcaption class="info-wrap">
@@ -142,7 +142,7 @@
                                         <span class="price">@item.productPrice</span>
                                     </div> <!-- price-wrap.// -->
                                 </div>
-                               
+
                             </figcaption>
                         </figure>
                     </div> <!-- col.// -->
@@ -164,7 +164,20 @@
         </main>
     </div>
 </div>
+<div id="divid" style="height:100px; width:400px" ;>
+</div>
+<input type="hidden" id="hiddenEmployeeId" />
+<script>
+     var ConfirmUpdate = function (productID) {
 
+
+        $("#hiddenEmployeeId").val(productID);
+        var empId = $("#hiddenEmployeeId").val();
+        var url = '@Url.Action("ShowDetail", "Product", new {id = "data"})';
+        $('#divid').load(url.replace('data', empId));
+
+    }
+</script>
 <style>
     .icon-control {
         margin-top: 5px;

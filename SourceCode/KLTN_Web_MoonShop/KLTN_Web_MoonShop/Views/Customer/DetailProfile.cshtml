@@ -3,6 +3,22 @@
 @{
     ViewBag.Title = "DetailProfile";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    int id = ViewBag.menu;
+    var profile = "";
+    var order = "";
+    if (id>0)
+    {
+        if(id==1)
+        {
+            profile = "active";
+        }
+        else
+         if(id==2)
+        {
+            order = "active";
+        }
+    }
+
 }
 <style>
     .tab-vertical .nav.nav-tabs {
@@ -41,9 +57,9 @@
             </ul>
 
         </div>
-        <div class="col-md-6">
+        <div class="col-md-9">
             <div class="tab-content" id="myTabContent3">
-                <div class="tab-pane fade show active" id="home-vertical" role="tabpanel" aria-labelledby="home-vertical-tab">
+                <div class="tab-pane fade show @profile" id="home-vertical" role="tabpanel" aria-labelledby="home-vertical-tab">
                     <div class="mt-0">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h6 class="text-right">Thông tin cá nhân</h6>
@@ -104,7 +120,7 @@
                    
                 </div>
                 @*-------------------------------------------tab2-------------------------------------------------*@
-                <div class="tab-pane fade" id="profile-vertical" role="tabpanel" aria-labelledby="profile-vertical-tab">
+                <div class="tab-pane fade show @order" id="profile-vertical" role="tabpanel" aria-labelledby="profile-vertical-tab">
                     @Html.Action("Order", "Customer")
                 </div>
             </div>

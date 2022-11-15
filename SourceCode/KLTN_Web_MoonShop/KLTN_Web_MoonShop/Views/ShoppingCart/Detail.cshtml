@@ -101,7 +101,6 @@ else
                                 <div class="fw-600">@pro.productPrice</div>
                             </td>
                             <td class="d-">
-
                                 <input class="form-control" id="txtcartquantity" name="txtcartquantity" type="number" value="@item.cartQuantity" min="0">
                             </td>
                             <td>
@@ -111,8 +110,8 @@ else
                                 <div class="btn" data-bs-dismiss="alert">
                                     <span onclick="showDel(@item.productID)" class="fas fa-times" data-toggle="tooltip" data-placement="bottom" title="Xóa"></span>
                                 </div>
-                                <div class="btn" data-bs-dismiss="alert" id="divsave">
-                                    <span class="ti-save" style="color:green" data-toggle="tooltip" data-placement="bottom" title="Lưu"></span>
+                                <div class="btn"  id="divsave">
+                                    <span class="ti-save" onclick="updateCart(@item.productID,@item.cartID)" style="color:green" data-toggle="tooltip" data-placement="bottom" title="Lưu"></span>
                                 </div>
                             </td>
                         </tr>
@@ -195,10 +194,41 @@ else
 
 
 <script>
+    function updateCart(proid, cartid) {
+
+        var userid = document.getElementById('txtuserid').value;
+        var sl =document.getElementById('txtcartquantity').value;
+        var person = new Object();
+        person.proID = proid;
+        person.cusID = userid;
+        person.cartID = cartid;
+        person.quantity = sl;
+        $.ajax({
+            url: '/api/Cart/',
+            type: 'PUT',
+            dataType: 'json',
+            data: person,
+            success: function (result) {
+                swal({
+                    title: 'Thành công!',
+                    text: 'Bạn đã cập nhật thành công sản phẩm !',
+                    type: 'success',
+                    button: {
+                        text: "Continue",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-primary"
+                    }
+                })
+            },
+            error: function (err) {
+                alert(err.statusText);
+            }
+        });
+    }
     function comfimDel() {
         var id = document.getElementById('txtiddel').value;
         var userid = document.getElementById('txtuserid').value;
-
         var person = new Object();
         person.proID = id;
         person.cusID = userid;

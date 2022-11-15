@@ -37,7 +37,7 @@ namespace KLTN_Web_MoonShop.Controllers
                 return RedirectToAction("Index", "Admin");
             }
             string pass = md5.CreateMD5(txt_password);
-            Customer cus = db.Customers.FirstOrDefault(n => n.customerUserName.Equals(txt_email) && n.customerPassword.Equals(pass) || n.customerUserName.Equals(txt_email) && n.customerPassword.Equals(pass));
+            Customer cus = db.Customers.FirstOrDefault(n => n.customerUserName.Equals(txt_email) && n.customerPassword.Equals(pass));
             if (cus!=null)
             {
                 Session["user"] = cus;
@@ -66,7 +66,7 @@ namespace KLTN_Web_MoonShop.Controllers
                 long id= long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
                 customer.customerID = id;
                 customer.customerName = (firstname + " " + lastname);
-                customer.customerUserName = ("0"+phone).Trim();
+                customer.customerUserName = (phone).Trim();
                 customer.customerPassword = md5.CreateMD5(password);
                 customer.customerPhoto = "Sample_User_Icon.png".Trim();
                 customer.isActive = 1;
@@ -113,7 +113,7 @@ namespace KLTN_Web_MoonShop.Controllers
             return PartialView();
 
         }
-        public ActionResult DetailProfile()
+        public ActionResult DetailProfile(int id)
         {
 
             Customer cs = Session["user"] as Customer;
@@ -123,6 +123,7 @@ namespace KLTN_Web_MoonShop.Controllers
                 ViewBag.name = ten;
                 ViewBag.user = cs;
                 ViewBag.useradd=db.CustomerAddresses.Where(n=>n.customerID==cs.customerID).ToList();
+                ViewBag.menu = id;
             }
 
             return View(cs);
@@ -218,6 +219,7 @@ namespace KLTN_Web_MoonShop.Controllers
             {
                 lst = db.OrderDetails.Where(n => n.orderID == d.orderID).ToList();
             }
+            ViewBag.order = d;
             return PartialView(lst);
 
         }

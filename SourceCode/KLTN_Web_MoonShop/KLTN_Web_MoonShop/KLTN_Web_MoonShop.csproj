@@ -524,6 +524,7 @@
     <Compile Include="Controllers\API\CartController.cs" />
     <Compile Include="Controllers\API\CustomerController.cs" />
     <Compile Include="Controllers\API\ImageController.cs" />
+    <Compile Include="Controllers\API\OrderController.cs" />
     <Compile Include="Controllers\API\PayController.cs" />
     <Compile Include="Controllers\API\PaymoreController.cs" />
     <Compile Include="Controllers\API\ProductController.cs" />
@@ -531,6 +532,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PartialViewController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -760,7 +762,6 @@
     <Content Include="Views\Home\Tesst1cart.cshtml" />
     <Content Include="Views\Customer\img.cshtml" />
     <Content Include="Views\Customer\Address.cshtml" />
-    <None Include="Properties\PublishProfiles\thienquang-001-site1 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\thienquang-001-site1 - Web Deploy.pubxml" />
     <Content Include="Views\Product\ShowDetail.cshtml" />
     <Content Include="Views\PartialView\NavbarProducer.cshtml" />
@@ -768,6 +769,7 @@
     <Content Include="Views\Home\pa.cshtml" />
     <Content Include="Views\ShoppingCart\Detail.cshtml" />
     <Content Include="Views\Payment\Paymore.cshtml" />
+    <Content Include="Views\Order\Detail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

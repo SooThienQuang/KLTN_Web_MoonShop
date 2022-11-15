@@ -4,19 +4,19 @@
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
     DBCosmeticEntities db = new DBCosmeticEntities();
+    Customer user = Session["user"] as Customer;
 }
 
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-
+<!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">-->
 <!-- jQuery library -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+@*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>*@
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
 <!-- Popper JS -->
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
+<!--<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>-->
 <!-- Latest compiled JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>*@
 @if (Model == null)
 {
     <div class="container-fluid  mt-100">
@@ -52,7 +52,7 @@ else
             <table class="table table-responsive table-borderless">
                 <thead>
                 <th>
-                    <input type="checkbox" onclick="checkall()" id="checkall"/>
+                    <input type="checkbox" onclick="checkall()" id="checkall" />
                 </th>
                 <th>&nbsp;</th>
                 <th>Sản phẩm</th>
@@ -109,10 +109,10 @@ else
                             </td>
                             <td>
                                 <div class="btn" data-bs-dismiss="alert">
-                                    <span class="fas fa-times"></span>
+                                    <span onclick="showDel(@item.productID)" class="fas fa-times" data-toggle="tooltip" data-placement="bottom" title="Xóa"></span>
                                 </div>
                                 <div class="btn" data-bs-dismiss="alert" id="divsave">
-                                    <span class="ti-save" style="color:green"></span>
+                                    <span class="ti-save" style="color:green" data-toggle="tooltip" data-placement="bottom" title="Lưu"></span>
                                 </div>
                             </td>
                         </tr>
@@ -130,7 +130,8 @@ else
                 <h3 style="color:red" id="txtmoney">0</h3>
             </div>
             <div class="col-sm-4 order-md-2 text-right">
-                <button type="button" onclick="showSwal('success-message')" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Thanh toán</button>
+                @*<button type="button" onclick="showSwal('success-message')" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Thanh toán</button>*@
+                <button type="button" onclick="checkOut()" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Thanh toán</button>
             </div>
             <div class="col-sm-4 mb-3 mb-m-1 order-md-1 text-md-left">
                 <a href="@Url.Action("Index","Home")">
@@ -142,21 +143,137 @@ else
     </div>
     @*@Html.Action("Paymore", "Payment")*@
 }
-<input type="number" id="txttongtien" hidden value="@Model.Sum(n=>n.cartMoney)"/>
+<input type="number" id="txttongtien" hidden value="@Model.Sum(n=>n.cartMoney)" />
 <input type="number" id="txtgia" hidden />
 <div id="divid" style="height:100px; width:400px" ;>
 </div>
+<input type="number" id="txtiddel" hidden />
+@if(user!=null)
+            {
+                <input type="number" id="txtuserid" value="@user.customerID" hidden />
+            }
 @*------------------------------------------------------------------mesage-------------------------------------------*@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 @*<div class="card-body">
-    <div class="wrapper text-center">
-        <h4 class="card-title">Alerts Popups</h4>
-        <p class="card-description">A success message!</p>
-        <button class="btn btn-outline-success" onclick="showSwal('success-message')">Click here!</button>
+        <div class="wrapper text-center">
+            <h4 class="card-title">Alerts Popups</h4>
+            <p class="card-description">A success message!</p>
+            <button class="btn btn-outline-success" onclick="showSwal('success-message')">Click here!</button>
+        </div>
+    </div>*@
+<!-- Button trigger modal-->
+
+<!--Modal: modalConfirmDelete-->
+<div class="modal fade" id="modalCartDel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+        <!--Content-->
+        <div class="modal-content text-center">
+            <!--Header-->
+            <div class="modal-header d-flex justify-content-center">
+                <p class="heading">Thông báo !</p>
+            </div>
+
+            <div class="modal-body">
+
+                <i class="fas fa-times fa-4x animated rotateIn" style="color:red"></i>
+                <br />
+                Bạn có chắc chắn muốn thực hiện thao tác này
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer flex-center">
+                <a onclick="comfimDel()" class="btn  btn-outline-danger">Có</a>
+                <a type="button" class="btn  btn-danger waves-effect" onclick="CloseDel()">Hủy</a>
+            </div>
+        </div>
+        <!--/.Content-->
     </div>
-</div>*@
+</div>
+<!--Modal: modalConfirmDelete-->
+
+
 <script>
+    function comfimDel() {
+        var id = document.getElementById('txtiddel').value;
+        var userid = document.getElementById('txtuserid').value;
+
+        var person = new Object();
+        person.proID = id;
+        person.cusID = userid;
+        person.price = 111;
+        person.quantity = 1;
+        $.ajax({
+            url: '/api/Cart/',
+            type: 'DELETE',
+            dataType: 'json',
+            data: person,
+            success: function (result) {
+                swal({
+                    title: 'Thành công!',
+                    text: 'Bạn đã xóa thành công sản phẩm !',
+                    type: 'success',
+                    button: {
+                        text: "Continue",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-primary"
+                    }
+                })
+            },
+            error: function (err) {
+                alert(err.statusText);
+            }
+        });
+        $("#modalCartDel").modal("hide");
+    }
+    function showDel(id) {
+        document.getElementById('txtiddel').value = id;
+        $(document).ready(function () {
+            $("#modalCartDel").modal("show");
+        });
+
+    }
+    function CloseDel() {
+        $(document).ready(function () {
+            $("#modalCartDel").modal("hide");
+        });
+        location.reload()
+    }
+    function checkOut() {
+        if (value == "") {
+            if (checkedall == false) {
+                swal({
+                    title: 'Có lỗi xảy ra!',
+                    text: 'Vui lòng chọn sản phẩm trước khi thanh toán ',
+                    type: 'error',
+                    button: {
+                        text: "Continue",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-primary"
+                    }
+                })
+            }
+            else {
+                var getall = "getallcartqnt";
+                var url = '@Url.Action("Paymore", "Payment", new {id = "data"})';
+                $('#divid').load(url.replace('data', getall));
+            }
+
+        }
+        else {
+              var url = '@Url.Action("Paymore", "Payment", new {id = "data"})';
+          $('#divid').load(url.replace('data', value));
+        }
+
+    }
+
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
     //-------------------check all---------------------
     function checkall() {
         $("#checkall").change(function () {
@@ -178,7 +295,7 @@ else
             }
         });
 
- 
+
     }
 
 
@@ -208,7 +325,7 @@ else
                         var getall = "getallcartqnt";
                         $('#divid').load(url.replace('data', getall));
                     }
-                   
+
                 }
             }
         }
@@ -234,35 +351,6 @@ else
             document.getElementById('txtmoney').innerHTML = money - price;
         }
     });
-
-
-    //var selectedItems = new Array();
-    //$("input:checkbox[name=selectPrice]:checked").each(function () {
-    //    selectedItems.push(this.id);
-    //});
-    //-----------------------------------------------------pay--------------------------------------
-
-
-
-    //var checkedValue = null;
-    //var inputElements = document.getElementsByClassName('checkbox');
-    //for (var i = 0; inputElements[i]; ++i) {
-    //    if (inputElements[i].checked) {
-    //        checkedValue = inputElements[i].value;
-    //        break;
-    //    }
-    //}
-    //alert(checkedValue)
-
-    //$(".checkbox").change(function () {
-    //    var str = "";
-    //    $("input:checked").each(function () {
-    //        var price = + document.getElementById('txtgia').value;
-    //        str += $(this).next() + "_" + price;
-    //    });
-    //    str = str.substr(0, str.length - 1);
-    //    alert(str);
-    //});
 
 
 </script>

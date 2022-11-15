@@ -13,6 +13,7 @@ else
         </a>
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
             <p class="mb-0 font-weight-normal float-left dropdown-header">Giỏ hàng của bạn</p>
+            <p class="mb-0 font-weight-normal float-md-left dropdown-header">Tên sản phẩm</p>
             <p class="mb-0 font-weight-normal float-md-left dropdown-header">Giá thành</p>
             <p class="mb-0 font-weight-normal float-lg-right dropdown-header">Tổng tiền</p>
             @foreach (var item in @ViewBag.lstCart)
@@ -29,11 +30,11 @@ else
                             {
                                 string name1 = @item.name.Substring(0, 30);
                                 <h6> @name1 ...</h6>
-                               
+
                             }
                             else
                             {
-                                    @item.name                            }
+                                @item.name}
                         </h6>
                         <p class="font-weight-light small-text mb-0 text-muted">
                             @item.quantity sản phẩm
@@ -47,9 +48,11 @@ else
                     </div>
                 </a>
             }
-        <a class="mb-0  float-md-left dropdown-header" href=""><h3 class="font-weight-normal" style="color:red">Tổng tiền : @String.Format("{0:0,0 vnđ}", @ViewBag.AllMoney)</h3></a>
-                <a class="mb-0 font-weight-normal float-sm-right dropdown-header" href="@Url.Action("Detail", "ShoppingCart")">Xem tất cả</a>
-            
+            @*<a class="mb-0  float-md-left dropdown-header" href="">
+            <h3 class="font-weight-normal" style="color:red">Tổng tiền : @String.Format("{0:0,0 vnđ}", @ViewBag.AllMoney)</h3>
+        </a>*@
+            <a class="mb-0 font-weight-bold float-sm-end dropdown-header" href="@Url.Action("Detail", "ShoppingCart")">Xem tất cả<p class="ti-arrow-circle-right"> </p></a>
+
         </div>
     }
     else

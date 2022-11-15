@@ -17,6 +17,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
         {
             public long proID { get; set; }
             public long cusID { get; set; }
+            public long cartID { get; set; }
             public int quantity { get; set; }
         }
         // GET: api/Cart
@@ -98,9 +99,30 @@ namespace KLTN_Web_MoonShop.Controllers.API
                 return "Thêm giỏ hàng thất bại";
             } 
         }
-        // PUT: api/Cart/5
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]        
+        public string Put(person id)
         {
+            try
+            {
+                Product pro = db.Products.ToList().FirstOrDefault(n => n.productID == id.proID);
+                CartDetail cd = db.CartDetails.FirstOrDefault(n => n.cartID == id.cartID && n.productID == id.proID);
+                if (id.quantity==0)
+                {
+                    cd.isActive = -1;
+                }  
+                else
+                {
+                    cd.cartQuantity = id.quantity;
+                    cd.cartMoney = cd.cartQuantity * pro.productPrice;
+                }
+                db.CartDetails.AddOrUpdate(cd); 
+                db.SaveChanges();
+                return "Thêm giỏ hàng thành công";
+            }
+            catch
+            {
+                return "Thất bại";
+            }
         }
 
         // DELETE: api/Cart/5
