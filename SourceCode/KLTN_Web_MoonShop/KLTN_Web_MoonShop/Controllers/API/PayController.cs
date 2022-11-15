@@ -23,23 +23,14 @@ namespace KLTN_Web_MoonShop.Controllers.API
         {
             try
             {
-                Order last=db.Orders.FirstOrDefault(n=>n.customerID==obj.cusID);
-                long id = 0;
                 Order order = new Order();
-                if (last==null)
-                {
-                    id = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
-                    order.orderID = id;
-                    order.employeeID = id;
-                    order.customerID = obj.cusID;
-                    order.createDate = DateTime.Now;
-                    order.isActive = 1;
-                    db.Orders.Add(order);
-                }
-                else
-                {
-                    id = last.orderID;
-                }
+                long id = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+                order.orderID = id;
+                order.employeeID = id;
+                order.customerID = obj.cusID;
+                order.createDate = DateTime.Now;
+                order.status = 1;
+                db.Orders.Add(order);
                 OrderDetail orderDetail = new OrderDetail();
                 OrderDetail odlast = db.OrderDetails.ToList().LastOrDefault();
                 if(odlast==null)

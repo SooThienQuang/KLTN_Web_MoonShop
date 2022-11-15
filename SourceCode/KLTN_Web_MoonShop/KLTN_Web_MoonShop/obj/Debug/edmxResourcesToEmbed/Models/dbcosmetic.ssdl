@@ -114,8 +114,8 @@
     <Property Name="orderID" Type="bigint" Nullable="false" />
     <Property Name="customerID" Type="bigint" />
     <Property Name="createDate" Type="datetime" />
-    <Property Name="isActive" Type="int" />
     <Property Name="employeeID" Type="bigint" />
+    <Property Name="status" Type="int" />
   </EntityType>
   <EntityType Name="OrderDetail">
     <Key>

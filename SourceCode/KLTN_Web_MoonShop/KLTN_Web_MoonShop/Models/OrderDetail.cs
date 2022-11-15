@@ -17,10 +17,10 @@ namespace KLTN_Web_MoonShop.Models
         public int orderDetailID { get; set; }
         public Nullable<long> orderID { get; set; }
         public Nullable<long> productID { get; set; }
+        public Nullable<long> price { get; set; }
         public Nullable<int> Quantity { get; set; }
         public Nullable<long> Money { get; set; }
         public string idAdd { get; set; }
         public Nullable<int> statusID { get; set; }
-        public Nullable<long> price { get; set; }
     }
 }

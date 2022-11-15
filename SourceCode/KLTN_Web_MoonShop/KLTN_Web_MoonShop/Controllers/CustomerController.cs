@@ -214,12 +214,13 @@ namespace KLTN_Web_MoonShop.Controllers
 
             Customer cs = Session["user"] as Customer;
             Order d = db.Orders.FirstOrDefault(n => n.customerID == cs.customerID);
-            List<OrderDetail> lst = new List<OrderDetail>();
+            List< OrderDetail> lst = new List<OrderDetail>();
             if(d!=null)
             {
                 lst = db.OrderDetails.Where(n => n.orderID == d.orderID).ToList();
             }
-            ViewBag.order = d;
+            OrderDetail od = lst.FirstOrDefault();
+            ViewBag.order = db.Products.FirstOrDefault(n => n.productID == od.productID);
             return PartialView(lst);
 
         }
