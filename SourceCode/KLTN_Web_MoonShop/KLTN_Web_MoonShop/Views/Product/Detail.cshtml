@@ -508,6 +508,17 @@
     //----------------------------------------------------------------them vao gio hang-----------------------------------
     var ConfirmDelete = function (productID, cusID) {
         var sl = document.getElementById("quantity").value;
+        swal({
+            title: 'Thành công!',
+            text: 'Bấm vào icon giỏ hàng để xem chi tiết',
+            type: 'success',
+            button: {
+                text: "Continue",
+                value: true,
+                visible: true,
+                className: "btn btn-primary"
+            }
+        })
         var person = new Object();
         person.proID = productID;
         person.cusID = cusID;
@@ -518,23 +529,12 @@
             dataType: 'json',
             data: person,
             success: function (data, textStatus, xhr) {
-                swal({
-                    title: 'Thành công!',
-                    text: 'Bấm vào icon giỏ hàng để xem chi tiết',
-                    type: 'success',
-                    button: {
-                        text: "Continue",
-                        value: true,
-                        visible: true,
-                        className: "btn btn-primary"
-                    }
-                })
+               
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.log('Error in Operation');
             }
         });
-        location.reload();
     }
     document.addEventListener("DOMContentLoaded", function (event) {
 

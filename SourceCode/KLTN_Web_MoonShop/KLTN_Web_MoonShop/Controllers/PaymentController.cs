@@ -31,7 +31,7 @@ namespace KLTN_Web_MoonShop.Controllers
             //gio hang
             Cart cart = db.Carts.FirstOrDefault(n => n.customerID == user.customerID);
             //danh sach tat ca chi tiet gio hang
-            List<CartDetail> lstcartdeall = db.CartDetails.Where(n => n.cartID == cart.cartID).ToList();
+            List<CartDetail> lstcartdeall = db.CartDetails.Where(n => n.cartID == cart.cartID && n.isActive == 1).ToList();
             //chi tiet san pham da chon tu gio hang
             List<CartDetail> lstd = new List<CartDetail>();
             List<Product> lst = new List<Product>();

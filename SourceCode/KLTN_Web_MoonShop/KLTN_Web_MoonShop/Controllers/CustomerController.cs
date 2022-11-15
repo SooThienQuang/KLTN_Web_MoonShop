@@ -181,7 +181,7 @@ namespace KLTN_Web_MoonShop.Controllers
                 List<CartDetail> lst = new List<CartDetail>();
                 if(cart!=null)
                 {
-                      lst = db.CartDetails.Where(n => n.cartID == cart.cartID).ToList();
+                      lst = db.CartDetails.Where(n => n.cartID == cart.cartID&&n.isActive==1).ToList();
                     List<cartTam> lsttam = new List<cartTam>();
                      if(lst.Count>0)
                     {

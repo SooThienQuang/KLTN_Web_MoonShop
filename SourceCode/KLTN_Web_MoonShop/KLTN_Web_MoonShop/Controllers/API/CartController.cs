@@ -48,7 +48,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
                
                 Cart c = new Cart();
                 CartDetail cd = new CartDetail();
-              
+                cd.isActive = 1;
                 if (cd1 == null)
                 {
                     cd.cartDetailID = 0;
@@ -105,8 +105,25 @@ namespace KLTN_Web_MoonShop.Controllers.API
 
         // DELETE: api/Cart/5
         [HttpDelete]
-        public void Delete(long id)
+        public string Delete(person id)
         {
+            try
+            {
+                Cart cart = db.Carts.FirstOrDefault(n => n.customerID == id.cusID);
+                if(cart!=null)
+                {
+                    CartDetail cd = db.CartDetails.FirstOrDefault(n => n.cartID == cart.cartID && n.productID == id.proID);
+                    cd.isActive = -1;
+                    db.CartDetails.AddOrUpdate(cd);
+                    db.SaveChanges();
+                }
+                return "Xóa thành công";
+            }
+            catch
+            {
+                return "Có lỗi xảy ra";
+            }
+           
         }
     }
 }

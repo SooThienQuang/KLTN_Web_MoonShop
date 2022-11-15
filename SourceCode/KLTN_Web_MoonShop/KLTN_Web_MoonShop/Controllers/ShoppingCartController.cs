@@ -23,7 +23,7 @@ namespace KLTN_Web_MoonShop.Controllers
             if (user!=null)
             {
               Cart cart=  db.Carts.FirstOrDefault(n => n.customerID == user.customerID);
-               lst = db.CartDetails.Where(n => n.cartID == cart.cartID).ToList();
+               lst = db.CartDetails.Where(n => n.cartID == cart.cartID&&n.isActive==1).ToList();
                return View(lst);
             }    
             return View(lst);
@@ -35,7 +35,7 @@ namespace KLTN_Web_MoonShop.Controllers
             if (user != null)
             {
                 Cart cart = db.Carts.FirstOrDefault(n => n.customerID == user.customerID);
-                lst = db.CartDetails.Where(n => n.cartID == cart.cartID).ToList();
+                lst = db.CartDetails.Where(n => n.cartID == cart.cartID && n.isActive == 1).ToList();
                 return PartialView(lst);
             }
             return PartialView(lst);
