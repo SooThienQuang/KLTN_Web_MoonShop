@@ -30,6 +30,7 @@
       <EntityTypeMapping TypeName="DBCosmeticModel.CartDetail">
         <MappingFragment StoreEntitySet="CartDetail">
           <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="createTime" ColumnName="createTime" />
           <ScalarProperty Name="cartMoney" ColumnName="cartMoney" />
           <ScalarProperty Name="cartQuantity" ColumnName="cartQuantity" />
           <ScalarProperty Name="productID" ColumnName="productID" />

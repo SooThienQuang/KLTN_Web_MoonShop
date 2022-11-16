@@ -28,8 +28,12 @@ namespace KLTN_Web_MoonShop.Controllers
         public ActionResult Paymore(string id)
         {
             Customer user = Session["user"]as Customer;
+            //id
+            ViewBag.id = id;
             //gio hang
             Cart cart = db.Carts.FirstOrDefault(n => n.customerID == user.customerID);
+            //
+            ViewBag.cartID = cart.cartID;
             //danh sach tat ca chi tiet gio hang
             List<CartDetail> lstcartdeall = db.CartDetails.Where(n => n.cartID == cart.cartID && n.isActive == 1).ToList();
             //chi tiet san pham da chon tu gio hang

@@ -51,6 +51,7 @@
     <Property Name="productID" Type="Int64" />
     <Property Name="cartQuantity" Type="Int32" />
     <Property Name="cartMoney" Type="Int64" />
+    <Property Name="createTime" Type="DateTime" Precision="3" />
     <Property Name="isActive" Type="Int32" />
   </EntityType>
   <EntityType Name="Customer">

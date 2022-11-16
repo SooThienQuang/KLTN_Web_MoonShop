@@ -135,11 +135,7 @@
 
                                         }
 
-                                        <td>
-                                            <div class="btn" data-bs-dismiss="alert">
-                                                <span class="fas fa-times" style="color:red"></span>
-                                            </div>
-                                        </td>
+
                                     </tr>
                                 }
                             </tbody>
@@ -150,37 +146,51 @@
                         Thành tiền:<h3 id="price2" style="color:red">@ViewBag.allMoney </h3>VND
 
                     </div>
-                    <button onclick="showSwalSuccess('success-message')" data-dismiss="modal" class="btn btn-danger btn-lg mt-5 mb-0" style="border-radius:0px">Đặt hàng ngay</button>
+                    <button onclick="showSwalSuccess()" data-dismiss="modal" class="btn btn-danger btn-lg mt-5 mb-0" style="border-radius:0px">Đặt hàng ngay</button>
 
                 </div>
 
             </div>
-
         </div>
         </div>
     </div>
-
+<input type="text" value="@ViewBag.id" id="txttringid"/>
+<input type="text" value="@ViewBag.cartID" id="txtcartID" />
+<input type="text" value="@user.customerID" id="txtcusID" />
 <script>
     (function ($) {
-        showSwalSuccess = function (type) {
+        showSwalSuccess = function (id) {
             'use strict';
-            if (type === 'success-message') {
-             
-                swal({
-                    title: 'Thành công!',
-                    text: 'Bấm vào cá nhân để theo dõi đơn hàng',
-                    type: 'success',
-                    button: {
-                        text: "Continue",
-                        value: true,
-                        visible: true,
-                        className: "btn btn-primary"
-                    }
-                     
-                })
+            swal({
+                title: 'Thành công!',
+                text: 'Bấm vào cá nhân để theo dõi đơn hàng',
+                type: 'success',
+                button: {
+                    text: "Continue",
+                    value: true,
+                    visible: true,
+                    className: "btn btn-primary"
+                }
 
-            }
-            $("#checkoutModalm").modal("hide");
+            })
+                var request = new Object();
+            request.cusID = document.getElementById("txtcusID").value;;
+            request.lstod = document.getElementById("txttringid").value;
+            request.cartID = document.getElementById("txtcartID").value;
+
+                $.ajax({
+                    url: '/api/Paymore/',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: request,
+                    success: function (result) {
+                    },
+                    error: function (err) {
+                        alert(err.statusText);
+                    }
+                });
+                
+
         }
     })(jQuery);
 </script>

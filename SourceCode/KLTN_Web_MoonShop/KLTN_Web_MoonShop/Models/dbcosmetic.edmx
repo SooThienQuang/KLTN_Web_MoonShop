@@ -37,6 +37,7 @@
           <Property Name="productID" Type="bigint" />
           <Property Name="cartQuantity" Type="int" />
           <Property Name="cartMoney" Type="bigint" />
+          <Property Name="createTime" Type="datetime" />
           <Property Name="isActive" Type="int" />
         </EntityType>
         <EntityType Name="Customer">
@@ -269,6 +270,7 @@
           <Property Name="productID" Type="Int64" />
           <Property Name="cartQuantity" Type="Int32" />
           <Property Name="cartMoney" Type="Int64" />
+          <Property Name="createTime" Type="DateTime" Precision="3" />
           <Property Name="isActive" Type="Int32" />
         </EntityType>
         <EntityType Name="Customer">
@@ -462,6 +464,7 @@
             <EntityTypeMapping TypeName="DBCosmeticModel.CartDetail">
               <MappingFragment StoreEntitySet="CartDetail">
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="createTime" ColumnName="createTime" />
                 <ScalarProperty Name="cartMoney" ColumnName="cartMoney" />
                 <ScalarProperty Name="cartQuantity" ColumnName="cartQuantity" />
                 <ScalarProperty Name="productID" ColumnName="productID" />

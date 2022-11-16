@@ -77,7 +77,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
                 }
                 else
                 {
-                    CartDetail ccc = db.CartDetails.ToList().FirstOrDefault(n => n.productID == obj.proID && n.cartID == cartold.cartID);
+                    CartDetail ccc = db.CartDetails.ToList().FirstOrDefault(n => n.productID == obj.proID && n.cartID == cartold.cartID&&n.isActive==1);
                     if (ccc!=null)
                     {
                         ccc.cartQuantity = ccc.cartQuantity + obj.quantity;
@@ -87,6 +87,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
                     }    
                     else
                     {
+                        cd.createTime = DateTime.Now;
                         cd.cartID = cartold.cartID;
                         db.CartDetails.Add(cd);
                         db.SaveChanges();
