@@ -11,7 +11,7 @@
 @model KLTN_Web_MoonShop.Models.Product
 @using (Html.BeginForm("UpdateProduct", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <div class="modal fade" id="updateProduct" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal" id="updateProduct" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-body">
@@ -204,7 +204,13 @@
                                                         }
                                                         else
                                                         {
-                                                            <input type="text" class="form-control" name="txtxuatxu" required>
+                                                    <select class="form-select" aria-label="Default select example" name="txtxuatxu">
+
+                                                        <option selected value="Việt Nam">Xuất xứ</option>
+                                                        <option value="Hàn Quốc">Hàn Quốc</option>
+                                                        <option value="Hàn Quốc">Nhật Bản</option>
+                                                        <option value="Hàn Quốc">Việt Nam</option>
+                                                    </select>
                                                         }
                                                     </div>
                                                 </div>

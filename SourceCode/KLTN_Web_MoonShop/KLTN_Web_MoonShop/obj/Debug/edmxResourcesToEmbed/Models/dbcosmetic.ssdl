@@ -151,6 +151,7 @@
     <Property Name="productImage" Type="nchar" MaxLength="500" />
     <Property Name="productTypeID" Type="int" />
     <Property Name="isActive" Type="int" />
+    <Property Name="date" Type="datetime" />
   </EntityType>
   <EntityType Name="ProductDetail">
     <Key>

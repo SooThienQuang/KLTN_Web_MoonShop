@@ -156,6 +156,7 @@
           <Property Name="productImage" Type="nchar" MaxLength="500" />
           <Property Name="productTypeID" Type="int" />
           <Property Name="isActive" Type="int" />
+          <Property Name="date" Type="datetime" />
         </EntityType>
         <EntityType Name="ProductDetail">
           <Key>
@@ -224,6 +225,7 @@
           <EntitySet Name="ActionLogs" EntityType="DBCosmeticModel.ActionLog" />
           <EntitySet Name="Carts" EntityType="DBCosmeticModel.Cart" />
           <EntitySet Name="CartDetails" EntityType="DBCosmeticModel.CartDetail" />
+          <EntitySet Name="Customers" EntityType="DBCosmeticModel.Customer" />
           <EntitySet Name="CustomerAddresses" EntityType="DBCosmeticModel.CustomerAddress" />
           <EntitySet Name="Discounts" EntityType="DBCosmeticModel.Discount" />
           <EntitySet Name="Employees" EntityType="DBCosmeticModel.Employee" />
@@ -237,7 +239,6 @@
           <EntitySet Name="ProductTypes" EntityType="DBCosmeticModel.ProductType" />
           <EntitySet Name="Salaries" EntityType="DBCosmeticModel.Salary" />
           <EntitySet Name="Status" EntityType="DBCosmeticModel.Status" />
-          <EntitySet Name="Customers" EntityType="DBCosmeticModel.Customer" />
         </EntityContainer>
         <EntityType Name="ActionLog">
           <Key>
@@ -273,6 +274,20 @@
           <Property Name="cartMoney" Type="Int64" />
           <Property Name="createTime" Type="DateTime" Precision="3" />
           <Property Name="isActive" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="customerID" />
+          </Key>
+          <Property Name="customerID" Type="Int64" Nullable="false" />
+          <Property Name="customerName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="customerMail" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="customerSex" Type="Int32" />
+          <Property Name="customerUserName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="customerPassword" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="customerPhoto" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
+          <Property Name="isActive" Type="Int32" />
+          <Property Name="dateCreate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="CustomerAddress">
           <Key>
@@ -376,6 +391,7 @@
           <Property Name="productImage" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
           <Property Name="productTypeID" Type="Int32" />
           <Property Name="isActive" Type="Int32" />
+          <Property Name="date" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="ProductDetail">
           <Key>
@@ -416,20 +432,6 @@
           <Property Name="statusID" Type="Int32" Nullable="false" />
           <Property Name="statusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="isActive" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Customer">
-          <Key>
-            <PropertyRef Name="customerID" />
-          </Key>
-          <Property Name="customerID" Type="Int64" Nullable="false" />
-          <Property Name="customerName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="customerMail" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="customerSex" Type="Int32" />
-          <Property Name="customerUserName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="customerPassword" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="customerPhoto" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
-          <Property Name="isActive" Type="Int32" />
-          <Property Name="dateCreate" Type="DateTime" Precision="3" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -472,6 +474,21 @@
                 <ScalarProperty Name="productID" ColumnName="productID" />
                 <ScalarProperty Name="cartID" ColumnName="cartID" />
                 <ScalarProperty Name="cartDetailID" ColumnName="cartDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="DBCosmeticModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="customerPhoto" ColumnName="customerPhoto" />
+                <ScalarProperty Name="customerPassword" ColumnName="customerPassword" />
+                <ScalarProperty Name="customerUserName" ColumnName="customerUserName" />
+                <ScalarProperty Name="customerSex" ColumnName="customerSex" />
+                <ScalarProperty Name="customerMail" ColumnName="customerMail" />
+                <ScalarProperty Name="customerName" ColumnName="customerName" />
+                <ScalarProperty Name="customerID" ColumnName="customerID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -576,6 +593,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="DBCosmeticModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="productTypeID" ColumnName="productTypeID" />
                 <ScalarProperty Name="productImage" ColumnName="productImage" />
@@ -628,21 +646,6 @@
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="statusName" ColumnName="statusName" />
                 <ScalarProperty Name="statusID" ColumnName="statusID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="DBCosmeticModel.Customer">
-              <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
-                <ScalarProperty Name="isActive" ColumnName="isActive" />
-                <ScalarProperty Name="customerPhoto" ColumnName="customerPhoto" />
-                <ScalarProperty Name="customerPassword" ColumnName="customerPassword" />
-                <ScalarProperty Name="customerUserName" ColumnName="customerUserName" />
-                <ScalarProperty Name="customerSex" ColumnName="customerSex" />
-                <ScalarProperty Name="customerMail" ColumnName="customerMail" />
-                <ScalarProperty Name="customerName" ColumnName="customerName" />
-                <ScalarProperty Name="customerID" ColumnName="customerID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

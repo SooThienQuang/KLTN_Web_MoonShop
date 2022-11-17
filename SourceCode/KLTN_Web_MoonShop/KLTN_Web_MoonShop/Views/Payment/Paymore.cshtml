@@ -154,36 +154,38 @@
         </div>
         </div>
     </div>
-<input type="text" value="@ViewBag.id" id="txttringid"/>
-<input type="text" value="@ViewBag.cartID" id="txtcartID" />
-<input type="text" value="@user.customerID" id="txtcusID" />
+<input type="text" value="@ViewBag.id" id="txttringid" hidden/>
+<input type="text" value="@ViewBag.cartID" id="txtcartID" hidden/>
+<input type="text" value="@user.customerID" id="txtcusID" hidden/>
 <script>
     (function ($) {
         showSwalSuccess = function (id) {
             'use strict';
-            swal({
-                title: 'Thành công!',
-                text: 'Bấm vào cá nhân để theo dõi đơn hàng',
-                type: 'success',
-                button: {
-                    text: "Continue",
-                    value: true,
-                    visible: true,
-                    className: "btn btn-primary"
-                }
-
-            })
+          
                 var request = new Object();
             request.cusID = document.getElementById("txtcusID").value;;
             request.lstod = document.getElementById("txttringid").value;
             request.cartID = document.getElementById("txtcartID").value;
-
+            $("#checkoutModalm").modal("hide");
                 $.ajax({
                     url: '/api/Paymore/',
                     type: 'POST',
                     dataType: 'json',
                     data: request,
                     success: function (result) {
+                      
+                        swal({
+                            title: 'Thành công!',
+                            text: 'Bấm vào cá nhân để theo dõi đơn hàng',
+                            type: 'success',
+                            button: {
+                                text: "Continue",
+                                value: true,
+                                visible: true,
+                                className: "btn btn-primary"
+                            }
+
+                        })
                     },
                     error: function (err) {
                         alert(err.statusText);

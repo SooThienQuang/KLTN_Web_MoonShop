@@ -60,6 +60,8 @@
 </div>
 <div id="divid" style="height:100px; width:400px" ;>
 </div>
+<button id="btndelpc" onclick="DeleteProducer()" hidden></button>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     var ConfirmUpdate = function (productID) {
         $("#hiddenEmployeeId").val(productID);
@@ -80,7 +82,24 @@
     var ConfirmDelete = function (productID) {
         $("#hiddenEmployeeId").val(productID);
         $("#txtidpro").val(productID);
-        $("#myModal1").modal('show');
+        Swal.fire({
+            title: 'Bạn có chắc chắn?',
+            text: "Bạn sẽ không thể hoàn tác được!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Có, xóa nó!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Xóa thành công!',
+                    'Dữ liệu của bạn đã được xóa',
+                    'success'
+                )
+                document.getElementById("btndelpc").onclick();
+            }
+        })
 
     }
     var HideModalDel = function () {
@@ -88,7 +107,7 @@
         $("#myModal1").modal("hide");
 
     }
-    var DeleteEmployee = function () {
+    var DeleteProducer = function () {
         var empId = $("#hiddenEmployeeId").val();
         $.ajax({
 
@@ -110,26 +129,3 @@
 </script>
 
 <input type="hidden" id="hiddenEmployeeId" />
-<div class="modal fade" id="myModal1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <a href="#" class="close" data-dismiss="modal">&times;</a>
-                <h3 class="modal-title">Thông báo</h3>
-            </div>
-            <div class="modal-body">
-                <h4>Bạn có chắc chắn muốn thực hiện thao tác này </h4>
-                <input class="form-control" id="txtidpro" />
-
-
-            </div>
-            <div class="modal-footer">
-                <a href="#" class="btn btn-default" onclick="HideModalDel()">Cancel</a>
-                <a href="#" class="btn btn-success" onclick="DeleteEmployee()">Confirm</a>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>

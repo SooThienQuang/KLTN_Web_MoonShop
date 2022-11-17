@@ -22,5 +22,6 @@ namespace KLTN_Web_MoonShop.Models
         public string productImage { get; set; }
         public Nullable<int> productTypeID { get; set; }
         public Nullable<int> isActive { get; set; }
+        public Nullable<System.DateTime> date { get; set; }
     }
 }

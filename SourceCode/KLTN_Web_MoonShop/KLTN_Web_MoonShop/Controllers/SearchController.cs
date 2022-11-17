@@ -13,11 +13,21 @@ namespace KLTN_Web_MoonShop.Controllers
         DBCosmeticEntities db = new DBCosmeticEntities();
         public ActionResult Search(string keyword)
         {
+            ViewBag.ProductType = db.ProductTypes.Where(n => n.isActive == 1).OrderBy(n => n.proTypeName).ToList();
             ViewBag.keyword=keyword;
             List<Product> lstpro = new List<Product>();
             if (keyword != "")
             {
+                  try
+                {
+                    int type = int.Parse(keyword);
+                    lstpro = db.Products.Where(n => n.productTypeID==type && n.isActive == 1).ToList();
+                }
+                catch
+                {
                     lstpro = db.Products.Where(n => n.productName.Contains(keyword) && n.isActive == 1).ToList();
+
+                }
             }
             //if (txtmin != 0 && txtmax != 0)
             //{

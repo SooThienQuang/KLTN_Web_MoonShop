@@ -130,6 +130,9 @@
 <div id="divid" style="height:100px; width:400px" ;>
 </div>
 <input type="hidden" id="hiddenEmployeeId" />
+<link rel="stylesheet" href="https://sweetalert2.github.io/styles/bootstrap4-buttons.css" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<button id="btndelpro" onclick="DeleteProduct()" hidden></button>
 <script>
     var ConfirmUpdate = function (productID) {
         $("#hiddenEmployeeId").val(productID);
@@ -150,7 +153,42 @@
     var ConfirmDelete = function (productID) {
         $("#hiddenEmployeeId").val(productID);
         $("#txtidpro").val(productID);
-        $("#modalConfirmDelete").modal('show');
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Bạn có chắc chắn muốn xóa?',
+            text: "Bạn không thể hoàn lại sau hành dộng này!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Có, Xóa đi!',
+            cancelButtonText: 'Thôi, thoát!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById("btndelpro").onclick();
+                swalWithBootstrapButtons.fire(
+                    'Xóa thành công!',
+                    'Dữ liệu của bạn đã được xóa',
+                    'success'
+                )
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Hủy thành công',
+                    ' Dữ liệu của bạn vẫn an toàn:)',
+                    'error'
+                )
+            }
+        })
+       /* $("#modalConfirmDelete").modal('show');*/
 
     }
     var HideModalDel = function () {
@@ -158,20 +196,7 @@
         $("#myModal1").modal("hide");
 
     }
-    var DeleteEmployee = function () {
-     
-        //$.ajax({
-
-        //    type: "DELETE",
-        //    url: "/api/Product/",
-        //    data: { id: 1 },
-        //    success: function (result) {
-        //        $("#modalConfirmDelete").modal("hide");
-        //        $("#row_" + empId).remove();
-
-        //    }
-
-        //})
+    var DeleteProduct = function () {
         var empId = $("#hiddenEmployeeId").val();
         var person = new Object();
         person.proID = empId;
@@ -182,11 +207,8 @@
             type: 'DELETE',
             dataType: 'json',
             data: person
-              
         });
-        $("#modalConfirmDelete").modal("hide");
-        $("#modalSuceess").modal('show');
-      setTimeout("location.reload(true);", 20);
+   /*   setTimeout("location.reload(true);", 20);*/
     }
 
 

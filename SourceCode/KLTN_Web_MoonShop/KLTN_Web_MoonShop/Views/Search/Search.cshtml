@@ -57,13 +57,23 @@
                             </div> <!-- card-body.// -->
                         </div>
                     </article> <!-- filter-group .// -->
+                  
                     <article class="filter-group">
+
                         <header class="card-header">
                             <a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
                                 <i class="icon-control fa fa-chevron-down"></i>
-                                <h6 class="title">Giá thành </h6>
+                                <h6 class="title">Lọc theo </h6>
                             </a>
                         </header>
+                        <select class="form-select mt-2" aria-label="Default select example" name="cbbloaisp">
+
+                            @foreach (var item in ViewBag.ProductType)
+                            {
+                                <option selected value="0">Chọn loại sản phẩm</option>
+                                <option value="@item.proTypeID">@item.proTypeName</option>
+                            }
+                        </select>
                         <div class="filter-content collapse show" id="collapse_3" style="">
                             <div class="card-body">
                                 <input type="range" class="custom-range" min="0" max="100" name="">
@@ -139,7 +149,7 @@
                                         }
                                     </p>
                                     <div class="price-wrap mt-2">
-                                        <span class="price">@item.productPrice</span>
+                                      Giá sản phẩm :  <span class="price" style="color:red">@String.Format("{0:0,0 vnđ}", item.productPrice)</span>
                                     </div> <!-- price-wrap.// -->
                                 </div>
 

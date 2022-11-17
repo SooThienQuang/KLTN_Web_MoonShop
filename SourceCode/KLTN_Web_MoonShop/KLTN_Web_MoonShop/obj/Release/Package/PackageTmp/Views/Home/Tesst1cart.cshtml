@@ -1,238 +1,50 @@
-﻿<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/multiselect/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="~/Content/multiselect/css/chosen.css">
+    <link rel="stylesheet" href="~/Content/multiselect/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/multiselect/css/style.css">
+    <script src="~/Content/multiselect/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/multiselect/js/popper.min.js"></script>
+    <script src="~/Content/multiselect/js/bootstrap.min.js"></script>
+    <script src="~/Content/multiselect/js/chosen.jquery.min.js"></script>
+    <script src="~/Content/multiselect/js/main.js"></script>
+</head>
+<body>
 
-<!-- jQuery library -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-<!-- Popper JS -->
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css" />
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<div class="items">
-
-
-    <div class="cardd">
-        <div class="media media-2x1 gd-primary">
-
-            <img class="profile-image" src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1568709978/BBBootstrap/2.jpg">
+    <select data-placeholder="Select Categories" multiple class="chosen-select" tabindex="8" style="border-radius:25px">
+        <option>Design</option>
+        <option>HTML5</option>
+        <option>CSS3</option>
+        <option>jQuery</option>
+        <option>BS4</option>
+        <option>Bootstrap</option>
+        <option>WordPress</option>
+        <option>FrontEnd</option>
+    </select>
+    
+    <div class="content">
+        <h2 class="text-center">Multi-Select #9</h2>
+        <div class="container text-left">
+            <div class="row justify-content-center">
+                <div class="col-md-5">
 
 
+
+
+                </div>
+
+
+            </div>
         </div>
-        <div class="cardd-body">
-            <h5 class="cardd-title">Delbert Simonas</h5>
-            <p class="cardd-text">"Online reviews can make or break a customer's decision to make a purchase. Read about these customer review on site"</p>
-        </div>
-
     </div>
 
-    <div class="cardd">
-        <div class="media media-2x1 gd-primary">
-
-            <img class="profile-image" src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1561869127/BBBootstrap/img-3.jpg">
-
-
-        </div>
-        <div class="cardd-body">
-            <h5 class="cardd-title">Tikoh Amin</h5>
-            <p class="cardd-text">"When you think of Apple you automatically think expensive if your anything like me. When purchasing this laptop I was skeptical."</p>
-        </div>
-
-    </div>
-
-    <div class="cardd">
-        <div class="media media-2x1 gd-primary">
-
-            <img class="profile-image" src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1561869127/BBBootstrap/img-2.jpg">
-
-
-        </div>
-        <div class="cardd-body">
-            <h5 class="cardd-title">Malachi Lensing</h5>
-            <p class="cardd-text">"I&rsquo;ve wanted a MacBook for a while now because of the build quality and the simplicity of the OS. I spend an average 6 hours a day."</p>
-        </div>
-
-    </div>
-
-
-    <div class="cardd">
-        <div class="media media-2x1 gd-primary">
-
-            <img class="profile-image" src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1561869126/BBBootstrap/img-1.jpg">
-
-
-        </div>
-        <div class="cardd-body">
-            <h5 class="cardd-title">Christian Isla</h5>
-            <p class="cardd-text">"This MacBook has excellent processing speed. The screen is crystal clear and I really enjoy the touchbar. I set it up"</p>
-        </div>
-
-    </div>
-
-
-
-    <div class="cardd">
-        <div class="media media-2x1 gd-primary">
-
-            <img class="profile-image" src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1563294707/Profile/img-1.jpg">
-
-
-        </div>
-        <div class="cardd-body">
-            <h5 class="cardd-title">Lori Charles</h5>
-            <p class="cardd-text">"For the last 10 years, I have owned an old Gateway laptop. Although it was amazing and lasted me, it was time for an upgrade."</p>
-        </div>
-
-    </div>
-
-
-</div>
-
-<style>
-
-    .padding {
-        padding: 5rem
-    }
-
-    .cardd {
-        position: relative;
-        display: flex;
-        width: 600px;
-        flex-direction: column;
-        min-width: 0;
-        word-wrap: break-word;
-        background-color: #fff;
-        background-clip: border-box;
-        border: 1px solid #d2d2dc;
-        border-radius: 11px;
-        -webkit-box-shadow: 0px 0px 5px 0px rgb(249, 249, 250);
-        -moz-box-shadow: 0px 0px 5px 0px rgba(212,182,212,1);
-        box-shadow: 0px 0px 5px 0px rgb(161, 163, 164);
-    }
-
-        .cardd .cardd-body {
-            padding: 1rem 1rem;
-        }
-
-    .cardd-body {
-        flex: 1 1 auto;
-        padding: 1.25rem
-    }
-
-    p {
-        font-size: 0.875rem;
-        margin-bottom: .5rem;
-        line-height: 1.5rem
-    }
-
-    h4 {
-        line-height: .2 !important;
-    }
-
-
-    .items {
-        width: 90%;
-        margin: 0px auto;
-        margin-top: 100px
-    }
-
-    .slick-slide {
-        margin: 10px
-    }
-
-
-    .media iframe,
-    .media-content {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        border: 0;
-        border-radius: inherit;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: 50% 50%;
-        background-color: rgba(120, 120, 120, .1);
-        display: flex;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center
-    }
-
-        .media-content:before {
-            content: '';
-            position: absolute;
-            height: 10%;
-            width: 90%;
-            left: 5%;
-            bottom: 0;
-            background: inherit;
-            background-position-y: 100%;
-            filter: blur(10px)
-        }
-
-    .circle .media-content:before {
-        width: 40%;
-        left: 30%
-    }
-
-
-    .profile-image {
-        width: 100%;
-        height: 200px;
-        border-top-left-radius: 11px !important;
-        border-top-right-radius: 11px;
-    }
-
-    .cardd-title {
-        font-size: 19px;
-        font-weight: 200;
-    }
-</style>
-<script>
-    $(document).ready(function () {
-
-        $('.items').slick({
-            dots: true,
-            infinite: true,
-            speed: 800,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            slidesToShow: 4,
-            slidesToScroll: 4,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3,
-                        infinite: true,
-                        dots: true
-                    }
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
-                    }
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }
-
-            ]
-        });
-    });
-</script>
+</body>
+</html>

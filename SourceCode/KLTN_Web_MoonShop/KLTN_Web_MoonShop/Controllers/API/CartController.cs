@@ -135,7 +135,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
                 Cart cart = db.Carts.FirstOrDefault(n => n.customerID == id.cusID);
                 if(cart!=null)
                 {
-                    CartDetail cd = db.CartDetails.FirstOrDefault(n => n.cartID == cart.cartID && n.productID == id.proID);
+                    CartDetail cd = db.CartDetails.FirstOrDefault(n => n.cartID == cart.cartID && n.productID == id.proID&&n.isActive==1);
                     cd.isActive = -1;
                     db.CartDetails.AddOrUpdate(cd);
                     db.SaveChanges();

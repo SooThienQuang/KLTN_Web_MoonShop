@@ -20,7 +20,7 @@ namespace KLTN_Web_MoonShop.Controllers
         }
         public ActionResult Product()
         {
-            return View(db.Products.Where(n=>n.isActive==1).ToList());
+            return View(db.Products.Where(n=>n.isActive==1).OrderByDescending(n=>n.productID).ToList());
         }
         public ActionResult AddProduct()
         {
@@ -80,7 +80,7 @@ namespace KLTN_Web_MoonShop.Controllers
             {
                 ViewBag.VisibleButton = true;
                 ViewBag.TitleProduct = "Thêm mới sản phẩm";
-                ViewBag.ProductType = db.ProductTypes.Where(n=>n.isActive==1).ToList();
+                ViewBag.ProductType = db.ProductTypes.Where(n=>n.isActive==1).OrderBy(n=>n.proTypeName).ToList();
                 return PartialView(db.Products.FirstOrDefault(n=>n.productID==id));
             }   
           if(id==1)
@@ -94,7 +94,7 @@ namespace KLTN_Web_MoonShop.Controllers
             {
                 ViewBag.VisibleButton = true;
                 ViewBag.TitleProduct = "Sửa sản phẩm";
-                ViewBag.ProductType = db.ProductTypes.Where(n=>n.isActive==1).ToList();
+                ViewBag.ProductType = db.ProductTypes.Where(n=>n.isActive==1).OrderBy(n => n.proTypeName).ToList();
                 Product pro = db.Products.FirstOrDefault(n => n.productID.Equals(id));
                 ViewBag.ProductDetail = db.ProductDetails.FirstOrDefault(n => n.ProductID.Equals(id));
                 return PartialView(pro);
