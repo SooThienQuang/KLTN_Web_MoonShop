@@ -1,8 +1,19 @@
-﻿
+﻿@model IEnumerable<KLTN_Web_MoonShop.Models.OrderDetail>
+@using KLTN_Web_MoonShop.Models;
 @{
-    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    ViewBag.Title = "Chi tiwt";
+    Customer user = Session["user"] as Customer;
 }
+<script>
+    $(document).ready(function () {
+        $("#updateProduct").modal("show");
+    });
+    var HideModalUpPro = function () {
 
+        $("#updateProduct").modal("hide");
+
+    }
+</script>
 <div class="container">
     <article class="card">
         <header class="card-header"> My Orders / Tracking </header>

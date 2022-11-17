@@ -41,7 +41,8 @@
     </Key>
     <Property Name="customerID" Type="bigint" Nullable="false" />
     <Property Name="customerName" Type="nvarchar" MaxLength="500" />
-    <Property Name="customerSex" Type="nvarchar" MaxLength="50" />
+    <Property Name="customerMail" Type="nchar" MaxLength="100" />
+    <Property Name="customerSex" Type="int" />
     <Property Name="customerUserName" Type="nchar" MaxLength="100" />
     <Property Name="customerPassword" Type="nchar" MaxLength="100" />
     <Property Name="customerPhoto" Type="nchar" MaxLength="1000" />

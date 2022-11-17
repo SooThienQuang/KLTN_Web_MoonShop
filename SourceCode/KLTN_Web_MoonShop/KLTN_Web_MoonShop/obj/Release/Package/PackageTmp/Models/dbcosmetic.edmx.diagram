@@ -8,20 +8,20 @@
         <EntityTypeShape EntityType="DBCosmeticModel.ActionLog" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="DBCosmeticModel.Cart" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="DBCosmeticModel.CartDetail" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.Customer" Width="1.5" PointX="4.75" PointY="0.75" />
         <EntityTypeShape EntityType="DBCosmeticModel.CustomerAddress" Width="1.5" PointX="4.75" PointY="4.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.Notification" Width="1.5" PointX="6.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.Product" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.ProductDetail" Width="1.5" PointX="6.75" PointY="3.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.ProductType" Width="1.5" PointX="6.75" PointY="7.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.Order" Width="1.5" PointX="3.375" PointY="8.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.OrderDetail" Width="1.5" PointX="9.375" PointY="0.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.Status" Width="1.5" PointX="9.375" PointY="4.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.Discount" Width="1.5" PointX="9.75" PointY="7.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.Employee" Width="1.5" PointX="0.75" PointY="10.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.EmployeeDetail" Width="1.5" PointX="5.75" PointY="10.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.Position" Width="1.5" PointX="11.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.Salary" Width="1.5" PointX="2.75" PointY="11.75" />
+        <EntityTypeShape EntityType="DBCosmeticModel.Discount" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DBCosmeticModel.Employee" Width="1.5" PointX="6.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DBCosmeticModel.EmployeeDetail" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="DBCosmeticModel.Notification" Width="1.5" PointX="6.75" PointY="7.75" />
+        <EntityTypeShape EntityType="DBCosmeticModel.Order" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DBCosmeticModel.OrderDetail" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="DBCosmeticModel.Position" Width="1.5" PointX="8.75" PointY="3.75" />
+        <EntityTypeShape EntityType="DBCosmeticModel.Product" Width="1.5" PointX="8.75" PointY="6.75" />
+        <EntityTypeShape EntityType="DBCosmeticModel.ProductDetail" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DBCosmeticModel.ProductType" Width="1.5" PointX="10.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DBCosmeticModel.Salary" Width="1.5" PointX="4.75" PointY="10.75" />
+        <EntityTypeShape EntityType="DBCosmeticModel.Status" Width="1.5" PointX="6.75" PointY="10.75" />
+        <EntityTypeShape EntityType="DBCosmeticModel.Customer" Width="1.5" PointX="9.375" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

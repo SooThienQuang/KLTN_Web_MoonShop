@@ -1,40 +1,331 @@
-﻿@model IEnumerable<KLTN_Web_MoonShop.Models.OrderDetail>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            STT
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Money)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idAdd)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.price)
-        </th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Money)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idAdd)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.price)
-        </td>
-      
-    </tr>
+﻿@model IEnumerable<KLTN_Web_MoonShop.Models.Order>
+@using KLTN_Web_MoonShop.Models;
+@{ 
+    DBCosmeticEntities db = new DBCosmeticEntities();
 }
+@if (Model == null)
+{
+    <div class="container-fluid  mt-100">
+        <div class="row">
+            <div class="col-md-12">
 
-</table>
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Danh sách đơn hàng của bạn</h5>
+                    </div>
+                    <div class="card-body cart">
+                        <div class="col-sm-12 empty-cart-cls text-center">
+                            <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+                            <h3><strong>Bạn chưa có đơn hàng nào ?</strong></h3>
+                            <h4>Thêm một vài sản phẩm sẽ khiến bạn vui hơn :)</h4>
+                            <a href="@Url.Action("Index","Home")" class="btn btn-primary cart-btn-transform m-3" data-abc="true">Tiếp tục mua sắm</a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+}
+else
+{
+@*<div class="row">
+    <div class="card card-timeline px-2 border-none">
+        <ul class="bs4-order-tracking">
+        <li class="step active">
+            <div><i class="fas fa-user"></i></div> Order Placed 
+            </li>
+        <li class="step active">
+            <div><i class="fas fa-bread-slice"></i></div> In transit
+            </li>
+        <li class="step"> <div><i class="fas fa-truck"></i></div> Out for delivery </li>
+        <li class="step "> <div><i class="fas fa-birthday-cake"></i></div> Delivered </li>
+         </ul> <h5 class="text-center"><b>In transit</b>. The order has been shipped!</h5>
+    </div>
+
+</div>*@
+<div class="row">
+    <table>
+        <thead>
+            <tr >
+                <th scope="col">Mã đơn hàng</th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Chi tiết</th>
+                <th scope="col"> </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                List<OrderDetail> lst = db.OrderDetails.Where(n => n.orderID == item.orderID).ToList();
+                OrderDetail od = db.OrderDetails.FirstOrDefault(n => n.orderID == item.orderID);
+                Product pro = db.Products.FirstOrDefault(n => n.productID == od.productID);
+                <tr>
+
+                    <th scope="row"><a href="#">@item.orderID</a></th>
+                    <td>@pro.productName</td>
+                    <td>
+                        <a href="#" onclick="ConfirmUpdate(@item.orderID)" class="text-primary">
+                            <img src="~/Asset/img/product/@pro.productImage" height="100" width="100" />
+                        </a>
+                    </td>
+                    <td style="color:red">@String.Format("{0:0,0 vnđ}", @lst.Sum(n => n.Money))</td>
+
+                    <td>
+                        <a class="btn btn-success" onclick="ShowMoreOrder(@item.orderID)"><p class="ti-fullscreen">Chi tiết</p> </a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+
+        @*@Html.Action("Detail","Order")*@
+    </table>
+</div>
+}
+<div id="divid" style="height:100px; width:400px" ;>
+</div>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
+<script>
+    function ShowMoreOrder(id) {
+           var url = '@Url.Action("Detail", "Order", new {id = "data"})';
+        $('#divid').load(url.replace('data', id));
+    }
+</script>
+
+<!-- Button trigger modal -->
+<!-- Modal -->
+@*--------------------toolstrip--------------*@
+
+<style>
+    .bs4-order-tracking {
+        margin-bottom: 30px;
+        overflow: hidden;
+        color: #878788;
+        padding-left: 0px;
+        margin-top: 30px
+    }
+
+        .bs4-order-tracking li {
+            list-style-type: none;
+            font-size: 13px;
+            width: 25%;
+            float: left;
+            position: relative;
+            font-weight: 400;
+            color: #878788;
+            text-align: center
+        }
+
+            .bs4-order-tracking li:first-child:before {
+                margin-left: 15px !important;
+                padding-left: 11px !important;
+                text-align: left !important
+            }
+
+            .bs4-order-tracking li:last-child:before {
+                margin-right: 5px !important;
+                padding-right: 11px !important;
+                text-align: right !important
+            }
+
+            .bs4-order-tracking li > div {
+                color: #fff;
+                width: 29px;
+                text-align: center;
+                line-height: 29px;
+                display: block;
+                font-size: 12px;
+                background: #878788;
+                border-radius: 50%;
+                margin: auto
+            }
+
+            .bs4-order-tracking li:after {
+                content: '';
+                width: 150%;
+                height: 2px;
+                background: #878788;
+                position: absolute;
+                left: 0%;
+                right: 0%;
+                top: 15px;
+                z-index: -1
+            }
+
+            .bs4-order-tracking li:first-child:after {
+                left: 50%
+            }
+
+            .bs4-order-tracking li:last-child:after {
+                left: 0% !important;
+                width: 0% !important
+            }
+
+            .bs4-order-tracking li.active {
+                font-weight: bold;
+                color: #dc3545
+            }
+
+                .bs4-order-tracking li.active > div {
+                    background: #dc3545
+                }
+
+                .bs4-order-tracking li.active:after {
+                    background: #dc3545
+                }
+
+    .card-timeline {
+        background-color: #fff;
+        z-index: 0
+    }
+
+
+
+    .card {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 0.10rem
+    }
+
+    .card-header:first-child {
+        border-radius: calc(0.37rem - 1px) calc(0.37rem - 1px) 0 0
+    }
+
+    .card-header {
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 0;
+        background-color: #fff;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+    }
+
+    .track {
+        position: relative;
+        background-color: #ddd;
+        height: 7px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        margin-bottom: 60px;
+        margin-top: 50px
+    }
+
+        .track .step {
+            -webkit-box-flex: 1;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            width: 25%;
+            margin-top: -18px;
+            text-align: center;
+            position: relative
+        }
+
+            .track .step.active:before {
+                background: #FF5722
+            }
+
+            .track .step::before {
+                height: 7px;
+                position: absolute;
+                content: "";
+                width: 100%;
+                left: 0;
+                top: 18px
+            }
+
+            .track .step.active .icon {
+                background: #ee5435;
+                color: #fff
+            }
+
+        .track .icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            position: relative;
+            border-radius: 100%;
+            background: #ddd
+        }
+
+        .track .step.active .text {
+            font-weight: 400;
+            color: #000
+        }
+
+        .track .text {
+            display: block;
+            margin-top: 7px
+        }
+
+    .itemside {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%
+    }
+
+        .itemside .aside {
+            position: relative;
+            -ms-flex-negative: 0;
+            flex-shrink: 0
+        }
+
+    .img-sm {
+        width: 80px;
+        height: 80px;
+        padding: 7px
+    }
+
+    ul.row, ul.row-sm {
+        list-style: none;
+        padding: 0
+    }
+
+    .itemside .info {
+        padding-left: 15px;
+        padding-right: 7px
+    }
+
+    .itemside .title {
+        display: block;
+        margin-bottom: 5px;
+        color: #212529
+    }
+
+    p {
+        margin-top: 0;
+        margin-bottom: 1rem
+    }
+
+    .btn-warning {
+        color: #ffffff;
+        background-color: #ee5435;
+        border-color: #ee5435;
+        border-radius: 1px
+    }
+
+        .btn-warning:hover {
+            color: #ffffff;
+            background-color: #ff2b00;
+            border-color: #ff2b00;
+            border-radius: 1px
+        }
+</style>

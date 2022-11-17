@@ -13,6 +13,7 @@ namespace KLTN_Web_MoonShop.Controllers
         DBCosmeticEntities db = new DBCosmeticEntities();
         public ActionResult Detail(long id)
         {
+            ViewBag.id= id;
             List<OrderDetail> lst = db.OrderDetails.Where(n => n.orderID == id).ToList();   
             return PartialView(lst);
         }

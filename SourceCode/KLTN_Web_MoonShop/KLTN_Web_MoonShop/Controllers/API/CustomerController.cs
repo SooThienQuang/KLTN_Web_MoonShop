@@ -8,9 +8,18 @@ using System.Net.Http;
 using System.Security.Principal;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.WebPages;
 
 namespace KLTN_Web_MoonShop.Controllers.API
 {
+    public class requestCustomer
+    {
+        public long id { get; set; }
+        public int sex { get; set; }
+        public string fullname { get; set; }
+        public string email { get; set; }
+
+    }
     public class CustomerController : ApiController
     {
         // GET: api/Customer
@@ -42,11 +51,38 @@ namespace KLTN_Web_MoonShop.Controllers.API
         }
 
         // PUT: api/Customer/5
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]
+        public string Put(requestCustomer data)
         {
+            try
+            {
+                Customer customer = db.Customers.FirstOrDefault(n => n.customerID == data.id);
+                if (customer != null)
+                {
+                    if (!data.fullname.IsEmpty())
+                    {
+                        customer.customerName = data.fullname;
+                    }
+                    if (!data.fullname.IsEmpty())
+                    {
+                        customer.customerMail = data.email;
+                    }
+                    customer.customerSex = data.sex;
+                    db.Customers.AddOrUpdate(customer);
+                    db.SaveChanges();
+                }
+                return "Cập nhật thông tin thành công";
+            }
+            catch
+            {
+                return "Cập nhật thông tin thất bại";
+            }
+            
+
         }
 
         // DELETE: api/Customer/5
+        [HttpDelete]
         public void Delete(int id)
         {
         }

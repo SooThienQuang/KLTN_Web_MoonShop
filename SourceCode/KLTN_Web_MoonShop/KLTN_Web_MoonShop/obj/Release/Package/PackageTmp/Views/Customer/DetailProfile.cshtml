@@ -3,6 +3,24 @@
 @{
     ViewBag.Title = "DetailProfile";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    var s = "";var s1 = "";var s2 = "";
+    if (Model.customerSex == 0) { s1 = "selected"; } else if(Model.customerSex == 1){ s2 = "selected"; } else { s = "selected"; }
+    int id = ViewBag.menu;
+    var profile = "";
+    var order = "";
+    if (id > 0)
+    {
+        if (id == 1)
+        {
+            profile = "active";
+        }
+        else
+         if (id == 2)
+        {
+            order = "active";
+        }
+    }
+
 }
 <style>
     .tab-vertical .nav.nav-tabs {
@@ -11,9 +29,9 @@
         margin-right: 0px;
         border-bottom: 0;
     }
-    .nav-item
-    {
-        padding:5px;
+
+    .nav-item {
+        padding: 5px;
     }
 </style>
 
@@ -41,39 +59,40 @@
             </ul>
 
         </div>
-        <div class="col-md-6">
+        <div class="col-md-9">
             <div class="tab-content" id="myTabContent3">
-                <div class="tab-pane fade show active" id="home-vertical" role="tabpanel" aria-labelledby="home-vertical-tab">
+                <div class="tab-pane fade show @profile" id="home-vertical" role="tabpanel" aria-labelledby="home-vertical-tab">
                     <div class="mt-0">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h6 class="text-right">Thông tin cá nhân</h6>
                         </div>
                         <div class="row mt-2">
-                            <div class="col-md-12"><label class="labels">Họ và tên</label><input type="text" class="form-control" placeholder="first name" value="@ViewBag.user.customerName"></div>
+                            <div class="col-md-12"><label class="labels">Họ và tên</label>
+                            <input id="txthoten" required type="text" class="form-control" placeholder="first name" value="@ViewBag.user.customerName"></div>
                         </div>
                         <div class="row mt-2">
                             <div class="col-md-12">
                                 <label class="labels">Giới tính</label>
                                 <div class="form">
-                                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                        <option selected>Giới tính</option>
-                                        <option value="1">Nam</option>
-                                        <option value="2">Nữ</option>
+                                    <select class="form-select" id="SexSelect" aria-label="Floating label select example">
+                                         <option value="-1" @s>Giới tính</option>
+                                        <option value="0" @s1>Nam</option>
+                                        <option value="1" @s2>Nữ</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="headline" value=""></div>
+                            <div class="col-md-12"><label class="labels">Email</label><input id="txtemail" required type="email" class="form-control" placeholder="headline" value=""></div>
                             <div class="col-md-12"><label class="labels">Số điện thoại</label><input type="text" class="form-control" placeholder="headline" value="@ViewBag.user.customerUserName" disabled></div>
                         </div>
-                        <div class="row mt-3">
+                        <div class="row mt-3 ml-2">
                             <div class="col-md-12">
                                 <label class="labels">Địa chỉ giao hàng</label>
                                 <div class="form-check">
 
 
-                                    @foreach (var item in @ViewBag.useradd)
+                                    @foreach (var item in ViewBag.useradd)
                                     {
                                         if (item.isMain == 1)
                                         {
@@ -82,14 +101,15 @@
                                             <label class="form-check-label" for="gridRadios1">
                                                 @item.customerAdd (Mặc định)
                                                 <p class="fa fa-check" style="color:green"></p>
-                                                <span class="ti-pencil-alt"></span>
                                             </label>
                                         }
                                         else
                                         {
-                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="@item.ID">
-                                            <label class="form-check-label" for="gridRadios1">
-                                                @item.customerAdd <span class="ti-pencil-alt"></span>
+                                            <input class="form-check-input mt-3" type="radio" name="gridRadios" id="gridRadios1" value="@item.ID">
+                                            <label class="form-check-label mt-3" for="gridRadios1">
+                                                @item.customerAdd
+                                                <a class="btn" style="color:blue" onclick="updateAdd(@item.ID)">(Đặt làm mặc định)</a>
+                                                <a class="btn" style="color:red" onclick="deleteAdd(@item.ID)"><span class="ti-close">Xóa</span></a>
                                             </label>
                                         }
                                     }
@@ -98,21 +118,137 @@
                                 </div>
                                 @Html.Action("Address", "Customer")
                             </div>
-                            <div class="mt-5 text-center"><button class="btn btn-primary" type="button">Lưu thông tin</button></div>
+                            <div class="mt-5 text-center"><button class="btn btn-primary" type="button" onclick="updateCustomer()">Lưu thông tin</button></div>
                         </div>
                     </div>
-                   
+
                 </div>
                 @*-------------------------------------------tab2-------------------------------------------------*@
-                <div class="tab-pane fade" id="profile-vertical" role="tabpanel" aria-labelledby="profile-vertical-tab">
+                <div class="tab-pane fade show @order" id="profile-vertical" role="tabpanel" aria-labelledby="profile-vertical-tab">
                     @Html.Action("Order", "Customer")
                 </div>
             </div>
         </div>
 
-     
+
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<input id="txtcusid" value="@ViewBag.user.customerID" hidden />
+<input id="txtidadd" type="number" hidden />
+<button type="submit" id="btndel" onclick="del()" hidden></button>
+<button type="submit" id="btnup" onclick="up()" hidden></button>
+<script>
+    function up() {
+        var address = new Object();
+        address.id = document.getElementById("txtidadd").value;
+        address.cusID = document.getElementById("txtcusid").value;
+        $.ajax({
+            url: '/api/Address/',
+            type: 'PUT',
+            dataType: 'json',
+            data: address,
+            success: function (result) {
+                Swal.fire(
+                    'Cập nhật thành công!',
+                    'Địa chỉ của bạn đã được xóa',
+                    'success'
+                )
+            },
+            error: function (err) {
+                alert(err.statusText);
+            }
+        });
+    }
+    function updateAdd(id) {
+        Swal.fire({
+            title: 'Bạn có chắc chắn ?',
+            text: "Muốn cập nhật không !",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Có!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById("txtidadd").value = id;
+                document.getElementById("btnup").onclick();
+            }
+        })
+    }
+    //----------------------------------------------------xoa dia chi----------------------------------------
+    function del() {
+        var address = new Object();
+        address.id = document.getElementById("txtidadd").value;
+        address.cusID = document.getElementById("txtcusid").value;
+        $.ajax({
+            url: '/api/Address/',
+            type: 'DELETE',
+            dataType: 'json',
+            data: address,
+            success: function (result) {
+                Swal.fire(
+                    'Xóa thành công!',
+                    'Địa chỉ của bạn đã được xóa',
+                    'success'
+                )
+            },
+            error: function (err) {
+                alert(err.statusText);
+            }
+        });
+    }
+    function deleteAdd(id) {
+        Swal.fire({
+            title: 'Bạn có chắc chắn ?',
+            text: "Bạn sẽ không thể hoàn tác được !",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Có, xóa đi!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById("txtidadd").value = id;
+                document.getElementById("btndel").onclick();
+            }
+        })
+    }
+    //-----------------------------------update thông tin cá nhân--------------------------------
+    function updateCustomer() {
+        var requestCustomer = new Object();
+        var sex = $('#SexSelect').find(":selected").val();
+        requestCustomer.id = document.getElementById("txtcusid").value;
+        requestCustomer.fullname = document.getElementById("txthoten").value;
+        requestCustomer.sex =sex;
+        requestCustomer.email = document.getElementById("txtemail").value;
+        $.ajax({
+            url: '/api/Customer/',
+            type: 'PUT',
+            dataType: 'json',
+            data: requestCustomer,
+            success: function (result) {
+                swal({
+                    title: 'Thành công!',
+                    text: 'Bạn đã cập nhật thành công thông tin cá nhân !',
+                    type: 'success',
+                    button: {
+                        text: "Continue",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-primary"
+                    }
+                })
+            },
+            error: function (err) {
+                alert(err.statusText);
+            }
+        });
+      
+    }
+</script>
 
 <style>
     .form-control:focus {

@@ -39,20 +39,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Customers">
-      <EntityTypeMapping TypeName="DBCosmeticModel.Customer">
-        <MappingFragment StoreEntitySet="Customer">
-          <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
-          <ScalarProperty Name="isActive" ColumnName="isActive" />
-          <ScalarProperty Name="customerPhoto" ColumnName="customerPhoto" />
-          <ScalarProperty Name="customerPassword" ColumnName="customerPassword" />
-          <ScalarProperty Name="customerUserName" ColumnName="customerUserName" />
-          <ScalarProperty Name="customerSex" ColumnName="customerSex" />
-          <ScalarProperty Name="customerName" ColumnName="customerName" />
-          <ScalarProperty Name="customerID" ColumnName="customerID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="CustomerAddresses">
       <EntityTypeMapping TypeName="DBCosmeticModel.CustomerAddress">
         <MappingFragment StoreEntitySet="CustomerAddress">
@@ -206,6 +192,21 @@
           <ScalarProperty Name="isActive" ColumnName="isActive" />
           <ScalarProperty Name="statusName" ColumnName="statusName" />
           <ScalarProperty Name="statusID" ColumnName="statusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="DBCosmeticModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="customerPhoto" ColumnName="customerPhoto" />
+          <ScalarProperty Name="customerPassword" ColumnName="customerPassword" />
+          <ScalarProperty Name="customerUserName" ColumnName="customerUserName" />
+          <ScalarProperty Name="customerSex" ColumnName="customerSex" />
+          <ScalarProperty Name="customerMail" ColumnName="customerMail" />
+          <ScalarProperty Name="customerName" ColumnName="customerName" />
+          <ScalarProperty Name="customerID" ColumnName="customerID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

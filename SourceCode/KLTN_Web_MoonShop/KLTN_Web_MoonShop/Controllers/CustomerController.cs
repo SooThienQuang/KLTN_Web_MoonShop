@@ -122,7 +122,7 @@ namespace KLTN_Web_MoonShop.Controllers
                 string ten = cs.customerName.ToString().Split(' ').Last();
                 ViewBag.name = ten;
                 ViewBag.user = cs;
-                ViewBag.useradd=db.CustomerAddresses.Where(n=>n.customerID==cs.customerID).ToList();
+                ViewBag.useradd=db.CustomerAddresses.Where(n=>n.customerID==cs.customerID&&n.isActive==1).ToList();
                 ViewBag.menu = id;
             }
 
@@ -146,7 +146,7 @@ namespace KLTN_Web_MoonShop.Controllers
                 ViewBag.user = cs;
             }
 
-            return View();
+            return View(cs);
 
         }
         public ActionResult Notification()
@@ -213,14 +213,8 @@ namespace KLTN_Web_MoonShop.Controllers
         {
 
             Customer cs = Session["user"] as Customer;
-            Order d = db.Orders.FirstOrDefault(n => n.customerID == cs.customerID);
-            List< OrderDetail> lst = new List<OrderDetail>();
-            if(d!=null)
-            {
-                lst = db.OrderDetails.Where(n => n.orderID == d.orderID).ToList();
-            }
-            OrderDetail od = lst.FirstOrDefault();
-            ViewBag.order = db.Products.FirstOrDefault(n => n.productID == od.productID);
+            List<Order> lst = new List<Order>();
+            lst = db.Orders.Where(n => n.customerID == cs.customerID).ToList();
             return PartialView(lst);
 
         }
@@ -266,6 +260,7 @@ namespace KLTN_Web_MoonShop.Controllers
                 CustomerAddress cd = db.CustomerAddresses.FirstOrDefault(n => n.customerID == cs.customerID);
                 if(cd.customerAdd==null)
                 {
+                    cd.isActive = 1;
                     cd.customerAdd = txtduong + "," + txt;
                     db.CustomerAddresses.AddOrUpdate(cd);
                     db.SaveChanges();
@@ -286,7 +281,7 @@ namespace KLTN_Web_MoonShop.Controllers
               
                 Session["user"] = cs;
             }
-            return RedirectToAction("DetailProfile");
+            return RedirectToAction("DetailProfile", "Customer", new {id=1});
 
         }
     }

@@ -1,25 +1,26 @@
-﻿using System;
+﻿using KLTN_Web_MoonShop.Models;
+using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Data.Entity.Core.Metadata.Edm;
+using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.ModelBinding;
 
 namespace KLTN_Web_MoonShop.Controllers.API
 {
-    public class ImageController : Controller
+    public class data
     {
-        // GET: Image
-        public ActionResult GetImage()
+        public string id { get; set; }
+    }
+    public class imageController : ApiController
+    {
+        [HttpDelete]
+        public string delete(data id)
         {
-            var dir = Server.MapPath("~/Asset/img/tu1.jpg");
-            var path = Path.Combine(dir);
-            return base.File(path, "image/jpeg");
-        }
-        [HttpPost]
-        public bool UpLoad(string data)
-        {
-            return true;
+            return "thanh cong";
         }
     }
 }

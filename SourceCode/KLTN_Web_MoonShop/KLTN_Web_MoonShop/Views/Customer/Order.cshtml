@@ -1,6 +1,9 @@
-﻿@model IEnumerable<KLTN_Web_MoonShop.Models.OrderDetail>
-
-@if (@Model == null)
+﻿@model IEnumerable<KLTN_Web_MoonShop.Models.Order>
+@using KLTN_Web_MoonShop.Models;
+@{ 
+    DBCosmeticEntities db = new DBCosmeticEntities();
+}
+@if (Model == null)
 {
     <div class="container-fluid  mt-100">
         <div class="row">
@@ -47,32 +50,34 @@ else
 <div class="row">
     <table>
         <thead>
-            <tr>
+            <tr >
                 <th scope="col">Mã đơn hàng</th>
                 <th scope="col">Tên sản phẩm</th>
                 <th scope="col">Hình ảnh</th>
                 <th scope="col">Giá</th>
-                <th scope="col"> </th>
+                <th scope="col">Chi tiết</th>
                 <th scope="col"> </th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-
+                List<OrderDetail> lst = db.OrderDetails.Where(n => n.orderID == item.orderID).ToList();
+                OrderDetail od = db.OrderDetails.FirstOrDefault(n => n.orderID == item.orderID);
+                Product pro = db.Products.FirstOrDefault(n => n.productID == od.productID);
                 <tr>
 
                     <th scope="row"><a href="#">@item.orderID</a></th>
-                    <td>@ViewBag.order.productName</td>
+                    <td>@pro.productName</td>
                     <td>
                         <a href="#" onclick="ConfirmUpdate(@item.orderID)" class="text-primary">
-                            <img src="~/Asset/img/product/@ViewBag.order.productImage" height="100" width="100" />
+                            <img src="~/Asset/img/product/@pro.productImage" height="100" width="100" />
                         </a>
                     </td>
-                    <td>@item.statusID</td>
+                    <td style="color:red">@String.Format("{0:0,0 vnđ}", @lst.Sum(n => n.Money))</td>
 
                     <td>
-                        <a class="btn btn-danger" onclick="ShowMoreOrder(@item.orderID)">Chi tiết </a>
+                        <a class="btn btn-success" onclick="ShowMoreOrder(@item.orderID)"><p class="ti-fullscreen">Chi tiết</p> </a>
                     </td>
 
                 </tr>

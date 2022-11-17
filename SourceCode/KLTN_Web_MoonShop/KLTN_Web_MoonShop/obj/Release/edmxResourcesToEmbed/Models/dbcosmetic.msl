@@ -30,25 +30,12 @@
       <EntityTypeMapping TypeName="DBCosmeticModel.CartDetail">
         <MappingFragment StoreEntitySet="CartDetail">
           <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="createTime" ColumnName="createTime" />
           <ScalarProperty Name="cartMoney" ColumnName="cartMoney" />
           <ScalarProperty Name="cartQuantity" ColumnName="cartQuantity" />
           <ScalarProperty Name="productID" ColumnName="productID" />
           <ScalarProperty Name="cartID" ColumnName="cartID" />
           <ScalarProperty Name="cartDetailID" ColumnName="cartDetailID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Customers">
-      <EntityTypeMapping TypeName="DBCosmeticModel.Customer">
-        <MappingFragment StoreEntitySet="Customer">
-          <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
-          <ScalarProperty Name="isActive" ColumnName="isActive" />
-          <ScalarProperty Name="customerPhoto" ColumnName="customerPhoto" />
-          <ScalarProperty Name="customerPassword" ColumnName="customerPassword" />
-          <ScalarProperty Name="customerUserName" ColumnName="customerUserName" />
-          <ScalarProperty Name="customerSex" ColumnName="customerSex" />
-          <ScalarProperty Name="customerName" ColumnName="customerName" />
-          <ScalarProperty Name="customerID" ColumnName="customerID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -62,88 +49,6 @@
           <ScalarProperty Name="customerAdd" ColumnName="customerAdd" />
           <ScalarProperty Name="customerID" ColumnName="customerID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Notifications">
-      <EntityTypeMapping TypeName="DBCosmeticModel.Notification">
-        <MappingFragment StoreEntitySet="Notification">
-          <ScalarProperty Name="customerName" ColumnName="customerName" />
-          <ScalarProperty Name="customerID" ColumnName="customerID" />
-          <ScalarProperty Name="notiName" ColumnName="notiName" />
-          <ScalarProperty Name="notiID" ColumnName="notiID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Products">
-      <EntityTypeMapping TypeName="DBCosmeticModel.Product">
-        <MappingFragment StoreEntitySet="Product">
-          <ScalarProperty Name="isActive" ColumnName="isActive" />
-          <ScalarProperty Name="productTypeID" ColumnName="productTypeID" />
-          <ScalarProperty Name="productImage" ColumnName="productImage" />
-          <ScalarProperty Name="productDescribe" ColumnName="productDescribe" />
-          <ScalarProperty Name="productPrice" ColumnName="productPrice" />
-          <ScalarProperty Name="productQuantity" ColumnName="productQuantity" />
-          <ScalarProperty Name="productName" ColumnName="productName" />
-          <ScalarProperty Name="productID" ColumnName="productID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ProductDetails">
-      <EntityTypeMapping TypeName="DBCosmeticModel.ProductDetail">
-        <MappingFragment StoreEntitySet="ProductDetail">
-          <ScalarProperty Name="desciption" ColumnName="desciption" />
-          <ScalarProperty Name="brand" ColumnName="brand" />
-          <ScalarProperty Name="origin" ColumnName="origin" />
-          <ScalarProperty Name="img3" ColumnName="img3" />
-          <ScalarProperty Name="img2" ColumnName="img2" />
-          <ScalarProperty Name="img1" ColumnName="img1" />
-          <ScalarProperty Name="Color" ColumnName="Color" />
-          <ScalarProperty Name="Size" ColumnName="Size" />
-          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ProductTypes">
-      <EntityTypeMapping TypeName="DBCosmeticModel.ProductType">
-        <MappingFragment StoreEntitySet="ProductType">
-          <ScalarProperty Name="isActive" ColumnName="isActive" />
-          <ScalarProperty Name="proTypeName" ColumnName="proTypeName" />
-          <ScalarProperty Name="proTypeID" ColumnName="proTypeID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Orders">
-      <EntityTypeMapping TypeName="DBCosmeticModel.Order">
-        <MappingFragment StoreEntitySet="Order">
-          <ScalarProperty Name="employeeID" ColumnName="employeeID" />
-          <ScalarProperty Name="isActive" ColumnName="isActive" />
-          <ScalarProperty Name="createDate" ColumnName="createDate" />
-          <ScalarProperty Name="customerID" ColumnName="customerID" />
-          <ScalarProperty Name="orderID" ColumnName="orderID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="OrderDetails">
-      <EntityTypeMapping TypeName="DBCosmeticModel.OrderDetail">
-        <MappingFragment StoreEntitySet="OrderDetail">
-          <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="statusID" ColumnName="statusID" />
-          <ScalarProperty Name="idAdd" ColumnName="idAdd" />
-          <ScalarProperty Name="Money" ColumnName="Money" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="productID" ColumnName="productID" />
-          <ScalarProperty Name="orderID" ColumnName="orderID" />
-          <ScalarProperty Name="orderDetailID" ColumnName="orderDetailID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Status">
-      <EntityTypeMapping TypeName="DBCosmeticModel.Status">
-        <MappingFragment StoreEntitySet="Status">
-          <ScalarProperty Name="isActive" ColumnName="isActive" />
-          <ScalarProperty Name="statusName" ColumnName="statusName" />
-          <ScalarProperty Name="statusID" ColumnName="statusID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -189,11 +94,84 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Notifications">
+      <EntityTypeMapping TypeName="DBCosmeticModel.Notification">
+        <MappingFragment StoreEntitySet="Notification">
+          <ScalarProperty Name="customerName" ColumnName="customerName" />
+          <ScalarProperty Name="customerID" ColumnName="customerID" />
+          <ScalarProperty Name="notiName" ColumnName="notiName" />
+          <ScalarProperty Name="notiID" ColumnName="notiID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="DBCosmeticModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="customerID" ColumnName="customerID" />
+          <ScalarProperty Name="orderID" ColumnName="orderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetails">
+      <EntityTypeMapping TypeName="DBCosmeticModel.OrderDetail">
+        <MappingFragment StoreEntitySet="OrderDetail">
+          <ScalarProperty Name="statusID" ColumnName="statusID" />
+          <ScalarProperty Name="idAdd" ColumnName="idAdd" />
+          <ScalarProperty Name="Money" ColumnName="Money" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="productID" ColumnName="productID" />
+          <ScalarProperty Name="orderID" ColumnName="orderID" />
+          <ScalarProperty Name="orderDetailID" ColumnName="orderDetailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Positions">
       <EntityTypeMapping TypeName="DBCosmeticModel.Position">
         <MappingFragment StoreEntitySet="Position">
           <ScalarProperty Name="posName" ColumnName="posName" />
           <ScalarProperty Name="posID" ColumnName="posID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="DBCosmeticModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="productTypeID" ColumnName="productTypeID" />
+          <ScalarProperty Name="productImage" ColumnName="productImage" />
+          <ScalarProperty Name="productDescribe" ColumnName="productDescribe" />
+          <ScalarProperty Name="productPrice" ColumnName="productPrice" />
+          <ScalarProperty Name="productQuantity" ColumnName="productQuantity" />
+          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="productID" ColumnName="productID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductDetails">
+      <EntityTypeMapping TypeName="DBCosmeticModel.ProductDetail">
+        <MappingFragment StoreEntitySet="ProductDetail">
+          <ScalarProperty Name="desciption" ColumnName="desciption" />
+          <ScalarProperty Name="brand" ColumnName="brand" />
+          <ScalarProperty Name="origin" ColumnName="origin" />
+          <ScalarProperty Name="img3" ColumnName="img3" />
+          <ScalarProperty Name="img2" ColumnName="img2" />
+          <ScalarProperty Name="img1" ColumnName="img1" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductTypes">
+      <EntityTypeMapping TypeName="DBCosmeticModel.ProductType">
+        <MappingFragment StoreEntitySet="ProductType">
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="proTypeName" ColumnName="proTypeName" />
+          <ScalarProperty Name="proTypeID" ColumnName="proTypeID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -205,6 +183,30 @@
           <ScalarProperty Name="salary1" ColumnName="salary" />
           <ScalarProperty Name="emID" ColumnName="emID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Status">
+      <EntityTypeMapping TypeName="DBCosmeticModel.Status">
+        <MappingFragment StoreEntitySet="Status">
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="statusName" ColumnName="statusName" />
+          <ScalarProperty Name="statusID" ColumnName="statusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="DBCosmeticModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="customerPhoto" ColumnName="customerPhoto" />
+          <ScalarProperty Name="customerPassword" ColumnName="customerPassword" />
+          <ScalarProperty Name="customerUserName" ColumnName="customerUserName" />
+          <ScalarProperty Name="customerSex" ColumnName="customerSex" />
+          <ScalarProperty Name="customerMail" ColumnName="customerMail" />
+          <ScalarProperty Name="customerName" ColumnName="customerName" />
+          <ScalarProperty Name="customerID" ColumnName="customerID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
