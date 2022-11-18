@@ -95,7 +95,7 @@
         </div>
     </div>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     //------------------------------------them vao gio hang --------------------------------
     function addtocart(proid, cusid) {
@@ -111,7 +111,11 @@
             dataType: 'json',
             data: person,
             success: function (result) {
-                alert(result);
+                Swal.fire(
+                    'Thêm thành công!',
+                    'Click vào giỏ hàng để xem chi tiết',
+                    'success'
+                )
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.log('Error in Operation');

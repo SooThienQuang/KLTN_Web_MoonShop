@@ -192,7 +192,8 @@ else
 </div>
 <!--Modal: modalConfirmDelete-->
 
-
+<button id="btdelCart" onclick="comfimDel()" hidden></button>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     function updateCart(proid, cartid) {
         var userid = document.getElementById('txtuserid').value;
@@ -239,17 +240,11 @@ else
             dataType: 'json',
             data: person,
             success: function (result) {
-                swal({
-                    title: 'Thành công!',
-                    text: 'Bạn đã xóa thành công sản phẩm !',
-                    type: 'success',
-                    button: {
-                        text: "Continue",
-                        value: true,
-                        visible: true,
-                        className: "btn btn-primary"
-                    }
-                })
+                Swal.fire(
+                    'Xóa thành công!',
+                    'Dữ liệu của bạn đã được xóa !',
+                    'success'
+                )
             },
             error: function (err) {
                 alert(err.statusText);
@@ -259,9 +254,19 @@ else
     }
     function showDel(id) {
         document.getElementById('txtiddel').value = id;
-        $(document).ready(function () {
-            $("#modalCartDel").modal("show");
-        });
+        Swal.fire({
+            title: 'Bạn có chắc chắn?',
+            text: "Bạn không thể hoàn tác !",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Có, xóa đi!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById("btdelCart").onclick();
+            }
+        })
 
     }
     function CloseDel() {

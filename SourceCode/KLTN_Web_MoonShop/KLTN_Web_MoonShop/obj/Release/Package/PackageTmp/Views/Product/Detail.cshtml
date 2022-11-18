@@ -100,7 +100,7 @@
                                             <span class="ti-minus"></span>
                                         </button>
                                     </span>
-                                    <input type="number" style="min-width:50px;max-width:60px;height:35px" id="quantity" name="quantity" class="form-control" value="1" min="1" max="100">
+                                    <input type="number" style="min-width:50px;max-width:60px;height:35px;font-size:25px;" id="quantity" name="quantity" class="form-control" value="1" min="1" max="100">
                                     <span class="input-group-btn">
                                         <button type="button" style="height:35px" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
                                             <span class="ti-plus"></span>
@@ -120,7 +120,7 @@
                                     $('.quantity-left-minus').click(function (e) {
                                         e.preventDefault();
                                         var quantity = parseInt($('#quantity').val());
-                                        if (quantity > 0) {
+                                        if (quantity > 1) {
                                             $('#quantity').val(quantity - 1);
                                         }
                                     });
@@ -442,18 +442,8 @@
         showSwal = function (type) {
             'use strict';
             if (type === 'success-message') {
-                /*  $("#checkoutModal").modal("hide");*/
-                swal({
-                    title: 'Thành công!',
-                    text: 'Bấm vào cá nhân để theo dõi đơn hàng',
-                    type: 'success',
-                    button: {
-                        text: "Continue",
-                        value: true,
-                        visible: true,
-                        className: "btn btn-primary"
-                    }
-                })
+               /*   $("#checkoutModal").modal("hide");*/
+              
                 var pro = document.getElementById("txtproid").value;
                 var price = document.getElementById("txtprice").value;
                 var userid = document.getElementById("txtuserid").value;
@@ -469,7 +459,17 @@
                     dataType: 'json',
                     data: person,
                     success: function (result) {
-                        
+                        swal({
+                            title: 'Thành công!',
+                            text: 'Bấm vào cá nhân để theo dõi đơn hàng',
+                            type: 'success',
+                            button: {
+                                text: "Continue",
+                                value: true,
+                                visible: true,
+                                className: "btn btn-primary"
+                            }
+                        })
                     },
                     error: function (err) {
                         alert(err.statusText);
@@ -508,17 +508,7 @@
     //----------------------------------------------------------------them vao gio hang-----------------------------------
     var ConfirmDelete = function (productID, cusID) {
         var sl = document.getElementById("quantity").value;
-        swal({
-            title: 'Thành công!',
-            text: 'Bấm vào icon giỏ hàng để xem chi tiết',
-            type: 'success',
-            button: {
-                text: "Continue",
-                value: true,
-                visible: true,
-                className: "btn btn-primary"
-            }
-        })
+       
         var person = new Object();
         person.proID = productID;
         person.cusID = cusID;
@@ -529,7 +519,17 @@
             dataType: 'json',
             data: person,
             success: function (data, textStatus, xhr) {
-               
+                swal({
+                    title: 'Thành công!',
+                    text: 'Bấm vào icon giỏ hàng để xem chi tiết',
+                    type: 'success',
+                    button: {
+                        text: "Continue",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-primary"
+                    }
+                })
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.log('Error in Operation');
