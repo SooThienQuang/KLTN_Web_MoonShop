@@ -561,11 +561,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Admin\ActionLogController.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
+    <Compile Include="Controllers\Admin\EmployeeController.cs" />
     <Compile Include="Controllers\Admin\ProductTypeController.cs" />
     <Compile Include="Controllers\AlertController.cs" />
     <Compile Include="Controllers\API\AddressController.cs" />
     <Compile Include="Controllers\API\CartController.cs" />
     <Compile Include="Controllers\API\CustomerController.cs" />
+    <Compile Include="Controllers\API\EmployeeController.cs" />
     <Compile Include="Controllers\API\imageController.cs" />
     <Compile Include="Controllers\API\OrderController.cs" />
     <Compile Include="Controllers\API\PayController.cs" />
@@ -912,6 +914,8 @@
     <Content Include="Views\ShoppingCart\Detail.cshtml" />
     <Content Include="Views\Payment\Paymore.cshtml" />
     <Content Include="Views\Order\Detail.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Alert\Loader.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
