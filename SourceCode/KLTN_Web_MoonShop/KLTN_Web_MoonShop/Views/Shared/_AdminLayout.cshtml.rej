@@ -1,0 +1,9 @@
+diff a/SourceCode/KLTN_Web_MoonShop/KLTN_Web_MoonShop/Views/Shared/_AdminLayout.cshtml b/SourceCode/KLTN_Web_MoonShop/KLTN_Web_MoonShop/Views/Shared/_AdminLayout.cshtml	(rejected hunks)
+@@ -426,7 +426,6 @@
+                     </svg><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
+                 </a>
+                 <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+-
+                     <li>
+                         <a href="@Url.Action("Product","Admin")">
+                             <i class="bi bi-circle"></i><span>Quản lý sản phẩm</span>

@@ -1,0 +1,10 @@
+diff a/SourceCode/KLTN_Web_MoonShop/KLTN_Web_MoonShop/Views/Product/CaroselProductHome.cshtml b/SourceCode/KLTN_Web_MoonShop/KLTN_Web_MoonShop/Views/Product/CaroselProductHome.cshtml	(rejected hunks)
+@@ -36,7 +36,7 @@
+ 
+                                     @foreach (var item in @ViewBag.Active)
+                                     {
+-                                        <div class="col-sm-2 h-100 w-100 d-block">
++                                        <div class="col-sm-3 h-100 w-100 d-block">
+                                             <div class="thumb-wrapper">
+                                                 <span class="badge badge-danger"> SALE </span>
+                                                 <div class="img-box">
