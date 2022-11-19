@@ -25,28 +25,24 @@ namespace KLTN_Web_MoonShop.Controllers
             return PartialView();
         }
 
-        public ActionResult NotLogin(string txtphone, string txtpws)
+        public ActionResult NotLogin(string txtphone,string txtpws)
         {
-            if (!txtphone.IsEmpty() && !txtpws.IsEmpty())
+            if(!txtphone.IsEmpty()&&!txtpws.IsEmpty())
             {
                 string pass = md5.CreateMD5(txtpws);
                 Customer cus = db.Customers.FirstOrDefault(n => n.customerUserName.Equals(txtphone) && n.customerPassword.Equals(pass) || n.customerUserName.Equals(txtphone) && n.customerPassword.Equals(pass));
                 if (cus != null)
                 {
                     Session["user"] = cus;
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index","Home");
                 }
                 else
                 {
                     ViewBag.LoginFail = "Tài khoản hoặc mật khẩu chưa chính xác!";
-                }
+                }   
 
             }
             return RedirectToAction("Index", "Home");
-        }
-        public ActionResult Loader()
-        {
-            return PartialView();
         }
     }
 }
