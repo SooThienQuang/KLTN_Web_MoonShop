@@ -39,10 +39,11 @@ namespace KLTN_Web_MoonShop.Controllers
             return View(lstpro);
         }
         [HttpPost]
-        public ActionResult Search(int txtmin,int txtmax)
+        public ActionResult Search(int txtmin,int txtmax,string cbbloaisp)
         {
             List<Product> lstpro = new List<Product>();
-            lstpro = db.Products.Where(n => n.productPrice>=txtmin&&n.productPrice<=txtmax && n.isActive == 1).ToList();
+            int loai = int.Parse(cbbloaisp);
+            lstpro = db.Products.Where(n => n.productPrice>=txtmin&&n.productPrice<=txtmax && n.isActive == 1&&n.productTypeID==loai).ToList();
             return View(lstpro);
         }
     }

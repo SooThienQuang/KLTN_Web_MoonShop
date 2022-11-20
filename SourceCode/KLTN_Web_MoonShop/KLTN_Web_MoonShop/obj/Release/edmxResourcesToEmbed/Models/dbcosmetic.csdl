@@ -8,7 +8,6 @@
     <EntitySet Name="CustomerAddresses" EntityType="DBCosmeticModel.CustomerAddress" />
     <EntitySet Name="Discounts" EntityType="DBCosmeticModel.Discount" />
     <EntitySet Name="Employees" EntityType="DBCosmeticModel.Employee" />
-    <EntitySet Name="EmployeeDetails" EntityType="DBCosmeticModel.EmployeeDetail" />
     <EntitySet Name="Notifications" EntityType="DBCosmeticModel.Notification" />
     <EntitySet Name="Orders" EntityType="DBCosmeticModel.Order" />
     <EntitySet Name="OrderDetails" EntityType="DBCosmeticModel.OrderDetail" />
@@ -17,7 +16,9 @@
     <EntitySet Name="ProductDetails" EntityType="DBCosmeticModel.ProductDetail" />
     <EntitySet Name="ProductTypes" EntityType="DBCosmeticModel.ProductType" />
     <EntitySet Name="Salaries" EntityType="DBCosmeticModel.Salary" />
+    <EntitySet Name="Sexes" EntityType="DBCosmeticModel.Sex" />
     <EntitySet Name="Status" EntityType="DBCosmeticModel.Status" />
+    <EntitySet Name="EmployeeDetails" EntityType="DBCosmeticModel.EmployeeDetail" />
   </EntityContainer>
   <EntityType Name="ActionLog">
     <Key>
@@ -102,22 +103,6 @@
     <Property Name="UserName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
     <Property Name="Password" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
     <Property Name="dateCreate" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="EmployeeDetail">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="emID" Type="Int64" />
-    <Property Name="fullName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="sex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="photo" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
-    <Property Name="phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-    <Property Name="mail" Type="String" MaxLength="200" FixedLength="true" Unicode="false" />
-    <Property Name="posID" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="roleID" Type="Int32" />
-    <Property Name="addressID" Type="Int32" />
-    <Property Name="isActive" Type="Int32" />
   </EntityType>
   <EntityType Name="Notification">
     <Key>
@@ -204,12 +189,35 @@
     <Property Name="bonus" Type="Int64" />
     <Property Name="dateUpdate" Type="DateTime" Precision="3" />
   </EntityType>
+  <EntityType Name="Sex">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="Status">
     <Key>
       <PropertyRef Name="statusID" />
     </Key>
     <Property Name="statusID" Type="Int32" Nullable="false" />
     <Property Name="statusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="isActive" Type="Int32" />
+  </EntityType>
+  <EntityType Name="EmployeeDetail">
+    <Key>
+      <PropertyRef Name="emID" />
+    </Key>
+    <Property Name="emID" Type="Int64" Nullable="false" />
+    <Property Name="fullName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="birthday" Type="DateTime" Precision="0" />
+    <Property Name="sex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="photo" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="mail" Type="String" MaxLength="200" FixedLength="true" Unicode="false" />
+    <Property Name="posID" Type="Int32" />
+    <Property Name="roleID" Type="Int32" />
+    <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="isActive" Type="Int32" />
   </EntityType>
 </Schema>

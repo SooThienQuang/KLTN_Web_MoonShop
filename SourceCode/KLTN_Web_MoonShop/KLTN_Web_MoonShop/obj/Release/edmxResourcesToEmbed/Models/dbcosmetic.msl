@@ -92,23 +92,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="EmployeeDetails">
-      <EntityTypeMapping TypeName="DBCosmeticModel.EmployeeDetail">
-        <MappingFragment StoreEntitySet="EmployeeDetail">
-          <ScalarProperty Name="isActive" ColumnName="isActive" />
-          <ScalarProperty Name="addressID" ColumnName="addressID" />
-          <ScalarProperty Name="roleID" ColumnName="roleID" />
-          <ScalarProperty Name="posID" ColumnName="posID" />
-          <ScalarProperty Name="mail" ColumnName="mail" />
-          <ScalarProperty Name="phone" ColumnName="phone" />
-          <ScalarProperty Name="photo" ColumnName="photo" />
-          <ScalarProperty Name="sex" ColumnName="sex" />
-          <ScalarProperty Name="fullName" ColumnName="fullName" />
-          <ScalarProperty Name="emID" ColumnName="emID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Notifications">
       <EntityTypeMapping TypeName="DBCosmeticModel.Notification">
         <MappingFragment StoreEntitySet="Notification">
@@ -202,12 +185,37 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Sexes">
+      <EntityTypeMapping TypeName="DBCosmeticModel.Sex">
+        <MappingFragment StoreEntitySet="Sex">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Status">
       <EntityTypeMapping TypeName="DBCosmeticModel.Status">
         <MappingFragment StoreEntitySet="Status">
           <ScalarProperty Name="isActive" ColumnName="isActive" />
           <ScalarProperty Name="statusName" ColumnName="statusName" />
           <ScalarProperty Name="statusID" ColumnName="statusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployeeDetails">
+      <EntityTypeMapping TypeName="DBCosmeticModel.EmployeeDetail">
+        <MappingFragment StoreEntitySet="EmployeeDetail">
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="roleID" ColumnName="roleID" />
+          <ScalarProperty Name="posID" ColumnName="posID" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+          <ScalarProperty Name="sex" ColumnName="sex" />
+          <ScalarProperty Name="birthday" ColumnName="birthday" />
+          <ScalarProperty Name="fullName" ColumnName="fullName" />
+          <ScalarProperty Name="emID" ColumnName="emID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

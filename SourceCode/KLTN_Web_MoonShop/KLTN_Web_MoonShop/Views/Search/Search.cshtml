@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<KLTN_Web_MoonShop.Models.Product>
+@using KLTN_Web_MoonShop.Models;
 @{
     ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    DBCosmeticEntities db = new DBCosmeticEntities();
+    var loaisp = db.ProductTypes.Where(n=>n.isActive==1).ToList();
 }
 <link rel="stylesheet" href="https://fontawesome.com/v4.7.0/assets/font-awesome/css/font-awesome.css">
 <div class="container">
@@ -9,68 +12,18 @@
         <aside class="col-md-3">
             @using (Html.BeginForm("Search", "Search"))
             {
-                <div class="card">
+                <div class="card">                  
                     <article class="filter-group">
-                        <header class="card-header">
-                            <a href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="true" class="">
-                                <i class="icon-control fa fa-chevron-down"></i>
-                                <h6 class="title">Xuất xứ </h6>
-                            </a>
-                        </header>
-                        <div class="filter-content collapse show" id="collapse_2" style="">
-                            <div class="card-body">
-                                <label class="custom-control custom-checkbox">
-                                    <input type="checkbox" checked="" class="custom-control-input">
-                                    <i class="custom-control-label">
-                                        Việt Nam
-                                        <b class="badge badge-pill badge-light float-right">120</b>
-                                    </i>
-                                </label>
-                                <label class="custom-control custom-checkbox">
-                                    <input type="checkbox" checked="" class="custom-control-input">
-                                    <div class="custom-control-label">
-                                        Hàn quốc
-                                        <b class="badge badge-pill badge-light float-right">15</b>
-                                    </div>
-                                </label>
-                                <label class="custom-control custom-checkbox">
-                                    <input type="checkbox" checked="" class="custom-control-input">
-                                    <div class="custom-control-label">
-                                        Nhật bản
-                                        <b class="badge badge-pill badge-light float-right">35</b>
-                                    </div>
-                                </label>
-                                <label class="custom-control custom-checkbox">
-                                    <input type="checkbox" checked="" class="custom-control-input">
-                                    <div class="custom-control-label">
-                                        Mỹ
-                                        <b class="badge badge-pill badge-light float-right">89</b>
-                                    </div>
-                                </label>
-                                <label class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input">
-                                    <div class="custom-control-label">
-                                        Anh
-                                        <b class="badge badge-pill badge-light float-right">30</b>
-                                    </div>
-                                </label>
-                            </div> <!-- card-body.// -->
-                        </div>
-                    </article> <!-- filter-group .// -->
-                  
-                    <article class="filter-group">
-
                         <header class="card-header">
                             <a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
                                 <i class="icon-control fa fa-chevron-down"></i>
-                                <h6 class="title">Lọc theo </h6>
+                                <h6 class="btn btn-outline-danger">Bộ lọc</h6>
                             </a>
                         </header>
                         <select class="form-select mt-2" aria-label="Default select example" name="cbbloaisp">
-
-                            @foreach (var item in ViewBag.ProductType)
+                            <option selected value="">Loại mỹ phẩm</option>
+                            @foreach (var item in loaisp)
                             {
-                                <option selected value="0">Chọn loại sản phẩm</option>
                                 <option value="@item.proTypeID">@item.proTypeName</option>
                             }
                         </select>
