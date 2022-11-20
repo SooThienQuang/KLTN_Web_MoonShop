@@ -14,16 +14,16 @@ namespace KLTN_Web_MoonShop.Models
     
     public partial class EmployeeDetail
     {
-        public int ID { get; set; }
-        public Nullable<long> emID { get; set; }
+        public long emID { get; set; }
         public string fullName { get; set; }
+        public Nullable<System.DateTime> birthday { get; set; }
         public string sex { get; set; }
         public string photo { get; set; }
         public string phone { get; set; }
         public string mail { get; set; }
-        public string posID { get; set; }
+        public Nullable<int> posID { get; set; }
         public Nullable<int> roleID { get; set; }
-        public Nullable<int> addressID { get; set; }
+        public string address { get; set; }
         public Nullable<int> isActive { get; set; }
     }
 }

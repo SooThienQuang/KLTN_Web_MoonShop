@@ -129,6 +129,7 @@
     <Content Include="Asset\img\caroselhome\img_6.jpg" />
     <Content Include="Asset\img\cart.png" />
     <Content Include="Asset\img\delete.png" />
+    <Content Include="Asset\img\logo\f9a5893e92b154ef0da0.jpg" />
     <Content Include="Asset\img\logo\MoonShop.png" />
     <Content Include="Asset\img\producer\bongtaytrang.jpg" />
     <Content Include="Asset\img\producer\caylaymun.jpg" />
@@ -567,6 +568,7 @@
     <Compile Include="Controllers\API\AddressController.cs" />
     <Compile Include="Controllers\API\CartController.cs" />
     <Compile Include="Controllers\API\CustomerController.cs" />
+    <Compile Include="Controllers\API\EmployeeController.cs" />
     <Compile Include="Controllers\API\imageController.cs" />
     <Compile Include="Controllers\API\OrderController.cs" />
     <Compile Include="Controllers\API\PayController.cs" />
@@ -648,6 +650,9 @@
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Salary.cs">
+      <DependentUpon>dbcosmetic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sex.cs">
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Status.cs">

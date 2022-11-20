@@ -15,7 +15,7 @@ namespace KLTN_Web_MoonShop.Controllers.Admin
         // GET: Employee
         public ActionResult Index()
         {
-          return View(db.Products.Where(n => n.isActive == 1).OrderByDescending(n => n.productID).ToList());
+          return View(db.Employees.OrderByDescending(n => n.dateCreate).ToList());
         }
         [HttpPost]
         public ActionResult img(HttpPostedFileBase image)

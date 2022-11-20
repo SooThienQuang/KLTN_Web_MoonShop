@@ -1,41 +1,35 @@
-﻿@model IEnumerable<KLTN_Web_MoonShop.Models.Product>
+﻿@model IEnumerable<KLTN_Web_MoonShop.Models.Employee>
 @using KLTN_Web_MoonShop.Models
 
 @{
     ViewBag.Title = "Product";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     DBCosmeticEntities db = new DBCosmeticEntities();
+    var posion = db.Positions.ToList();
+    var sex = db.Sexes.ToList();
 }
 <div class="col-12">
     <div class="card recent-sales overflow-auto">
-        <div class="filter">
-            Lọc
-            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                    <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-            </ul>
-        </div>
 
         <div class="card-body">
-            <h5 class="card-title">Recent Sales <span>| Today</span></h5>
-            @*<button data-id="null" id="buttonId" class="btn btn-outline-success">Thêm mới</button>*@
-            @*@Html.Action("AddProduct", "Admin")*@
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addOrUpDateEm">
-            Thêm mới
-        </button>
+            <button type="button" class="btn btn-primary" onclick="showModalEmployee(1)">
+                Thêm mới
+            </button>
+            <button type="button" class="btn btn-outline-success" onclick="reload()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
+                    <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
+                </svg>
+                Reload
+            </button>
             <table class="table table-borderless datatable">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Tên sản phẩm</th>
+                        <th scope="col">Mã nhân viên</th>
+                        <th scope="col">Tên nhân viên</th>
                         <th scope="col">Hình ảnh</th>
-                        <th scope="col">Giá</th>
+                        <th scope="col">Chức vụ</th>
+                        <th scope="col"> Ngày vào làm</th>
                         <th scope="col"> </th>
                         <th scope="col"> </th>
                     </tr>
@@ -46,20 +40,18 @@
 
                         <tr>
 
-                            <th scope="row"><a href="#">@item.productID</a></th>
-                            <td>@item.productName</td>
+                            <th scope="row"><a href="#">@item.emID</a></th>
+                            <td>tên</td>
                             <td>
-                                <a href="#" onclick="ConfirmUpdate(@item.productID)" class="text-primary">
-                                    <img src="~/Asset/img/product/@item.productImage" height="100" width="100" />
-                                </a>
+                                    <img src="~/Asset/img/user/Sample_User_Icon.png" height="100" width="100" />
                             </td>
-                            <td>@item.productPrice</td>
+                            <td>ngày</td>
 
                             <td>
-                                <a class="btn btn-danger" onclick="ConfirmDelete(@item.productID)">Xóa </a>
+                                <a class="btn btn-danger" onclick="ConfirmDelete(@item.emID)">Xóa </a>
                             </td>
                             <td>
-                                <a class="btn btn-primary" onclick="ConfirmUpdate(@item.productID)">Sửa </a>
+                                <a class="btn btn-primary" onclick="showModalEmployee(@item.emID)">Sửa </a>
                             </td>
                         </tr>
 
@@ -77,6 +69,342 @@
 
     </div>
 </div>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+<div class="modal" id="addOrUpDateEm" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="addOrUpDateEm1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="text-center">
+                    <label id="titleEmployee"></label>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="text-right">
+                    <i class="fa fa-close close" style="color:red" data-dismiss="modal">Đóng</i>
+                </div>
+
+                <div class="row">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 p-0">
+                                <nav aria-label="breadcrumb ">
+                                    <ol class="breadcrumb py-3 px-3" style="background-color:white">
+                                        <li class="breadcrumb-item"><a href="#">Table</a></li>
+                                        <li class="breadcrumb-item"><a href="#">Nhân viên</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Dữ liệu</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="row">
+                                    <div class="col-12 bg-white p-0 px-3 py-3 mb-3">
+                                        <div class="d-flex flex-column align-items-center">
+                                            <div id="imgavt" style="  align-items: center;">
+                                                <input type="text" value="d2ce2c30c5b6348b66730acdd8560f7a.jpg" hidden id="txtimguser" name="txtimguser" />
+                                                <div id="preview" style="position: relative;">
+                                                    <div id="avatar" style=" background-color: antiquewhite; height: 200px; width: 200px; border: 3px solid #0af; border-radius: 50%; transition: background ease-out 200ms;"></div>
+                                                    <button id="upload-button"
+                                                            style=" height:50px; padding: 18px; border-radius: 50%; border: none; cursor: pointer; background-color: #08f; box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12); transition: background-color ease-out 120ms; position: absolute; right: -5%; bottom: 0%;"
+                                                            aria-labelledby="image"
+                                                            aria-describedby="image">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                                        </svg>
+                                                    </button>
+
+                                                </div>
+                                                @using (Html.BeginForm("img", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                {
+                                                    <input type="file" name="image" id="image" accept="image/*" style="display: none" />
+                                                    <button type="submit" class="btn btn-success" id="save">Lưu</button>
+                                                }
+                                            </div>
+
+                                            <p class="fw-bold h4 mt-3">John Doe</p>
+                                            <p class="text-muted">Full Stack Developer</p>
+                                            <p class="text-muted mb-3">Soma,San Francisco, CA</p>
+                                            <div class="d-flex ">
+                                                <div class="btn btn-primary follow me-2">Follow</div>
+                                                <div class="btn btn-outline-primary message">Message</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 bg-white p-0 px-2 pb-3 mb-3">
+                                        <div class="d-flex justify-content-between border-bottom py-2 px-3">
+                                            <p><span class="fas fa-globe me-2"></span>Website</p>
+                                            <a href="#">https://bootdey.com</a>
+                                        </div>
+                                        <div class="d-flex justify-content-between border-bottom py-2 px-3">
+                                            <p><span class="fab fa-github-alt me-2"></span>Github</p>
+                                            <a href="">bootdey</a>
+                                        </div>
+                                        <div class="d-flex justify-content-between border-bottom py-2 px-3">
+                                            <p><span class="fab fa-twitter me-2"></span>Twitter</p>
+                                            <a href=""></a>
+                                        </div>
+                                        <div class="d-flex justify-content-between border-bottom py-2 px-3">
+                                            <p><span class="fab fa-instagram me-2"></span>Instagram</p>
+                                            <a href="">bootdey</a>
+                                        </div>
+                                        <div class="d-flex justify-content-between py-2 px-3">
+                                            <p><span class="fab fa-facebook-f me-2"></span>facebook</p>
+                                            <a href="">bootdey</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7 ps-md-4">
+                                <div class="row">
+                                    <div class="col-12 bg-white px-3 mb-3 pb-3">
+                                        <label id="noti" style="color:red"></label>
+                                        <div class="d-flex align-items-center justify-content-between border-bottom">
+                                            <p class="py-2">Họ</p>
+                                            <input id="txtho" required type="text" style="border:none;max-width:300px" class="form-control" placeholder="Nguyễn Thiện" />
+                                            <p class="py-2">Tên</p>
+                                            <input id="txtten" required type="text" style="border:none;max-width:300px" class="form-control" placeholder="Quang" />
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between border-bottom">
+                                            <p class="py-2">Ngày sinh</p>
+                                            <input id="txtbirthday" type="date" style="border:none;max-width:300px" class="form-control" value="">
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between border-bottom">
+                                            <p class="py-2">Email</p>
+                                            <input id="txtemail" type="email" style="border: none; max-width: 300px" class="form-control" placeholder="example@gmail.com" />
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between border-bottom">
+                                            <p class="py-2">Số điện thoại</p>
+                                            <input id="txtsdt" required type="text" style="border: none; max-width: 300px" class="form-control" placeholder="0123456789" />
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between border-bottom">
+                                            <p class="py-2">Giới tính</p>
+                                            <select class="form-select" style="max-width:300px" aria-label="Default select example" id="cbbgioitinh">
+
+                                                @foreach (var item in sex)
+                                                {
+                                                    <option value="@item.Name">@item.Name</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between border-bottom">
+                                            <p class="py-2">Chức vụ</p>
+                                            <select class="form-select" style="max-width:300px" aria-label="Default select example" id="cbbchucvu">
+                                                <option selected>Chức vụ</option>
+                                                @foreach (var item in posion)
+                                                {
+                                                    <option value="@item.posID">@item.posName</option>
+                                                }
+
+                                            </select>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <p class="py-2">Địa chỉ</p>
+                                            <p class="py-2 text-muted"> Soma,San Francisco,CA</p>
+                                            <a href="#" onclick="showadd()" style="color:blue">Thêm/Sửa</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 bg-white px-3 pb-2" id="divaddress" style="display:none">
+                                        <div class="form-group mt-3">
+                                            <div class="form-group">
+                                                Tỉnh/ Thành Phố
+                                                <select name="" id="province" class="form-control coupon">
+                                                </select>
+                                                <br />
+                                                Quận/Huyện
+                                                <select name="" id="district" class="form-control coupon">
+                                                    <option value="">chọn quận/huyện</option>
+                                                </select>
+                                                <br />
+                                                Xã/Phường
+                                                <select name="" id="ward" class="form-control coupon">
+                                                    <option value="">chọn xã/phường</option>
+                                                </select>
+
+                                                <br />
+                                                Số nhà/Đường
+                                                <input type="text" id="txtduong" class="form-control coupon" name="txtduong">
+                                                <br />
+                                                Địa chỉ đã chọn
+                                                <input type="text" id="txt" class="form-control coupon" name="txt">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-danger" onclick="createOrUpdate()" type="submit">Lưu thông tin</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    //---------------------------------------luu thong tin nhan vien-------------------------------------
+    function createOrUpdate() {
+        if (document.getElementById("txtho").value == "" || document.getElementById("txtten").value == "" || document.getElementById("txtsdt").value == "") {
+            //Swal.fire({
+            //    position: 'top-center',
+            //    title: 'Lỗi',
+            //    icon: 'error',
+            //    text: 'Vui lòng nhập đầy đủ thông tin',
+            //    showConfirmButton: false,
+            //    timer: 1500
+            //})
+            document.getElementById("noti").innerHTML = "Vui lòng nhập đầy đủ thông tin";
+        }
+        else {
+            var employee = new Object();
+            employee.emID = 1;
+            employee.fullName = document.getElementById("txtho").value + " " + document.getElementById("txtten").value;
+            employee.sex = document.getElementById("cbbgioitinh").value;
+            employee.mail = document.getElementById("txtemail").value;
+            employee.phone = document.getElementById("txtsdt").value;
+            employee.posID = document.getElementById("cbbchucvu").value;
+            employee.birthday = document.getElementById("txtbirthday").value;
+            employee.address = document.getElementById("txtduong").value+","+ document.getElementById("txt").value;
+            employee.create = create;
+            $.ajax({
+                url: '/api/employee/',
+                type: 'POST',
+                dataType: 'json',
+                data: employee,
+                success: function (result) {
+                    Swal.fire({
+                        position: 'top-center',
+                        title: 'Thành công',
+                        icon: 'success',
+                        text: 'Thêm mới nhân viên thành công',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                },
+                error: function (err) {
+                    alert(err.statusText);
+                }
+            });
+
+            $("#addOrUpDateEm").modal("hide");
+        }
+       
+    }
+    //-------------------------------------------show modal option----------------------------
+    var create = true;
+    function showModalEmployee(type) {
+        if (type ==1) {
+            document.getElementById('titleEmployee').innerHTML = 'Thêm mới nhân viên';
+            $("#addOrUpDateEm").modal("show");
+        }
+        else {
+            create = false;
+            document.getElementById('titleEmployee').innerHTML = 'Sửa thông tin nhân viên';
+            $("#addOrUpDateEm").modal("show");
+        }
+    }
+ 
+    //----------------------------------------------------api dia chi-----------------------------------------
+    const host = "https://provinces.open-api.vn/api/";
+    var callAPI = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data, "province");
+            });
+    }
+    callAPI('https://provinces.open-api.vn/api/?depth=1');
+    var callApiDistrict = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data.districts, "district");
+            });
+    }
+    var callApiWard = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data.wards, "ward");
+            });
+    }
+
+    var renderData = (array, select) => {
+        let row = ' <option disable value="">chọn</option>';
+        array.forEach(element => {
+            row += `<option value="${element.code}">${element.name}</option>`
+        });
+        document.querySelector("#" + select).innerHTML = row
+    }
+
+    $("#province").change(() => {
+        callApiDistrict(host + "p/" + $("#province").val() + "?depth=2");
+        printResult();
+    });
+    $("#district").change(() => {
+        callApiWard(host + "d/" + $("#district").val() + "?depth=2");
+        printResult();
+    });
+    $("#ward").change(() => {
+        printResult();
+    })
+    var duong = document.getElementById("txtduong").value;
+    var printResult = () => {
+        if ($("#district").val() != "" && $("#province").val() != "" &&
+            $("#ward").val() != "") {
+            let result = $("#province option:selected").text() +
+                " | " + $("#district option:selected").text() + " | " +
+                $("#ward option:selected").text();
+
+            $("#result").text(result)
+
+            var diachi = result;
+            document.getElementById("txt").value = $("#ward option:selected").text() + "," + $("#district option:selected").text() + "," + $("#province option:selected").text();
+
+
+
+        }
+
+    }
+    //-------------------------------showpanel address--------------------------------------------
+    function showadd() {
+        var x = document.getElementById("divaddress");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    //-------------------------------------------reload-----------------------------------
+    function reload() {
+        location.reload();
+    }
+    //-----------------------------------------hinhanh---------------------------------
+    document.getElementById('save').style.visibility = 'hidden';
+    var imgg = document.getElementById('txtimguser').value;
+    const save_button = document.getElementById("save");
+    const UPLOAD_BUTTON = document.getElementById("upload-button");
+    const FILE_INPUT = document.querySelector("input[type=file]");
+    const AVATAR = document.getElementById("avatar");
+    AVATAR.style.background = "url('/Asset/img/user/" + imgg + "') center center/cover"
+    UPLOAD_BUTTON.addEventListener("click", () => FILE_INPUT.click());
+    FILE_INPUT.addEventListener("change", event => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            AVATAR.setAttribute("aria-label", file.name);
+            AVATAR.style.background = `url(${reader.result}) center center/cover`;
+            document.getElementById('save').style.visibility = 'visible';
+            var url = "/api/Image/";
+            /* var data = new FormData(document.getElementById("form"));*/
+            fetch(url, {
+                method: "POST",
+                data: "1"
+            });
+        };
+    });
+</script>
 <style>
     .breadcrumb {
         background-color: #c5cee4;
@@ -119,128 +447,3 @@
         color: #5999ec;
     }
 </style>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
-<div class="modal" id="addOrUpDateEm" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="addOrUpDateEm" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="text-right">
-                    <i class="fa fa-close close" data-dismiss="modal">Đóng</i>
-                </div>
-                <div class="row">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 p-0">
-                                <nav aria-label="breadcrumb ">
-                                    <ol class="breadcrumb py-3 px-3">
-                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                        <li class="breadcrumb-item"><a href="#">Library</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Data</li>
-                                    </ol>
-                                </nav>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="row">
-                                    <div class="col-12 bg-white p-0 px-3 py-3 mb-3">
-                                        <div class="d-flex flex-column align-items-center">
-                                            <img class="photo"
-                                                 src="https://images.unsplash.com/photo-1541647376583-8934aaf3448a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-                                                 alt="">
-                                            <p class="fw-bold h4 mt-3">John Doe</p>
-                                            <p class="text-muted">Full Stack Developer</p>
-                                            <p class="text-muted mb-3">Soma,San Francisco, CA</p>
-                                            <div class="d-flex ">
-                                                <div class="btn btn-primary follow me-2">Follow</div>
-                                                <div class="btn btn-outline-primary message">Message</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 bg-white p-0 px-2 pb-3 mb-3">
-                                        <div class="d-flex justify-content-between border-bottom py-2 px-3">
-                                            <p><span class="fas fa-globe me-2"></span>Website</p>
-                                            <a href="#">https://bootdey.com</a>
-                                        </div>
-                                        <div class="d-flex justify-content-between border-bottom py-2 px-3">
-                                            <p><span class="fab fa-github-alt me-2"></span>Github</p>
-                                            <a href="">bootdey</a>
-                                        </div>
-                                        <div class="d-flex justify-content-between border-bottom py-2 px-3">
-                                            <p><span class="fab fa-twitter me-2"></span>Twitter</p>
-                                            <a href=""></a>
-                                        </div>
-                                        <div class="d-flex justify-content-between border-bottom py-2 px-3">
-                                            <p><span class="fab fa-instagram me-2"></span>Instagram</p>
-                                            <a href="">bootdey</a>
-                                        </div>
-                                        <div class="d-flex justify-content-between py-2 px-3">
-                                            <p><span class="fab fa-facebook-f me-2"></span>facebook</p>
-                                            <a href="">bootdey</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-7 ps-md-4">
-                                <div class="row">
-                                    <div class="col-12 bg-white px-3 mb-3 pb-3">
-                                        <div class="d-flex align-items-center justify-content-between border-bottom">
-                                            <p class="py-2">Full Name</p>
-                                            <p class="py-2 text-muted">Kenneth valdez</p>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-between border-bottom">
-                                            <p class="py-2">Email</p>
-                                            <p class="py-2 text-muted">fip@jukmuh.al</p>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-between border-bottom">
-                                            <p class="py-2">Phone</p>
-                                            <p class="py-2 text-muted">(239) 816-9029</p>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-between border-bottom">
-                                            <p class="py-2">Mobile</p>
-                                            <p class="py-2 text-muted">(320) 380-4539</p>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <p class="py-2">Address</p>
-                                            <p class="py-2 text-muted"> Soma,San Francisco,CA</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 bg-white px-3 pb-2">
-                                        <h6 class="d-flex align-items-center mb-3 fw-bold py-3">
-                                            <i class="text-info me-2">assignment</i>Project
-                                            Status
-                                        </h6>
-                                        <small>Web Design</small>
-                                        <div class="progress mb-3" style="height: 5px">
-                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 60%"
-                                                 aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <small>One Page</small>
-                                        <div class="progress mb-3" style="height: 5px">
-                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 72%"
-                                                 aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <small>Mobile Template</small>
-                                        <div class="progress mb-3" style="height: 5px">
-                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 50%"
-                                                 aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <small>Backend API</small>
-                                        <div class="progress mb-3" style="height: 5px">
-                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 90%"
-                                                 aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <small>Website Markup</small>
-                                        <div class="progress mb-3" style="height: 5px">
-                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 80%"
-                                                 aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>

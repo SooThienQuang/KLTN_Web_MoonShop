@@ -86,18 +86,18 @@
   </EntityType>
   <EntityType Name="EmployeeDetail">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="emID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="emID" Type="bigint" />
+    <Property Name="emID" Type="bigint" Nullable="false" />
     <Property Name="fullName" Type="nvarchar" MaxLength="500" />
+    <Property Name="birthday" Type="date" />
     <Property Name="sex" Type="nvarchar" MaxLength="50" />
     <Property Name="photo" Type="nchar" MaxLength="1000" />
     <Property Name="phone" Type="char" MaxLength="10" />
     <Property Name="mail" Type="char" MaxLength="200" />
-    <Property Name="posID" Type="nvarchar" MaxLength="500" />
+    <Property Name="posID" Type="int" />
     <Property Name="roleID" Type="int" />
-    <Property Name="addressID" Type="int" />
+    <Property Name="address" Type="nvarchar" MaxLength="500" />
     <Property Name="isActive" Type="int" />
   </EntityType>
   <EntityType Name="Notification">
@@ -185,6 +185,13 @@
     <Property Name="bonus" Type="bigint" />
     <Property Name="dateUpdate" Type="datetime" />
   </EntityType>
+  <EntityType Name="Sex">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="Status">
     <Key>
       <PropertyRef Name="statusID" />
@@ -210,6 +217,7 @@
     <EntitySet Name="ProductDetail" EntityType="Self.ProductDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductType" EntityType="Self.ProductType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sex" EntityType="Self.Sex" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>
