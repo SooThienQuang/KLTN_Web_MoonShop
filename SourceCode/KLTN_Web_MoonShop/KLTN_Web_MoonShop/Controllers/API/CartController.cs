@@ -12,6 +12,15 @@ using System.Web.ModelBinding;
 
 namespace KLTN_Web_MoonShop.Controllers.API
 {
+    public class cartTam
+    {
+        public long id { get; set; }
+        public string name { get; set; }
+        public long quantity { get; set; }
+        public long price { get; set; }
+        public string img { get; set; }
+        public long money { get; set; }
+    }
     public class CartController : ApiController
     {
         public class person

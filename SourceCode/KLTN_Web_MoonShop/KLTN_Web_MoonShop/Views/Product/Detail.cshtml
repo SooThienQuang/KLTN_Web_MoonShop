@@ -521,7 +521,8 @@
             data: person,
             success: function (data, textStatus, xhr) {
                 var slq = Object.keys(data).length;
-                $(".soluongcart").replaceWith(`` + slq+``);
+                $(".soluongcart").replaceWith(`` + slq + ``);
+
                 swal({
                     title: 'Thành công!',
                     text: 'Bấm vào icon giỏ hàng để xem chi tiết',
@@ -533,6 +534,25 @@
                         className: "btn btn-primary"
                     }
                 })
+
+               
+                $('.chitietcart').empty();
+                $.each(data, function (index, item) {
+                    var trHTL = $(
+                        `<a class="dropdown-item" href="#" id="dropcart"> ` +
+                        `<img src="/asset/img/product/` + item.img+`" width="50" height="50">`
+                        + ` <h6 class="font-weight-normal">`
+                        + item.name +
+                    ` </h6>`
+
+                        + ` <h6 class="font-weight-normal mr-3 ml-3" style="color:red"> ` + item.price + `</h6>`
+                        + ` <h6 class="font-weight-normal">` + item.quantity + `</h6>`
+                    + ` </a>`
+            
+                    );
+                    $('.chitietcart').append(trHTL);
+                })
+               
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.log('Error in Operation');

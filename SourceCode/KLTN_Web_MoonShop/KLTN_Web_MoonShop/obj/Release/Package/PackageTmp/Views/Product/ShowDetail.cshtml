@@ -50,9 +50,11 @@
                     <span>200ml</span>
                     <span>400ml</span>
                     <span>800ml</span>
+                                    
 
                 </div>*@
                                 <div class="color">
+                                 
                                     @*<h6 class="mt-2 fw-bold">Color</h6>
                     <div class="diff_color d-flex gap-3">*@ <span></span> <span></span> <span></span>
                                 </div>
@@ -110,7 +112,9 @@
             type: 'POST',
             dataType: 'json',
             data: person,
-            success: function (result) {
+            success: function (data) {
+                var slq = Object.keys(data).length;
+                $(".soluongcart").replaceWith(`` + slq + ``);
                 Swal.fire(
                     'Thêm thành công!',
                     'Click vào giỏ hàng để xem chi tiết',

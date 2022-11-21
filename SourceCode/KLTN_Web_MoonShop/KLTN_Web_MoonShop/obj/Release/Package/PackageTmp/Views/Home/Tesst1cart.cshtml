@@ -1,50 +1,59 @@
 ﻿<!doctype html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="~/Content/multiselect/fonts/icomoon/style.css">
-    <link rel="stylesheet" href="~/Content/multiselect/css/chosen.css">
-    <link rel="stylesheet" href="~/Content/multiselect/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/Content/multiselect/css/style.css">
-    <script src="~/Content/multiselect/js/jquery-3.3.1.min.js"></script>
-    <script src="~/Content/multiselect/js/popper.min.js"></script>
-    <script src="~/Content/multiselect/js/bootstrap.min.js"></script>
-    <script src="~/Content/multiselect/js/chosen.jquery.min.js"></script>
-    <script src="~/Content/multiselect/js/main.js"></script>
+    <title>append demo</title>
+   
 </head>
 <body>
-
-    <select data-placeholder="Select Categories" multiple class="chosen-select" tabindex="8" style="border-radius:25px">
-        <option>Design</option>
-        <option>HTML5</option>
-        <option>CSS3</option>
-        <option>jQuery</option>
-        <option>BS4</option>
-        <option>Bootstrap</option>
-        <option>WordPress</option>
-        <option>FrontEnd</option>
-    </select>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <p>I would like to say: </p>
+    <table id="myTable">
+        <tbody>
+            <tr>1</tr>
+            <tr>2</tr>
+        </tbody>
+    </table>
     
-    <div class="content">
-        <h2 class="text-center">Multi-Select #9</h2>
-        <div class="container text-left">
-            <div class="row justify-content-center">
-                <div class="col-md-5">
+    <script>
+      
+        $(document).ready(function () {
+            $("p").append(document.createTextNode("Hello"));
+            loaddata();
+        })
+       
+        function loaddata()
+        {
+            var person = new Object();
+            person.proID = 1;
+            person.cusID = 2;
+            person.quantity = 3;
+            $.ajax({
+                url: '/getcart',
+                type: 'POST',
+                dataType: 'json',
+                data: person,
+                success: function (response) {
+                    $('#myTable').empty();
+                    $.each(response, function (index, item) {
+                        var trHTML = $(`<tr>
+                                    <td>`+ item.cartID + `</td>
+                                    <td>`+ item.name + `</td>
+                                    <td>`+ item.birthday + `</td>
+                                    <td>`+ `
+                                            <button class='iconButton' onclick="UpdateStudent(`+ item.id + `)" id="btnUpdate"><i class="fas fa-pencil-alt"></i>&nbsp;&nbsp; Sửa</button>
+                                            <button class='iconButton' onclick="deleteStudent(`+ item.id + `)" id="btnDelete"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp; Xóa </button>` + `</td>
+                                           
+                                </tr>`);
+                        $('#myTable').append(trHTML);
+                    })
+                },
+            });
+         }
+    </script>
 
-
-
-
-                </div>
-
-
-            </div>
-        </div>
-    </div>
-
+   
 </body>
 </html>
+
+
