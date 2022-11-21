@@ -140,11 +140,11 @@
                                 }
                                 else
                                 {
-                                    <a class="cart-button w-25" onclick="ConfirmDelete(@ViewBag.Product.productID,@user.customerID)">
+                                    <button type="button" class="cart-button w-50" onclick="ConfirmDelete(@ViewBag.Product.productID,@user.customerID)">
                                         <span class="add-to-cart">Add to cart</span>
                                         <span class="added">Item added</span> <i class="fa fa-plus"></i>
                                         <i class="fa fa-circle-thin"></i> <i class="fa fa-check"></i>
-                                    </a>
+                                    </button>
 
                                     <button type="button" data-toggle="modal" data-target="#checkoutModal" class="btn btn-danger btn-rounded btn-block w-50" style="border-radius:25px">
                                         <i class="ti-truck"></i>  Chọn mua
@@ -442,8 +442,8 @@
         showSwal = function (type) {
             'use strict';
             if (type === 'success-message') {
-               /*   $("#checkoutModal").modal("hide");*/
-              
+                /*   $("#checkoutModal").modal("hide");*/
+
                 var pro = document.getElementById("txtproid").value;
                 var price = document.getElementById("txtprice").value;
                 var userid = document.getElementById("txtuserid").value;
@@ -506,9 +506,10 @@
     //    });
     //}
     //----------------------------------------------------------------them vao gio hang-----------------------------------
+    @*$(".soluongcart").append(`<p>` + @quantitycart + `<p/>`);*@
     var ConfirmDelete = function (productID, cusID) {
         var sl = document.getElementById("quantity").value;
-       
+
         var person = new Object();
         person.proID = productID;
         person.cusID = cusID;
@@ -519,6 +520,7 @@
             dataType: 'json',
             data: person,
             success: function (data, textStatus, xhr) {
+                $(".soluongcart").replaceWith(`` + data+``);
                 swal({
                     title: 'Thành công!',
                     text: 'Bấm vào icon giỏ hàng để xem chi tiết',

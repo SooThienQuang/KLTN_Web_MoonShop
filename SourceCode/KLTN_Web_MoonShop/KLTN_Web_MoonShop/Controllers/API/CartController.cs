@@ -13,6 +13,15 @@ namespace KLTN_Web_MoonShop.Controllers.API
 {
     public class CartController : ApiController
     {
+         public class cartTam
+    {
+        public long id { get; set; }
+        public string name { get; set; }
+        public long quantity { get; set; }
+        public long price { get; set; }
+        public string img { get; set; }
+        public long money { get; set; }
+    }
         public class person
         {
             public long proID { get; set; }
@@ -22,9 +31,16 @@ namespace KLTN_Web_MoonShop.Controllers.API
         }
         // GET: api/Cart
         DBCosmeticEntities db = new DBCosmeticEntities();
-        public IEnumerable<string> Get()
+        [Route("getcart")]
+        [HttpPost]
+        public IEnumerable<Cart> getcart(person ob)
         {
-            return new string[] { "value1", "value2" };
+            return db.Carts.ToList();
+        }
+        [Route("countcart")]
+        public IEnumerable<Cart> Count(long id)
+        {
+            return db.Carts.ToList();
         }
         //Thêm giỏ hàng
         public bool Get(long id)
@@ -40,7 +56,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
            
         }
         [HttpPost]
-        public string AddToCart(person obj)
+        public int AddToCart(person obj)
         {
             try
             {
@@ -92,12 +108,14 @@ namespace KLTN_Web_MoonShop.Controllers.API
                         db.CartDetails.Add(cd);
                         db.SaveChanges();
                     }    
-                }    
-                return "Thêm giỏ hàng thành công";
+                }
+                Cart cca = db.Carts.FirstOrDefault(n => n.customerID == obj.cusID);
+                int sl=db.CartDetails.Where(n=>n.cartID==cca.cartID&&n.isActive==1).Count();
+                return sl;
             }
              catch
             {
-                return "Thêm giỏ hàng thất bại";
+                return 0;
             } 
         }
         [HttpPut]        

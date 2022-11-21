@@ -529,6 +529,7 @@
     <Content Include="js\bootstrap4\bootstrap.js" />
     <Content Include="js\bootstrap4\bootstrap.min.js" />
     <Content Include="js\caroselhome\script.js" />
+    <Content Include="js\cart.js" />
     <Content Include="js\chart.js" />
     <Content Include="js\dashboard.js" />
     <Content Include="js\documentation.js" />
