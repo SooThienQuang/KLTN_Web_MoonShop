@@ -1,5 +1,6 @@
 ﻿using KLTN_Web_MoonShop.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.Entity.Migrations;
@@ -13,15 +14,6 @@ namespace KLTN_Web_MoonShop.Controllers.API
 {
     public class CartController : ApiController
     {
-         public class cartTam
-    {
-        public long id { get; set; }
-        public string name { get; set; }
-        public long quantity { get; set; }
-        public long price { get; set; }
-        public string img { get; set; }
-        public long money { get; set; }
-    }
         public class person
         {
             public long proID { get; set; }
@@ -56,7 +48,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
            
         }
         [HttpPost]
-        public int AddToCart(person obj)
+        public IEnumerable<cartTam> AddToCart(person obj)
         {
             try
             {
@@ -110,12 +102,27 @@ namespace KLTN_Web_MoonShop.Controllers.API
                     }    
                 }
                 Cart cca = db.Carts.FirstOrDefault(n => n.customerID == obj.cusID);
-                int sl=db.CartDetails.Where(n=>n.cartID==cca.cartID&&n.isActive==1).Count();
-                return sl;
+                List<CartDetail> sl=db.CartDetails.Where(n=>n.cartID==cca.cartID&&n.isActive==1).ToList();
+                List<cartTam> lsttam = new List<cartTam>();
+                foreach (var i in sl)
+                {
+                    cartTam c1 = new cartTam();
+                    c1.id = (long)i.productID;
+                    Product pro = db.Products.ToList().FirstOrDefault(n => n.productID == i.productID);
+                    c1.name = pro.productName;
+                    c1.img = pro.productImage;
+                    c1.price = (long)pro.productPrice;
+                    c1.quantity = (long)i.cartQuantity;
+                    c1.money = (long)i.cartMoney;
+                    lsttam.Add(c1);
+
+                }
+                return lsttam;
             }
              catch
             {
-                return 0;
+                List<cartTam> lsttam = new List<cartTam>();
+                return lsttam;
             } 
         }
         [HttpPut]        

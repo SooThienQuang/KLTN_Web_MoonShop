@@ -520,7 +520,8 @@
             dataType: 'json',
             data: person,
             success: function (data, textStatus, xhr) {
-                $(".soluongcart").replaceWith(`` + data+``);
+                var slq = Object.keys(data).length;
+                $(".soluongcart").replaceWith(`` + slq+``);
                 swal({
                     title: 'Thành công!',
                     text: 'Bấm vào icon giỏ hàng để xem chi tiết',
