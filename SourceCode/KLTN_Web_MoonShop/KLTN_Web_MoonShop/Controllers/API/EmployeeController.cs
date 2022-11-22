@@ -2,9 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace KLTN_Web_MoonShop.Controllers.API
@@ -15,13 +17,17 @@ namespace KLTN_Web_MoonShop.Controllers.API
         public string UserName { get; set; }
         public string Password { get; set; }
         public string fullName { get; set; }
+        public string lastName { get; set; }
         public DateTime birthday { get; set; }
+        public string strDate { get; set; }
+        public DateTime datecreate { get; set; }
         public string sex { get; set; }
         public string phone { get; set; }
         public string mail { get; set; }
         public int posID { get; set; }
         public int roleID { get; set; }
         public string address { get; set; }
+        public string img { get; set; }
         public bool create { get; set; }
     }
     public class EmployeeController : ApiController
@@ -58,6 +64,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
                 detail.phone = data.phone;
                 detail.posID = data.posID;
                 detail.address = data.address;
+                detail.photo = "Sample_User_Icon.png";
                 detail.isActive = 1;
                 db.Employees.AddOrUpdate(employee);
                 db.EmployeeDetails.AddOrUpdate(detail);
@@ -66,10 +73,55 @@ namespace KLTN_Web_MoonShop.Controllers.API
             }   
             else
             {
-                //sửa thông tin nhân viên
+                EmployeeDetail detail = db.EmployeeDetails.FirstOrDefault(n => n.emID == data.emID);
+                detail.fullName = data.fullName;
+                detail.birthday = data.birthday;
+                detail.sex = data.sex;
+                detail.mail = data.mail;
+                detail.phone = data.phone;
+                detail.posID = data.posID;
+                detail.address = data.address;
+                detail.photo = "Sample_User_Icon.png";
+                detail.isActive = 1;
+                db.EmployeeDetails.AddOrUpdate(detail);
+                db.SaveChanges();
             }    
            
             return "Success";
         }
+        [Route("getemployee")]
+        [HttpPost]
+        public employee GetEmployee(employee id)
+        {
+            Employee employee = db.Employees.FirstOrDefault(n => n.emID == id.emID);
+            EmployeeDetail ed=db.EmployeeDetails.FirstOrDefault(n=>n.emID == id.emID);
+            employee e = new employee();
+           try
+            {
+                e.emID = id.emID;
+                e.phone = ed.phone;
+                e.address = ed.address;
+                string[] arrten = ed.fullName.Split(' ');
+                int leng = ed.fullName.Length - (arrten[arrten.Length - 1]).Length;
+                e.fullName = ed.fullName.Substring(0,leng-1);
+                e.lastName = arrten[arrten.Length - 1];
+                e.birthday = (DateTime)ed.birthday;
+                e.strDate = e.birthday.ToString("yyyy-MM-dd");
+                e.mail = ed.mail;
+                e.UserName = employee.UserName;
+                e.Password = employee.Password;
+                e.sex = ed.sex;
+                 e.posID = (int)ed.posID;
+                e.datecreate = (DateTime)employee.dateCreate;
+                e.img = ed.photo;
+                return e;
+            }
+            catch
+            {
+                return e;
+            }
+          
+        }
+        
     }
 }

@@ -536,13 +536,11 @@
                 })
 
                
-                var loca = window.location.hostname;
-                alert(loca);
                 $('.chitietcart').empty();
                 $.each(data, function (index, item) {
                     var trHTL = $(
                         `<a class="dropdown-item" href="#" id="dropcart"> ` +
-                        `<img src="` + loca + `/asset/img/product/` + item.img+`" width="50" height="50">`
+                        `<img src="/asset/img/product/` + item.img+`" width="50" height="50">`
                         + ` <h6 class="font-weight-normal">`
                         + item.name +
                     ` </h6>`

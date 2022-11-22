@@ -18,7 +18,7 @@ namespace KLTN_Web_MoonShop.Controllers.Admin
           return View(db.Employees.OrderByDescending(n => n.dateCreate).ToList());
         }
         [HttpPost]
-        public ActionResult img(HttpPostedFileBase image)
+        public string img(HttpPostedFileBase image)
         {
             if (image != null)
             {
@@ -35,7 +35,7 @@ namespace KLTN_Web_MoonShop.Controllers.Admin
                 db.SaveChanges();
                 Session["user"] = cs;
             }
-            return RedirectToAction("DetailProfile");
+            return "success";
         }
 
     }
