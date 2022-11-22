@@ -47,7 +47,7 @@
                                 <img src="~/Asset/img/user/@ed.photo" height="100" width="100" />
                             </td>
                             <td>@ed.birthday</td>
-                            <td>@po.posName</td>
+                            @*<td>@po.posName</td>*@
                             <td>
                                 <a class="btn btn-danger" onclick="ConfirmDelete(@item.emID)">Xóa </a>
                             </td>
@@ -104,21 +104,38 @@
                                                 <input type="text" value="d2ce2c30c5b6348b66730acdd8560f7a.jpg" hidden id="txtimguser" name="txtimguser" />
                                                 <div id="preview" style="position: relative;">
                                                     <div id="avatar" style=" background-color: antiquewhite; height: 200px; width: 200px; border: 3px solid #0af; border-radius: 50%; transition: background ease-out 200ms;"></div>
-                                                    <button id="upload-button"
-                                                            style=" height:50px; padding: 18px; border-radius: 50%; border: none; cursor: pointer; background-color: #08f; box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12); transition: background-color ease-out 120ms; position: absolute; right: -5%; bottom: 0%;"
-                                                            aria-labelledby="image"
-                                                            aria-describedby="image">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                                                        </svg>
-                                                    </button>
+                                                    @*<button id="upload-button"
+                style=" height:50px; padding: 18px; border-radius: 50%; border: none; cursor: pointer; background-color: #08f; box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12); transition: background-color ease-out 120ms; position: absolute; right: -5%; bottom: 0%;"
+                aria-labelledby="image"
+                aria-describedby="image">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+            </svg>
+        </button>*@
+                                                <label for="inp">
+                                                    Browse...
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                                    </svg>
+                                                </label>
+                                                    <input id="inp" type="file">
+                                                    <p id="b64" hidden></p>
+                                                    <style>
+                                                        label {
+                                                            cursor: pointer;
+                                                            color:blue;
+                                                            /* Style as you please, it will become the visible UI component. */
+                                                        }
 
+                                                        #inp {
+                                                            opacity: 0;
+                                                            position: absolute;
+                                                            z-index: -1;
+                                                        }
+                                                    </style>
+                                                    
                                                 </div>
-                                                @using (Html.BeginForm("img", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                                {
-                                                    <input type="file" name="image" id="image" accept="image/*" style="display: none" />
-                                                    <button type="submit" class="btn btn-success" id="save">Lưu</button>
-                                                }
+                                               
                                             </div>
 
                                             <p class="fw-bold h4 mt-3">John Doe</p>
@@ -246,7 +263,16 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <input id="txtcusid" value="1" hidden />
 <script>
-
+    //--------------------------------clear modal---------------------------------------------
+    $('#addOrUpDateEm').on('hidden.bs.modal', function (e) {
+        $(this)
+            .find("input,textarea,select,p")
+            .val('')
+            .end()
+            .find("input[type=checkbox], input[type=radio]")
+            .prop("checked", "")
+            .end();
+    })
     //---------------------------------------luu thong tin nhan vien-------------------------------------
     function createOrUpdate() {
         if (document.getElementById("txtho").value == "" || document.getElementById("txtten").value == "" || document.getElementById("txtsdt").value == "") {
@@ -262,6 +288,8 @@
         }
         else {
             var employee = new Object();
+            employee.imgbase64 = document.getElementById("b64").innerHTML;
+            employee.img = document.getElementById("inp").value;
             employee.emID = document.getElementById("txtcusid").value;
             employee.fullName = document.getElementById("txtho").value + " " + document.getElementById("txtten").value;
             employee.sex = document.getElementById("cbbgioitinh").value;
@@ -324,6 +352,7 @@
                         else
                             document.getElementById("cbbgioitinh").selectedIndex = 0;
                     document.getElementById("txtemail").value = data.mail;
+                    const AVATAR = document.getElementById("avatar");
                     AVATAR.style.background = "url('/Asset/img/user/" + data.img + "') center center/cover"
                     document.getElementById("txtsdt").value = data.phone;
                     document.getElementById("cbbchucvu").selectedIndex = data.posID;
@@ -433,30 +462,48 @@
         location.reload();
     }
     //-----------------------------------------hinhanh---------------------------------
-    document.getElementById('save').style.visibility = 'hidden';
-    var imgg = document.getElementById('txtimguser').value;
-    const save_button = document.getElementById("save");
-    const UPLOAD_BUTTON = document.getElementById("upload-button");
-    const FILE_INPUT = document.querySelector("input[type=file]");
-    const AVATAR = document.getElementById("avatar");
-    AVATAR.style.background = "url('/Asset/img/user/" + imgg + "') center center/cover"
-    UPLOAD_BUTTON.addEventListener("click", () => FILE_INPUT.click());
-    FILE_INPUT.addEventListener("change", event => {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-            AVATAR.setAttribute("aria-label", file.name);
-            AVATAR.style.background = `url(${reader.result}) center center/cover`;
-            document.getElementById('save').style.visibility = 'visible';
-            var url = "/api/Image/";
-            /* var data = new FormData(document.getElementById("form"));*/
-            fetch(url, {
-                method: "POST",
-                data: "1"
-            });
-        };
-    });
+    function readFile() {
+
+        if (!this.files || !this.files[0]) return;
+
+        const FR = new FileReader();
+
+        FR.addEventListener("load", function (evt) {
+            const AVATAR = document.getElementById("avatar");
+            AVATAR.style.background = "url('" + evt.target.result + "') center center/cover"
+            document.querySelector("#avatar").src = evt.target.result;
+            document.querySelector("#b64").textContent = evt.target.result;
+        });
+
+        FR.readAsDataURL(this.files[0]);
+
+    }
+    document.querySelector("#inp").addEventListener("change", readFile);
+
+    //document.getElementById('save').style.visibility = 'hidden';
+    //var imgg = document.getElementById('txtimguser').value;
+    //const save_button = document.getElementById("save");
+    //const UPLOAD_BUTTON = document.getElementById("upload-button");
+    //const FILE_INPUT = document.querySelector("input[type=file]");
+    //const AVATAR = document.getElementById("avatar");
+    //AVATAR.style.background = "url('/Asset/img/user/" + imgg + "') center center/cover"
+    //UPLOAD_BUTTON.addEventListener("click", () => FILE_INPUT.click());
+    //FILE_INPUT.addEventListener("change", event => {
+    //    const file = event.target.files[0];
+    //    const reader = new FileReader();
+    //    reader.readAsDataURL(file);
+    //    reader.onloadend = () => {
+    //        AVATAR.setAttribute("aria-label", file.name);
+    //        AVATAR.style.background = `url(${reader.result}) center center/cover`;
+    //        document.getElementById('save').style.visibility = 'visible';
+    //        var url = "/api/Image/";
+    //        /* var data = new FormData(document.getElementById("form"));*/
+    //        fetch(url, {
+    //            method: "POST",
+    //            data: "1"
+    //        });
+    //    };
+    //});
 </script>
 <style>
     .breadcrumb {

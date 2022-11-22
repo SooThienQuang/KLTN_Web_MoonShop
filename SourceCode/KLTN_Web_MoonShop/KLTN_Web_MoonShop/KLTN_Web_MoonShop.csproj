@@ -650,6 +650,7 @@
     <Compile Include="Models\ProductType.cs">
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReplaceUnitcode.cs" />
     <Compile Include="Models\Salary.cs">
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>

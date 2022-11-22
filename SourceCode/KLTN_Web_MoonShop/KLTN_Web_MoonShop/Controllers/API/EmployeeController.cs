@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using static System.Net.WebRequestMethods;
 
 namespace KLTN_Web_MoonShop.Controllers.API
 {
@@ -29,11 +30,13 @@ namespace KLTN_Web_MoonShop.Controllers.API
         public string address { get; set; }
         public string img { get; set; }
         public bool create { get; set; }
+        public string imgbase64 { get; set; }
     }
     public class EmployeeController : ApiController
     {
         DBCosmeticEntities db = new DBCosmeticEntities();
         MD5 md5 = new MD5();
+        ReplaceUnitcode rp = new ReplaceUnitcode();
         [HttpPost]
         public string add(employee data)
         {
@@ -41,12 +44,29 @@ namespace KLTN_Web_MoonShop.Controllers.API
             if(data.create==true)
             {
                 string[] arrten = data.fullName.Split(' ');
+                Uri uri = new Uri(data.img);
+                string[] arrimg = uri.ToString().Split('/');
+                string fileName = arrimg[arrimg.Length - 1];
                 string nametam = arrten[arrten.Length - 1];
+                //save img
+                string imgbase6 = data.imgbase64.Substring(data.imgbase64.LastIndexOf(',') + 1);
+                byte[] imageBytes = Convert.FromBase64String(imgbase6);
+                MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+                ms.Flush();
+                ms.Position = 0;
+                ms.Write(imageBytes, 0, imageBytes.Length);
+                System.Drawing.Image image = System.Drawing.Image.FromStream(ms, true);
+                var mappedPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Asset/img/user/");
+                image.Save(mappedPath+ fileName);
+
+
+
                 for (int i = 0; i < arrten.Length - 1; i++)
                 {
                     nametam = nametam + arrten[i].Substring(0, 1);
                 }
-                string username = "msc." + nametam.ToLower().Trim();
+                string namereplace = rp.RemoveUnicode(nametam.ToLower().Trim());
+                string username = "msc." + namereplace;
                 string password = md5.CreateMD5("123");
                 string idstr = DateTime.Now.ToString("yyyyMMddHHmmss");
                 long id = long.Parse(idstr);
@@ -64,7 +84,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
                 detail.phone = data.phone;
                 detail.posID = data.posID;
                 detail.address = data.address;
-                detail.photo = "Sample_User_Icon.png";
+                detail.photo =fileName;
                 detail.isActive = 1;
                 db.Employees.AddOrUpdate(employee);
                 db.EmployeeDetails.AddOrUpdate(detail);
