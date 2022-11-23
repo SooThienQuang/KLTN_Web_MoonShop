@@ -85,6 +85,9 @@ namespace KLTN_Web_MoonShop.Controllers
             
             return PartialView(lst);
         }
-
+        public ActionResult Discount()
+        {
+            return PartialView();
+        }
     }
 }

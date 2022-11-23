@@ -71,7 +71,7 @@
 
                                 </div>
                                 <br />
-                                Thành tiền:<h3 id="price" style="color:red">@ViewBag.Product.productPrice </h3>VND
+                                Thành tiền:<h3 id="price" style="color:red">@String.Format("{0:0,0 vnđ}", @ViewBag.Product.productPrice) </h3>VND
                                 <input type="hidden" value="@ViewBag.Product.productPrice" id="product_input_price">
                             </div>
 
@@ -120,6 +120,22 @@
                     'Click vào giỏ hàng để xem chi tiết',
                     'success'
                 )
+                $('.chitietcart').empty();
+                $.each(data, function (index, item) {
+                    var trHTL = $(
+                        `<a class="dropdown-item" href="#" id="dropcart"> ` +
+                        `<img src="/asset/img/product/` + item.img + `" width="50" height="50">`
+                        + ` <h6 class="font-weight-normal">`
+                        + item.name +
+                        ` </h6>`
+
+                        + ` <h6 class="font-weight-normal mr-3 ml-3" style="color:red"> ` + item.price + `</h6>`
+                        + ` <h6 class="font-weight-normal">` + item.quantity + `</h6>`
+                        + ` </a>`
+
+                    );
+                    $('.chitietcart').append(trHTL);
+                })
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.log('Error in Operation');
@@ -145,11 +161,13 @@
             increment_price = price_p * increment;
 
             quantity.innerHTML = increment;
-
-            price_show.innerHTML = increment_price;
+           
+            price_show.innerHTML = format2(increment_price, 'vnd');
         }
     });
-
+    function format2(n, currency) {
+        return n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + currency ;
+    }
 
     minus.addEventListener('click', function () {
 
@@ -160,7 +178,7 @@
             decrease_price = price_p * increment;
 
             quantity.innerHTML = increment;
-            price_show.innerHTML = decrease_price;
+            price_show.innerHTML = format2(decrease_price, 'vnd');
         }
 
     });

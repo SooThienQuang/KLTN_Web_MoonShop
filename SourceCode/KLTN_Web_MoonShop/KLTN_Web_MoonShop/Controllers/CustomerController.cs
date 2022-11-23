@@ -122,7 +122,7 @@ namespace KLTN_Web_MoonShop.Controllers
                 string ten = cs.customerName.ToString().Split(' ').Last();
                 ViewBag.name = ten;
                 ViewBag.user = cs;
-                ViewBag.useradd=db.CustomerAddresses.Where(n=>n.customerID==cs.customerID&&n.isActive==1).ToList();
+                ViewBag.useradd=db.CustomerAddresses.Where(n=>n.customerID==cs.customerID&&n.isActive==1).OrderByDescending(n=>n.isMain).ToList();
                 ViewBag.menu = id;
             }
 
@@ -214,7 +214,7 @@ namespace KLTN_Web_MoonShop.Controllers
 
             Customer cs = Session["user"] as Customer;
             List<Order> lst = new List<Order>();
-            lst = db.Orders.Where(n => n.customerID == cs.customerID).ToList();
+            lst = db.Orders.Where(n => n.customerID == cs.customerID).OrderByDescending(n=>n.orderID).ToList();
             return PartialView(lst);
 
         }

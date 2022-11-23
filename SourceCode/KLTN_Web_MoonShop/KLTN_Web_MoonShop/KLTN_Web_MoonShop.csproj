@@ -921,6 +921,7 @@
     <Content Include="Views\Payment\Paymore.cshtml" />
     <Content Include="Views\Order\Detail.cshtml" />
     <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Payment\Discount.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

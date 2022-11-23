@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Policy;
 using System.Web;
 using System.Web.Http;
 using static System.Net.WebRequestMethods;
@@ -94,6 +95,27 @@ namespace KLTN_Web_MoonShop.Controllers.API
             else
             {
                 EmployeeDetail detail = db.EmployeeDetails.FirstOrDefault(n => n.emID == data.emID);
+                if(data.imgbase64!=null)
+                {
+                    Uri uri = new Uri(data.img);
+                    string[] arrimg = uri.ToString().Split('/');
+                    string fileName = arrimg[arrimg.Length - 1];
+                    string imgbase6 = data.imgbase64.Substring(data.imgbase64.LastIndexOf(',') + 1);
+                    byte[] imageBytes = Convert.FromBase64String(imgbase6);
+                    MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+                    ms.Flush();
+                    ms.Position = 0;
+                    ms.Write(imageBytes, 0, imageBytes.Length);
+                    System.Drawing.Image image = System.Drawing.Image.FromStream(ms, true);
+                    var mappedPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Asset/img/user/");
+                    image.Save(mappedPath + fileName);
+                    detail.photo = fileName;
+                }
+                else
+                { detail.photo = data.img; }
+              
+
+
                 detail.fullName = data.fullName;
                 detail.birthday = data.birthday;
                 detail.sex = data.sex;
@@ -101,7 +123,6 @@ namespace KLTN_Web_MoonShop.Controllers.API
                 detail.phone = data.phone;
                 detail.posID = data.posID;
                 detail.address = data.address;
-                detail.photo = "Sample_User_Icon.png";
                 detail.isActive = 1;
                 db.EmployeeDetails.AddOrUpdate(detail);
                 db.SaveChanges();

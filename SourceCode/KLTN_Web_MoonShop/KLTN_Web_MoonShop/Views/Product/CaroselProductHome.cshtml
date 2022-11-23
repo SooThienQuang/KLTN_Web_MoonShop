@@ -88,7 +88,9 @@
                                             <div class="thumb-wrapper">
                                                 <span class="badge badge-danger">SALE </span>
                                                 <div class="img-box">
-                                                    <img src="~/Asset/img/product/@item.productImage" class="img-fluid" alt="">
+                                                    <a href="@Url.Action("Detail", "Product", new { id = item.productID })">
+                                                        <img src="~/Asset/img/product/@item.productImage" width="150" height="200">
+                                                    </a>
                                                 </div>
                                                 <button class="btn btn-outline-danger" onclick="ConfirmUpdate(@item.productID)"><i class="fa fa-search-plus">Xem thêm</i></button>
                                                 <div class="thumb-content">
@@ -106,7 +108,7 @@
                                                             @item.productName
                                                         </h6>
                                                     }
-                                                    <p class="item-price"><span>@String.Format("{0:0,0 vnđ}", @item.productPrice)</span></p>
+                                                    <p class="item-price"><span  style="color:red">@String.Format("{0:0,0 vnđ}", @item.productPrice)</span></p>
                                                     <div class="star-rating">
                                                         <ul class="list-inline">
                                                             <li class="list-inline-item"><i class="fa fa-star"></i></li>

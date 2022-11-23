@@ -41,13 +41,13 @@
                         Position po = db.Positions.FirstOrDefault(n => n.posID == ed.posID);
                         <tr>
 
-                            <th scope="row"><a href="#">@item.emID</a></th>
+                            <td>@item.emID</td>
                             <td>@ed.fullName</td>
                             <td>
                                 <img src="~/Asset/img/user/@ed.photo" height="100" width="100" />
                             </td>
                             <td>@ed.birthday</td>
-                            @*<td>@po.posName</td>*@
+                            <td>@po.posName</td>
                             <td>
                                 <a class="btn btn-danger" onclick="ConfirmDelete(@item.emID)">Xóa </a>
                             </td>
@@ -309,7 +309,7 @@
                         position: 'top-center',
                         title: 'Thành công',
                         icon: 'success',
-                        text: 'Thêm mới nhân viên thành công',
+                        text: ':Lưu thành công',
                         showConfirmButton: false,
                         timer: 1500
                     })
@@ -353,7 +353,8 @@
                             document.getElementById("cbbgioitinh").selectedIndex = 0;
                     document.getElementById("txtemail").value = data.mail;
                     const AVATAR = document.getElementById("avatar");
-                    AVATAR.style.background = "url('/Asset/img/user/" + data.img + "') center center/cover"
+                    AVATAR.style.background = "url('/Asset/img/user/" + data.img + "') center center/cover";
+                    document.getElementById("inp").filname = data.img;
                     document.getElementById("txtsdt").value = data.phone;
                     document.getElementById("cbbchucvu").selectedIndex = data.posID;
                     const myArray = data.address.split(",");
