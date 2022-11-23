@@ -200,7 +200,7 @@ namespace KLTN_Web_MoonShop.Controllers
                             
                         }
                         ViewBag.AllMoney = lst.Sum(n => n.cartMoney);
-                        ViewBag.lstCart = lsttam.Take(3);
+                        ViewBag.lstCart = lsttam.Take(5);
                     }    
                 }
                 ViewBag.size = lst.Count;

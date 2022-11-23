@@ -359,7 +359,7 @@
                                 <div class="d-flex justify-content-between align-items-center mt-3">
                                     Giá sản phẩm : <h6 class="" style="color:red">@String.Format("{0:0,0 vnđ}", @ViewBag.Product.productPrice)</h6>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                @*<div class="d-flex justify-content-between align-items-center mt-3">
                                     <div class="sign">
                                         <span id="minus2">
                                             <i class="fa fa-minus"></i>
@@ -368,10 +368,10 @@
                                             <i class="fa fa-plus"></i>
                                         </span>
                                     </div>
-                                </div>
+                                </div>*@
                                 <div class="d-flex justify-content-between align-items-center mt-3">
                                     Thành tiền:<h2 id="price2" style="color:red">@String.Format("{0:0,0 vnđ}", @ViewBag.Product.productPrice) </h2>
-                                    <input type="hidden" value="@ViewBag.Product.productPrice" id="product_input_price2">
+                                    <input type="hidden" value="@ViewBag.Product.productPrice" id="txtgiasp">
                                 </div>
                                 <p>Số lượng </p>
                                 @*<input type="number" min="1" class="form-control" value="1" />*@
@@ -392,17 +392,20 @@
 
                             <script>
                                 $(document).ready(function () {
-                                    var quantitiy = 0;
+                                  /*  var quantitiy = 0;*/
+                                    var gia = document.getElementById("txtgiasp").value;
                                     $('.quantity-right-plus1').click(function (e) {
                                         e.preventDefault();
                                         var quantity = parseInt($('#quantity1').val());
                                         $('#quantity1').val(quantity + 1);
+                                        document.getElementById("price2").innerHTML = gia * (quantity+1);
                                     });
                                     $('.quantity-left-minus1').click(function (e) {
                                         e.preventDefault();
                                         var quantity = parseInt($('#quantity1').val());
                                         if (quantity > 1) {
                                             $('#quantity1').val(quantity - 1);
+                                            document.getElementById("price2").innerHTML = gia * (quantity-1);
                                         }
                                     });
                                 });
