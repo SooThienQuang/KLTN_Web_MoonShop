@@ -523,6 +523,7 @@
     <Content Include="css\home\navbartop.css" />
     <Content Include="css\home\product.css" />
     <Content Include="css\productDetail.css" />
+    <Content Include="css\product\detail.css" />
     <Content Include="css\style.css" />
     <Content Include="Global.asax" />
     <Content Include="js\bootstrap4\bootstrap.bundle.js" />
@@ -933,6 +934,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="css\NewFolder1\" />
     <Folder Include="Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
