@@ -156,187 +156,6 @@
 
 </div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
-<style>
-
-    .card {
-        border: none;
-        overflow: hidden
-    }
-
-    .thumbnail_images ul {
-        list-style: none;
-        justify-content: center;
-        display: flex;
-        align-items: center;
-        margin-top: 10px
-    }
-
-        .thumbnail_images ul li {
-            margin: 5px;
-            padding: 10px;
-            border: 2px solid #eee;
-            cursor: pointer;
-            transition: all 0.5s
-        }
-
-            .thumbnail_images ul li:hover {
-                border: 2px solid #000
-            }
-
-    .main_image {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-bottom: 1px solid #eee;
-        height: 400px;
-        width: 100%;
-        overflow: hidden
-    }
-
-    .heart {
-        height: 29px;
-        width: 29px;
-        background-color: #eaeaea;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center
-    }
-
-    .content p {
-        font-size: 12px
-    }
-
-    .ratings span {
-        font-size: 14px;
-        margin-left: 12px
-    }
-
-    .colors {
-        margin-top: 5px
-    }
-
-        .colors ul {
-            list-style: none;
-            display: flex;
-            padding-left: 0px
-        }
-
-            .colors ul li {
-                height: 20px;
-                width: 20px;
-                display: flex;
-                border-radius: 50%;
-                margin-right: 10px;
-                cursor: pointer
-            }
-
-                .colors ul li:nth-child(1) {
-                    background-color: #6c704d
-                }
-
-                .colors ul li:nth-child(2) {
-                    background-color: #96918b
-                }
-
-                .colors ul li:nth-child(3) {
-                    background-color: #68778e
-                }
-
-                .colors ul li:nth-child(4) {
-                    background-color: #263f55
-                }
-
-                .colors ul li:nth-child(5) {
-                    background-color: black
-                }
-
-    .right-side {
-        position: relative
-    }
-
-    .search-option {
-        position: absolute;
-        background-color: #000;
-        overflow: hidden;
-        align-items: center;
-        color: #fff;
-        width: 200px;
-        height: 200px;
-        border-radius: 49% 51% 50% 50% / 68% 69% 31% 32%;
-        left: 30%;
-        bottom: -250px;
-        transition: all 0.5s;
-        cursor: pointer
-    }
-
-        .search-option .first-search {
-            position: absolute;
-            top: 20px;
-            left: 90px;
-            font-size: 20px;
-            opacity: 1000
-        }
-
-        .search-option .inputs {
-            opacity: 0;
-            transition: all 0.5s ease;
-            transition-delay: 0.5s;
-            position: relative
-        }
-
-            .search-option .inputs input {
-                position: absolute;
-                top: 200px;
-                left: 30px;
-                padding-left: 20px;
-                background-color: transparent;
-                width: 300px;
-                border: none;
-                color: #fff;
-                border-bottom: 1px solid #eee;
-                transition: all 0.5s;
-                z-index: 10
-            }
-
-                .search-option .inputs input:focus {
-                    box-shadow: none;
-                    outline: none;
-                    z-index: 10
-                }
-
-        .search-option:hover {
-            border-radius: 0px;
-            width: 100%;
-            left: 0px
-        }
-
-            .search-option:hover .inputs {
-                opacity: 1
-            }
-
-            .search-option:hover .first-search {
-                left: 27px;
-                top: 25px;
-                font-size: 15px
-            }
-
-            .search-option:hover .inputs input {
-                top: 20px
-            }
-
-        .search-option .share {
-            position: absolute;
-            right: 20px;
-            top: 22px
-        }
-
-    .buttons .btn {
-        height: 50px;
-        width: 150px;
-        border-radius: 0px !important
-    }
-</style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" />
 @*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>*@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
@@ -416,69 +235,68 @@
                         <div class="d-flex flex-column dis">
                             <div class="d-flex mb-2">
                                 <p>Số lượng </p>-->
-                                @*<input type="number" min="1" class="form-control" value="1" />*@
-                                <!--<div class="input-group">
-                                    <span class="input-group-btn">
-                                        <button type="button" style="height:35px" class="quantity-left-minus btn btn-danger btn-number" data-type="minus" data-field="">
-                                            <span class="ti-minus"></span>
-                                        </button>
-                                    </span>
-                                    <input type="number" style="min-width:50px;max-width:60px;height:35px;font-size:25px;" id="quantity" name="quantity" class="form-control" value="1" min="1" max="100">
-                                    <span class="input-group-btn">
-                                        <button type="button" style="height:35px" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
-                                            <span class="ti-plus"></span>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
+@*<input type="number" min="1" class="form-control" value="1" />*@
+<!--<div class="input-group">
+            <span class="input-group-btn">
+                <button type="button" style="height:35px" class="quantity-left-minus btn btn-danger btn-number" data-type="minus" data-field="">
+                    <span class="ti-minus"></span>
+                </button>
+            </span>
+            <input type="number" style="min-width:50px;max-width:60px;height:35px;font-size:25px;" id="quantity" name="quantity" class="form-control" value="1" min="1" max="100">
+            <span class="input-group-btn">
+                <button type="button" style="height:35px" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                    <span class="ti-plus"></span>
+                </button>
+            </span>
+        </div>
+    </div>
 
-                            <script>
-                                $(document).ready(function () {
-                                    var quantitiy = 0;
-                                    $('.quantity-right-plus').click(function (e) {
-                                        e.preventDefault();
-                                        var quantity = parseInt($('#quantity').val());
-                                        $('#quantity').val(quantity + 1);
-                                    });
-                                    $('.quantity-left-minus').click(function (e) {
-                                        e.preventDefault();
-                                        var quantity = parseInt($('#quantity').val());
-                                        if (quantity > 1) {
-                                            $('#quantity').val(quantity - 1);
-                                        }
-                                    });
-                                });
-                            </script>
-                        </div>
-                        <div>
-                            <div class="buttons">
-                                @if (user == null)
-                                {
-                                    <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-success w-25 btn-rounded" style="border-radius:25px">
-                                        <i class="ti-shopping-cart"></i> Thêm giỏ hàng
-                                    </button>
-                                    <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-danger w-50 btn-rounded btn-block" style="border-radius:25px">
-                                        <i class="ti-truck"></i> Chọn mua
-                                    </button>
-                                }
-                                else
-                                {
-                                    <button type="button" class="cart-button w-50" onclick="ConfirmDelete(@ViewBag.Product.productID,@user.customerID)">
-                                        <span class="add-to-cart">Add to cart</span>
-                                        <span class="added">Item added</span> <i class="fa fa-plus"></i>
-                                        <i class="fa fa-circle-thin"></i> <i class="fa fa-check"></i>
-                                    </button>
+    <script>
+        $(document).ready(function () {
+            var quantitiy = 0;
+            $('.quantity-right-plus').click(function (e) {
+                e.preventDefault();
+                var quantity = parseInt($('#quantity').val());
+                $('#quantity').val(quantity + 1);
+            });
+            $('.quantity-left-minus').click(function (e) {
+                e.preventDefault();
+                var quantity = parseInt($('#quantity').val());
+                if (quantity > 1) {
+                    $('#quantity').val(quantity - 1);
+                }
+            });
+        });
+    </script>
+</div>
+<div>
+    <div class="buttons">
+        @if (user == null)
+        {
+            <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-success w-25 btn-rounded" style="border-radius:25px">
+                <i class="ti-shopping-cart"></i> Thêm giỏ hàng
+            </button>
+            <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-danger w-50 btn-rounded btn-block" style="border-radius:25px">
+                <i class="ti-truck"></i> Chọn mua
+            </button>
+        }
+        else
+        {
+            <button type="button" class="cart-button w-50" onclick="ConfirmDelete(@ViewBag.Product.productID,@user.customerID)">
+                <span class="add-to-cart">Add to cart</span>
+                <span class="added">Item added</span> <i class="fa fa-plus"></i>
+                <i class="fa fa-circle-thin"></i> <i class="fa fa-check"></i>
+            </button>
 
-                                    <button type="button" data-toggle="modal" data-target="#checkoutModal" class="btn btn-danger btn-rounded btn-block w-50" style="border-radius:25px">
-                                        <i class="ti-truck"></i>  Chọn mua
-                                    </button>
+            <button type="button" data-toggle="modal" data-target="#checkoutModal" class="btn btn-danger btn-rounded btn-block w-50" style="border-radius:25px">
+                <i class="ti-truck"></i>  Chọn mua
+            </button>
 
-                                }-->
-
-                                @*<button type="button" class="btn btn-primary btn-lg btn-open-modal" data-toggle="modal" data-target="#checkoutModal">
-                                        Fullscreen modal xs down
-                                    </button>*@
-                            <!--</div>
+        }-->
+@*<button type="button" class="btn btn-primary btn-lg btn-open-modal" data-toggle="modal" data-target="#checkoutModal">
+        Fullscreen modal xs down
+    </button>*@
+<!--</div>
 
                         </div>
 
@@ -534,7 +352,7 @@
                                         <i class="ti-shopping-cart"></i> Thêm vào giỏ hàng
                                     </button>
                                 }
-                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <div class="p-3 py-5">
@@ -555,103 +373,97 @@
                                     Thành tiền:<h2 id="price2" style="color:red">@String.Format("{0:0,0 vnđ}", @ViewBag.Product.productPrice) </h2>
                                     <input type="hidden" value="@ViewBag.Product.productPrice" id="product_input_price2">
                                 </div>
-
-                                <script>
-                                    var plus = document.querySelector("#plus2");
-                                    var quantity = document.querySelector("#quantity2");
-                                    var minus = document.querySelector("#minus2");
-                                    var product_price = document.querySelector("#product_input_price2");
-                                    var price_show = document.querySelector("#price2");
-                                    plus.addEventListener('click', function () {
-
-                                        var increment = parseInt(quantity.innerHTML);
-                                        var price_p = parseInt(product_price.value);
-
-                                        if (increment < 100) {
-                                            increment = increment + 1;
-                                            increment_price = price_p * increment;
-                                            document.getElementById("txtsl").value = increment;
-                                            quantity.innerHTML = increment;
-
-                                            price_show.innerHTML = format2(increment_price, 'vnđ');
-                                        }
-                                    });
-
-
-                                    minus.addEventListener('click', function () {
-
-                                        var increment = parseInt(quantity.innerHTML);
-                                        var price_p = parseInt(product_price.value);
-                                        if (increment > 1) {
-                                            increment = increment - 1;
-                                            decrease_price = price_p * increment;
-                                            document.getElementById("txtsl").value = increment;
-                                            quantity.innerHTML = increment;
-                                            price_show.innerHTML = format2(decrease_price, 'vnđ');
-                                        }
-
-                                    });
-                                    function format2(n, currency) {
-                                        return n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') +" "+ currency;
-                                    }
-                                </script>
-                                <br />
-                                <div class="d-flex justify-content-between align-items-center mt-3">
-                                    <h6 class="text-right">Thông tin cá nhân</h6>
-                                </div>
-                                <div class="row mt-2">
-                                    @if (user != null)
-                                    {
-                                        <div class="col-md-12">
-                                            <label class="labels">Họ và tên</label>
-                                            <input type="text" class="form-control" placeholder="first name" value="@user.customerName">
-                                        </div>
-                                    }
-
-                                </div>
-                                <div class="row mt-3">
-                                    @if (user != null)
-                                    {
-                                        <div class="col-md-12">
-                                            <label class="labels">Số điện thoại</label>
-                                            <input type="text" class="form-control" placeholder="headline" value="@user.customerUserName" disabled>
-                                        </div>
-
-                                    }
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-md-12">
-                                        <label class="labels">Địa chỉ giao hàng</label>
-                                        <div class="form-check">
-
-                                            @if (user != null)
-                                            {
-                                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="1" checked>
-                                                <label class="form-check-label" for="gridRadios1">
-                                                    @ca.customerAdd (Mặc định)
-                                                    <p class="fa fa-check" style="color:green"></p>
-                                                    <span class="ti-pencil-alt"></span>
-                                                </label>
-                                            }
-
-
-
-                                        </div>
-                                        <a href="@Url.Action("DetailProfile", "Customer", new {id=1})">Thêm địa chỉ</a>
-                                    </div>
-                                    <div class="mt-5 text-center">
-                                        <input type="number" id="txtprice" value="@ViewBag.Product.productPrice" hidden />
-                                        <input type="number" id="txtproid" value="@ViewBag.Product.productID" hidden />
-                                        <input type="number" id="txtsl" hidden value="1" />
-                                        @if (user != null)
-                                        {
-                                            <input type="number" id="txtuserid" value="@user.customerID" hidden />
-                                        }
-                                        <button class="btn btn-danger btn-lg" data-dismiss="modal" onclick="showSwal('success-message')">Đặt hàng ngay</button>
-                                        @*<button class="btn btn-lg btn-danger" onclick="Pay()" type="button"><i class="ti-truck"></i> Đặt hàng ngay</button>*@
-                                    </div>
+                                <p>Số lượng </p>
+                                @*<input type="number" min="1" class="form-control" value="1" />*@
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <button type="button" style="height:35px" class="quantity-left-minus1 btn btn-dark btn-number" data-type="minus" data-field="">
+                                            <span class="ti-minus"></span>
+                                        </button>
+                                    </span>
+                                    <input type="number" style="min-width:50px;max-width:60px;height:35px;font-size:25px;" id="quantity1" name="quantity1" class="form-control" value="1" min="1" max="100">
+                                    <span class="input-group-btn">
+                                        <button type="button" style="height:35px" class="quantity-right-plus1 btn btn-dark btn-number" data-type="plus" data-field="">
+                                            <span class="ti-plus"></span>
+                                        </button>
+                                    </span>
                                 </div>
                             </div>
+
+                            <script>
+                                $(document).ready(function () {
+                                    var quantitiy = 0;
+                                    $('.quantity-right-plus1').click(function (e) {
+                                        e.preventDefault();
+                                        var quantity = parseInt($('#quantity1').val());
+                                        $('#quantity1').val(quantity + 1);
+                                    });
+                                    $('.quantity-left-minus1').click(function (e) {
+                                        e.preventDefault();
+                                        var quantity = parseInt($('#quantity1').val());
+                                        if (quantity > 1) {
+                                            $('#quantity1').val(quantity - 1);
+                                        }
+                                    });
+                                });
+                            </script>
+
+                            <br />
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <h6 class="text-right">Thông tin cá nhân</h6>
+                            </div>
+                            <div class="row mt-2">
+                                @if (user != null)
+                                {
+                                    <div class="col-md-12">
+                                        <label class="labels">Họ và tên</label>
+                                        <input type="text" class="form-control" placeholder="first name" value="@user.customerName">
+                                    </div>
+                                }
+
+                            </div>
+                            <div class="row mt-3">
+                                @if (user != null)
+                                {
+                                    <div class="col-md-12">
+                                        <label class="labels">Số điện thoại</label>
+                                        <input type="text" class="form-control" placeholder="headline" value="@user.customerUserName" disabled>
+                                    </div>
+
+                                }
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <label class="labels">Địa chỉ giao hàng</label>
+                                    <div class="form-check">
+
+                                        @if (user != null)
+                                        {
+                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="1" checked>
+                                            <label class="form-check-label" for="gridRadios1">
+                                                @ca.customerAdd (Mặc định)
+                                                <p class="fa fa-check" style="color:green"></p>
+                                                <span class="ti-pencil-alt"></span>
+                                            </label>
+                                        }
+
+
+
+                                    </div>
+                                    <a href="@Url.Action("DetailProfile", "Customer", new {id=1})">Thêm địa chỉ</a>
+                                </div>
+                                <div class="mt-5 text-center">
+                                    <input type="number" id="txtprice" value="@ViewBag.Product.productPrice" hidden />
+                                    <input type="number" id="txtproid" value="@ViewBag.Product.productID" hidden />
+                                    @if (user != null)
+                                    {
+                                        <input type="number" id="txtuserid" value="@user.customerID" hidden />
+                                    }
+                                    <button class="btn btn-danger btn-lg" data-dismiss="modal" onclick="showSwal('success-message')">Đặt hàng ngay</button>
+                                    @*<button class="btn btn-lg btn-danger" onclick="Pay()" type="button"><i class="ti-truck"></i> Đặt hàng ngay</button>*@
+                                </div>
+                            </div>
+                        </div>
                         </div>
                     </div>
 
@@ -705,8 +517,8 @@
     function HideModalUp() {
 
         $("#modalLogin").modal("hide");
-        
-      
+
+
     }
 </script>
 
@@ -773,7 +585,7 @@
                 var pro = document.getElementById("txtproid").value;
                 var price = document.getElementById("txtprice").value;
                 var userid = document.getElementById("txtuserid").value;
-                var qn = document.getElementById("txtsl").value;
+                var qn = document.getElementById("quantity1").value;
                 var person = new Object();
                 person.proID = pro;
                 person.cusID = userid;
@@ -861,7 +673,7 @@
                     }
                 })
 
-               
+
                 $('.chitietcart').empty();
                 $.each(data, function (index, item) {
                     var trHTL = $(
@@ -874,11 +686,11 @@
                         + ` <h6 class="font-weight-normal mr-3 ml-3" style="color:red"> ` + item.price + `</h6>`
                         + ` <h6 class="font-weight-normal">` + item.quantity + `</h6>`
                     + ` </a>`
-            
+
                     );
                     $('.chitietcart').append(trHTL);
                 })
-               
+
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.log('Error in Operation');
@@ -1493,3 +1305,184 @@
 </style>
 
 
+<style>
+
+    .card {
+        border: none;
+        overflow: hidden
+    }
+
+    .thumbnail_images ul {
+        list-style: none;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        margin-top: 10px
+    }
+
+        .thumbnail_images ul li {
+            margin: 5px;
+            padding: 10px;
+            border: 2px solid #eee;
+            cursor: pointer;
+            transition: all 0.5s
+        }
+
+            .thumbnail_images ul li:hover {
+                border: 2px solid #000
+            }
+
+    .main_image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+        height: 400px;
+        width: 100%;
+        overflow: hidden
+    }
+
+    .heart {
+        height: 29px;
+        width: 29px;
+        background-color: #eaeaea;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center
+    }
+
+    .content p {
+        font-size: 12px
+    }
+
+    .ratings span {
+        font-size: 14px;
+        margin-left: 12px
+    }
+
+    .colors {
+        margin-top: 5px
+    }
+
+        .colors ul {
+            list-style: none;
+            display: flex;
+            padding-left: 0px
+        }
+
+            .colors ul li {
+                height: 20px;
+                width: 20px;
+                display: flex;
+                border-radius: 50%;
+                margin-right: 10px;
+                cursor: pointer
+            }
+
+                .colors ul li:nth-child(1) {
+                    background-color: #6c704d
+                }
+
+                .colors ul li:nth-child(2) {
+                    background-color: #96918b
+                }
+
+                .colors ul li:nth-child(3) {
+                    background-color: #68778e
+                }
+
+                .colors ul li:nth-child(4) {
+                    background-color: #263f55
+                }
+
+                .colors ul li:nth-child(5) {
+                    background-color: black
+                }
+
+    .right-side {
+        position: relative
+    }
+
+    .search-option {
+        position: absolute;
+        background-color: #000;
+        overflow: hidden;
+        align-items: center;
+        color: #fff;
+        width: 200px;
+        height: 200px;
+        border-radius: 49% 51% 50% 50% / 68% 69% 31% 32%;
+        left: 30%;
+        bottom: -250px;
+        transition: all 0.5s;
+        cursor: pointer
+    }
+
+        .search-option .first-search {
+            position: absolute;
+            top: 20px;
+            left: 90px;
+            font-size: 20px;
+            opacity: 1000
+        }
+
+        .search-option .inputs {
+            opacity: 0;
+            transition: all 0.5s ease;
+            transition-delay: 0.5s;
+            position: relative
+        }
+
+            .search-option .inputs input {
+                position: absolute;
+                top: 200px;
+                left: 30px;
+                padding-left: 20px;
+                background-color: transparent;
+                width: 300px;
+                border: none;
+                color: #fff;
+                border-bottom: 1px solid #eee;
+                transition: all 0.5s;
+                z-index: 10
+            }
+
+                .search-option .inputs input:focus {
+                    box-shadow: none;
+                    outline: none;
+                    z-index: 10
+                }
+
+        .search-option:hover {
+            border-radius: 0px;
+            width: 100%;
+            left: 0px
+        }
+
+            .search-option:hover .inputs {
+                opacity: 1
+            }
+
+            .search-option:hover .first-search {
+                left: 27px;
+                top: 25px;
+                font-size: 15px
+            }
+
+            .search-option:hover .inputs input {
+                top: 20px
+            }
+
+        .search-option .share {
+            position: absolute;
+            right: 20px;
+            top: 22px
+        }
+
+    .buttons .btn {
+        height: 50px;
+        width: 150px;
+        border-radius: 0px !important
+    }
+</style>
