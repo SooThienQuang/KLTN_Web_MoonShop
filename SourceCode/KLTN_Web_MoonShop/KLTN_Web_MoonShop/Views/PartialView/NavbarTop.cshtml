@@ -40,20 +40,20 @@
             </form>
         </div>
 
-        <div class="col-md-3">
-            <div class="navbar-menu-wrapper d-flex">
+        <div class="col-sm-4" style="padding-left:2px">
+            <div class="navbar-menu-wrapper">
                 <ul class="navbar-nav">
                     @*------------------------------------------gio hang----------------------------*@
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown" style="margin-left:80px">
                         @Html.Action("Cart", "Customer")
                     </li>
                     @*<li class="nav-item dropdown">
                         @Html.Action("Order", "Customer")
                     </li>*@
                     @*----------------------------------thông báo--------------------------------*@
-                @*<li class="nav-item dropdown">
+                <li class="nav-item dropdown">
                     @Html.Action("Notification", "Customer")
-                </li>*@
+                </li>
                     @*----------------------thông tin cá nhân---------------------------------*@
                 <li class="nav-item nav-profile dropdown">
                     @Html.Action("Profile", "Customer")

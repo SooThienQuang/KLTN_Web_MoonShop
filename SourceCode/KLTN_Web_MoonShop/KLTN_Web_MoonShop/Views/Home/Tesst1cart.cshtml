@@ -1,108 +1,19 @@
-﻿<div id="imgavt" style="  align-items: center;">
-    <input type="text" value="d2ce2c30c5b6348b66730acdd8560f7a.jpg" hidden id="txtimguser" name="txtimguser" />
-    <div id="preview" style="position: relative;">
-        <div id="avatar" style=" background-color: antiquewhite; height: 200px; width: 200px; border: 3px solid #0af; border-radius: 50%; transition: background ease-out 200ms;"></div>
-        <button id="upload-button"
-                style=" height:50px; padding: 18px; border-radius: 50%; border: none; cursor: pointer; background-color: #08f; box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12); transition: background-color ease-out 120ms; position: absolute; right: -5%; bottom: 0%;"
-                aria-labelledby="image"
-                aria-describedby="image">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-            </svg>
-        </button>
-
-    </div>
-        <input type="file" name="image" id="image" accept="image/*" style="display: none" /> 
-</div>
-<input id="inp" type="file">
-<p id="b64"></p>
-
+﻿<select class="js-example-data-ajax form-control">
+    <option value="3620194" selected="selected">select2/select2</option>
+</select>
 <script>
-    function readFile() {
+    $('#mySelect2').select2({
+        ajax: {
+            url: 'https://api.github.com/search/repositories',
+            data: function (params) {
+                var query = {
+                    search: params.term,
+                    page: params.page || 1
+                }
 
-        if (!this.files || !this.files[0]) return;
-
-        const FR = new FileReader();
-
-        FR.addEventListener("load", function (evt) {
-            const AVATAR = document.getElementById("avatar");
-            AVATAR.style.background = "url('" + evt.target.result+"') center center/cover"
-            document.querySelector("#avatar").src = evt.target.result;
-            document.querySelector("#b64").textContent = evt.target.result;
-        });
-
-        FR.readAsDataURL(this.files[0]);
-
-    }
-
-    document.querySelector("#image").addEventListener("change", readFile);
-
-
-
-    //document.getElementById('save').style.visibility = 'hidden';
-    //var imgg = document.getElementById('txtimguser').value;
-    //const save_button = document.getElementById("save");
-    //const UPLOAD_BUTTON = document.getElementById("upload-button");
-    //const FILE_INPUT = document.querySelector("input[type=file]");
-    //const AVATAR = document.getElementById("avatar");
-    //AVATAR.style.background = "url('/Asset/img/user/" + imgg + "') center center/cover"
-    //UPLOAD_BUTTON.addEventListener("click", () => FILE_INPUT.click());
-    //FILE_INPUT.addEventListener("change", event => {
-    //    const file = event.target.files[0];
-    //    const reader = new FileReader();
-    //    reader.readAsDataURL(file);
-    //    reader.onloadend = () => {
-    //        AVATAR.setAttribute("aria-label", file.name);
-    //        AVATAR.style.background = `url(${reader.result}) center center/cover`;
-    //        document.getElementById('save').style.visibility = 'visible';
-    //        var url = "/api/Image/";
-    //        /* var data = new FormData(document.getElementById("form"));*/
-    //        fetch(url, {
-    //            method: "POST",
-    //            data: "1"
-    //        });
-    //    };
-    //});
-</script>
-<style>
-    .breadcrumb {
-        background-color: #c5cee4;
-    }
-
-        .breadcrumb a {
-            text-decoration: none;
+                // Query parameters will be ?search=[term]&page=[page]
+                return query;
+            }
         }
-
-    .container {
-        max-width: 1000px;
-        padding: 0;
-    }
-
-    p {
-        margin: 0;
-    }
-
-    .d-flex a {
-        text-decoration: none;
-        color: #686868;
-    }
-
-    img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        object-fit: cover;
-    }
-
-    .fab.fa-twitter {
-        color: #8ab7f1;
-    }
-
-    .fab.fa-instagram {
-        color: #E1306C;
-    }
-
-    .fab.fa-facebook-f {
-        color: #5999ec;
-    }
-</style>
+    });
+</script>
