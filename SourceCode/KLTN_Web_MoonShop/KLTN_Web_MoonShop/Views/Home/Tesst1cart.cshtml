@@ -1,19 +1,169 @@
-﻿<select class="js-example-data-ajax form-control">
-    <option value="3620194" selected="selected">select2/select2</option>
-</select>
+﻿<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<div class="items">
+    <div class="cardj">
+        <div class="cardj-body">
+            <img class="logo" src="https://img.icons8.com/color/100/000000/google-logo.png">
+        </div>
+    </div>
+    <div class="cardj">
+        <div class="cardj-body">
+            <img class="logo" src="https://img.icons8.com/color/100/000000/linkedin.png">
+        </div>
+    </div>
+    <div class="cardj">
+        <div class="cardj-body">
+            <img class="logo" src="https://img.icons8.com/color/100/000000/yahoo.png">
+        </div>
+    </div>
+    <div class="cardj">
+        <div class="cardj-body">
+            <img class="logo" src="https://img.icons8.com/color/100/000000/amazon.png">
+        </div>
+    </div>
+    <div class="cardj">
+        <div class="cardj-body">
+            <img class="logo" src="https://img.icons8.com/color/48/000000/netflix.png">
+        </div>
+    </div>
+    <div class="cardj">
+        <div class="cardj-body">
+            <img class="logo" src="https://img.icons8.com/ios-filled/100/000000/mac-os.png">
+        </div>
+    </div>
+    <div class="cardj">
+        <div class="cardj-body">
+            <img class="logo" src="https://img.icons8.com/color/48/000000/dell--v1.png">
+        </div>
+    </div>
+
+
+    <div class="cardj">
+        <div class="cardj-body">
+            <img class="logo" src="https://img.icons8.com/color/100/000000/hp.png">
+        </div>
+    </div>
+
+
+    <div class="cardj">
+        <div class="cardj-body">
+            <img class="logo" src="https://img.icons8.com/color/100/000000/ebay.png">
+        </div>
+    </div>
+
+    <div class="cardj">
+        <div class="cardj-body">
+            <img class="logo" src="https://img.icons8.com/color/100/000000/ibm.png">
+        </div>
+    </div>
+
+    <div class="cardj">
+        <div class="cardj-body">
+            <img class="logo" src="https://img.icons8.com/color/100/000000/sap.png">
+        </div>
+    </div>
+
+    <div class="cardj">
+        <div class="cardj-body">
+            <img class="logo" src="https://img.icons8.com/color/100/000000/ebay.png">
+        </div>
+    </div>
+
+
+</div>
+<style>
+    .cardj {
+        position: relative;
+        display: flex;
+        height:100px;
+        width: 100px;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid #d2d2dc;
+        border-radius: 11px;
+        -webkit-box-shadow: 0px 0px 5px 0px rgb(249, 249, 250);
+        -moz-box-shadow: 0px 0px 5px 0px rgba(212,182,212,1);
+        box-shadow: 0px 0px 5px 0px rgb(161, 163, 164);
+    }
+
+        .cardj .cardj-body {
+            padding: 1rem 1rem;
+        }
+
+    .cardj-body {
+        flex: 1 1 auto;
+        padding: 1.25rem
+    }
+
+
+
+
+    .logo {
+        height: 67px;
+    }
+
+
+    .items {
+        width: 90%;
+        margin: 0px auto;
+        margin-top: 250px
+    }
+
+    .slick-slide {
+        margin: 10px
+    }
+</style>
 <script>
-    $('#mySelect2').select2({
-        ajax: {
-            url: 'https://api.github.com/search/repositories',
-            data: function (params) {
-                var query = {
-                    search: params.term,
-                    page: params.page || 1
+    $(document).ready(function () {
+
+        $('.items').slick({
+            dots: true,
+            infinite: true,
+            speed: 800,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            slidesToShow: 10,
+            slidesToScroll: 10,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 6,
+                        slidesToScroll: 6,
+                        infinite: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 4
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3
+                    }
                 }
 
-                // Query parameters will be ?search=[term]&page=[page]
-                return query;
-            }
-        }
+            ]
+        });
     });
 </script>

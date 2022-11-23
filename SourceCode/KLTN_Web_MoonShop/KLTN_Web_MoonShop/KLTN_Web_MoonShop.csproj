@@ -923,6 +923,7 @@
     <Content Include="Views\Order\Detail.cshtml" />
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\Payment\Discount.cshtml" />
+    <Content Include="Views\PartialView\Suggest.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
