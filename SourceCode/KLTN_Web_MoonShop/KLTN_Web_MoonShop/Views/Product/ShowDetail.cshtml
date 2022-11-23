@@ -71,7 +71,7 @@
 
                                 </div>
                                 <br />
-                                Thành tiền:<h3 id="price" style="color:red">@String.Format("{0:0,0 vnđ}", @ViewBag.Product.productPrice) </h3>VND
+                                Thành tiền:<h3 id="price" style="color:red">@ViewBag.Product.productPrice </h3>VND
                                 <input type="hidden" value="@ViewBag.Product.productPrice" id="product_input_price">
                             </div>
 
@@ -161,13 +161,11 @@
             increment_price = price_p * increment;
 
             quantity.innerHTML = increment;
-           
-            price_show.innerHTML = format2(increment_price, 'vnd');
+
+            price_show.innerHTML = increment_price;
         }
     });
-    function format2(n, currency) {
-        return n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + currency ;
-    }
+
 
     minus.addEventListener('click', function () {
 
@@ -178,7 +176,7 @@
             decrease_price = price_p * increment;
 
             quantity.innerHTML = increment;
-            price_show.innerHTML = format2(decrease_price, 'vnd');
+            price_show.innerHTML = decrease_price;
         }
 
     });

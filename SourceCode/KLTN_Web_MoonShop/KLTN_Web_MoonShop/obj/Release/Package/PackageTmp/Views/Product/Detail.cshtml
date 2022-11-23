@@ -216,7 +216,7 @@
                         <div class="col-md-6">
                             <div class="p-3 py-5">
                                 <div class="d-flex justify-content-between align-items-center mt-3">
-                                    Giá sản phẩm : <h4 class="" style="color:red">@String.Format("{0:0,0 vnđ}", @ViewBag.Product.productPrice)</h4>
+                                    Giá sản phẩm : <h6 class="" style="color:red">@String.Format("{0:0,0 vnđ}", @ViewBag.Product.productPrice)</h6>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mt-3">
                                     <div class="sign">
@@ -229,7 +229,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mt-3">
-                                    Thành tiền:<h3 id="price2" style="color:red">@ViewBag.Product.productPrice </h3>VND
+                                    Thành tiền:<h2 id="price2" style="color:red">@ViewBag.Product.productPrice </h2>
                                     <input type="hidden" value="@ViewBag.Product.productPrice" id="product_input_price2">
                                 </div>
 
@@ -250,7 +250,7 @@
                                             document.getElementById("txtsl").value = increment;
                                             quantity.innerHTML = increment;
 
-                                            price_show.innerHTML = increment_price;
+                                            price_show.innerHTML = format2(increment_price, 'vnđ');
                                         }
                                     });
 
@@ -264,10 +264,13 @@
                                             decrease_price = price_p * increment;
                                             document.getElementById("txtsl").value = increment;
                                             quantity.innerHTML = increment;
-                                            price_show.innerHTML = decrease_price;
+                                            price_show.innerHTML = format2(decrease_price, 'vnđ');
                                         }
 
                                     });
+                                    function format2(n, currency) {
+                                        return n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') +" "+ currency;
+                                    }
                                 </script>
                                 <br />
                                 <div class="d-flex justify-content-between align-items-center mt-3">
@@ -311,7 +314,7 @@
 
 
                                         </div>
-                                        @Html.Action("Address", "Customer")
+                                        <a href="@Url.Action("DetailProfile", "Customer", new {id=1})">Thêm địa chỉ</a>
                                     </div>
                                     <div class="mt-5 text-center">
                                         <input type="number" id="txtprice" value="@ViewBag.Product.productPrice" hidden />
