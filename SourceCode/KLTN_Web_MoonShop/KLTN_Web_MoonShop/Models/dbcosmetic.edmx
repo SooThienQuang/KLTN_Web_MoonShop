@@ -121,6 +121,7 @@
           <Property Name="message" Type="nvarchar(max)" />
           <Property Name="image" Type="nchar" MaxLength="500" />
           <Property Name="menutype" Type="bigint" />
+          <Property Name="isRead" Type="int" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -464,6 +465,7 @@
           <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="image" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
           <Property Name="menutype" Type="Int64" />
+          <Property Name="isRead" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -683,6 +685,7 @@
           <EntitySetMapping Name="Notifications">
             <EntityTypeMapping TypeName="DBCosmeticModel.Notification">
               <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="isRead" ColumnName="isRead" />
                 <ScalarProperty Name="menutype" ColumnName="menutype" />
                 <ScalarProperty Name="image" ColumnName="image" />
                 <ScalarProperty Name="message" ColumnName="message" />

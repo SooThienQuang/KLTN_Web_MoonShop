@@ -1,0 +1,49 @@
+﻿@model IEnumerable<KLTN_Web_MoonShop.Models.Discount>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<table class="table table-borderless datatable">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Hình ảnh</th>
+            <th scope="col">Giá</th>
+            <th scope="col"> </th>
+            <th scope="col"> </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+
+                <th scope="row"><a href="#">@item.ID</a></th>
+                <td>@item.name</td>
+                <td>
+                    <a href="#" onclick="" class="text-primary">
+                        <img src="~/Asset/img/discount/hot-sale.png" height="100" width="100" />
+                    </a>
+                </td>
+                <td>
+                    <span class="btn btn-danger">@item.percentDiscount %</span>
+                </td>
+                <td>
+                    <span>@item.description </span>
+                </td>
+                <td>
+                    <a class="btn btn-danger" onclick="">Xóa </a>
+                </td>
+                <td>
+                    <a class="btn btn-primary" onclick="">Sửa </a>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+
+
+</table>

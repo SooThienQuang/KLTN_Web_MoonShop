@@ -82,6 +82,7 @@ namespace KLTN_Web_MoonShop.Controllers
                     db.CustomerAddresses.Add(cd);
                     db.Customers.Add(customer);
                     ViewBag.CreateSuccess = "Tạo tài khoản thành công";
+                    db.SaveChanges();
                     //thông báo đăng kí thành công
                     Notification noti = new Notification();
                     long idnoti = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
@@ -92,7 +93,9 @@ namespace KLTN_Web_MoonShop.Controllers
                     noti.message = "Cám ơn bạn đã tin tưởng Shop , mong bạn có một trải nghiệm tốt bằng các dịch vụ của chúng mình !";
                     noti.image = "check.jpg";
                     noti.menutype = 1;
+                    noti.isRead = 0;
                     db.Notifications.Add(noti);
+                    db.SaveChanges();
                     //thông báo giảm giá khách hàng mới
                     Notification noti2 = new Notification();
                     long idnoti2 = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
@@ -103,6 +106,7 @@ namespace KLTN_Web_MoonShop.Controllers
                     noti2.message = "Tặng bạn voucher giảm giá 20% ! Click để xem chi tiết";
                     noti2.image = "discount20.jpg";
                     noti2.menutype = 1;
+                    noti2.isRead = 0;
                     db.Notifications.Add(noti2);
                     db.SaveChanges();
                 }    

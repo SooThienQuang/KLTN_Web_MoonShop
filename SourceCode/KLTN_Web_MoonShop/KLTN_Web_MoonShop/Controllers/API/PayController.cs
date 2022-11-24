@@ -31,6 +31,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
                 order.createDate = DateTime.Now;
                 order.status = 1;
                 db.Orders.Add(order);
+                db.SaveChanges();
                 OrderDetail orderDetail = new OrderDetail();
                 OrderDetail odlast = db.OrderDetails.ToList().LastOrDefault();
                 if(odlast==null)
@@ -51,6 +52,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
                 orderDetail.idAdd = cus.customerAdd;
                 orderDetail.statusID = 1;
                 db.OrderDetails.Add(orderDetail);
+                db.SaveChanges();
                 //thêm thông báo đăt hàng thành công
                 long idnoti = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
                 Notification noti = new Notification();
@@ -64,6 +66,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
                 noti.message = "Sản phẩm bao gồm :" + product.productName.Substring(0,30)+"..." + " (số lượng :" + obj.quantity + ")";
                 noti.image = product.productImage;
                 noti.menutype = 2;
+                noti.isRead = 0;
                 db.Notifications.Add(noti);
                 db.SaveChanges();
                 return "Đặt hàng thành công";

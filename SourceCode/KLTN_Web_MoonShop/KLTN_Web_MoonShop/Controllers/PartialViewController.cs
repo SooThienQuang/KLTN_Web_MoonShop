@@ -50,20 +50,20 @@ namespace KLTN_Web_MoonShop.Controllers
 
 
 
-        public ActionResult Profile()
-        {
+        //public ActionResult Profile()
+        //{
 
-                Customer cs = Session["user"] as Customer;
-                if(cs != null)
-                {
-                    string ten = cs.customerName.ToString().Split(' ').Last();
-                    ViewBag.name = ten;
-                    ViewBag.user = cs;
-                }    
+        //        Customer cs = Session["user"] as Customer;
+        //        if(cs != null)
+        //        {
+        //            string ten = cs.customerName.ToString().Split(' ').Last();
+        //            ViewBag.name = ten;
+        //            ViewBag.user = cs;
+        //        }    
                
-                return PartialView();
+        //        return PartialView();
 
-        }
+        //}
         public ActionResult Suggest()
         {
          return PartialView();

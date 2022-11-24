@@ -136,7 +136,7 @@
                 <div class="modal-body text-center">
                     <h4>Tuyệt vời !</h4>
                     <p>@ViewBag.message</p>
-                    <a data-dismiss="modal" class="btn btn-success" >Tiếp tục<i class="material-icons">&#xE5C8;</i></a>
+                    <a @*data-dismiss="modal"*@ class="btn btn-success" href="@Url.Action("Login","Customer")" >Tiếp tục<i class="material-icons">&#xE5C8;</i></a>
                 </div>
             </div>
         </div>

@@ -110,6 +110,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Notifications">
+      <EntityTypeMapping TypeName="DBCosmeticModel.Notification">
+        <MappingFragment StoreEntitySet="Notification">
+          <ScalarProperty Name="menutype" ColumnName="menutype" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="objectTypeID" ColumnName="objectTypeID" />
+          <ScalarProperty Name="objectID" ColumnName="objectID" />
+          <ScalarProperty Name="receiveUserFullName" ColumnName="receiveUserFullName" />
+          <ScalarProperty Name="receiveUserID" ColumnName="receiveUserID" />
+          <ScalarProperty Name="sendUserFullName" ColumnName="sendUserFullName" />
+          <ScalarProperty Name="sendUserID" ColumnName="sendUserID" />
+          <ScalarProperty Name="notiID" ColumnName="notiID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="DBCosmeticModel.Order">
         <MappingFragment StoreEntitySet="Order">
@@ -207,23 +224,6 @@
           <ScalarProperty Name="isActive" ColumnName="isActive" />
           <ScalarProperty Name="statusName" ColumnName="statusName" />
           <ScalarProperty Name="statusID" ColumnName="statusID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Notifications">
-      <EntityTypeMapping TypeName="DBCosmeticModel.Notification">
-        <MappingFragment StoreEntitySet="Notification">
-          <ScalarProperty Name="menutype" ColumnName="menutype" />
-          <ScalarProperty Name="image" ColumnName="image" />
-          <ScalarProperty Name="message" ColumnName="message" />
-          <ScalarProperty Name="title" ColumnName="title" />
-          <ScalarProperty Name="objectTypeID" ColumnName="objectTypeID" />
-          <ScalarProperty Name="objectID" ColumnName="objectID" />
-          <ScalarProperty Name="receiveUserFullName" ColumnName="receiveUserFullName" />
-          <ScalarProperty Name="receiveUserID" ColumnName="receiveUserID" />
-          <ScalarProperty Name="sendUserFullName" ColumnName="sendUserFullName" />
-          <ScalarProperty Name="sendUserID" ColumnName="sendUserID" />
-          <ScalarProperty Name="notiID" ColumnName="notiID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

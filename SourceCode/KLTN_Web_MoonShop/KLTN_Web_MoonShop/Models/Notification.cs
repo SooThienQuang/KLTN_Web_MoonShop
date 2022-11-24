@@ -25,5 +25,6 @@ namespace KLTN_Web_MoonShop.Models
         public string message { get; set; }
         public string image { get; set; }
         public Nullable<long> menutype { get; set; }
+        public Nullable<int> isRead { get; set; }
     }
 }

@@ -6,7 +6,7 @@
     DBCosmeticEntities db = new DBCosmeticEntities();
     Customer user = Session["user"] as Customer;
     CustomerAddress ca = new CustomerAddress();
-    List<Product> lstpro = db.Products.Where(n=>n.productID==1).ToList();
+    List<Product> lstpro = db.Products.Where(n => n.productID == 1).ToList();
     if (user != null)
     {
 
@@ -309,7 +309,7 @@
 </div>
 </div>-->
 @*----------------------------------------------------------------------------modal thanh toán----------------------------------------------------------------------*@
-<div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="checkoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-body">
@@ -348,11 +348,11 @@
 
                                 </div>
                                 @*@if (user != null)
-                                {
-                                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="ConfirmDelete(@ViewBag.Product.productID,@user.customerID)">
-                                        <i class="ti-shopping-cart"></i> Thêm vào giỏ hàng
-                                    </button>
-                                }*@
+                                    {
+                                        <button type="button" class="btn btn-success" data-dismiss="modal" onclick="ConfirmDelete(@ViewBag.Product.productID,@user.customerID)">
+                                            <i class="ti-shopping-cart"></i> Thêm vào giỏ hàng
+                                        </button>
+                                    }*@
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -470,7 +470,7 @@
                                     }
                                     else
                                     {
-                                        <button class="btn btn-danger btn-lg" data-dismiss="modal" onclick="showSwal('success-message')">Đặt hàng ngay</button>
+                                        <button class="btn btn-danger btn-lg" data-dismiss="modal" onclick="checkoutt()">Đặt hàng ngay</button>
 
                                     }
                                     @*<button class="btn btn-lg btn-danger" onclick="Pay()" type="button"><i class="ti-truck"></i> Đặt hàng ngay</button>*@
@@ -567,10 +567,9 @@
 @*<link rel="stylesheet" href="~/css/alert/notlogin.css" />*@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    function diachiapi()
-    {
+    function diachiapi() {
         var address = new Object();
-        address.cusID = @user.customerID;
+        address.cusID = document.getElementById("txtuserid").value;
         address.diachi = document.getElementById("txtduong").value + "," + document.getElementById("txt").value;
         $.ajax({
             url: '/api/Address/',
@@ -581,7 +580,7 @@
                 $("#modaladdresss").modal("hide");
                 Swal.fire(
                     'Cập nhật thành công!',
-                    'Địa chỉ của bạn đã được xóa',
+                    'Địa chỉ của bạn đã được thêm mới',
                     'success'
                 )
                 location.reload();
@@ -593,18 +592,18 @@
     }
     function themdiachi() {
         Swal.fire({
-  title: 'Bạn chưa có địa chỉ giao hàng?',
-  text: "Bạn có muốn thêm địa chỉ ?",
-  icon: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
-  confirmButtonText: 'Có thêm ngay!'
-}).then((result) => {
-  if (result.isConfirmed) {
-      $("#modaladdresss").modal("show");
-  }
-})
+            title: 'Bạn chưa có địa chỉ giao hàng?',
+            text: "Bạn có muốn thêm địa chỉ ?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Có thêm ngay!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $("#modaladdresss").modal("show");
+            }
+        })
     }
     function HideModalUp() {
 
@@ -665,52 +664,83 @@
 @*--------------------------------alert-----------------------------------------*@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-
+<button id="checkkk" onclick="checkoutt()"></button>
+<link rel="stylesheet" href="https://sweetalert2.github.io/styles/bootstrap4-buttons.css" />
+<button id="comfimchhh" onclick="comfirmcheckout()"></button>
 <script>
     //----------------------------------------------------- alert---------------------------thanh cong---------------------------
-    (function ($) {
-        showSwal = function (type) {
-            'use strict';
-            if (type === 'success-message') {
-                /*   $("#checkoutModal").modal("hide");*/
-                    var pro = document.getElementById("txtproid").value;
-                    var price = document.getElementById("txtprice").value;
-                    var userid = document.getElementById("txtuserid").value;
-                    var qn = document.getElementById("quantity1").value;
-                    var person = new Object();
-                    person.proID = pro;
-                    person.cusID = userid;
-                    person.price = price;
-                    person.quantity = qn;
-                    $.ajax({
-                        url: '/api/Pay/',
-                        type: 'POST',
-                        dataType: 'json',
-                        data: person,
-                        success: function (result) {
-                            swal({
-                                title: 'Thành công!',
-                                text: 'Bấm vào cá nhân để theo dõi đơn hàng',
-                                type: 'success',
-                                button: {
-                                    text: "Continue",
-                                    value: true,
-                                    visible: true,
-                                    className: "btn btn-primary"
-                                }
-                            })
-                        },
-                        error: function (err) {
-                            alert(err.statusText);
-                        }
-                    });
-               
-            } else {
-                swal("Error occured !");
-            }
-        }
+    function checkoutt() {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
 
-    })(jQuery);
+        swalWithBootstrapButtons.fire({
+            title: 'Bạn có chắc chắn ?',
+            text: "Muốn đặt hàng sản phẩm này không !",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Có, đặt ngay cho tôi!',
+            cancelButtonText: 'Thôi, để lần sau vậy!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#spinnerModal').modal('show');
+                document.getElementById("comfimchhh").onclick();
+                //swalWithBootstrapButtons.fire(
+                //    'Deleted!',
+                //    'Your file has been deleted.',
+                //    'success'
+                //)
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Your imaginary file is safe :)',
+                    'error'
+                )
+            }
+        })
+    }
+    function comfirmcheckout() {
+        var pro = document.getElementById("txtproid").value;
+        var price = document.getElementById("txtprice").value;
+        var userid = document.getElementById("txtuserid").value;
+        var qn = document.getElementById("quantity1").value;
+        var person = new Object();
+        person.proID = pro;
+        person.cusID = userid;
+        person.price = price;
+        person.quantity = qn;
+        $.ajax({
+            url: '/api/Pay/',
+            type: 'POST',
+            dataType: 'json',
+            data: person,
+            success: function (result) {
+                $('#spinnerModal').modal('hide');
+                swal({
+                    title: 'Thành công!',
+                    text: 'Bấm vào cá nhân để theo dõi đơn hàng',
+                    type: 'success',
+                    button: {
+                        text: "Continue",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-primary"
+                    }
+                })
+            },
+            error: function (err) {
+                alert(err.statusText);
+            }
+        });
+    }
     /*////----------------------------------------------------------------thanh toan----------------------------------------*/
     //var Pay = function () {
     //    var pro = document.getElementById("txtproid").value;
@@ -738,8 +768,8 @@
     //----------------------------------------------------------------them vao gio hang-----------------------------------
     @*$(".soluongcart").append(`<p>` + @quantitycart + `<p/>`);*@
     var ConfirmDelete = function (productID, cusID) {
+        $('#spinnerModal').modal('show');
         var sl = document.getElementById("quantity").value;
-
         var person = new Object();
         person.proID = productID;
         person.cusID = cusID;
@@ -752,7 +782,7 @@
             success: function (data, textStatus, xhr) {
                 var slq = Object.keys(data).length;
                 $(".soluongcart").replaceWith(`` + slq + ``);
-
+                $('#spinnerModal').modal('hide');
                 swal({
                     title: 'Thành công!',
                     text: 'Bấm vào icon giỏ hàng để xem chi tiết',
@@ -843,15 +873,15 @@
                         </div>
                         @if (user == null)
                         {
-                            <button type="button" data-toggle="modal" data-target="#loginModal" style="border:none;background-color:white" class="mt-4 m-4" >
-                                <i class="ti-shopping-cart ">Thêm giỏ hàng</i> 
+                            <button type="button" data-toggle="modal" data-target="#loginModal" style="border:none;background-color:white" class="mt-4 m-4">
+                                <i class="ti-shopping-cart ">Thêm giỏ hàng</i>
                             </button>
                         }
                         else
                         {
-                    <button type="button"class="mt-4 m-4" onclick="ConfirmDelete(@item.productID,@user.customerID)" style="border: none; background-color: white">
-                        <i class="ti-shopping-cart ">Thêm giỏ hàng</i>
-                    </button>
+                            <button type="button" class="mt-4 m-4" onclick="ConfirmDelete(@item.productID,@user.customerID)" style="border: none; background-color: white">
+                                <i class="ti-shopping-cart ">Thêm giỏ hàng</i>
+                            </button>
                         }
                     </div>
                 </figcaption>
@@ -870,7 +900,19 @@
 @*--gio hang--*@
 <link rel="stylesheet" href="~/css/cart.css " />
 <link rel=" stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="~/css/spinner.css" />
+
+
+<div class="modal" tabindex="-1" role="dialog" id="spinnerModal">
+    <div class="modal-dialog modal-dialog-centered text-center" role="document">
+        @*<span class="fa fa-spinner fa-spin fa-3x w-100"></span>*@
+        <div class="loading-box">
+            <div class="loader"></div>
+        </div>
+    </div>
+</div>
 <script>
+   
     //---------------------------------------gio hang---------------------------------------
     document.addEventListener("DOMContentLoaded", function (event) {
 

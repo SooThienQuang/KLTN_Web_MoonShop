@@ -9,6 +9,7 @@
     <EntitySet Name="Discounts" EntityType="DBCosmeticModel.Discount" />
     <EntitySet Name="Employees" EntityType="DBCosmeticModel.Employee" />
     <EntitySet Name="EmployeeDetails" EntityType="DBCosmeticModel.EmployeeDetail" />
+    <EntitySet Name="Notifications" EntityType="DBCosmeticModel.Notification" />
     <EntitySet Name="Orders" EntityType="DBCosmeticModel.Order" />
     <EntitySet Name="OrderDetails" EntityType="DBCosmeticModel.OrderDetail" />
     <EntitySet Name="Positions" EntityType="DBCosmeticModel.Position" />
@@ -18,7 +19,6 @@
     <EntitySet Name="Salaries" EntityType="DBCosmeticModel.Salary" />
     <EntitySet Name="Sexes" EntityType="DBCosmeticModel.Sex" />
     <EntitySet Name="Status" EntityType="DBCosmeticModel.Status" />
-    <EntitySet Name="Notifications" EntityType="DBCosmeticModel.Notification" />
   </EntityContainer>
   <EntityType Name="ActionLog">
     <Key>
@@ -121,6 +121,22 @@
     <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="isActive" Type="Int32" />
   </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="notiID" />
+    </Key>
+    <Property Name="notiID" Type="Int64" Nullable="false" />
+    <Property Name="sendUserID" Type="Int64" />
+    <Property Name="sendUserFullName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="receiveUserID" Type="Int64" />
+    <Property Name="receiveUserFullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="objectID" Type="Int64" />
+    <Property Name="objectTypeID" Type="Int64" />
+    <Property Name="title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="image" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+    <Property Name="menutype" Type="Int64" />
+  </EntityType>
   <EntityType Name="Order">
     <Key>
       <PropertyRef Name="orderID" />
@@ -211,21 +227,5 @@
     <Property Name="statusID" Type="Int32" Nullable="false" />
     <Property Name="statusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="isActive" Type="Int32" />
-  </EntityType>
-  <EntityType Name="Notification">
-    <Key>
-      <PropertyRef Name="notiID" />
-    </Key>
-    <Property Name="notiID" Type="Int64" Nullable="false" />
-    <Property Name="sendUserID" Type="Int64" />
-    <Property Name="sendUserFullName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="receiveUserID" Type="Int64" />
-    <Property Name="receiveUserFullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="objectID" Type="Int64" />
-    <Property Name="objectTypeID" Type="Int64" />
-    <Property Name="title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="image" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
-    <Property Name="menutype" Type="Int64" />
   </EntityType>
 </Schema>

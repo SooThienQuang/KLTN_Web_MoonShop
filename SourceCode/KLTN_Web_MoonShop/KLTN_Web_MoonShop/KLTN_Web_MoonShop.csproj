@@ -530,6 +530,7 @@
     <Content Include="css\home\product.css" />
     <Content Include="css\productDetail.css" />
     <Content Include="css\product\detail.css" />
+    <Content Include="css\spinner.css" />
     <Content Include="css\style.css" />
     <Content Include="Global.asax" />
     <Content Include="js\bootstrap4\bootstrap.bundle.js" />
@@ -921,6 +922,7 @@
     <Content Include="Views\Home\Tesst1cart.cshtml" />
     <Content Include="Views\Customer\img.cshtml" />
     <Content Include="Views\Customer\Address.cshtml" />
+    <None Include="Properties\PublishProfiles\thienquang-001-site1 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\thienquang-001-site1 - Web Deploy.pubxml" />
     <Content Include="Views\Product\ShowDetail.cshtml" />
     <Content Include="Views\PartialView\NavbarProducer.cshtml" />
@@ -935,6 +937,7 @@
     <Content Include="Views\Home\sendmail.cshtml" />
     <Content Include="Views\Discount\Index.cshtml" />
     <Content Include="Views\Customer\Notifications.cshtml" />
+    <None Include="Properties\PublishProfiles\thienquang-001-site1 - Web Deploy1.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
