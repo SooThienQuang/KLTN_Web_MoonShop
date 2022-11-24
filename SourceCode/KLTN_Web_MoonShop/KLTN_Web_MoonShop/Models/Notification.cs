@@ -15,8 +15,15 @@ namespace KLTN_Web_MoonShop.Models
     public partial class Notification
     {
         public long notiID { get; set; }
-        public string notiName { get; set; }
-        public Nullable<long> customerID { get; set; }
-        public string customerName { get; set; }
+        public Nullable<long> sendUserID { get; set; }
+        public string sendUserFullName { get; set; }
+        public Nullable<long> receiveUserID { get; set; }
+        public string receiveUserFullName { get; set; }
+        public Nullable<long> objectID { get; set; }
+        public Nullable<long> objectTypeID { get; set; }
+        public string title { get; set; }
+        public string message { get; set; }
+        public string image { get; set; }
+        public Nullable<long> menutype { get; set; }
     }
 }

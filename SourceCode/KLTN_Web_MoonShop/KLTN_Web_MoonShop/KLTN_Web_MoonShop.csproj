@@ -129,6 +129,8 @@
     <Content Include="Asset\img\caroselhome\img_6.jpg" />
     <Content Include="Asset\img\cart.png" />
     <Content Include="Asset\img\delete.png" />
+    <Content Include="Asset\img\discount\check.jpg" />
+    <Content Include="Asset\img\discount\discount20.jpg" />
     <Content Include="Asset\img\discount\hot-sale.png" />
     <Content Include="Asset\img\logo\f9a5893e92b154ef0da0.jpg" />
     <Content Include="Asset\img\logo\MoonShop.png" />
@@ -192,15 +194,18 @@
     <Content Include="Asset\img\product\cart.png" />
     <Content Include="Asset\img\product\center-illuminate-foamer.png" />
     <Content Include="Asset\img\product\center.png" />
+    <Content Include="Asset\img\product\check.jpg" />
     <Content Include="Asset\img\product\cotrangdiem.jpg" />
     <Content Include="Asset\img\product\d2ce2c30c5b6348b66730acdd8560f7a.jpg" />
     <Content Include="Asset\img\product\deccf3ae0587796a32b6de2ae2953b78.jpg" />
     <Content Include="Asset\img\product\dior-addict-lip-glow000000000001874494f.png" />
     <Content Include="Asset\img\product\dior-lip-glow-2021-orchardvn-anh3.png" />
     <Content Include="Asset\img\product\dior-lip-glow-2021-orchardvn-anh9.png" />
+    <Content Include="Asset\img\product\discount20.jpg" />
     <Content Include="Asset\img\product\f48f34f32b302d0ca0f38420e0203f6c.jpg" />
     <Content Include="Asset\img\product\f6819bdc586d5e7c9da1fa6bf78173ca.jpg" />
     <Content Include="Asset\img\product\google-shopping-son-thoi-li-3ce-227-benchmark-mau-cam-do-chay-3-5g-1644639565_img_380x380_64adc6_fit_center.jpg" />
+    <Content Include="Asset\img\product\hot-sale.png" />
     <Content Include="Asset\img\product\huxley-cleansing-foam-deep-clean-deep-moist-product.png" />
     <Content Include="Asset\img\product\huxley-cleansing-foam-info.png" />
     <Content Include="Asset\img\product\huxley-cleansing-gel-info.jpg" />
@@ -520,6 +525,7 @@
     <Content Include="css\bootstrap4\bootstrap.min.css" />
     <Content Include="css\caroselhome\style.css" />
     <Content Include="css\cart.css" />
+    <Content Include="css\discount\discount20%25.jpg" />
     <Content Include="css\home\navbartop.css" />
     <Content Include="css\home\product.css" />
     <Content Include="css\productDetail.css" />
@@ -565,6 +571,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Admin\ActionLogController.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
+    <Compile Include="Controllers\Admin\DiscountController.cs" />
     <Compile Include="Controllers\Admin\EmployeeController.cs" />
     <Compile Include="Controllers\Admin\ProductTypeController.cs" />
     <Compile Include="Controllers\AlertController.cs" />
@@ -905,7 +912,6 @@
     <Content Include="Views\Payment\Detail.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
     <Content Include="Views\Customer\Profile.cshtml" />
-    <Content Include="Views\Customer\Notification.cshtml" />
     <Content Include="Views\Customer\Cart.cshtml" />
     <Content Include="Views\Customer\Order.cshtml" />
     <Content Include="Views\ShoppingCart\AddOrUpdate.cshtml" />
@@ -927,6 +933,8 @@
     <Content Include="Views\Payment\Discount.cshtml" />
     <Content Include="Views\PartialView\Suggest.cshtml" />
     <Content Include="Views\Home\sendmail.cshtml" />
+    <Content Include="Views\Discount\Index.cshtml" />
+    <Content Include="Views\Customer\Notifications.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

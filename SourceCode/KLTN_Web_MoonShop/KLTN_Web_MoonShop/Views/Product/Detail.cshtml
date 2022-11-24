@@ -443,6 +443,7 @@
 
                                         @if (user != null)
                                         {
+                                            <input type="text" value="@ca.customerAdd" hidden id="diachigiaohang" />
                                             <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="1" checked>
                                             <label class="form-check-label" for="gridRadios1">
                                                 @ca.customerAdd (Mặc định)
@@ -463,7 +464,15 @@
                                     {
                                         <input type="number" id="txtuserid" value="@user.customerID" hidden />
                                     }
-                                    <button class="btn btn-danger btn-lg" data-dismiss="modal" onclick="showSwal('success-message')">Đặt hàng ngay</button>
+                                    @if (ca.customerAdd == null)
+                                    {
+                                        <button class="btn btn-danger btn-lg" data-dismiss="modal" onclick="themdiachi()">Đặt hàng ngay</button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-danger btn-lg" data-dismiss="modal" onclick="showSwal('success-message')">Đặt hàng ngay</button>
+
+                                    }
                                     @*<button class="btn btn-lg btn-danger" onclick="Pay()" type="button"><i class="ti-truck"></i> Đặt hàng ngay</button>*@
                                 </div>
                             </div>
@@ -516,8 +525,87 @@
 
 </div>
 <!--Modal: modalPush-->
+@*------------------------------------------------------------modal dịa chi------------------------------------------------------*@
+<div class="modal fade" id="modaladdresss" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="text-right cross"> <i class="fa fa-times" data-dismiss="modal"></i> </div>
+            <h4 class="mt-1 text-md-center">Thêm địa chỉ giao hàng </h4>
+            <div class="card-body text-center mb-5">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Circle-icons-location.svg/2048px-Circle-icons-location.svg.png" height="100" width="100">
+                <div class="form-group mt-3">
+                    <div class="form-group">
+                        Tỉnh/ Thành Phố
+                        <select name="" id="province" class="form-control coupon">
+                        </select>
+                        <br />
+                        Quận/Huyện
+                        <select name="" id="district" class="form-control coupon">
+                            <option value="">chọn quận/huyện</option>
+                        </select>
+                        <br />
+                        Xã/Phường
+                        <select name="" id="ward" class="form-control coupon">
+                            <option value="">chọn xã/phường</option>
+                        </select>
+
+                        <br />
+                        Số nhà/Đường
+                        <input type="text" id="txtduong" class="form-control coupon" name="txtduong">
+                        <br />
+                        Địa chỉ đã chọn
+                        <input type="text" id="txt" class="form-control coupon" name="txt">
+                    </div>
+                    <button class="btn btn-outline-primary" onclick="diachiapi()"><p class="fa fa-floppy-o"></p>Thêm địa chỉ</button>
+
+                </div>
+                <a href="#" class="" data-dismiss="modal">Không ! Cám ơn</a>
+            </div>
+        </div>
+    </div>
+</div>
 @*<link rel="stylesheet" href="~/css/alert/notlogin.css" />*@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+    function diachiapi()
+    {
+        var address = new Object();
+        address.cusID = @user.customerID;
+        address.diachi = document.getElementById("txtduong").value + "," + document.getElementById("txt").value;
+        $.ajax({
+            url: '/api/Address/',
+            type: 'POST',
+            dataType: 'json',
+            data: address,
+            success: function (result) {
+                $("#modaladdresss").modal("hide");
+                Swal.fire(
+                    'Cập nhật thành công!',
+                    'Địa chỉ của bạn đã được xóa',
+                    'success'
+                )
+                location.reload();
+            },
+            error: function (err) {
+                alert(err.statusText);
+            }
+        });
+    }
+    function themdiachi() {
+        Swal.fire({
+  title: 'Bạn chưa có địa chỉ giao hàng?',
+  text: "Bạn có muốn thêm địa chỉ ?",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Có thêm ngay!'
+}).then((result) => {
+  if (result.isConfirmed) {
+      $("#modaladdresss").modal("show");
+  }
+})
+    }
     function HideModalUp() {
 
         $("#modalLogin").modal("hide");
@@ -585,38 +673,38 @@
             'use strict';
             if (type === 'success-message') {
                 /*   $("#checkoutModal").modal("hide");*/
-
-                var pro = document.getElementById("txtproid").value;
-                var price = document.getElementById("txtprice").value;
-                var userid = document.getElementById("txtuserid").value;
-                var qn = document.getElementById("quantity1").value;
-                var person = new Object();
-                person.proID = pro;
-                person.cusID = userid;
-                person.price = price;
-                person.quantity = qn;
-                $.ajax({
-                    url: '/api/Pay/',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: person,
-                    success: function (result) {
-                        swal({
-                            title: 'Thành công!',
-                            text: 'Bấm vào cá nhân để theo dõi đơn hàng',
-                            type: 'success',
-                            button: {
-                                text: "Continue",
-                                value: true,
-                                visible: true,
-                                className: "btn btn-primary"
-                            }
-                        })
-                    },
-                    error: function (err) {
-                        alert(err.statusText);
-                    }
-                });
+                    var pro = document.getElementById("txtproid").value;
+                    var price = document.getElementById("txtprice").value;
+                    var userid = document.getElementById("txtuserid").value;
+                    var qn = document.getElementById("quantity1").value;
+                    var person = new Object();
+                    person.proID = pro;
+                    person.cusID = userid;
+                    person.price = price;
+                    person.quantity = qn;
+                    $.ajax({
+                        url: '/api/Pay/',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: person,
+                        success: function (result) {
+                            swal({
+                                title: 'Thành công!',
+                                text: 'Bấm vào cá nhân để theo dõi đơn hàng',
+                                type: 'success',
+                                button: {
+                                    text: "Continue",
+                                    value: true,
+                                    visible: true,
+                                    className: "btn btn-primary"
+                                }
+                            })
+                        },
+                        error: function (err) {
+                            alert(err.statusText);
+                        }
+                    });
+               
             } else {
                 swal("Error occured !");
             }

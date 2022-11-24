@@ -14,6 +14,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
     {
         public long id { get;set; }
         public long cusID { get; set; }
+        public string diachi { get; set; }
     }
     public class AddressController : ApiController
     {
@@ -47,6 +48,24 @@ namespace KLTN_Web_MoonShop.Controllers.API
                 CustomerAddress cs = db.CustomerAddresses.FirstOrDefault(n => n.customerID == d.cusID && n.ID == d.id);
                 cs.isMain =1;
                 db.CustomerAddresses.AddOrUpdate(cs);
+                db.SaveChanges();
+                return "Cập nhật địa chỉ thành công";
+            }
+            catch
+            {
+                return "Cập nhật thất bại";
+            }
+
+        }
+        [HttpPost]
+        public string post(address d)
+        {
+            try
+            {
+                CustomerAddress csmain = db.CustomerAddresses.FirstOrDefault(n => n.customerID == d.cusID && n.isMain == 1);
+                csmain.customerAdd = d.diachi;
+                csmain.isMain = 1;
+                db.CustomerAddresses.AddOrUpdate(csmain);
                 db.SaveChanges();
                 return "Cập nhật địa chỉ thành công";
             }

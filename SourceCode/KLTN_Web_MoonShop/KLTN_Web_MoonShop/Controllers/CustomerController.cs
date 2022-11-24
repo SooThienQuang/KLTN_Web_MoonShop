@@ -81,8 +81,30 @@ namespace KLTN_Web_MoonShop.Controllers
                     cd.customerPhone = ("0" + phone).Trim();
                     db.CustomerAddresses.Add(cd);
                     db.Customers.Add(customer);
-                    db.SaveChanges();
                     ViewBag.CreateSuccess = "Tạo tài khoản thành công";
+                    //thông báo đăng kí thành công
+                    Notification noti = new Notification();
+                    long idnoti = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+                    noti.notiID=idnoti;
+                    noti.receiveUserID = id;
+                    noti.receiveUserFullName = firstname + " " + lastname;
+                    noti.title = "Chúc mừng bạn đã đăng kí tài khoản thành công";
+                    noti.message = "Cám ơn bạn đã tin tưởng Shop , mong bạn có một trải nghiệm tốt bằng các dịch vụ của chúng mình !";
+                    noti.image = "check.jpg";
+                    noti.menutype = 1;
+                    db.Notifications.Add(noti);
+                    //thông báo giảm giá khách hàng mới
+                    Notification noti2 = new Notification();
+                    long idnoti2 = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+                    noti2.notiID = idnoti2;
+                    noti2.receiveUserID = id;
+                    noti2.receiveUserFullName = firstname + " " + lastname;
+                    noti2.title = "Giảm giá cho khách hàng mới đến";
+                    noti2.message = "Tặng bạn voucher giảm giá 20% ! Click để xem chi tiết";
+                    noti2.image = "discount20.jpg";
+                    noti2.menutype = 1;
+                    db.Notifications.Add(noti2);
+                    db.SaveChanges();
                 }    
                 else
                 {
@@ -149,18 +171,20 @@ namespace KLTN_Web_MoonShop.Controllers
             return View(cs);
 
         }
-        public ActionResult Notification()
+        public ActionResult Notifications()
         {
 
             Customer cs = Session["user"] as Customer;
+            List<Notification> lst = new List<Notification>();
             if (cs != null)
             {
                 string ten = cs.customerName.ToString().Split(' ').Last();
                 ViewBag.name = ten;
                 ViewBag.user = cs;
+                lst = db.Notifications.Where(n => n.receiveUserID == cs.customerID).ToList().OrderByDescending(n => n.notiID).ToList();
             }
 
-            return PartialView();
+            return PartialView(lst);
 
         }
         public void RefreshAll()
@@ -241,7 +265,7 @@ namespace KLTN_Web_MoonShop.Controllers
                 db.SaveChanges();
                 Session["user"]=cs;
             }
-            return RedirectToAction("DetailProfile");
+            return RedirectToAction("DetailProfile", "Customer", new {id=1});
         }
 
 

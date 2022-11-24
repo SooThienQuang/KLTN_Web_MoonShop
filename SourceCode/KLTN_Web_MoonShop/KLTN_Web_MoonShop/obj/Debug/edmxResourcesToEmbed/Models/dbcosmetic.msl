@@ -70,6 +70,7 @@
     <EntitySetMapping Name="Discounts">
       <EntityTypeMapping TypeName="DBCosmeticModel.Discount">
         <MappingFragment StoreEntitySet="Discount">
+          <ScalarProperty Name="image" ColumnName="image" />
           <ScalarProperty Name="isActive" ColumnName="isActive" />
           <ScalarProperty Name="productType" ColumnName="productType" />
           <ScalarProperty Name="description" ColumnName="description" />
@@ -92,13 +93,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Notifications">
-      <EntityTypeMapping TypeName="DBCosmeticModel.Notification">
-        <MappingFragment StoreEntitySet="Notification">
-          <ScalarProperty Name="customerName" ColumnName="customerName" />
-          <ScalarProperty Name="customerID" ColumnName="customerID" />
-          <ScalarProperty Name="notiName" ColumnName="notiName" />
-          <ScalarProperty Name="notiID" ColumnName="notiID" />
+    <EntitySetMapping Name="EmployeeDetails">
+      <EntityTypeMapping TypeName="DBCosmeticModel.EmployeeDetail">
+        <MappingFragment StoreEntitySet="EmployeeDetail">
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="roleID" ColumnName="roleID" />
+          <ScalarProperty Name="posID" ColumnName="posID" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+          <ScalarProperty Name="sex" ColumnName="sex" />
+          <ScalarProperty Name="birthday" ColumnName="birthday" />
+          <ScalarProperty Name="fullName" ColumnName="fullName" />
+          <ScalarProperty Name="emID" ColumnName="emID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -202,20 +210,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="EmployeeDetails">
-      <EntityTypeMapping TypeName="DBCosmeticModel.EmployeeDetail">
-        <MappingFragment StoreEntitySet="EmployeeDetail">
-          <ScalarProperty Name="isActive" ColumnName="isActive" />
-          <ScalarProperty Name="address" ColumnName="address" />
-          <ScalarProperty Name="roleID" ColumnName="roleID" />
-          <ScalarProperty Name="posID" ColumnName="posID" />
-          <ScalarProperty Name="mail" ColumnName="mail" />
-          <ScalarProperty Name="phone" ColumnName="phone" />
-          <ScalarProperty Name="photo" ColumnName="photo" />
-          <ScalarProperty Name="sex" ColumnName="sex" />
-          <ScalarProperty Name="birthday" ColumnName="birthday" />
-          <ScalarProperty Name="fullName" ColumnName="fullName" />
-          <ScalarProperty Name="emID" ColumnName="emID" />
+    <EntitySetMapping Name="Notifications">
+      <EntityTypeMapping TypeName="DBCosmeticModel.Notification">
+        <MappingFragment StoreEntitySet="Notification">
+          <ScalarProperty Name="menutype" ColumnName="menutype" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="objectTypeID" ColumnName="objectTypeID" />
+          <ScalarProperty Name="objectID" ColumnName="objectID" />
+          <ScalarProperty Name="receiveUserFullName" ColumnName="receiveUserFullName" />
+          <ScalarProperty Name="receiveUserID" ColumnName="receiveUserID" />
+          <ScalarProperty Name="sendUserFullName" ColumnName="sendUserFullName" />
+          <ScalarProperty Name="sendUserID" ColumnName="sendUserID" />
+          <ScalarProperty Name="notiID" ColumnName="notiID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

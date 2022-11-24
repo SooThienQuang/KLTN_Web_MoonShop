@@ -18,6 +18,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
         public int sex { get; set; }
         public string fullname { get; set; }
         public string email { get; set; }
+        public string address { get; set; }
 
     }
     public class CustomerController : ApiController
@@ -82,7 +83,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
         }
 
         // DELETE: api/Customer/5
-        [HttpDelete]
+        [HttpPost]
         public void Delete(int id)
         {
         }

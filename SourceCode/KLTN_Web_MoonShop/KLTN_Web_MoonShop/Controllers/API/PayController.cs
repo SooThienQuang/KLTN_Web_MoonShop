@@ -51,6 +51,20 @@ namespace KLTN_Web_MoonShop.Controllers.API
                 orderDetail.idAdd = cus.customerAdd;
                 orderDetail.statusID = 1;
                 db.OrderDetails.Add(orderDetail);
+                //thêm thông báo đăt hàng thành công
+                long idnoti = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+                Notification noti = new Notification();
+                Customer customer = db.Customers.FirstOrDefault(n => n.customerID == obj.cusID && n.isActive == 1);
+                Product product = db.Products.FirstOrDefault(n => n.productID == obj.proID && n.isActive == 1);
+                ProductDetail productDetail=db.ProductDetails.FirstOrDefault(n => n.ProductID == obj.proID);
+                noti.notiID= idnoti;
+                noti.receiveUserID = obj.cusID;
+                noti.receiveUserFullName = customer.customerName;
+                noti.title = "Bạn đã đặt hàng thành công !";
+                noti.message = "Sản phẩm bao gồm :" + product.productName.Substring(0,30)+"..." + " (số lượng :" + obj.quantity + ")";
+                noti.image = product.productImage;
+                noti.menutype = 2;
+                db.Notifications.Add(noti);
                 db.SaveChanges();
                 return "Đặt hàng thành công";
             }
