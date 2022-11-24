@@ -21,15 +21,10 @@ namespace KLTN_Web_MoonShop.Controllers.API
         public string img { get; set; }
         public long money { get; set; }
     }
+
     public class CartController : ApiController
     {
-        public class person
-        {
-            public long proID { get; set; }
-            public long cusID { get; set; }
-            public long cartID { get; set; }
-            public int quantity { get; set; }
-        }
+      
         // GET: api/Cart
         DBCosmeticEntities db = new DBCosmeticEntities();
         [Route("getcart")]

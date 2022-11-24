@@ -656,6 +656,7 @@
     <Compile Include="Models\Salary.cs">
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SendMail.cs" />
     <Compile Include="Models\Sex.cs">
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>
@@ -925,6 +926,7 @@
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\Payment\Discount.cshtml" />
     <Content Include="Views\PartialView\Suggest.cshtml" />
+    <Content Include="Views\Home\sendmail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

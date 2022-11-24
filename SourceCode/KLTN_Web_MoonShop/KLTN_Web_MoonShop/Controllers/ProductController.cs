@@ -32,8 +32,10 @@ namespace KLTN_Web_MoonShop.Controllers
         }
         public ActionResult Detail(long id)
         {
+            Product pro = db.Products.FirstOrDefault(n => n.productID == id);
             ViewBag.Product = db.Products.FirstOrDefault(n => n.productID == id);
             ViewBag.ProductDetail = db.ProductDetails.FirstOrDefault(n => n.ProductID == id);
+            ViewBag.ProductRecom = db.Products.Where(n => n.productTypeID == pro.productTypeID&&n.isActive==1).ToList();
             return View();
         }
         public ActionResult ShowDetail(long id)
