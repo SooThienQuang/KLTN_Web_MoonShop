@@ -4,19 +4,30 @@
     DBCosmeticEntities db = new DBCosmeticEntities();
     Customer user = Session["user"] as Customer;
 }
+
 <script>
     $(document).ready(function () {
-        $("#exampleModal").modal("show");
+        $("#exampleModal2").modal("show");
     });
     var HideModalUpPro = function () {
 
-        $("#exampleModal").modal("hide");
+        $("#exampleModal2").modal("hide");
+       
 
     }
 </script>
+<link rel="stylesheet" href="~/css/spinner.css" />
 
+<div class="modal" tabindex="-1" role="dialog" id="spinnerModal2">
+    <div class="modal-dialog modal-dialog-centered text-center" role="document">
+        @*<span class="fa fa-spinner fa-spin fa-3x w-100"></span>*@
+        <div class="loading-box">
+            <div class="loader"></div>
+        </div>
+    </div>
+</div>
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -46,17 +57,17 @@
                             <br />
                             <div class="size">
                                 @*<h6 class="fw-bold">Size</h6>
-                <div class="diff_sizes d-flex justify-content-between ">
-                    <span>200ml</span>
-                    <span>400ml</span>
-                    <span>800ml</span>
-                                    
+                                    <div class="diff_sizes d-flex justify-content-between ">
+                                        <span>200ml</span>
+                                        <span>400ml</span>
+                                        <span>800ml</span>
 
-                </div>*@
+
+                                    </div>*@
                                 <div class="color">
-                                 
+
                                     @*<h6 class="mt-2 fw-bold">Color</h6>
-                    <div class="diff_color d-flex gap-3">*@ <span></span> <span></span> <span></span>
+                                        <div class="diff_color d-flex gap-3">*@ <span></span> <span></span> <span></span>
                                 </div>
                                 <div id="dvquantity">
                                     <h5>Số lượng</h5>
@@ -101,7 +112,8 @@
 <script>
     //------------------------------------them vao gio hang --------------------------------
     function addtocart(proid, cusid) {
-        $("#exampleModal").modal("hide");
+        $("#exampleModal2").modal("hide");
+        $("#spinnerModal2").modal("show");
         var sll = +document.getElementById("quantity").innerHTML;
         var person = new Object();
         person.proID = proid;
@@ -113,8 +125,10 @@
             dataType: 'json',
             data: person,
             success: function (data) {
+                $("#spinnerModal2").modal("hide");
                 var slq = Object.keys(data).length;
-                $(".soluongcart").replaceWith(`` + slq + ``);
+                $('.soluongcart').empty();
+                $(".soluongcart").append(`` + slq + ``);
                 Swal.fire(
                     'Thêm thành công!',
                     'Click vào giỏ hàng để xem chi tiết',
@@ -223,19 +237,19 @@
         padding: 20px
     }
 
-  /*  .carousel {
+        /*  .carousel {
         margin-top: -20px !important
     }*/
 
-    .card2 h5 {
-        font-weight: 700
-    }
+        .card2 h5 {
+            font-weight: 700
+        }
 
-    .card2 p {
-        font-size: 13px;
-        margin-top: -10px;
-        color: #8b8b90
-    }
+        .card2 p {
+            font-size: 13px;
+            margin-top: -10px;
+            color: #8b8b90
+        }
 
     .size h6 {
         color: #8b8b90

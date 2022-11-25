@@ -317,80 +317,65 @@
                     <i class="fa fa-close close" data-dismiss="modal">Đóng</i>
                 </div>
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="card rounded-3 " style="min-width:300px; height: auto; background-color: #a7a3d2; font-family: 'Rubik', sans-serif">
-                                <div class="top p-3 d-flex justify-content-between"> <i class="fa fa-heart-o"></i> </div>
-                                <div id="carouselExampleIndicators" class="carousel slide p-3 " data-bs-ride="carousel">
-                                    <div class="carousel-indicators"> <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button> <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button> <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button> </div>
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active"> <img src="~/Asset/img/product/@ViewBag.ProductDetail.img1" class="d-block w-100 h-100" alt="..."> </div>
-                                        <div class="carousel-item"> <img src="~/Asset/img/product/@ViewBag.ProductDetail.img2" class="d-block w-100" alt="..."> </div>
-                                        <div class="carousel-item"> <img src="~/Asset/img/product/@ViewBag.ProductDetail.img3" class="d-block w-100" alt="..."> </div>
-                                    </div> <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span> </button> <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span> </button>
-                                </div>
-                                <div class="card2 w-100">
-                                    <h5>@ViewBag.Product.productName</h5>
-                                    <p>Còn hàng</p>
-                                    <span>@ViewBag.Product.productDescribe</span>
-                                    <br />
-                                    <br />
-                                    <div class="size">
+                    <div class="col-sm-12">
+                        <div class="card rounded-3 " style="min-width:300px; height: auto; background-color: #a7a3d2; font-family: 'Rubik', sans-serif">
+                            <div class="top p-3 d-flex justify-content-between"> <i class="fa fa-heart-o"></i> </div>
+                            <div id="carouselExampleIndicators" class="carousel slide p-3 " data-bs-ride="carousel">
+                                <div class="carousel-indicators"> <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button> <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button> <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button> </div>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active"> <img src="~/Asset/img/product/@ViewBag.ProductDetail.img1" class="d-block w-100 h-100" alt="..."> </div>
+                                    <div class="carousel-item"> <img src="~/Asset/img/product/@ViewBag.ProductDetail.img2" class="d-block w-100" alt="..."> </div>
+                                    <div class="carousel-item"> <img src="~/Asset/img/product/@ViewBag.ProductDetail.img3" class="d-block w-100" alt="..."> </div>
+                                </div> <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span> </button> <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span> </button>
+                            </div>
+                            @*<div class="card2 w-100">
 
-                                        <div class="color">
-                                            <span></span> <span></span> <span></span>
-                                        </div>
+                                <span>@ViewBag.Product.productDescribe</span>
+                                <br />
+                                <br />
+                                <div class="size">
 
-                                        <br />
-
+                                    <div class="color">
+                                        <span></span> <span></span> <span></span>
                                     </div>
 
+                                    <br />
 
                                 </div>
-                                @*@if (user != null)
-                                    {
-                                        <button type="button" class="btn btn-success" data-dismiss="modal" onclick="ConfirmDelete(@ViewBag.Product.productID,@user.customerID)">
-                                            <i class="ti-shopping-cart"></i> Thêm vào giỏ hàng
-                                        </button>
-                                    }*@
-                            </div>
+
+
+                            </div>*@
                         </div>
-                        <div class="col-md-6">
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-12">
                             <div class="p-3 py-5">
+                                <h5>@ViewBag.Product.productName</h5>
+                                <p>Còn hàng</p>
                                 <div class="d-flex justify-content-between align-items-center mt-3">
-                                    Giá sản phẩm : <h6 class="" style="color:red">@String.Format("{0:0,0 vnđ}", @ViewBag.Product.productPrice)</h6>
+                                    Giá sản phẩm : <h5 class="" style="color:red">@String.Format("{0:0,0 vnđ}", @ViewBag.Product.productPrice)</h5>
                                 </div>
-                                @*<div class="d-flex justify-content-between align-items-center mt-3">
-                                        <div class="sign">
-                                            <span id="minus2">
-                                                <i class="fa fa-minus"></i>
-                                            </span> <h5 id="quantity2">1</h5>
-                                            <span id="plus2">
-                                                <i class="fa fa-plus"></i>
-                                            </span>
-                                        </div>
-                                    </div>*@
-                                <div class="d-flex justify-content-between align-items-center mt-3">
-                                    Thành tiền:<h2 id="price2" style="color:red">@String.Format("{0:0,0 vnđ}", @ViewBag.Product.productPrice) </h2>
-                                    <input type="hidden" value="@ViewBag.Product.productPrice" id="txtgiasp">
-                                </div>
-                                <p>Số lượng </p>
-                                @*<input type="number" min="1" class="form-control" value="1" />*@
-                                <div class="input-group">
-                                    <span class="input-group-btn">
-                                        <button type="button" style="height:35px" class="quantity-left-minus1 btn btn-dark btn-number" data-type="minus" data-field="">
-                                            <span class="ti-minus"></span>
-                                        </button>
-                                    </span>
-                                    <input type="number" style="min-width:50px;max-width:60px;height:35px;font-size:25px;" id="quantity1" name="quantity1" class="form-control" value="1" min="1" max="100">
-                                    <span class="input-group-btn">
-                                        <button type="button" style="height:35px" class="quantity-right-plus1 btn btn-dark btn-number" data-type="plus" data-field="">
-                                            <span class="ti-plus"></span>
-                                        </button>
-                                    </span>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+
+
+                                    <p>Số lượng </p>
+                                    @*<input type="number" min="1" class="form-control" value="1" />*@
+                                    <div class="input-group mt-2">
+                                        <span class="input-group-btn">
+                                            <button type="button" style="height:35px" class="quantity-left-minus1 btn btn-dark btn-number" data-type="minus" data-field="">
+                                                <span class="ti-minus"></span>
+                                            </button>
+                                        </span>
+                                        <input type="number" style="min-width:50px;max-width:60px;height:35px;font-size:25px;" id="quantity1" name="quantity1" class="form-control" value="1" min="1" max="100">
+                                        <span class="input-group-btn">
+                                            <button type="button" style="height:35px" class="quantity-right-plus1 btn btn-dark btn-number" data-type="plus" data-field="">
+                                                <span class="ti-plus"></span>
+                                            </button>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-
                             <script>
                                 $(document).ready(function () {
                                     /*  var quantitiy = 0;*/
@@ -411,9 +396,18 @@
                                     });
                                 });
                             </script>
-
-                            <br />
+                            <div class="d-flex justify-content-between align-items-center mt-1">
+                                <input type="text" class="form-control" placeholder="NHẬP MÃ GIẢM GIÁ" /><button class="btn btn-danger w-25">Áp dụng</button>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                Giảm giá:<h2 id="" style="color:red"></h2>
+                            </div>
                             <div class="d-flex justify-content-between align-items-center mt-3">
+                                Thành tiền:<h2 id="price2" style="color:red">@String.Format("{0:0,0 vnđ}", @ViewBag.Product.productPrice) </h2>
+                                <input type="hidden" value="@ViewBag.Product.productPrice" id="txtgiasp">
+                            </div>
+                            <br />
+                            <div class="d-flex justify-content-between align-items-center mt-2">
                                 <h6 class="text-right">Thông tin cá nhân</h6>
                             </div>
                             <div class="row mt-2">
@@ -455,7 +449,7 @@
 
 
                                     </div>
-                                    <a href="@Url.Action("DetailProfile", "Customer", new {id=1})">Thêm địa chỉ</a>
+                                    <a href="@Url.Action("DetailProfile", "Customer", new {id=1})">Đổi địa chỉ</a>
                                 </div>
                                 <div class="mt-5 text-center">
                                     <input type="number" id="txtprice" value="@ViewBag.Product.productPrice" hidden />

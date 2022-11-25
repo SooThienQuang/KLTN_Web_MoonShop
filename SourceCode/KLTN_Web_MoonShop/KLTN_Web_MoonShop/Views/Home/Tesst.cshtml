@@ -1,181 +1,41 @@
-﻿<h5>Số lượng</h5>
-    <br />
-    <div class="sign">
-        <span id="minus2">
-            <i class="fa fa-minus"></i>
-        </span> <h5 id="quantity2">1</h5> <span id="plus2">
-            <i class="fa fa-plus"></i>
-        </span>
+﻿<<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="laod()">Save changes</button>
+            </div>
+        </div>
     </div>
+</div>
 <script>
-    var plus = document.querySelector("#plus2");
-    var quantity = document.querySelector("#quantity2");
-    var minus = document.querySelector("#minus2");
-    plus.addEventListener('click', function () {
-
-        var increment = parseInt(quantity.innerHTML);
-
-        if (increment < 100) {
-            increment = increment + 1;
-
-            quantity.innerHTML = increment;
-
-        }
-    });
-    minus.addEventListener('click', function () {
-
-        var increment = parseInt(quantity.innerHTML);
-        if (increment > 1) {
-            increment = increment - 1;
-            quantity.innerHTML = increment;
-        }
-
-    });
+    function laod() {
+        location.reload();
+    }
 </script>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
-<style>
-    .sign {
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-        align-items: center
-    }
+<!-- jQuery library -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
 
-        .sign span {
-            height: 30px;
-            width: 30px;
-            background-color: black;
-            display: flex;
-            border-radius: 50%;
-            color: #fff;
-            font-size: 12px;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer
-        }
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 
-        .sign small {
-            font-weight: 700;
-            margin-top: -14px;
-            margin-right: 4px;
-            height: 2px;
-            width: 2px
-        }
-
-        .sign span i {
-            margin-top: 5px
-        }
-
-    .card2 {
-        height: auto;
-        background-color: #f4f5fc;
-        margin-top: 20px;
-        border-top-left-radius: 30px;
-        border-top-right-radius: 30px;
-        padding: 20px
-    }
-
-    .carousel {
-        margin-top: -20px !important
-    }
-
-    .card2 h5 {
-        font-weight: 700
-    }
-
-    .card2 p {
-        font-size: 13px;
-        margin-top: -10px;
-        color: #8b8b90
-    }
-
-    .size h6 {
-        color: #8b8b90
-    }
-
-    .diff_sizes {
-        width: 100% !important
-    }
-
-        .diff_sizes span {
-            display: flex;
-            height: 40px;
-            width: 40px;
-            background-color: #fff;
-            padding: 2px;
-            font-size: 13px;
-            justify-content: center;
-            align-items: center;
-            border-radius: 9px;
-            cursor: pointer;
-            transition: all 0.5s
-        }
-
-            .diff_sizes span:hover {
-                background-color: #ed8a14 !important;
-                color: #fff;
-                font-weight: bold
-            }
-
-    .color h6 {
-        color: #8b8b90
-    }
-
-    .diff_color {
-        position: relative
-    }
-
-        .diff_color span {
-            display: flex;
-            height: 50px;
-            width: 50px;
-            background-color: #fff;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.5s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 2px solid #fff
-        }
-
-            .diff_color span:nth-child(1)::before {
-                position: absolute;
-                content: '';
-                height: 15px;
-                width: 15px;
-                background-color: red;
-                border-radius: 5px
-            }
-
-            .diff_color span:nth-child(1):hover {
-                border: 2px solid red !important
-            }
-
-            .diff_color span:nth-child(2)::before {
-                position: absolute;
-                content: '';
-                height: 15px;
-                width: 15px;
-                background-color: blue;
-                border-radius: 5px
-            }
-
-            .diff_color span:nth-child(2):hover {
-                border: 2px solid blue !important
-            }
-
-            .diff_color span:nth-child(3)::before {
-                position: absolute;
-                content: '';
-                height: 15px;
-                width: 15px;
-                background-color: black;
-                border-radius: 5px
-            }
-
-            .diff_color span:nth-child(3):hover {
-                border: 2px solid black !important
-            }
-</style>
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>

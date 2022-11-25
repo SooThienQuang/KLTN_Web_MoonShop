@@ -116,6 +116,7 @@
     <Property Name="message" Type="nvarchar(max)" />
     <Property Name="image" Type="nchar" MaxLength="500" />
     <Property Name="menutype" Type="bigint" />
+    <Property Name="isRead" Type="int" />
   </EntityType>
   <EntityType Name="Order">
     <Key>

@@ -128,6 +128,7 @@
     <Content Include="Asset\img\caroselhome\img_5.jpg" />
     <Content Include="Asset\img\caroselhome\img_6.jpg" />
     <Content Include="Asset\img\cart.png" />
+    <Content Include="Asset\img\cholayhang.png" />
     <Content Include="Asset\img\delete.png" />
     <Content Include="Asset\img\discount\check.jpg" />
     <Content Include="Asset\img\discount\discount20.jpg" />
@@ -234,6 +235,7 @@
     <Content Include="Asset\img\product\tu1.jpg" />
     <Content Include="Asset\img\product\Untitled.png" />
     <Content Include="Asset\img\product\vitamin.jpg" />
+    <Content Include="Asset\img\star.jpg" />
     <Content Include="Asset\img\sucess.png" />
     <Content Include="Asset\img\tu1.jpg" />
     <Content Include="Asset\img\user\36-365828_navbar-toggle-icon-menu-hamburger-png-white.png" />
@@ -525,6 +527,7 @@
     <Content Include="css\bootstrap4\bootstrap.min.css" />
     <Content Include="css\caroselhome\style.css" />
     <Content Include="css\cart.css" />
+    <Content Include="css\demo.css" />
     <Content Include="css\discount\discount20%25.jpg" />
     <Content Include="css\home\navbartop.css" />
     <Content Include="css\home\product.css" />
