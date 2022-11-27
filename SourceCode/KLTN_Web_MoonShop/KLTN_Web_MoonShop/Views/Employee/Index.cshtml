@@ -305,6 +305,7 @@
                 dataType: 'json',
                 data: employee,
                 success: function (result) {
+                    $(".table").load(location.href + " .table");
                     Swal.fire({
                         position: 'top-center',
                         title: 'Thành công',

@@ -25,7 +25,17 @@ namespace KLTN_Web_MoonShop.Controllers
                 }
                 catch
                 {
-                    lstpro = db.Products.Where(n => n.productName.Contains(keyword) && n.isActive == 1).ToList();
+                    ReplaceUnitcode replaceUnitcode = new ReplaceUnitcode();
+                    string key1 = replaceUnitcode.RemoveUnicode(keyword).ToLower();
+                    foreach(var item in db.Products.Where(n=>n.isActive==1).ToList())
+                    {
+                        string name1 = replaceUnitcode.RemoveUnicode(item.productName).ToLower();
+                        if(name1.Contains(key1))
+                        {
+                            lstpro.Add(item);
+                        }    
+                    }    
+                   // lstpro = db.Products.Where(n =>replaceUnitcode.RemoveUnicode(n.productName.ToLower()).Contains(key1) && n.isActive == 1).ToList();
 
                 }
             }

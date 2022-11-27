@@ -64,10 +64,11 @@ namespace KLTN_Web_MoonShop.Controllers.API
                     {
                         customer.customerName = data.fullname;
                     }
-                    if (!data.fullname.IsEmpty())
+                    if (!data.email.IsEmpty())
                     {
                         customer.customerMail = data.email;
                     }
+                    customer.customerSex = data.sex;
                     customer.customerSex = data.sex;
                     db.Customers.AddOrUpdate(customer);
                     db.SaveChanges();

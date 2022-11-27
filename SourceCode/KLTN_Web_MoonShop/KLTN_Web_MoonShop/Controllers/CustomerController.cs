@@ -119,7 +119,7 @@ namespace KLTN_Web_MoonShop.Controllers
             }
             catch
             {
-                return RedirectToAction("Page404", "Error");
+                return View();
             }
         }
 

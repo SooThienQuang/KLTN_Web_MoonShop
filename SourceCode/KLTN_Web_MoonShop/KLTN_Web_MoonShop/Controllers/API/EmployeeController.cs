@@ -112,7 +112,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
                     detail.photo = fileName;
                 }
                 else
-                { detail.photo = data.img; }
+                { detail.photo = detail.photo; }
               
 
 

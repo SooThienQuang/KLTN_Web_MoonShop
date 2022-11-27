@@ -110,6 +110,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Asset\giaohangnhanh.jpg" />
     <Content Include="Asset\img\36-365828_navbar-toggle-icon-menu-hamburger-png-white.png" />
     <Content Include="Asset\img\banner\4327ee1f7bca83cf039c03ff9e97c50b.png" />
     <Content Include="Asset\img\banner\50a82d79d6e17e0dc489401b5a97263a.png" />
@@ -243,6 +244,8 @@
     <Content Include="Asset\img\user\Sample_User_Icon.png" />
     <Content Include="Asset\img\user\sothienquang.jpg" />
     <Content Include="Asset\img\user\soothienquang.jpg" />
+    <Content Include="Asset\j&amp;T.png" />
+    <Content Include="Asset\vietnamsport.jpg" />
     <Content Include="Content\multiselect\css\bootstrap.min.css" />
     <Content Include="Content\multiselect\css\chosen-sprite%402x.png" />
     <Content Include="Content\multiselect\css\chosen-sprite.png" />
@@ -577,8 +580,11 @@
     <Compile Include="Controllers\Admin\AdminController.cs" />
     <Compile Include="Controllers\Admin\DiscountController.cs" />
     <Compile Include="Controllers\Admin\EmployeeController.cs" />
+    <Compile Include="Controllers\Admin\OrdersController.cs" />
     <Compile Include="Controllers\Admin\ProductTypeController.cs" />
     <Compile Include="Controllers\AlertController.cs" />
+    <Compile Include="Controllers\Android\ProductData.cs" />
+    <Compile Include="Controllers\Android\UserController.cs" />
     <Compile Include="Controllers\API\AddressController.cs" />
     <Compile Include="Controllers\API\CartController.cs" />
     <Compile Include="Controllers\API\CustomerController.cs" />
@@ -941,6 +947,11 @@
     <Content Include="Views\Discount\Index.cshtml" />
     <Content Include="Views\Customer\Notifications.cshtml" />
     <None Include="Properties\PublishProfiles\thienquang-001-site1 - Web Deploy1.pubxml" />
+    <Content Include="Views\Orders\Waiting.cshtml" />
+    <Content Include="Views\Orders\Processing.cshtml" />
+    <Content Include="Views\Orders\Processed.cshtml" />
+    <Content Include="Views\Orders\Show.cshtml" />
+    <Content Include="Views\Orders\Showmore.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
