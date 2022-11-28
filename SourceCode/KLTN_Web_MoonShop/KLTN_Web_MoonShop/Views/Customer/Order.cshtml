@@ -2,6 +2,12 @@
 @using KLTN_Web_MoonShop.Models;
 @{
     DBCosmeticEntities db = new DBCosmeticEntities();
+    Customer cs = Session["user"] as Customer;
+    List<Order> waiting = db.Orders.Where(n => n.customerID == cs.customerID && n.status == 1).OrderByDescending(n => n.orderID).ToList();
+    List<Order> comfimed = db.Orders.Where(n => n.customerID == cs.customerID && n.status == 2).OrderByDescending(n => n.orderID).ToList();
+    List<Order> processing = db.Orders.Where(n => n.customerID == cs.customerID && n.status == 3).OrderByDescending(n => n.orderID).ToList();
+    List<Order> processed = db.Orders.Where(n => n.customerID == cs.customerID && n.status == 4).OrderByDescending(n => n.orderID).ToList();
+
 }
 @if (Model == null)
 {
@@ -69,14 +75,15 @@ else
                             <thead>
                             <th>
                             </th>
-                            <th>&nbsp;</th>
+                            <th>Trạng thái</th>
+                            <th>Ngày đặt</th>
                             <th>Tổng tiền</th>
                             <th>Hình ảnh</th>
                             <th>Sản phẩm</th>
 
                             </thead>
                             <tbody>
-                                @foreach (var item in Model)
+                                @foreach (var item in waiting)
                                 {
                                     List<OrderDetail> lst = db.OrderDetails.Where(n => n.orderID == item.orderID).ToList();
                                     OrderDetail od = db.OrderDetails.FirstOrDefault(n => n.orderID == item.orderID);
@@ -87,6 +94,9 @@ else
                                         </td>
                                         <td>
                                             <span class="text-danger">Chờ xác nhận</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-primary">@item.createDate</span>
                                         </td>
                                         <td style="color:red">@String.Format("{0:0,0 vnđ}", @lst.Sum(n => n.Money))</td>
 
@@ -113,13 +123,161 @@ else
             </div>
             @*-------------------------------------------tab2-------------------------------------------------*@
             <div class="tab-pane fade show" id="profile-vertical1" role="tabpanel" aria-labelledby="profile-vertical-tab1">
-                Chờ xác nhận
+                <div class="row">
+                    <div class="table-wrap">
+                        <table class="table table-responsive table-borderless">
+                            <thead>
+                            <th>
+                            </th>
+                            <th>Trạng thái</th>
+                            <th>Ngày đặt</th>
+                            <th>Tổng tiền</th>
+                            <th>Hình ảnh</th>
+                            <th>Sản phẩm</th>
+
+                            </thead>
+                            <tbody>
+                                @foreach (var item in comfimed)
+                                {
+                                    List<OrderDetail> lst = db.OrderDetails.Where(n => n.orderID == item.orderID).ToList();
+                                    OrderDetail od = db.OrderDetails.FirstOrDefault(n => n.orderID == item.orderID);
+                                    Product pro = db.Products.FirstOrDefault(n => n.productID == od.productID);
+                                    <tr class="align-middle alert border-bottom" role="alert">
+                                        <td>
+                                            <a class="btn btn-outline-success" onclick="ShowMoreOrder(@item.orderID)">Chi tiết</a>
+                                        </td>
+                                        <td>
+                                            <span class="text-danger">Chờ lấy hàng</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-primary">@item.createDate</span>
+                                        </td>
+                                        <td style="color:red">@String.Format("{0:0,0 vnđ}", @lst.Sum(n => n.Money))</td>
+
+                                        <td>
+                                            <a href="#" onclick="ConfirmUpdate(@item.orderID)" class="text-primary">
+                                                <img src="~/Asset/img/product/@pro.productImage" height="100" width="50" />
+                                            </a>
+                                        </td>
+                                        <td>@pro.productName</td>
+
+
+
+
+                                    </tr>
+                                }
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </div>
             <div class="tab-pane fade show" id="profile-vertical2" role="tabpanel" aria-labelledby="profile-vertical-tab2">
-                Đang giao hàng
+                <div class="row">
+                    <div class="table-wrap">
+                        <table class="table table-responsive table-borderless">
+                            <thead>
+                            <th>
+                            </th>
+                            <th>Trạng thái</th>
+                            <th>Ngày đặt</th>
+                            <th>Tổng tiền</th>
+                            <th>Hình ảnh</th>
+                            <th>Sản phẩm</th>
+
+                            </thead>
+                            <tbody>
+                                @foreach (var item in processing)
+                                {
+                                    List<OrderDetail> lst = db.OrderDetails.Where(n => n.orderID == item.orderID).ToList();
+                                    OrderDetail od = db.OrderDetails.FirstOrDefault(n => n.orderID == item.orderID);
+                                    Product pro = db.Products.FirstOrDefault(n => n.productID == od.productID);
+                                    <tr class="align-middle alert border-bottom" role="alert">
+                                        <td>
+                                            <a class="btn btn-outline-success" onclick="ShowMoreOrder(@item.orderID)">Chi tiết</a>
+                                        </td>
+                                        <td>
+                                            <span class="text-danger">Đang giao hàng</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-primary">@item.createDate</span>
+                                        </td>
+                                        <td style="color:red">@String.Format("{0:0,0 vnđ}", @lst.Sum(n => n.Money))</td>
+
+                                        <td>
+                                            <a href="#" onclick="ConfirmUpdate(@item.orderID)" class="text-primary">
+                                                <img src="~/Asset/img/product/@pro.productImage" height="100" width="50" />
+                                            </a>
+                                        </td>
+                                        <td>@pro.productName</td>
+
+
+
+
+                                    </tr>
+                                }
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class="tab-pane fade show" id="profile-vertical3" role="tabpanel" aria-labelledby="profile-vertical-tab3">
-               Đánh giá
+                <div class="row">
+                    <div class="table-wrap">
+                        <table class="table table-responsive table-borderless">
+                            <thead>
+                            <th>
+                            </th>
+                            <th>Trạng thái</th>
+                            <th>Ngày đặt</th>
+                            <th>Tổng tiền</th>
+                            <th>Hình ảnh</th>
+                            <th>Sản phẩm</th>
+
+                            </thead>
+                            <tbody>
+                                @foreach (var item in processed)
+                                {
+                                    List<OrderDetail> lst = db.OrderDetails.Where(n => n.orderID == item.orderID).ToList();
+                                    OrderDetail od = db.OrderDetails.FirstOrDefault(n => n.orderID == item.orderID);
+                                    Product pro = db.Products.FirstOrDefault(n => n.productID == od.productID);
+                                    <tr class="align-middle alert border-bottom" role="alert">
+                                        <td>
+                                            <a class="btn btn-outline-success" onclick="ShowMoreOrder(@item.orderID)">Chi tiết</a>
+                                        </td>
+                                        <td>
+                                            <span class="text-danger">Giao thành công</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-primary">@item.createDate</span>
+                                        </td>
+                                        <td style="color:red">@String.Format("{0:0,0 vnđ}", @lst.Sum(n => n.Money))</td>
+
+                                        <td>
+                                            <a href="#" onclick="ConfirmUpdate(@item.orderID)" class="text-primary">
+                                                <img src="~/Asset/img/product/@pro.productImage" height="100" width="50" />
+                                            </a>
+                                        </td>
+                                        <td>@pro.productName</td>
+
+
+
+
+                                    </tr>
+                                }
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -281,6 +439,15 @@ else
     </div>-->
 }
 <div id="divid" style="height:100px; width:400px" ;>
+</div>
+<link rel="stylesheet" href="~/css/spinner.css" />
+<div class="modal fade" tabindex="-1" role="dialog" id="spinnerModalO">
+    <div class="modal-dialog modal-dialog-centered text-center" role="document">
+        @*<span class="fa fa-spinner fa-spin fa-3x w-100"></span>*@
+        <div class="loading-box">
+            <div class="loader"></div>
+        </div>
+    </div>
 </div>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
 <script>

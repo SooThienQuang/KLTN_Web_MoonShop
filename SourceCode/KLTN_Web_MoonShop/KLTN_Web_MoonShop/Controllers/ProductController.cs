@@ -21,12 +21,12 @@ namespace KLTN_Web_MoonShop.Controllers
         }
         public ActionResult CaroselProductHome()
         {
-            List<Product> lst = db.Products.Where(n=>n.isActive==1).Take(6).ToList();
+            List<Product> lst = db.Products.Where(n=>n.isActive==1).ToList().Take(6).ToList();
             if (lst.Count > 0)
             {
                 long id = lst.LastOrDefault().productID;
                 ViewBag.Active = lst;
-                ViewBag.Pro = db.Products.Where(n => n.productID >= id && n.isActive == 1).Take(6).ToList();
+                ViewBag.Pro = db.Products.Where(n => n.productID >= id && n.isActive == 1).ToList().Take(6).ToList();
             }
             return PartialView();
         }

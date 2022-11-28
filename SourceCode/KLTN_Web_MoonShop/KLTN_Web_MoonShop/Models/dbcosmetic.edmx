@@ -153,6 +153,24 @@
           <Property Name="posID" Type="int" Nullable="false" />
           <Property Name="posName" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="ProcessOrder">
+          <Key>
+            <PropertyRef Name="processID" />
+          </Key>
+          <Property Name="processID" Type="bigint" Nullable="false" />
+          <Property Name="objectID" Type="bigint" />
+          <Property Name="shippingName" Type="nvarchar" MaxLength="500" />
+          <Property Name="sendUserID" Type="bigint" />
+          <Property Name="sendUserFullName" Type="nvarchar" MaxLength="500" />
+          <Property Name="sendDate" Type="datetime" />
+          <Property Name="finishDate" Type="datetime" />
+          <Property Name="receiveUserID" Type="bigint" />
+          <Property Name="receiveUserFullName" Type="nvarchar" MaxLength="500" />
+          <Property Name="processType" Type="int" />
+          <Property Name="status" Type="int" />
+          <Property Name="description" Type="nvarchar" MaxLength="50" />
+          <Property Name="isActive" Type="int" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="productID" />
@@ -161,7 +179,7 @@
           <Property Name="productName" Type="nvarchar" MaxLength="500" />
           <Property Name="productQuantity" Type="bigint" />
           <Property Name="productPrice" Type="bigint" />
-          <Property Name="productDescribe" Type="nvarchar" MaxLength="500" />
+          <Property Name="productDescribe" Type="nvarchar(max)" />
           <Property Name="productImage" Type="nchar" MaxLength="500" />
           <Property Name="productTypeID" Type="int" />
           <Property Name="isActive" Type="int" />
@@ -227,6 +245,7 @@
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProcessOrder" EntityType="Self.ProcessOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductDetail" EntityType="Self.ProductDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductType" EntityType="Self.ProductType" Schema="dbo" store:Type="Tables" />
@@ -247,16 +266,17 @@
           <EntitySet Name="Discounts" EntityType="DBCosmeticModel.Discount" />
           <EntitySet Name="Employees" EntityType="DBCosmeticModel.Employee" />
           <EntitySet Name="EmployeeDetails" EntityType="DBCosmeticModel.EmployeeDetail" />
+          <EntitySet Name="Notifications" EntityType="DBCosmeticModel.Notification" />
           <EntitySet Name="Orders" EntityType="DBCosmeticModel.Order" />
           <EntitySet Name="OrderDetails" EntityType="DBCosmeticModel.OrderDetail" />
           <EntitySet Name="Positions" EntityType="DBCosmeticModel.Position" />
+          <EntitySet Name="ProcessOrders" EntityType="DBCosmeticModel.ProcessOrder" />
           <EntitySet Name="Products" EntityType="DBCosmeticModel.Product" />
           <EntitySet Name="ProductDetails" EntityType="DBCosmeticModel.ProductDetail" />
           <EntitySet Name="ProductTypes" EntityType="DBCosmeticModel.ProductType" />
           <EntitySet Name="Salaries" EntityType="DBCosmeticModel.Salary" />
           <EntitySet Name="Sexes" EntityType="DBCosmeticModel.Sex" />
           <EntitySet Name="Status" EntityType="DBCosmeticModel.Status" />
-          <EntitySet Name="Notifications" EntityType="DBCosmeticModel.Notification" />
         </EntityContainer>
         <EntityType Name="ActionLog">
           <Key>
@@ -359,6 +379,23 @@
           <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="isActive" Type="Int32" />
         </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="notiID" />
+          </Key>
+          <Property Name="notiID" Type="Int64" Nullable="false" />
+          <Property Name="sendUserID" Type="Int64" />
+          <Property Name="sendUserFullName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="receiveUserID" Type="Int64" />
+          <Property Name="receiveUserFullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="objectID" Type="Int64" />
+          <Property Name="objectTypeID" Type="Int64" />
+          <Property Name="title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="image" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="menutype" Type="Int64" />
+          <Property Name="isRead" Type="Int32" />
+        </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="orderID" />
@@ -389,6 +426,24 @@
           <Property Name="posID" Type="Int32" Nullable="false" />
           <Property Name="posName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="ProcessOrder">
+          <Key>
+            <PropertyRef Name="processID" />
+          </Key>
+          <Property Name="processID" Type="Int64" Nullable="false" />
+          <Property Name="objectID" Type="Int64" />
+          <Property Name="shippingName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="sendUserID" Type="Int64" />
+          <Property Name="sendUserFullName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="sendDate" Type="DateTime" Precision="3" />
+          <Property Name="finishDate" Type="DateTime" Precision="3" />
+          <Property Name="receiveUserID" Type="Int64" />
+          <Property Name="receiveUserFullName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="processType" Type="Int32" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Int32" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="productID" />
@@ -397,7 +452,7 @@
           <Property Name="productName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="productQuantity" Type="Int64" />
           <Property Name="productPrice" Type="Int64" />
-          <Property Name="productDescribe" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="productDescribe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="productImage" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
           <Property Name="productTypeID" Type="Int32" />
           <Property Name="isActive" Type="Int32" />
@@ -449,23 +504,6 @@
           <Property Name="statusID" Type="Int32" Nullable="false" />
           <Property Name="statusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="isActive" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Notification">
-          <Key>
-            <PropertyRef Name="notiID" />
-          </Key>
-          <Property Name="notiID" Type="Int64" Nullable="false" />
-          <Property Name="sendUserID" Type="Int64" />
-          <Property Name="sendUserFullName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="receiveUserID" Type="Int64" />
-          <Property Name="receiveUserFullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="objectID" Type="Int64" />
-          <Property Name="objectTypeID" Type="Int64" />
-          <Property Name="title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="image" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
-          <Property Name="menutype" Type="Int64" />
-          <Property Name="isRead" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -582,6 +620,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="DBCosmeticModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="isRead" ColumnName="isRead" />
+                <ScalarProperty Name="menutype" ColumnName="menutype" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="objectTypeID" ColumnName="objectTypeID" />
+                <ScalarProperty Name="objectID" ColumnName="objectID" />
+                <ScalarProperty Name="receiveUserFullName" ColumnName="receiveUserFullName" />
+                <ScalarProperty Name="receiveUserID" ColumnName="receiveUserID" />
+                <ScalarProperty Name="sendUserFullName" ColumnName="sendUserFullName" />
+                <ScalarProperty Name="sendUserID" ColumnName="sendUserID" />
+                <ScalarProperty Name="notiID" ColumnName="notiID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="DBCosmeticModel.Order">
               <MappingFragment StoreEntitySet="Order">
@@ -612,6 +668,25 @@
               <MappingFragment StoreEntitySet="Position">
                 <ScalarProperty Name="posName" ColumnName="posName" />
                 <ScalarProperty Name="posID" ColumnName="posID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProcessOrders">
+            <EntityTypeMapping TypeName="DBCosmeticModel.ProcessOrder">
+              <MappingFragment StoreEntitySet="ProcessOrder">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="processType" ColumnName="processType" />
+                <ScalarProperty Name="receiveUserFullName" ColumnName="receiveUserFullName" />
+                <ScalarProperty Name="receiveUserID" ColumnName="receiveUserID" />
+                <ScalarProperty Name="finishDate" ColumnName="finishDate" />
+                <ScalarProperty Name="sendDate" ColumnName="sendDate" />
+                <ScalarProperty Name="sendUserFullName" ColumnName="sendUserFullName" />
+                <ScalarProperty Name="sendUserID" ColumnName="sendUserID" />
+                <ScalarProperty Name="shippingName" ColumnName="shippingName" />
+                <ScalarProperty Name="objectID" ColumnName="objectID" />
+                <ScalarProperty Name="processID" ColumnName="processID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -679,24 +754,6 @@
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="statusName" ColumnName="statusName" />
                 <ScalarProperty Name="statusID" ColumnName="statusID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Notifications">
-            <EntityTypeMapping TypeName="DBCosmeticModel.Notification">
-              <MappingFragment StoreEntitySet="Notification">
-                <ScalarProperty Name="isRead" ColumnName="isRead" />
-                <ScalarProperty Name="menutype" ColumnName="menutype" />
-                <ScalarProperty Name="image" ColumnName="image" />
-                <ScalarProperty Name="message" ColumnName="message" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="objectTypeID" ColumnName="objectTypeID" />
-                <ScalarProperty Name="objectID" ColumnName="objectID" />
-                <ScalarProperty Name="receiveUserFullName" ColumnName="receiveUserFullName" />
-                <ScalarProperty Name="receiveUserID" ColumnName="receiveUserID" />
-                <ScalarProperty Name="sendUserFullName" ColumnName="sendUserFullName" />
-                <ScalarProperty Name="sendUserID" ColumnName="sendUserID" />
-                <ScalarProperty Name="notiID" ColumnName="notiID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

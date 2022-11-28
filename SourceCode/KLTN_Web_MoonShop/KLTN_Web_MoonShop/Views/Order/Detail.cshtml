@@ -34,9 +34,33 @@
                             <h6>Mã đơn hàng: @ViewBag.id</h6>
                             <article class="card">
                                 <div class="card-body row">
-                                    <div class="col"> <strong>Ước tính thời gian giao hàng:</strong> <br>29 nov 2019 </div>
-                                    <div class="col"> <strong>Giao hàng bởi:</strong> <br> BLUEDART, | <i class="fa fa-phone"></i> +1598675986 </div>
-                                    <div class="col"> <strong>Trạng thái:</strong> <br> Chờ xác nhận </div>
+                                    <div class="col">
+                                        <strong>Ước tính thời gian giao hàng:</strong>
+                                        <br>
+                                        @if (ViewBag.process != null)
+                                        {
+                                           @ViewBag.process.finishDate
+                                        }
+
+                                    </div>
+                                    <div class="col">
+                                        <strong>Giao hàng bởi:</strong> <br>
+                                        <br>
+                                        @if (ViewBag.shipper != null)
+                                          {
+                                                  <h6>@ViewBag.shipper.fullName</h6> <i class="fa fa-phone"></i><h6>@ViewBag.shipper.phone</h6>
+                                        }
+                                   
+                                    </div>
+                                  
+                                    <div class="col">
+
+                                        <strong>Trạng thái:</strong> <br>
+                                        @if (ViewBag.process != null)
+                                        {
+
+                                        }
+                                    </div>
                                     <div class="col"> <strong>Mã vận đơn #:</strong> <br> BD045903594059 </div>
                                 </div>
                             </article>

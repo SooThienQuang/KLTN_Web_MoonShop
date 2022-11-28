@@ -14,6 +14,12 @@ namespace KLTN_Web_MoonShop.Controllers
         public ActionResult Detail(long id)
         {
             ViewBag.id= id;
+            ProcessOrder pd=db.ProcessOrders.FirstOrDefault(n=>n.objectID==id);
+            if(pd!=null)
+            {
+                ViewBag.process = pd;
+                ViewBag.shipper = db.EmployeeDetails.FirstOrDefault(n => n.emID == pd.receiveUserID);
+            }    
             List<OrderDetail> lst = db.OrderDetails.Where(n => n.orderID == id).ToList();   
             return PartialView(lst);
         }
