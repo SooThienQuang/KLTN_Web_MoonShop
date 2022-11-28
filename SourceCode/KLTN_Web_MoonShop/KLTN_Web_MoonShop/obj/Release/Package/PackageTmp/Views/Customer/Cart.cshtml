@@ -1,0 +1,59 @@
+﻿@if (@ViewBag.user == null)
+{
+}
+else
+{
+    if (@ViewBag.lstCart != null)
+    {
+        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+            <i class="ti-shopping-cart mx-0">&#xf07a;</i>
+            <span class='badge badge-warning' id='lblCartCount'><div class="soluongcart"></div>  </span>
+            <div class="item-content">Giỏ hàng</div>
+            @*<script>$('.soluongcart').append(`` +@ViewBag.size + ``);</script>*@
+            <script>$('.soluongcart').append("@ViewBag.size");</script>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+            <p class="mb-0 font-weight-normal float-left dropdown-header">Hình ảnh</p>
+            <p class="mb-0 font-weight-normal float-left dropdown-header">Tên sản phẩm</p>
+            <p class="mb-0 font-weight-normal float-sm-left dropdown-header ml-3">Giá thành</p>
+            <p class="mb-0 font-weight-normal float-sm-right dropdown-header">Số lượng</p>
+            <div class="chitietcart">
+               
+            </div>
+            <script>
+                var trHTML = $(` 
+            @foreach (var item in @ViewBag.lstCart)
+                {
+                    <a class="dropdown-item" href="#" id="dropcart">
+                        <img src="~/Asset/img/product/@item.img" height="50" width="50" />
+                        <h6 class="font-weight-normal">
+                            @item.name.Substring(0, 30)
+                        </h6>
+
+                        <h6 class="font-weight-normal mr-3 ml-3" style="color:red">@String.Format("{0:0,0 vnđ}", item.price)</h6>
+                        <h6 class="font-weight-normal"> @item.quantity</h6>
+                    </a>
+                }
+`);
+                $('.chitietcart').append(trHTML);</script>
+            @*<a class="mb-0  float-md-left dropdown-header" href="">
+            <h3 class="font-weight-normal" style="color:red">Tổng tiền : @String.Format("{0:0,0 vnđ}", @ViewBag.AllMoney)</h3>
+        </a>*@
+            <a class="mb-0 font-weight-bold float-sm-end dropdown-header" href="@Url.Action("Detail", "ShoppingCart")">Xem tất cả<p class="ti-arrow-circle-right"> </p></a>
+
+        </div>
+    }
+    else
+    {
+        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+            <i class="ti-shopping-cart mx-0">&#xf07a;</i>
+            <span class='badge badge-warning' id='lblCartCount'> 0 </span>
+            <div class="item-content">Giỏ hàng</div>
+
+        </a>
+        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+            <p class="mb-0 font-weight-normal float-left dropdown-header">Bạn chưa có sản phẩm nào ?</p>
+        </div>
+    }
+}
+

@@ -1,0 +1,200 @@
+﻿@model IEnumerable<KLTN_Web_MoonShop.Models.Product>
+@using KLTN_Web_MoonShop.Models;
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    DBCosmeticEntities db = new DBCosmeticEntities();
+    var loaisp = db.ProductTypes.Where(n=>n.isActive==1).ToList();
+}
+<link rel="stylesheet" href="https://fontawesome.com/v4.7.0/assets/font-awesome/css/font-awesome.css">
+<div class="container">
+    <div class="row">
+        <aside class="col-md-3">
+            @using (Html.BeginForm("Search", "Search"))
+            {
+                <div class="card">                  
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
+                                <i class="icon-control fa fa-chevron-down"></i>
+                                <h6 class="btn btn-outline-danger">Bộ lọc</h6>
+                            </a>
+                        </header>
+                        <select class="form-select mt-2" aria-label="Default select example" name="cbbloaisp">
+                            <option selected value="">Loại mỹ phẩm</option>
+                            @foreach (var item in loaisp)
+                            {
+                                <option value="@item.proTypeID">@item.proTypeName</option>
+                            }
+                        </select>
+                        <div class="filter-content collapse show" id="collapse_3" style="">
+                            <div class="card-body">
+                                <input type="range" class="custom-range" min="0" max="100" name="">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label>Từ</label>
+                                        <input class="form-control" placeholder="0" type="number" name="txtmin" required>
+                                    </div>
+                                    <div class="form-group text-right col-md-6">
+                                        <label>Đến</label>
+                                        <input class="form-control" placeholder="1000000" type="number" name="txtmax" required>
+                                    </div>
+                                </div> <!-- form-row.// -->
+                                <button class="btn btn-block btn-primary" type="submit">Tìm kiếm</button>
+                            </div><!-- card-body.// -->
+                        </div>
+                    </article> <!-- filter-group .// -->
+                </div> <!-- card.// -->
+            }
+
+        </aside>
+        <main class="col-md-9">
+
+            <header class="border-bottom mb-4 pb-3">
+                <div class="form-inline">
+                    <span class="mr-md-auto">Tổng số sản phẩm theo từ khóa :@ViewBag.keyword </span>
+                    <select class="mr-2 form-control">
+                        <option>Latest items</option>
+                        <option>Trending</option>
+                        <option>Most Popular</option>
+                        <option>Cheapest</option>
+                    </select>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-outline-secondary" data-toggle="tooltip" title="" data-original-title="List view">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                        <a href="#" class="btn  btn-outline-secondary active" data-toggle="tooltip" title="" data-original-title="Grid view">
+                            <i class="fa fa-th"></i>
+                        </a>
+                    </div>
+                </div>
+            </header><!-- sect-heading -->
+
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-3">
+                        <figure class="card card-product-grid">
+                            <div class="img-wrap">
+                                <span class="badge badge-danger"> NEW </span>
+                                <a href="@Url.Action("Detail","Product",new {id=item.productID})">
+                                    <img src="~/Asset/img/product/@item.productImage" class="img-fluid">
+                                </a>
+
+                                <button class="btn-overlay" onclick="ConfirmUpdate(@item.productID)"><i class="fa fa-search-plus">Xem thêm</i></button>
+                            </div>
+                            <!-- img-wrap.// -->
+                            <figcaption class="info-wrap">
+                                <div class="fix-height">
+                                    <p href="#" class="title">
+                                        @if (@item.productName.Length > 30)
+                                        {
+                                            string name = @item.productName.Substring(0, 30);
+                                            <span>
+                                                @name...
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <h6 style="height:40px">
+                                                @item.productName
+                                            </h6>
+                                        }
+                                    </p>
+                                    <div class="price-wrap mt-2">
+                                      Giá sản phẩm :  <span class="price" style="color:red">@String.Format("{0:0,0 vnđ}", item.productPrice)</span>
+                                    </div> <!-- price-wrap.// -->
+                                </div>
+
+                            </figcaption>
+                        </figure>
+                    </div> <!-- col.// -->
+
+                }
+            </div> <!-- row end.// -->
+
+
+            <nav class="mt-4" aria-label="Page navigation sample">
+                <ul class="pagination">
+                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
+
+        </main>
+    </div>
+</div>
+<div id="divid" style="height:100px; width:400px" ;>
+</div>
+<input type="hidden" id="hiddenEmployeeId" />
+<script>
+     var ConfirmUpdate = function (productID) {
+
+
+        $("#hiddenEmployeeId").val(productID);
+        var empId = $("#hiddenEmployeeId").val();
+        var url = '@Url.Action("ShowDetail", "Product", new {id = "data"})';
+        $('#divid').load(url.replace('data', empId));
+
+    }
+</script>
+<style>
+    .icon-control {
+        margin-top: 5px;
+        float: right;
+        font-size: 80%;
+    }
+
+
+
+    .btn-light {
+        background-color: #fff;
+        border-color: #e4e4e4;
+    }
+
+    .list-menu {
+        list-style: none;
+        margin: 0;
+        padding-left: 0;
+    }
+
+        .list-menu a {
+            color: #343a40;
+        }
+
+    .card-product-grid .info-wrap {
+        overflow: hidden;
+        padding: 18px 20px;
+    }
+
+    [class*='card-product'] a.title {
+        color: #212529;
+        display: block;
+    }
+
+    .card-product-grid:hover .btn-overlay {
+        opacity: 1;
+    }
+
+    .card-product-grid .btn-overlay {
+        -webkit-transition: .5s;
+        transition: .5s;
+        opacity: 0;
+        left: 0;
+        bottom: 0;
+        color: #fff;
+        width: 100%;
+        padding: 5px 0;
+        text-align: center;
+        position: absolute;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .img-wrap {
+        overflow: hidden;
+        position: relative;
+    }
+</style>
