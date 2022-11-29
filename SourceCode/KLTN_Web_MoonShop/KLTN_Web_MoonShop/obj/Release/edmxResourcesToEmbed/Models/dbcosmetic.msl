@@ -195,21 +195,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ProductDetails">
-      <EntityTypeMapping TypeName="DBCosmeticModel.ProductDetail">
-        <MappingFragment StoreEntitySet="ProductDetail">
-          <ScalarProperty Name="desciption" ColumnName="desciption" />
-          <ScalarProperty Name="brand" ColumnName="brand" />
-          <ScalarProperty Name="origin" ColumnName="origin" />
-          <ScalarProperty Name="img3" ColumnName="img3" />
-          <ScalarProperty Name="img2" ColumnName="img2" />
-          <ScalarProperty Name="img1" ColumnName="img1" />
-          <ScalarProperty Name="Color" ColumnName="Color" />
-          <ScalarProperty Name="Size" ColumnName="Size" />
-          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ProductTypes">
       <EntityTypeMapping TypeName="DBCosmeticModel.ProductType">
         <MappingFragment StoreEntitySet="ProductType">
@@ -244,6 +229,21 @@
           <ScalarProperty Name="isActive" ColumnName="isActive" />
           <ScalarProperty Name="statusName" ColumnName="statusName" />
           <ScalarProperty Name="statusID" ColumnName="statusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductDetails">
+      <EntityTypeMapping TypeName="DBCosmeticModel.ProductDetail">
+        <MappingFragment StoreEntitySet="ProductDetail">
+          <ScalarProperty Name="desciption" ColumnName="desciption" />
+          <ScalarProperty Name="brand" ColumnName="brand" />
+          <ScalarProperty Name="origin" ColumnName="origin" />
+          <ScalarProperty Name="img3" ColumnName="img3" />
+          <ScalarProperty Name="img2" ColumnName="img2" />
+          <ScalarProperty Name="img1" ColumnName="img1" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

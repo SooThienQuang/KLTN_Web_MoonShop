@@ -19,11 +19,11 @@
         <EntityTypeShape EntityType="DBCosmeticModel.Position" Width="1.5" PointX="8.75" PointY="3.75" />
         <EntityTypeShape EntityType="DBCosmeticModel.ProcessOrder" Width="1.5" PointX="8.75" PointY="6.75" />
         <EntityTypeShape EntityType="DBCosmeticModel.Product" Width="1.5" PointX="10.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.ProductDetail" Width="1.5" PointX="10.75" PointY="4.75" />
         <EntityTypeShape EntityType="DBCosmeticModel.ProductType" Width="1.5" PointX="10.75" PointY="8.75" />
         <EntityTypeShape EntityType="DBCosmeticModel.Salary" Width="1.5" PointX="8.75" PointY="11.75" />
         <EntityTypeShape EntityType="DBCosmeticModel.Sex" Width="1.5" PointX="10.75" PointY="11.75" />
         <EntityTypeShape EntityType="DBCosmeticModel.Status" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DBCosmeticModel.ProductDetail" Width="1.5" PointX="11.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

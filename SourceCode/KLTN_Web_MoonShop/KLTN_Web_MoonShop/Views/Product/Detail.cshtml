@@ -486,6 +486,30 @@
 
 }
 @*-----------------------------check out----------------------------\*@
+<div class="container" id="divmota" style="text-align:left;padding:3%">
+    <div class="row">
+        <h2>Mô tả sản phẩm</h2>
+        <span id="spanmota">
+        </span>
+    </div>
+    <style>
+        #divmota img {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+
+</div>
+@if (ViewBag.ProductDetail.desciption != null)
+{
+    <input id="txttt" value="@ViewBag.ProductDetail.desciption" hidden />
+
+}
+
+
+<script>
+    document.getElementById("spanmota").innerHTML += document.getElementById("txttt").value;
+</script>
 <script>
     $(document).ready(function () {
 

@@ -192,7 +192,7 @@
     <Property Name="img3" Type="nchar" MaxLength="500" />
     <Property Name="origin" Type="nvarchar" MaxLength="500" />
     <Property Name="brand" Type="nvarchar" MaxLength="500" />
-    <Property Name="desciption" Type="nvarchar" MaxLength="500" />
+    <Property Name="desciption" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="ProductType">
     <Key>

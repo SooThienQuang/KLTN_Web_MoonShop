@@ -39,10 +39,10 @@ namespace KLTN_Web_MoonShop.Models
         public virtual DbSet<Position> Positions { get; set; }
         public virtual DbSet<ProcessOrder> ProcessOrders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<ProductDetail> ProductDetails { get; set; }
         public virtual DbSet<ProductType> ProductTypes { get; set; }
         public virtual DbSet<Salary> Salaries { get; set; }
         public virtual DbSet<Sex> Sexes { get; set; }
         public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<ProductDetail> ProductDetails { get; set; }
     }
 }

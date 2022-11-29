@@ -8,6 +8,7 @@
 
 }
 
+
 <section class="section dashboard">
     <div class="row">
 
@@ -175,7 +176,7 @@
                                     <td>@cus.customerName</td>
                                     <td><a href="#" class="text-primary">@pro.productName.Substring(0, 20)</a></td>
 
-                                    <td>  <span style="color:red">@String.Format("{0:0,0 vnđ}",tongtien)</span></td>
+                                    <td>  <span style="color:red">@String.Format("{0:0,0 vnđ}", tongtien)</span></td>
                                     <td><span class="badge bg-success">Đã giao</span></td>
                                 </tr>
                             }
@@ -229,7 +230,7 @@
                                 Product pro = db.Products.FirstOrDefault(n => n.productID == od.productID);
                                 <tr>
                                     <th scope="row"><a href="#"><img src="~/Asset/img/product/@pro.productImage" alt=""></a></th>
-                                    <td><a href="#" class="text-primary fw-bold">@pro.productName.Substring(0,20)</a></td>
+                                    <td><a href="#" class="text-primary fw-bold">@pro.productName.Substring(0, 20)</a></td>
                                     <td>@pro.productPrice</td>
                                     <td class="fw-bold">@od.Quantity</td>
                                     <td>$5,828</td>

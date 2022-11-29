@@ -101,8 +101,9 @@ namespace KLTN_Web_MoonShop.Controllers
             }  
           
         }
+        [ValidateInput(false)]
         [HttpPost]
-        public ActionResult UpdateProduct(HttpPostedFileBase file,string txtxuatxu, string txtsize, string txtcolor, HttpPostedFileBase img1, HttpPostedFileBase img2, HttpPostedFileBase img3, string txtimg, string txtimg1, string txtimg2, string txtimg3, long id, string txttensanpham, string txtsoluong, string txtgiathanh, string txtchitiet, string txthinhanh, string cbbloaisp)
+        public ActionResult UpdateProduct(string txtmotachitiet, HttpPostedFileBase file,string txtxuatxu, string txtsize, string txtcolor, HttpPostedFileBase img1, HttpPostedFileBase img2, HttpPostedFileBase img3, string txtimg, string txtimg1, string txtimg2, string txtimg3, long id, string txttensanpham, string txtsoluong, string txtgiathanh, string txtchitiet, string txthinhanh, string cbbloaisp)
         {
             bool action = false;
             int type = 0;
@@ -196,10 +197,10 @@ namespace KLTN_Web_MoonShop.Controllers
                 pro.productPrice = int.Parse(txtgiathanh);
                 pro.productTypeID = int.Parse(cbbloaisp);
                 pro.isActive = 1;
-
                 prod.Size = txtsize;
                 prod.Color = txtcolor;
                 prod.origin = txtxuatxu;
+                prod.desciption = txtmotachitiet;
                 db.ProductDetails.AddOrUpdate(prod);
                 db.Products.AddOrUpdate(pro);
                 db.SaveChanges();
