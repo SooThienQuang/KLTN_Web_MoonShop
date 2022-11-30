@@ -1,0 +1,66 @@
+﻿<script>
+    var input = document.getElementById("myInput");
+    var keyword = input.val();
+    // Execute a function when the user presses a key on the keyboard
+    input.addEventListener("keypress", function (event) {
+        // If the user presses the "Enter" key on the keyboard
+        if (event.key === "Enter") {
+              $.ajax({
+                type: "GET",
+                  url: "/Search/Search/",
+                  data: { keyword: keyword }
+        });
+        }
+    });
+</script>
+    <nav class="navbar col-lg-12 col-12 p-0 d-flex flex-row">
+        <img src="~/Asset/img/banner/bannertop.png" width="100%" height="40px" style="margin-bottom:auto">
+        <div class="col-sm-2">
+            <a class="navbar-brand brand-logo ml-4" href="@Url.Action("Index","Home")">
+                <img src="~/Asset/img/logo/f9a5893e92b154ef0da0.jpg" height="130" width="150" />
+                
+            </a>
+           
+        </div>
+        <div class="col-sm">
+            <form action="@Url.Action("Search","Search")">
+                <div class="nav-item nav-search">
+                    <div class="input-group">
+                        <input type="search" list="list-timezone" id="input-datalist" style="border-radius:52px;min-width:100px" class="form-control" placeholder="Nhập từ khóa..." aria-label="search" aria-describedby="search" name="keyword">
+                        <script>
+                            document.addEventListener('DOMContentLoaded', e => {
+                                $('#input-datalist').autocomplete()
+                            }, false);
+                        </script>
+                        <button class="btn btn-outline-primary ml-2" style="border-radius:52px;color:lightpink">
+                            <span class="ti-search" type="submit">Tìm</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-sm-4" style="padding-left:2px">
+            <div class="navbar-menu-wrapper">
+                <ul class="navbar-nav">
+                    @*------------------------------------------gio hang----------------------------*@
+                    <li class="nav-item dropdown" style="margin-left:80px">
+                        @Html.Action("Cart", "Customer")
+                    </li>
+                    @*<li class="nav-item dropdown">
+                        @Html.Action("Order", "Customer")
+                    </li>*@
+                    @*----------------------------------thông báo--------------------------------*@
+                <li class="nav-item dropdown">
+                    @Html.Action("Notifications", "Customer")
+                </li>
+                    @*----------------------thông tin cá nhân---------------------------------*@
+                <li class="nav-item nav-profile dropdown">
+                    @Html.Action("Profile", "Customer")
+                </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+

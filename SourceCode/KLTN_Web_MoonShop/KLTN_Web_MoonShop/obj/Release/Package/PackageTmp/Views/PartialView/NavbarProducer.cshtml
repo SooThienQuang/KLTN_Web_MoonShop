@@ -1,0 +1,335 @@
+﻿<nav class="navbar navbar-expand-lg navbar-light" style="padding:0;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="ti-list text-primary">Danh mục</i>
+    </button>
+    <div class="collapse navbar-collapse navbar-menu-wrapper" id="navbarSupportedContent" >
+        <ul class="navbar-nav navbar-nav-scroll" style="margin-left:10%">
+            <li class="nav-item dropdown">
+                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                    <i class="ti-face-smile">&#xf07a;</i>
+                    <div class="item-content">Chăm sóc da mặt</div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+                    <p class="mb-0 font-weight-normal float-left dropdown-header">Sản phẩm chăm sóc da</p>
+                    <a class="dropdown-item" href="@Url.Action("Search","Search",new {keyword=0})">
+                        <div class="item-thumbnail">
+                            <div class="item-icon bg-success">
+                                <img src="~/Asset/img/producer/tay-trang-sach-sau-3in1-loreal-400ml.jpg" />
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <h6 class="font-weight-normal">Tẩy trang</h6>
+                            <p class="font-weight-light small-text mb-0 text-muted">
+                                Còn hàng
+                            </p>
+
+                        </div>
+                        <div class="item-content">
+                          
+                        </div>
+
+                    </a>
+                    <a class="dropdown-item" href="@Url.Action("Search","Search",new {keyword=1})">
+                        <div class="item-thumbnail">
+                            <div class="item-icon bg-success">
+                                <img src="~/Asset/img/producer/srm-greentea.jpg" />
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <h6 class="font-weight-normal">Sửa rửa mặt</h6>
+                            <p class="font-weight-light small-text mb-0 text-muted">
+                                2 item
+                            </p>
+                        </div>
+                    </a>
+                    <a class="dropdown-item" href="@Url.Action("Search","Search",new {keyword=2})">
+                        <div class="item-thumbnail">
+                            <div class="item-icon bg-success">
+                                <img src="~/Asset/img/producer/mat-na-tay-te-bao-chet-huxley-170-30-ml.png" />
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <h6 class="font-weight-normal">Tẩy tế bào chết</h6>
+                            <p class="font-weight-light small-text mb-0 text-muted">
+                               Còn hàng
+                            </p>
+                        </div>
+                    </a>
+                    <a class="dropdown-item" href="@Url.Action("Search","Search",new {keyword=3})">
+                        <div class="item-thumbnail">
+                            <div class="item-icon bg-success">
+                                <img src="~/Asset/img/producer/matna.png" />
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <h6 class="font-weight-normal">Mặt nạ rửa</h6>
+                            <p class="font-weight-light small-text mb-0 text-muted">
+                                Còn hàng
+                            </p>
+                        </div>
+                    </a>
+                    <a class="mb-0 font-weight-normal float-sm-right dropdown-header" href="@Url.Action("Search", "Search", new {keyword=""})">Xem tất cả</a>
+
+                </div>
+            </li>
+            @*--------------------------------------chăm sóc cơ thể------------------------------------------*@
+            <li class="nav-item dropdown">
+                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                    <i class="ti-user mx-0">&#xf07a;</i>
+
+                    <div class="item-content">Chăm sóc cơ thể</div>
+
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+                    <p class="mb-0 font-weight-normal float-left dropdown-header">Các loại sản phẩm chăm sóc cơ thể</p>
+                    <a class="dropdown-item" href="@Url.Action("Search","Search",new {keyword=6})">
+                        <div class="item-thumbnail">
+                            <div class="item-icon bg-success">
+                                <img src="~/Asset/img/producer/suatam.png" />
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <h6 class="font-weight-normal">Sửa tắm</h6>
+                            <p class="font-weight-light small-text mb-0 text-muted">
+                                Còn hàng
+                            </p>
+                        </div>
+                    </a>
+                    <a class="dropdown-item" href="@Url.Action("Search","Search",new {keyword=7})">
+                        <div class="item-thumbnail">
+                            <div class="item-icon bg-success">
+                                <img src="~/Asset/img/producer/taytebaochet.jpeg" />
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <h6 class="font-weight-normal">Tẩy tế bào chết</h6>
+                            <p class="font-weight-light small-text mb-0 text-muted">
+                                Còn hàng
+                            </p>
+                        </div>
+                    </a>
+                    <a class="dropdown-item" href="@Url.Action("Search","Search",new {keyword=8})">
+                        <div class="item-thumbnail">
+                            <div class="item-icon bg-success">
+                                <img src="~/Asset/img/producer/nuochoa.png" />
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <h6 class="font-weight-normal">Nước hoa</h6>
+                            <p class="font-weight-light small-text mb-0 text-muted">
+                               Còn hàng
+                            </p>
+                        </div>
+                    </a>
+                    <a class="dropdown-item" href="@Url.Action("Search","Search",new {keyword=9})">
+                        <div class="item-thumbnail">
+                            <div class="item-icon bg-success">
+                                <img src="~/Asset/img/producer/nhuomtoc.jpg" />
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <h6 class="font-weight-normal">Nhuộm tóc</h6>
+                            <p class="font-weight-light small-text mb-0 text-muted">
+                               Còn hàng
+                            </p>
+                        </div>
+                    </a>
+                    <a class="mb-0 font-weight-normal float-sm-right dropdown-header" href="@Url.Action("Search","Search",new {keyword=""})">Xem tất cả</a>
+                </div>
+            </li>
+            @*---------------------------------------------trang điểm-------------------------------------------------------*@
+            <li class="nav-item dropdown">
+                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                    <i class="ti-wand mx-0">&#xf07a;</i>
+
+                    <div class="item-content">Trang điểm</div>
+
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+                    <p class="mb-0 font-weight-normal float-left dropdown-header">Kem lót</p>
+                    <a class="dropdown-item" href="@Url.Action("Search","Search",new {keyword=10})">
+                        <div class="item-thumbnail">
+                            <div class="item-icon bg-success">
+                                <img src="~/Asset/img/producer/kemlot.jpeg" />
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <h6 class="font-weight-normal">Kem lót</h6>
+                            <p class="font-weight-light small-text mb-0 text-muted">
+                                2 sản phẩm
+                            </p>
+                        </div>
+                    </a>
+                    <a class="dropdown-item" href="@Url.Action("Search","Search",new {keyword=11})">
+                        <div class="item-thumbnail">
+                            <div class="item-icon bg-success">
+                                <img src="~/Asset/img/producer/kechanmay.png" />
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <h6 class="font-weight-normal">Kẻ chân mày</h6>
+                            <p class="font-weight-light small-text mb-0 text-muted">
+                                2 sản phẩm
+                            </p>
+                        </div>
+                    </a>
+                    <a class="dropdown-item" href="@Url.Action("Search","Search",new {keyword=13})">
+                        <div class="item-thumbnail">
+                            <div class="item-icon bg-success">
+                                <img src="~/Asset/img/producer/phanmat.jpg" />
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <h6 class="font-weight-normal">Phấn mắt</h6>
+                            <p class="font-weight-light small-text mb-0 text-muted">
+                                2 sản phẩm
+                            </p>
+                        </div>
+                    </a>
+                    <a class="dropdown-item" href="@Url.Action("Search","Search",new {keyword=14 })">
+                        <div class="item-thumbnail">
+                            <div class="item-icon bg-success">
+                                <img src="~/Asset/img/producer/sonmoi.jpg" />
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <h6 class="font-weight-normal">Son thỏi</h6>
+                            <p class="font-weight-light small-text mb-0 text-muted">
+                                2 sản phẩm
+                            </p>
+                        </div>
+                    </a>
+                    <a class="mb-0 font-weight-normal float-sm-right dropdown-header" href="@Url.Action("AllCart","ShoppingCart")">Xem tất cả</a>
+                </div>
+            </li>
+            @*-----------------------------------------------------phụ kiện--------------------------------------------*@
+        <li class="nav-item dropdown">
+            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                <i class="ti-panel mx-0">&#xf07a;</i>
+
+                <div class="item-content">Phụ kiện</div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+                <p class="mb-0 font-weight-normal float-left dropdown-header">Phụ kiện</p>
+                <a class="dropdown-item" href="@Url.Action("Search","Search",new {keyword=16})">
+                    <div class="item-thumbnail">
+                        <div class="item-icon bg-success">
+                            <img src="~/Asset/img/producer/caylaymun.jpg" />
+                        </div>
+                    </div>
+                    <div class="item-content">
+                        <h6 class="font-weight-normal">Dụng cụ lấy mụn</h6>
+                        <p class="font-weight-light small-text mb-0 text-muted">
+                            2 đơn đặt hàng
+                        </p>
+                    </div>
+                </a>
+                <a class="dropdown-item" href="@Url.Action("Search","Search",new {keyword=17})">
+                    <div class="item-thumbnail">
+                        <div class="item-icon bg-success">
+                            <img src="~/Asset/img/producer/dungcuruamat.png" />
+                        </div>
+                    </div>
+                    <div class="item-content">
+                        <h6 class="font-weight-normal">Dụng cụ rửa mặt</h6>
+                        <p class="font-weight-light small-text mb-0 text-muted">
+                            2 item
+                        </p>
+                    </div>
+                </a>
+                <a class="dropdown-item" href="@Url.Action("Search","Search",new {keyword=18})">
+                    <div class="item-thumbnail">
+                        <div class="item-icon bg-success">
+                            <img src="~/Asset/img/producer/bongtaytrang.jpg" />
+                        </div>
+                    </div>
+                    <div class="item-content">
+                        <h6 class="font-weight-normal">Bông tẩy trang</h6>
+                        <p class="font-weight-light small-text mb-0 text-muted">
+                            Private message
+                        </p>
+                    </div>
+                </a>
+                <a class="dropdown-item" href="@Url.Action("Search","Search",new {keyword=19})">
+                    <div class="item-thumbnail">
+                        <div class="item-icon bg-success">
+                            <img src="~/Asset/img/producer/cotrangdiem.jpg" />
+                        </div>
+                    </div>
+                    <div class="item-content">
+                        <h6 class="font-weight-normal">Cọ trang điểm</h6>
+                        <p class="font-weight-light small-text mb-0 text-muted">
+                            Private message
+                        </p>
+                    </div>
+                </a>
+                <a class="mb-0 font-weight-normal float-sm-right dropdown-header" href="@Url.Action("AllCart","ShoppingCart")">Xem tất cả</a>
+            </div>
+        </li>
+            @*----------------------------------------------sản phẩm mới------------------------------*@
+            <li class="nav-item dropdown">
+                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                    <i class="ti-crown mx-0">&#xf07a;</i>
+
+                    <div class="item-content">Sản phẩm mới</div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+                    <p class="mb-0 font-weight-normal float-left dropdown-header">Chưa có sản phẩm</p>
+                    @*<a class="dropdown-item">
+                        <div class="item-thumbnail">
+                            <div class="item-icon bg-success">
+                                <i class="ti-new-window mx-0"></i>
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <h6 class="font-weight-normal">Đơn đặt hàng</h6>
+                            <p class="font-weight-light small-text mb-0 text-muted">
+                                2 đơn đặt hàng
+                            </p>
+                        </div>
+                    </a>*@
+                </div>
+            </li>
+            @*-------------------------------------------------------kem chống nắng-----------------------------------*@
+            <li class="nav-item dropdown">
+                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                    <i class="ti-shine mx-0">&#xf07a;</i>
+
+                    <div class="item-content">Kem chống nắng</div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+                    <p class="mb-0 font-weight-normal float-left dropdown-header">Chưa có sản phẩm</p>
+                    @*<a class="dropdown-item">
+                        <div class="item-thumbnail">
+                            <div class="item-icon bg-success">
+                                <i class="ti-wallet mx-0"></i>
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <h6 class="font-weight-normal">Đơn đặt hàng</h6>
+                            <p class="font-weight-light small-text mb-0 text-muted">
+                                2 đơn đặt hàng
+                            </p>
+                        </div>
+                    </a>*@
+                </div>
+            </li>
+            @*--------------------------------xu hướng làm đẹp-----------------------------*@
+            <li class="nav-item dropdown ">
+                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                    <i class="ti-arrow-top-right mx-0">&#xf07a;</i>
+
+                    <div class="item-content">Xu hướng</div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+                    <p class="mb-0 font-weight-normal float-left dropdown-header">Chưa có sản phẩm</p>
+                 
+                  
+                </div>
+            </li>
+
+
+        </ul>
+    </div>
+</nav>

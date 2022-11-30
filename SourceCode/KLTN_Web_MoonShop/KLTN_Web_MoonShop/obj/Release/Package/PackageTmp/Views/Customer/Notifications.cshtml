@@ -1,0 +1,58 @@
+﻿@using KLTN_Web_MoonShop.Models;
+@model IEnumerable<KLTN_Web_MoonShop.Models.Notification>
+@if (@ViewBag.user == null)
+{
+}
+else
+{
+    if (Model != null)
+    {
+        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+            <i class="ti-bell mx-0">&#xf07a;</i>
+            <span class='badge badge-warning' id='lblCartCount'> @Model.Count() </span>
+            <div class="item-content">Thông báo</div>
+
+        </a>
+        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+            <p class="mb-0 font-weight-normal float-left dropdown-header">Thông báo</p>
+            @foreach (var item in Model)
+            {
+                <a class="dropdown-item" href="@Url.Action("DetailProfile","Customer",new {id=item.menutype})">
+                    <div class="item-thumbnail">
+
+                            <div class="item-icon bg-info">
+                                    <img src="~/Asset/img/product/@item.image">
+                            </div>
+                            
+                        </div>
+                    <div class="item-content">
+                        <h6 class="font-weight-normal">
+                            @item.title
+                            <img src="~/Asset/img/discount/hot-sale.png" height="20" width="20" />
+                        </h6>
+                        <p class="font-weight-light small-text mb-0 text-muted">
+                            @item.message
+                        </p>
+                    </div>
+                </a>
+            }
+
+
+            <a class="mb-0 font-weight-normal float-sm-right dropdown-header" href="@Url.Action("AllCart","ShoppingCart")">Xem tất cả</a>
+        </div>
+    }
+    else
+    {
+        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+            <i class="ti-bell mx-0">&#xf07a;</i>
+            <span class='badge badge-warning' id='lblCartCount'> 0 </span>
+            <div class="item-content">Thông báo</div>
+
+        </a>
+        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+            <p class="mb-0 font-weight-normal float-left dropdown-header">Bạn chưa có thông báo mới !</p>
+        </div>
+    }
+
+}
+

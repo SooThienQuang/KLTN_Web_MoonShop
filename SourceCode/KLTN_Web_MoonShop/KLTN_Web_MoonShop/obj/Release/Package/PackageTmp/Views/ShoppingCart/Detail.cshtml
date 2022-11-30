@@ -1,0 +1,534 @@
+﻿@model IEnumerable<KLTN_Web_MoonShop.Models.CartDetail>
+@using KLTN_Web_MoonShop.Models
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    DBCosmeticEntities db = new DBCosmeticEntities();
+    Customer user = Session["user"] as Customer;
+}
+@*<script>
+    function modal() {
+        $('#spinnerModal').modal('show');
+        setTimeout(function () {
+            console.log('hejsan');
+            $('#spinnerModal').modal('hide');
+        }, 3000);
+    }
+</script>*@
+@*----------------modal waiting-----------------------------------------*@
+<link rel="stylesheet" href="~/css/spinner.css" />
+<div class="modal fade" tabindex="-1" role="dialog" id="spinnerModal">
+    <div class="modal-dialog modal-dialog-centered text-center" role="document">
+        @*<span class="fa fa-spinner fa-spin fa-3x w-100"></span>*@
+        <div class="loading-box">
+            <div class="loader"></div>
+        </div>
+    </div>
+</div>
+@*--------------------end modal waiting-----------------------------*@
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+@if (Model == null)
+{
+    <div class="container-fluid  mt-100">
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Giỏ hàng của bạn</h5>
+                    </div>
+                    <div class="card-body cart">
+                        <div class="col-sm-12 empty-cart-cls text-center">
+                            <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+                            <h3><strong>Bạn chưa có sản phẩm nào trong giỏ hàng</strong></h3>
+                            <h4>Thêm một vài sản phẩm sẽ khiến bạn vui hơn :)</h4>
+                            <a href="@Url.Action("Index","Home")" class="btn btn-primary cart-btn-transform m-3" data-abc="true">Tiếp tục mua sắm</a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+}
+else
+{
+    <div class="container">
+        <div class="table-wrap">
+            <table class="table table-responsive table-borderless">
+                <thead>
+                <th>
+                    <input type="checkbox" onclick="checkall()" id="checkall" />
+                </th>
+                <th>&nbsp;</th>
+                <th style="width:30%">Sản phẩm</th>
+                <th style="width:15%">Giá thành</th>
+                <th style="width:15%">Số lượng</th>
+                <th style="width:15%">Tổng tiền</th>
+                <th style="width:15%">Xóa/Lưu</th>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        KLTN_Web_MoonShop.Models.Product pro = db.Products.FirstOrDefault(n => n.productID == item.productID);
+                        <tr class="align-middle alert border-bottom" role="alert">
+                            <td>
+                                <input class="checkbox" type="checkbox" value="@item.productID" id="checkbox" onclick="setVal(@pro.productID,@item.cartMoney)">
+                            </td>
+                            <td class="text-center">
+                                <img class="pic"
+                                     src="~/Asset/img/product/@pro.productImage"
+                                     alt="">
+                            </td>
+                            <td>
+                                <div>
+                                    @if (pro.productName.Length > 30)
+                                    {
+                                        string name = pro.productName.Substring(0, 30);
+                                        <p class="m-0 fw-bold">@name ...</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="m-0 fw-bold">@pro.productName</p>
+                                    }
+
+                                    @if (pro.productDescribe.Length > 50)
+                                    {
+                                        string name = pro.productDescribe.Substring(0, 50);
+                                        <p class="m-0 fw-bold">@name ...</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="m-0 fw-bold">@pro.productDescribe</p>
+                                    }
+                                </div>
+                            </td>
+                            <td>
+                                <div class="fw-600">@pro.productPrice</div>
+                            </td>
+                            <td class="d-">
+                                <input class="form-control" id="txtcartquantity" name="txtcartquantity" type="number" value="@item.cartQuantity" min="0">
+                            </td>
+                            <td>
+                                @item.cartMoney
+                            </td>
+                            <td>
+                                <div class="btn" data-bs-dismiss="alert">
+                                    <span onclick="showDel(@item.productID)" class="fas fa-times" data-toggle="tooltip" data-placement="bottom" title="Xóa"></span>
+                                </div>
+                                <div class="btn" id="divsave">
+                                    <span class="ti-save" onclick="updateCart(@item.productID,@item.cartID)" style="color:green" data-toggle="tooltip" data-placement="bottom" title="Lưu"></span>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+        <div class="row mt-4 d-flex align-items-center">
+            <div class="col-sm-2 order-md-2">
+                <h3>Tổng tiền :</h3>
+            </div>
+            <div class="col-sm-2 order-md-2">
+                <h3 style="color:red" id="txtmoney">0</h3>
+            </div>
+            <div class="col-sm-4 order-md-2 text-right">
+                @*<button type="button" onclick="showSwal('success-message')" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Thanh toán</button>*@
+                <button type="button" onclick="checkOut()" class="btn btn-danger mb-4 btn-lg pl-5 pr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
+                        <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+                        <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z" />
+                    </svg>
+                    Thanh toán
+                </button>
+            </div>
+            <div class="col-sm-4 mb-3 mb-m-1 order-md-1 text-md-left">
+                <a href="@Url.Action("Index","Home")">
+                    <i class="ti-back-left"></i> Tiếp tục mua hàng
+                </a>
+            </div>
+
+        </div>
+    </div>
+    @*@Html.Action("Paymore", "Payment")*@
+}
+<input type="number" id="txttongtien" hidden value="@Model.Sum(n=>n.cartMoney)" />
+<input type="number" id="txtgia" hidden />
+<div id="divid" style="height:100px; width:400px" ;>
+</div>
+<input type="number" id="txtiddel" hidden />
+@if (user != null)
+{
+    <input type="number" id="txtuserid" value="@user.customerID" hidden />
+}
+@*------------------------------------------------------------------mesage-------------------------------------------*@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+@*<div class="card-body">
+        <div class="wrapper text-center">
+            <h4 class="card-title">Alerts Popups</h4>
+            <p class="card-description">A success message!</p>
+            <button class="btn btn-outline-success" onclick="showSwal('success-message')">Click here!</button>
+        </div>
+    </div>*@
+<!-- Button trigger modal-->
+<!--Modal: modalConfirmDelete-->
+<div class="modal fade" id="modalCartDel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+        <!--Content-->
+        <div class="modal-content text-center">
+            <!--Header-->
+            <div class="modal-header d-flex justify-content-center">
+                <p class="heading">Thông báo !</p>
+            </div>
+
+            <div class="modal-body">
+
+                <i class="fas fa-times fa-4x animated rotateIn" style="color:red"></i>
+                <br />
+                Bạn có chắc chắn muốn thực hiện thao tác này
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer flex-center">
+                <a onclick="comfimDel()" class="btn  btn-outline-danger">Có</a>
+                <a type="button" class="btn  btn-danger waves-effect" onclick="CloseDel()">Hủy</a>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+
+<button id="btdelCart" onclick="comfimDel()" hidden></button>
+<button id="btncancelDel" onclick="CloseDel()" hidden></button>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function updateCart(proid, cartid) {
+        var userid = document.getElementById('txtuserid').value;
+        var sl = document.getElementById('txtcartquantity').value;
+        var person = new Object();
+        person.proID = proid;
+        person.cusID = userid;
+        person.cartID = cartid;
+        person.quantity = sl;
+        $.ajax({
+            url: '/api/Cart/',
+            type: 'PUT',
+            dataType: 'json',
+            data: person,
+            success: function (result) {
+                swal({
+                    title: 'Thành công!',
+                    text: 'Bạn đã cập nhật thành công sản phẩm !',
+                    type: 'success',
+                    button: {
+                        text: "Continue",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-primary"
+                    }
+                })
+            },
+            error: function (err) {
+                alert(err.statusText);
+            }
+        });
+    }
+    function comfimDel() {
+        var id = document.getElementById('txtiddel').value;
+        var userid = document.getElementById('txtuserid').value;
+        var person = new Object();
+        person.proID = id;
+        person.cusID = userid;
+        person.price = 111;
+        person.quantity = 1;
+        $.ajax({
+            url: '/api/Cart/',
+            type: 'DELETE',
+            dataType: 'json',
+            data: person,
+            success: function (result) {
+                $('#spinnerModal').modal('hide');
+                Swal.fire(
+                    'Xóa thành công!',
+                    'Dữ liệu của bạn đã được xóa !',
+                    'success'
+                )
+            },
+            error: function (err) {
+                alert(err.statusText);
+            }
+        });
+        $("#modalCartDel").modal("hide");
+    }
+    function modalspi() {
+        $('#spinnerModal').modal('show');
+        setTimeout(function () {
+            console.log('hejsan');
+            $('#spinnerModal').modal('hide');
+        }, 2000);
+    }
+    function showDel(id) {
+        document.getElementById('txtiddel').value = id;
+        Swal.fire({
+            title: 'Bạn có chắc chắn?',
+            text: "Bạn không thể hoàn tác !",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Có, xóa đi!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById("btdelCart").onclick();
+                $('#spinnerModal').modal('show');
+            }
+            
+            else {
+                document.getElementById("btncancelDel").onclick();
+                modalspi();
+            }
+        })
+
+    }
+    function CloseDel() {
+        /*location.reload();*/
+        $(".table").load(location.href + " .table");
+    }
+    function checkOut() {
+        if (value == "") {
+            if (checkedall == false) {
+                swal({
+                    title: 'Có lỗi xảy ra!',
+                    text: 'Vui lòng chọn sản phẩm trước khi thanh toán ',
+                    type: 'error',
+                    button: {
+                        text: "Continue",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-primary"
+                    }
+                })
+            }
+            else {
+                var getall = "getallcartqnt";
+                var url = '@Url.Action("Paymore", "Payment", new {id = "data"})';
+                $('#divid').load(url.replace('data', getall));
+            }
+
+        }
+        else {
+              var url = '@Url.Action("Paymore", "Payment", new {id = "data"})';
+          $('#divid').load(url.replace('data', value));
+        }
+
+    }
+
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    //-------------------check all---------------------
+    function checkall() {
+        $("#checkall").change(function () {
+            if (this.checked) {
+
+                $('input[type="checkbox"]').each(function () {
+                    $(this).prop("checked", true);
+                });
+                checkedall = true;
+                document.getElementById('txtmoney').innerHTML = document.getElementById('txttongtien').value;
+            }
+            else {
+
+                $('input[type="checkbox"]').each(function () {
+                    $(this).prop("checked", false);
+                });
+                checkedall = false;
+                document.getElementById('txtmoney').innerHTML = 0;
+            }
+        });
+
+
+    }
+
+
+    (function ($) {
+        showSwal = function (type) {
+            'use strict';
+            if (type === 'success-message') {
+                if (value == "" && checkedall == false) {
+                    swal({
+                        title: 'Có lỗi xảy ra!',
+                        text: 'Vui lòng chọn sản phẩm trước khi thanh toán ',
+                        type: 'error',
+                        button: {
+                            text: "Continue",
+                            value: true,
+                            visible: true,
+                            className: "btn btn-primary"
+                        }
+                    })
+                }
+                else {
+                    var url = '@Url.Action("Paymore", "Payment", new {id = "data"})';
+                    if (checkedall == false) {
+                        $('#divid').load(url.replace('data', value));
+                    }
+                    else {
+                        var getall = "getallcartqnt";
+                        $('#divid').load(url.replace('data', getall));
+                    }
+
+                }
+            }
+        }
+    })(jQuery);
+    var value = "";
+    let checkedall = false;
+    const array = [];
+
+    function setVal(proid, money) {
+        document.getElementById('txtgia').value = money;
+        array.push(proid);
+        value = value + "," + proid;
+    }
+    $(".checkbox").change(function () {
+        if (this.checked) {
+            var money = +document.getElementById('txtmoney').innerText;
+            var price = + document.getElementById('txtgia').value;
+            document.getElementById('txtmoney').innerHTML = money + price;
+        }
+        else {
+            var money = +document.getElementById('txtmoney').innerText;
+            var price = + document.getElementById('txtgia').value;
+            document.getElementById('txtmoney').innerHTML = money - price;
+        }
+    });
+
+
+</script>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif
+    }
+
+
+
+    .pic {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+    }
+
+    .table thead {
+        background-color: pink;
+    }
+
+        .table thead th {
+            padding: 30px;
+            font-size: 14px;
+            color: white;
+        }
+
+    .table tbody td input[type="checkbox"] {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        background-color: #eee;
+        position: relative;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .container .table-wrap {
+        margin: 20px auto;
+        overflow-x: auto
+    }
+
+        .container .table-wrap::-webkit-scrollbar {
+            height: 5px;
+        }
+
+        .container .table-wrap::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            background-image: linear-gradient(to right, #5D7ECD, #0C91E6);
+        }
+
+    .table > :not(caption) > * > * {
+        padding: 2rem 0.5rem;
+    }
+
+    .input {
+        width: 30px;
+        height: 30px;
+        color: black;
+        font-weight: 600;
+        outline: none;
+        padding: 8px;
+    }
+
+    ::placeholder {
+        color: black;
+        font-weight: 600;
+    }
+
+    .table tbody td input[type="checkbox"]:after {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 600;
+        content: "\f00c";
+        color: #fff;
+        font-size: 15px;
+        display: none
+    }
+
+    .table tbody td input[type="checkbox"]:checked,
+    .table tbody td input[type="checkbox"]:checked:hover {
+        background-color: #21cf95;
+    }
+
+        .table tbody td input[type="checkbox"]:checked::after {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+    .table tbody td input[type="checkbox"]:hover {
+        background-color: #ddd;
+    }
+
+    .table tbody td {
+        padding: 30px;
+        margin: 0;
+        font-size: 14.5px;
+        font-weight: 600;
+    }
+
+        .table tbody td .fa-times {
+            color: #D32F2F;
+        }
+
+
+    .text-muted {
+        font-size: 12.5px;
+    }
+
+    .table tbody tr td:nth-of-type(3) {
+        min-width: 320px;
+    }
+</style>
+

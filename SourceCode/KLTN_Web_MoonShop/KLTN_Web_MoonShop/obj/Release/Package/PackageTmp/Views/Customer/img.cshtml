@@ -1,0 +1,53 @@
+﻿@using KLTN_Web_MoonShop.Models
+@{
+    ViewBag.Title = "DetailProfile";
+    Customer user = Session["user"] as Customer;
+}
+<div id="imgavt" style="  align-items: center;">
+    <input type="text" value="@user.customerPhoto" hidden id="txtimguser" name="txtimguser" />
+    <div id="preview" style="position: relative;">
+        <div id="avatar" style=" background-color: antiquewhite; height: 200px; width: 200px; border: 3px solid #0af; border-radius: 50%; transition: background ease-out 200ms;"></div>
+        <button id="upload-button"
+                style=" height:50px; padding: 18px; border-radius: 50%; border: none; cursor: pointer; background-color: #08f; box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12); transition: background-color ease-out 120ms; position: absolute; right: -5%; bottom: 0%;"
+                aria-labelledby="image"
+                aria-describedby="image">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+            </svg>
+        </button>
+
+    </div>
+    @using (Html.BeginForm("img", "Customer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input type="file" name="image" id="image" accept="image/*" style="display: none" />
+        <button type="submit" class="btn btn-success" id="save">Lưu</button>
+    }
+</div>
+
+
+<script>
+    document.getElementById('save').style.visibility = 'hidden';
+    var imgg = document.getElementById('txtimguser').value;
+    const save_button = document.getElementById("save");
+    const UPLOAD_BUTTON = document.getElementById("upload-button");
+    const FILE_INPUT = document.querySelector("input[type=file]");
+    const AVATAR = document.getElementById("avatar");
+    AVATAR.style.background = "url('/Asset/img/user/" +imgg+"') center center/cover"
+    UPLOAD_BUTTON.addEventListener("click", () => FILE_INPUT.click());
+    FILE_INPUT.addEventListener("change", event => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            AVATAR.setAttribute("aria-label", file.name);
+            AVATAR.style.background = `url(${reader.result}) center center/cover`;
+            document.getElementById('save').style.visibility = 'visible';
+            var url = "/api/Image/";
+           /* var data = new FormData(document.getElementById("form"));*/
+            fetch(url, {
+                method: "POST",
+                data: "1"
+            });
+        };
+    });
+</script>
