@@ -185,7 +185,7 @@ namespace KLTN_Web_MoonShop.Controllers
                 string ten = cs.customerName.ToString().Split(' ').Last();
                 ViewBag.name = ten;
                 ViewBag.user = cs;
-                lst = db.Notifications.Where(n => n.receiveUserID == cs.customerID).ToList().OrderByDescending(n => n.notiID).ToList();
+                lst = db.Notifications.Where(n => n.receiveUserID == cs.customerID).ToList().Take(10).OrderByDescending(n => n.notiID).ToList();
             }
 
             return PartialView(lst);
