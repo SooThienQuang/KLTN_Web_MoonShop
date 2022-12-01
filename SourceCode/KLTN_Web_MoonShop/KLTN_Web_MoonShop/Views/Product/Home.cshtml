@@ -1,11 +1,18 @@
-﻿@model IEnumerable<KLTN_Web_MoonShop.Models.Product>
+﻿@using KLTN_Web_MoonShop.Models
+@using PagedList.Mvc
+@model PagedList.IPagedList<Product>
 @*<link rel="stylesheet" href="https://fontawesome.com/v4.7.0/assets/font-awesome/css/font-awesome.css">*@
-<div class="row">
-    <main class="col-md-12">
+<div class="d-flex justify-content-center align-items-center mt-5">
+    <button class="btn btn-dark">Danh sách sản phẩm</button>
+</div>
+<div class="d-flex justify-content-center mt-3 mb-5">
+    <span class="text text-center">Các sản phẩm gợi ý hôm nay</span>
+</div>
+<main class="col-12">
         <div class="row">
             @foreach (var item in Model)
             {
-                <div class="col-md-2">
+                <div class="col-6 col-md-2">
                     <figure class="card card-product-grid" style="min-height:350px">
                         <div class="img-wrap">
                             <span class="badge badge-danger"> NEW </span>
@@ -47,7 +54,49 @@
 
 
     </main>
-</div>
+@*<ul class="pagination" style="margin-top:30px;margin-left:35%">
+        <li> @Html.PagedListPager(Model, page => Url.Action("Index", "Home", new { page }))</li>
+    </ul>*@
+<ul class="pagination" style="margin-top:5%;margin-left:35%">
+    <li class="mr-3"> Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) trong @Model.PageCount</li>
+    @for (int i = 1; i <= Model.PageCount; i++)
+    {
+        <li class="@(i == Model.PageNumber ? "page-item active" : "page-item")">
+            <a class="page-link" href="@Url.Action("Index","Home", new { page = i })">@i</a>
+        </li>
+
+    }
+</ul>
+<style>
+
+    .ul.pagination {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+        background-color: red;
+    }
+
+    ul.pagination li {
+        display: inline;
+    }
+
+        ul.pagination li a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+        }
+
+            ul.pagination li a.active {
+                background-color: red;
+                color: red;
+            }
+
+            ul.pagination li a:hover:not(.active) {
+                background-color: red;
+            }
+</style>
 <div id="divid" style="height:100px; width:400px" ;>
 </div>
 <input type="hidden" id="hiddenEmployeeId" />

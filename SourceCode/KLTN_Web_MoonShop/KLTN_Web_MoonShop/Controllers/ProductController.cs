@@ -1,4 +1,5 @@
 ﻿using KLTN_Web_MoonShop.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,10 @@ namespace KLTN_Web_MoonShop.Controllers
     {
         // GET: Product
         DBCosmeticEntities db = new DBCosmeticEntities();
-        public ActionResult Home()
-        {   
-            return PartialView(db.Products.Where(n=>n.isActive==1).ToList());
+        public ActionResult Home(int page = 1, int size = 30)
+        {
+            var item = db.Products.Where(n => n.isActive == 1).ToList().ToPagedList(page, size);
+            return PartialView(item);
         }
         public ActionResult AddOrUpdate(int id)
         {

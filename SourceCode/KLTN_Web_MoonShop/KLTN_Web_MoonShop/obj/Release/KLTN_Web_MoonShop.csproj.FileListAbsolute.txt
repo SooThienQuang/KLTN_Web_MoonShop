@@ -166,17 +166,18 @@ D:\MySource\KLTN_Web_MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\obj
 D:\MySource\KLTN_Web_MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\obj\Release\KLTN_Web_MoonShop.csproj.CopyComplete
 D:\MySource\KLTN_Web_MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\obj\Release\KLTN_Web_MoonShop.dll
 D:\MySource\KLTN_Web_MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\obj\Release\KLTN_Web_MoonShop.pdb
+C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\roslyn\csc.exe
+C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\obj\Release\KLTN_Web_MoonShop.pdb
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\KLTN_Web_MoonShop.dll.config
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\KLTN_Web_MoonShop.dll
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\KLTN_Web_MoonShop.pdb
-C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\roslyn\csc.exe
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\roslyn\csc.exe.config
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\roslyn\csc.rsp
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\roslyn\csi.exe
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\roslyn\csi.exe.config
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\roslyn\csi.rsp
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\roslyn\Microsoft.CodeAnalysis.dll
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
@@ -223,6 +224,8 @@ C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\EntityFram
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\Microsoft.Web.Infrastructure.dll
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\Newtonsoft.Json.dll
+C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\PagedList.dll
+C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\PagedList.Mvc.dll
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\System.Net.Http.Formatting.dll
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\System.Web.Helpers.dll
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\System.Web.Http.dll
@@ -234,6 +237,8 @@ C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\System.Web
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\System.Web.Webpages.Razor.dll
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\EntityFramework.xml
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\EntityFramework.SqlServer.xml
+C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\PagedList.xml
+C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\PagedList.Mvc.xml
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\System.Web.Razor.xml
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\System.Web.Webpages.xml
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\System.Web.Webpages.Deployment.xml
@@ -249,4 +254,3 @@ C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\obj\Release\KL
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\obj\Release\KLTN_Web_MoonShop.csproj.CoreCompileInputs.cache
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\obj\Release\KLTN_Web_MoonShop.csproj.CopyComplete
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\obj\Release\KLTN_Web_MoonShop.dll
-C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\obj\Release\KLTN_Web_MoonShop.pdb

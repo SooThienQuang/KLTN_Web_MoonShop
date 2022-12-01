@@ -5,6 +5,36 @@
     DBCosmeticEntities db = new DBCosmeticEntities();
     List<Order> lstorder = db.Orders.ToList();
     List<OrderDetail> lstod = db.OrderDetails.ToList();
+    //danh sách đơn hàng theo mục
+    //---hôm nay
+    DateTime date = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
+    DateTime month = new DateTime(DateTime.Today.Year, DateTime.Today.Month - 1, DateTime.Today.Day);
+    //doanh số
+    //--hôm nay
+    long idod = ViewBag.idod;
+    List<Order> lstsaletoday = db.Orders.Where(n => n.orderID >= idod).ToList();
+    List<Order> lstsalemonth = db.Orders.Where(n => n.createDate >= month).ToList();
+    List<Customer> lstcustomertoday = db.Customers.Where(n => n.isActive == 1 && n.customerID >= idod).ToList();
+    List<Customer> lstcustomermoth = db.Customers.Where(n => n.isActive == 1 && n.dateCreate >= month).ToList();
+    List<Customer> lstcustomerall = db.Customers.Where(n => n.isActive == 1).ToList();
+
+
+    long sumsaletoday = 0;
+    if (lstsaletoday != null)
+    {
+        foreach (var item in lstsaletoday)
+        {
+            sumsaletoday = sumsaletoday + (long)db.OrderDetails.Where(n => n.orderID == item.orderID).ToList().Sum(n => n.Money);
+        }
+    }
+    long sumsalemonth = 0;
+    if (lstsalemonth != null)
+    {
+        foreach (var item in lstsalemonth)
+        {
+            sumsalemonth = sumsalemonth + (long)db.OrderDetails.Where(n => n.orderID == item.orderID).ToList().Sum(n => n.Money);
+        }
+    }
 
 }
 
@@ -21,21 +51,37 @@
                     <div class="card info-card sales-card">
 
                         <div class="filter">
-                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots text-primary"></i></a>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                 <li class="dropdown-header text-start">
-                                    <h6>Filter</h6>
+                                    Lọc theo
                                 </li>
-
-                                <li><a class="dropdown-item" href="#">Today</a></li>
-                                <li><a class="dropdown-item" href="#">This Month</a></li>
-                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                                <li><a class="dropdown-item" onclick="filterOrder('Hôm nay')" href="#">Hôm nay</a></li>
+                                <li><a class="dropdown-item" onclick="filterOrder('Tháng này')">Tháng này</a></li>
+                                <li><a class="dropdown-item" onclick="filterOrder('Năm nay')">Năm nay</a></li>
                             </ul>
                         </div>
+                        <input id="ordertoday" value="@lstsaletoday.Count()" hidden />
+                        <input id="ordermonth" value="@lstsalemonth.Count()" hidden />
+                        <script>
+                            function filterOrder(type) {
+                                document.getElementById("txtorder").innerHTML = type;
+                                if (type == 'Hôm nay') {
+                                    document.getElementById("ordercount").innerHTML = document.getElementById("ordertoday").value;
+                                }
+                                else
+                                    if (type == 'Tháng này') {
+                                        document.getElementById("ordercount").innerHTML = document.getElementById("ordermonth").value;
 
+                                    }
+                            }
+                        </script>
                         <div class="card-body">
-                            <h5 class="card-title">Đơn đặt <span>| Today</span></h5>
-
+                            <h5 class="card-title">
+                                Đơn đặt <span id="txtorder" style="color:blue">
+                                    | Tất cả
+                                </span>
+                            </h5>
                             <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
@@ -43,7 +89,7 @@
                                     </svg>
                                 </div>
                                 <div class="ps-3">
-                                    <h6>145</h6>
+                                    <h6 id="ordercount">@lstorder.Count()</h6>
                                     <span class="text-success small pt-1 fw-bold">Đơn đặt hàng</span> <span class="text-muted small pt-2 ps-1">Tăng</span>
 
                                 </div>
@@ -57,20 +103,35 @@
                     <div class="card info-card revenue-card">
 
                         <div class="filter">
-                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                            <a class="icon" href="#" data-bs-toggle="dropdown">
+                                <i class="bi bi-three-dots text-primary"></i>
+                            </a>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                 <li class="dropdown-header text-start">
-                                    <h6>Filter</h6>
+                                    <h6>Lọc theo</h6>
                                 </li>
 
-                                <li><a class="dropdown-item" href="#">Today</a></li>
-                                <li><a class="dropdown-item" href="#">This Month</a></li>
-                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                                <li><a class="dropdown-item" onclick="filterSales('Hôm nay')">Hôm nay</a></li>
+                                <li><a class="dropdown-item" onclick="filterSales('Tháng này')">Tháng này</a></li>
+                                <li><a class="dropdown-item" onclick="filterSales('Năm nay')">Năm nay</a></li>
                             </ul>
                         </div>
-
+                        <input id="saletoday" value="@sumsaletoday" hidden />
+                        <input id="salemonth" value="@sumsalemonth" hidden />
+                        <script>
+                            function filterSales(type) {
+                                document.getElementById("txtfiltersales").innerHTML = type;
+                                if (type == 'Hôm nay') {
+                                    document.getElementById("txtsumsales").innerHTML = document.getElementById("saletoday").value;
+                                }
+                                else
+                                    if (type == 'Tháng này') {
+                                        document.getElementById("txtsumsales").innerHTML = document.getElementById("salemonth").value;
+                                    }
+                            }
+                        </script>
                         <div class="card-body">
-                            <h5 class="card-title">Doanh số <span>| This Month</span></h5>
+                            <h5 class="card-title">Doanh số <span id="txtfiltersales" style="color:blue">| Tất cả</span></h5>
 
                             <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -79,7 +140,7 @@
                                     </svg>
                                 </div>
                                 <div class="ps-3">
-                                    <h6>$3,264</h6>
+                                    <h6 id="txtsumsales">@lstod.Sum(n => n.Money)</h6>
                                     <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                                 </div>
@@ -94,20 +155,32 @@
                     <div class="card info-card customers-card">
 
                         <div class="filter">
-                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots text-primary"></i></a>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                 <li class="dropdown-header text-start">
-                                    <h6>Filter</h6>
+                                    Lọc theo
                                 </li>
-
-                                <li><a class="dropdown-item" href="#">Today</a></li>
-                                <li><a class="dropdown-item" href="#">This Month</a></li>
-                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                                <li><a class="dropdown-item" onclick="filterCustomer('Hôm nay')">Hôm nay</a></li>
+                                <li><a class="dropdown-item" onclick="filterCustomer('Tháng này')">Tháng này</a></li>
+                                <li><a class="dropdown-item" onclick="filterCustomer('Năm nay')">Năm nay</a></li>
                             </ul>
                         </div>
-
+                        <input id="txtsumcustoday" value="@lstcustomertoday.Count()" hidden />
+                        <input id="txtsumcusmonth" value="@lstcustomermoth.Count()" hidden />
+                        <script>
+                            function filterCustomer(type) {
+                                document.getElementById("txtfiltercustomer").innerHTML = type;
+                                if (type == 'Hôm nay') {
+                                    document.getElementById("txtsumcustomer").innerHTML = document.getElementById("txtsumcustoday").value;
+                                }
+                                else
+                                    if (type == 'Tháng này') {
+                                        document.getElementById("txtsumcustomer").innerHTML = document.getElementById("txtsumcusmonth").value;
+                                    }
+                            }
+                        </script>
                         <div class="card-body">
-                            <h5 class="card-title">Khách hàng <span>| This Year</span></h5>
+                            <h5 class="card-title">Khách hàng <span id="txtfiltercustomer" style="color:blue">| This Year</span></h5>
 
                             <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -116,7 +189,7 @@
                                     </svg>
                                 </div>
                                 <div class="ps-3">
-                                    <h6>1244</h6>
+                                    <h6 id="txtsumcustomer">@lstcustomerall.Count()</h6>
                                     <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
 
                                 </div>
@@ -136,21 +209,21 @@
         <div class="col-12">
             <div class="card recent-sales overflow-auto">
 
-                <div class="filter">
-                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                        <li class="dropdown-header text-start">
-                            <h6>Filter</h6>
-                        </li>
+                @*<div class="filter">
+                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                            <li class="dropdown-header text-start">
+                                <h6>Filter</h6>
+                            </li>
 
-                        <li><a class="dropdown-item" href="#">Today</a></li>
-                        <li><a class="dropdown-item" href="#">This Month</a></li>
-                        <li><a class="dropdown-item" href="#">This Year</a></li>
-                    </ul>
-                </div>
+                            <li><a class="dropdown-item" href="#">Today</a></li>
+                            <li><a class="dropdown-item" href="#">This Month</a></li>
+                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                        </ul>
+                    </div>*@
 
                 <div class="card-body">
-                    <h5 class="card-title">Top mua hàng  <span>| Today</span></h5>
+                    <h5 class="card-title">Top mua hàng  @*<span>| Today</span>*@</h5>
 
                     <table class="table table-borderless datatable">
                         <thead>
@@ -177,7 +250,28 @@
                                     <td><a href="#" class="text-primary">@pro.productName.Substring(0, 20)</a></td>
 
                                     <td>  <span style="color:red">@String.Format("{0:0,0 vnđ}", tongtien)</span></td>
-                                    <td><span class="badge bg-success">Đã giao</span></td>
+                                    @if (item.status == 1)
+                                    {
+                                        <td><span class="badge bg-dark">Chờ xử lý</span></td>
+                                    }
+                                    else
+                                        if (item.status == 2)
+                                    {
+                                        <td><span class="badge bg-primary">Đã xác nhận</span></td>
+
+                                    }
+                                    else
+                                        if (item.status == 3)
+                                    {
+                                        <td><span class="badge bg-danger">Đang giao</span></td>
+
+                                    }
+                                    else
+                                    {
+                                        <td><span class="badge bg-success">Giao thành công</span></td>
+
+                                    }
+
                                 </tr>
                             }
 
@@ -190,61 +284,37 @@
             </div>
         </div><!-- End Recent Sales -->
         <!-- Top Selling -->
-        <div class="col-12">
-            <div class="card top-selling overflow-auto">
-
-                <div class="filter">
-                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                        <li class="dropdown-header text-start">
-                            <h6>Filter</h6>
-                        </li>
-
-                        <li><a class="dropdown-item" href="#">Today</a></li>
-                        <li><a class="dropdown-item" href="#">This Month</a></li>
-                        <li><a class="dropdown-item" href="#">This Year</a></li>
-                    </ul>
-                </div>
-
-                <div class="card-body pb-0">
-                    <h5 class="card-title">Top bán chạy <span>| Today</span></h5>
-
-                    <table class="table table-borderless">
-                        <thead>
-                            <tr>
-                                <th scope="col">Hình ảnh</th>
-                                <th scope="col">Sản phẩm</th>
-                                <th scope="col">Giá</th>
-                                <th scope="col">Số lượng bán</th>
-                                <th scope="col">Doanh thu</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in lstorder)
-                            {
-
-                                Customer cus = db.Customers.FirstOrDefault(n => n.customerID == item.customerID && n.isActive == 1);
-                                List<OrderDetail> lst = db.OrderDetails.Where(n => n.orderID == item.orderID).ToList();
-                                var tongtien = @lst.Sum(n => n.Money);
-                                OrderDetail od = db.OrderDetails.FirstOrDefault(n => n.orderID == item.orderID);
-                                Product pro = db.Products.FirstOrDefault(n => n.productID == od.productID);
-                                <tr>
-                                    <th scope="row"><a href="#"><img src="~/Asset/img/product/@pro.productImage" alt=""></a></th>
-                                    <td><a href="#" class="text-primary fw-bold">@pro.productName.Substring(0, 20)</a></td>
-                                    <td>@pro.productPrice</td>
-                                    <td class="fw-bold">@od.Quantity</td>
-                                    <td>$5,828</td>
-                                </tr>
-                            }
-
-
-                        </tbody>
-                    </table>
-
-                </div>
-
-            </div>
-        </div><!-- End Top Selling -->
     </div>
 </section>
+<div class="card-body">
+    <h5 class="card-title">Top bán chạy  @*<span>| Today</span>*@</h5>
 
+    <table class="table table-borderless datatable">
+        <thead>
+            <tr>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Sản phẩm</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Số lượng bán</th>
+                <th scope="col">Doanh thu</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in lstod.Select(n => n.productID).Distinct().ToList())
+            {
+                List<OrderDetail> lst = db.OrderDetails.Where(n => n.productID == item).ToList();
+                var tongtien = @lst.Sum(n => n.Money);
+                Product pro = db.Products.FirstOrDefault(n => n.productID == item);
+                <tr>
+                    <th scope="row"><a href="#"><img src="~/Asset/img/product/@pro.productImage" height="50" width="50" alt=""></a></th>
+                    <td><a href="#" class="text-primary fw-bold">@pro.productName.Substring(0, 20)</a></td>
+                    <td>@pro.productPrice</td>
+                    <td class="fw-bold">@lst.Sum(n => n.Quantity)</td>
+                    <td>@lst.Sum(n => n.Money)</td>
+                </tr>
+            }
+        </tbody>
+
+
+    </table>
+</div>

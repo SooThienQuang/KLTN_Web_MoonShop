@@ -16,6 +16,8 @@ namespace KLTN_Web_MoonShop.Controllers
         // GET: Admin
         public ActionResult Index()
         {
+            long idod = long.Parse(DateTime.Now.ToString("yyyyMMdd") + "120000");
+            ViewBag.idod=idod;
             return View();
         }
         public ActionResult Product()
