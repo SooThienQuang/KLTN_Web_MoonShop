@@ -84,9 +84,25 @@ namespace KLTN_Web_MoonShop.Controllers.API
         }
 
         // DELETE: api/Customer/5
-        [HttpPost]
-        public void Delete(int id)
+        [HttpDelete]
+        public string Delete(requestCustomer data)
         {
+            Customer cus = db.Customers.FirstOrDefault(n =>n.customerID == data.id);
+            if (cus!=null&&cus.isActive==1)
+            {
+                cus.isActive = -1;
+                db.Customers.AddOrUpdate(cus);
+                db.SaveChanges();
+                return "Khóa thành công";
+            }
+            else
+            {
+
+                cus.isActive = 1;
+                db.Customers.AddOrUpdate(cus);
+                db.SaveChanges();
+                return "Mở khóa thành công";
+            }    
         }
     }
 }

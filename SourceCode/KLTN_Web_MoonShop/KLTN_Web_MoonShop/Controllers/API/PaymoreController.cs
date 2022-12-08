@@ -60,7 +60,10 @@ namespace KLTN_Web_MoonShop.Controllers.API
                     orderDetail.statusID = 1;
                     db.OrderDetails.Add(orderDetail);
                     db.SaveChanges();
-
+                    Product proupdate = db.Products.FirstOrDefault(n => n.productID == detail.productID);
+                    proupdate.productQuantity = proupdate.productQuantity - detail.cartQuantity;
+                    db.Products.AddOrUpdate(proupdate);
+                    db.SaveChanges();
                 }
                
                 return "thanh cong";
@@ -92,6 +95,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
                     cd.isActive = -1;
                     db.CartDetails.AddOrUpdate(cd);
                     db.SaveChanges();
+                   
                     if(cd!=null)
                     {
                         OrderDetail orderDetail = new OrderDetail();
@@ -115,6 +119,10 @@ namespace KLTN_Web_MoonShop.Controllers.API
                         orderDetail.idAdd = cus.customerAdd;
                         orderDetail.statusID = 1;
                         db.OrderDetails.Add(orderDetail);
+                        db.SaveChanges();
+                        Product proup = db.Products.FirstOrDefault(n => n.isActive == 1 && n.productID == idn);
+                        proup.productQuantity = proup.productQuantity - cd.cartQuantity;
+                        db.Products.AddOrUpdate(proup);
                         db.SaveChanges();
                     }    
                 }    

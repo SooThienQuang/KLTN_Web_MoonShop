@@ -1,0 +1,79 @@
+﻿@using KLTN_Web_MoonShop.Models
+@{
+    DBCosmeticEntities db = new DBCosmeticEntities();
+    List<ProductType> lstproty = db.ProductTypes.Where(n => n.isActive == 1).ToList().Take(10).ToList();
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+</script>
+<div class="d-sm-flex align-items-sm-center pt-2 clear" id="viewsearch">
+    @foreach (var item in lstproty)
+    {
+        <div class="green-label font-weight-bold p-0 px-1 mx-sm-1 mx-0 my-sm-0 my-2" id="@item.proTypeID" style="display:none">
+            @item.proTypeName<span class=" px-1 close" onclick="hide(@item.proTypeID)">&times;</span>
+        </div>
+    }
+    <div class="green-label font-weight-bold p-0 px-1 mx-sm-1 mx-0 my-sm-0 my-2" id="xoatatca" style="display:none">
+       Xóa tất cả<span class=" px-1 close" onclick="clear1()">&times;</span>
+    </div>
+</div>
+@foreach (var item in lstproty)
+{
+    <input type="checkbox" class="box" value="@item.proTypeID" name="@item.proTypeID" onclick="show(@item.proTypeID,@item.proTypeID)">@item.proTypeName
+    <span class="check"></span>
+}
+<button id="disp">click</button>
+<script>
+    $('#disp').click(function () {
+        var array = [];
+        $(".box:checked").each(function () {
+            array.push($(this).val());
+        });
+        alert(array);
+    });
+    var flag1 = true;
+    function show(idck, id) {
+        var check = document.getElementsByName(idck).checked;
+        if (!check) {
+            //alert("check"+ " idchek =" + idck+"div check ="+id);
+            document.getElementById(id).style.display = "block";
+            document.getElementsByName(idck).checked = true;
+            document.getElementById("xoatatca").style.display = "block";
+        }
+        else {
+           // alert("uncheck" + idck + "div check =" + id);
+            document.getElementById(id).style.display = "none";
+            document.getElementsByName(idck).checked = false;
+           // $('.myCheckbox').prop('checked', false);
+        }
+    }
+    function hide(id) {
+        document.getElementById(id).style.display = "none";
+       // document.getElementsByName(id).onclick();
+       // $("#1").prop('checked', true);
+    }
+    function clear1() {
+        document.getElementById("xoatatca").style.display = "none";
+        //alert("click");
+        $(".box:checked").each(function () {
+            //array.push($(this).val());
+            document.getElementById($(this).val()).style.display = "none";
+        });
+       
+        $('input[type="checkbox"]').each(function () {
+            $(this).prop("checked", false);
+        });
+    }
+   
+</script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>

@@ -11,10 +11,10 @@ namespace KLTN_Web_MoonShop.Controllers.Admin
     {
         // GET: Orders
         DBCosmeticEntities db = new DBCosmeticEntities();
-        public ActionResult Waiting()
+        public ActionResult Waiting(int id )
         {
-            
-            return View();
+            List<Order> lstorder = db.Orders.Where(n=>n.status==id).ToList().OrderByDescending(n => n.createDate).ToList();
+            return View(lstorder);
         }
         public ActionResult Showmore(long id)
         {

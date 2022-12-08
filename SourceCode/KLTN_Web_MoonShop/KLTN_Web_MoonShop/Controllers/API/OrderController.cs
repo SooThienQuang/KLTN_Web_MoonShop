@@ -70,10 +70,10 @@ namespace KLTN_Web_MoonShop.Controllers.API
                 noti.notiID = idnoti;
                 noti.receiveUserID = customer.customerID;
                 noti.receiveUserFullName =customer.customerName;
-                noti.title = "Đơn hàng #"+order.orderID+"của bạn đã được "+getStatus(d.status,d.cbbshippingname);
+                noti.title = "Đơn hàng #"+order.orderID+" của bạn đã được "+getStatus(d.status,d.cbbshippingname);
                 noti.message = "Có "+lstd.Count()+" sản phẩm gồm :"+pro.productName.Substring(0,20)+"...";
                 noti.image =pro.productImage;
-                noti.menutype = 1;
+                noti.menutype = 2;
                 noti.isRead = 0;
                 db.Notifications.Add(noti);
                 db.SaveChanges();

@@ -6,7 +6,6 @@
     <EntitySet Name="CartDetails" EntityType="DBCosmeticModel.CartDetail" />
     <EntitySet Name="Customers" EntityType="DBCosmeticModel.Customer" />
     <EntitySet Name="CustomerAddresses" EntityType="DBCosmeticModel.CustomerAddress" />
-    <EntitySet Name="Discounts" EntityType="DBCosmeticModel.Discount" />
     <EntitySet Name="Employees" EntityType="DBCosmeticModel.Employee" />
     <EntitySet Name="EmployeeDetails" EntityType="DBCosmeticModel.EmployeeDetail" />
     <EntitySet Name="Notifications" EntityType="DBCosmeticModel.Notification" />
@@ -15,11 +14,13 @@
     <EntitySet Name="Positions" EntityType="DBCosmeticModel.Position" />
     <EntitySet Name="ProcessOrders" EntityType="DBCosmeticModel.ProcessOrder" />
     <EntitySet Name="Products" EntityType="DBCosmeticModel.Product" />
+    <EntitySet Name="ProductDetails" EntityType="DBCosmeticModel.ProductDetail" />
     <EntitySet Name="ProductTypes" EntityType="DBCosmeticModel.ProductType" />
     <EntitySet Name="Salaries" EntityType="DBCosmeticModel.Salary" />
     <EntitySet Name="Sexes" EntityType="DBCosmeticModel.Sex" />
     <EntitySet Name="Status" EntityType="DBCosmeticModel.Status" />
-    <EntitySet Name="ProductDetails" EntityType="DBCosmeticModel.ProductDetail" />
+    <EntitySet Name="sysdiagrams" EntityType="DBCosmeticModel.sysdiagram" />
+    <EntitySet Name="Discounts" EntityType="DBCosmeticModel.Discount" />
   </EntityContainer>
   <EntityType Name="ActionLog">
     <Key>
@@ -81,21 +82,6 @@
     <Property Name="isMain" Type="Int32" />
     <Property Name="customerMail" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="isActive" Type="Int32" />
-  </EntityType>
-  <EntityType Name="Discount">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int64" Nullable="false" />
-    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="percentDiscount" Type="Int32" />
-    <Property Name="productID" Type="Int64" />
-    <Property Name="dateTo" Type="DateTime" Precision="3" />
-    <Property Name="dateFrom" Type="DateTime" Precision="3" />
-    <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="productType" Type="Int32" />
-    <Property Name="isActive" Type="Int32" />
-    <Property Name="image" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="Employee">
     <Key>
@@ -201,6 +187,20 @@
     <Property Name="isActive" Type="Int32" />
     <Property Name="date" Type="DateTime" Precision="3" />
   </EntityType>
+  <EntityType Name="ProductDetail">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int64" Nullable="false" />
+    <Property Name="Size" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="Color" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="img1" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+    <Property Name="img2" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+    <Property Name="img3" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+    <Property Name="origin" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="brand" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="desciption" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="ProductType">
     <Key>
       <PropertyRef Name="proTypeID" />
@@ -234,18 +234,31 @@
     <Property Name="statusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="isActive" Type="Int32" />
   </EntityType>
-  <EntityType Name="ProductDetail">
+  <EntityType Name="sysdiagram">
     <Key>
-      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="diagram_id" />
     </Key>
-    <Property Name="ProductID" Type="Int64" Nullable="false" />
-    <Property Name="Size" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
-    <Property Name="Color" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
-    <Property Name="img1" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
-    <Property Name="img2" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
-    <Property Name="img3" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
-    <Property Name="origin" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="brand" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="desciption" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Discount">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="percentDiscount" Type="Int32" />
+    <Property Name="productID" Type="Int64" />
+    <Property Name="dateTo" Type="DateTime" Precision="3" />
+    <Property Name="dateFrom" Type="DateTime" Precision="3" />
+    <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="productType" Type="Int32" />
+    <Property Name="isActive" Type="Int32" />
+    <Property Name="image" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+    <Property Name="code" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="cusID" Type="Int64" />
   </EntityType>
 </Schema>

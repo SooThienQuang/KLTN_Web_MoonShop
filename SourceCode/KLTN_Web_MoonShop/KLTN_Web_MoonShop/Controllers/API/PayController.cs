@@ -1,6 +1,7 @@
 ﻿using KLTN_Web_MoonShop.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -14,6 +15,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
         public long cusID { get; set; }
         public int price { get; set; }
         public int quantity { get; set; }
+        public long money { get;set; }
     }
     public class PayController : ApiController
     {
@@ -46,7 +48,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
                 orderDetail.productID = obj.proID;
                 orderDetail.Quantity = obj.quantity;
                 orderDetail.price = obj.price;
-                orderDetail.Money = orderDetail.Quantity * obj.price;
+                orderDetail.Money =obj.money;
                 //dia chi
                 CustomerAddress cus = db.CustomerAddresses.FirstOrDefault(n => n.customerID == obj.cusID&&n.isMain==1);
                 orderDetail.idAdd = cus.customerAdd;
@@ -68,6 +70,10 @@ namespace KLTN_Web_MoonShop.Controllers.API
                 noti.menutype = 2;
                 noti.isRead = 0;
                 db.Notifications.Add(noti);
+                db.SaveChanges();
+                Product pro = db.Products.FirstOrDefault(n => n.productID == obj.proID);
+                pro.productQuantity = pro.productQuantity - obj.quantity;
+                db.Products.AddOrUpdate(pro);
                 db.SaveChanges();
                 return "Đặt hàng thành công";
             }

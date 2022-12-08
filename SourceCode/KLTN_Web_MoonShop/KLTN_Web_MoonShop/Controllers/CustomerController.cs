@@ -37,11 +37,19 @@ namespace KLTN_Web_MoonShop.Controllers
                 return RedirectToAction("Index", "Admin");
             }
             string pass = md5.CreateMD5(txt_password);
-            Customer cus = db.Customers.FirstOrDefault(n => n.customerUserName.Equals(txt_email) && n.customerPassword.Equals(pass)&&n.isActive==1);
+            Customer cus = db.Customers.FirstOrDefault(n => n.customerUserName.Equals(txt_email) && n.customerPassword.Equals(pass));
             if (cus!=null)
             {
-                Session["user"] = cus;
-                return RedirectToAction("Index", "Home");
+                if(cus.isActive==1)
+                {
+                    Session["user"] = cus;
+                    return RedirectToAction("Index", "Home");
+                }    
+                else
+                {
+                    ViewBag.LoginFail = "Tài khoản của bạn đã bị khóa!";
+                }    
+               
             }   
             else
             {
@@ -62,27 +70,27 @@ namespace KLTN_Web_MoonShop.Controllers
             }
           try
             {
-                Customer customer = new Customer();
-                long id= long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
-                customer.customerID = id;
-                customer.customerName = (firstname + " " + lastname);
-                customer.customerUserName = (phone).Trim();
-                customer.customerPassword = md5.CreateMD5(password);
-                customer.customerPhoto = "Sample_User_Icon.png".Trim();
-                customer.isActive = 1;
-                customer.dateCreate = DateTime.Now; 
+              
                 if(db.Customers.FirstOrDefault(n=>n.customerUserName.Equals(phone))==null)
                 {
+                    Customer customer = new Customer();
+                    long id = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+                    customer.customerID = id;
+                    customer.customerName = (firstname + " " + lastname);
+                    customer.customerUserName = (phone).Trim();
+                    customer.customerPassword = md5.CreateMD5(password);
+                    customer.customerPhoto = "Sample_User_Icon.png".Trim();
+                    customer.isActive = 1;
+                    customer.dateCreate = DateTime.Now;
                     CustomerAddress cd = new CustomerAddress();
                     cd.ID = long.Parse(DateTime.Now.ToString("MMddHHmmssyyyy"));
                     cd.customerID = id;
                     cd.isActive = 1;
                     cd.isMain = 1;
-                    cd.customerPhone = ("0" + phone).Trim();
+                    cd.customerPhone = (phone).Trim();
                     db.CustomerAddresses.Add(cd);
                     db.Customers.Add(customer);
                     ViewBag.CreateSuccess = "Tạo tài khoản thành công";
-                    db.SaveChanges();
                     //thông báo đăng kí thành công
                     Notification noti = new Notification();
                     long idnoti = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
@@ -96,6 +104,9 @@ namespace KLTN_Web_MoonShop.Controllers
                     noti.isRead = 0;
                     db.Notifications.Add(noti);
                     db.SaveChanges();
+                    //tạo mã giảm
+                    string magiam = RandomUniCode.RandomString(12);
+                   
                     //thông báo giảm giá khách hàng mới
                     Notification noti2 = new Notification();
                     long idnoti2 = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
@@ -103,12 +114,24 @@ namespace KLTN_Web_MoonShop.Controllers
                     noti2.receiveUserID = id;
                     noti2.receiveUserFullName = firstname + " " + lastname;
                     noti2.title = "Giảm giá cho khách hàng mới đến";
-                    noti2.message = "Tặng bạn voucher giảm giá 20% ! Click để xem chi tiết";
+                    noti2.message = "Tặng bạn voucher giảm giá 20% : "+magiam;
                     noti2.image = "discount20.jpg";
                     noti2.menutype = 1;
                     noti2.isRead = 0;
                     db.Notifications.Add(noti2);
                     db.SaveChanges();
+                    Discount dis = new Discount();
+                    dis.ID = idnoti2;
+                    dis.name = noti2.title;
+                    dis.code = magiam;
+                    dis.percentDiscount = 10;
+                    dis.cusID = id;
+                    dis.isActive = 1;
+                    db.Discounts.Add(dis);
+                    db.SaveChanges();
+                  
+                  
+                  
                 }    
                 else
                 {
@@ -134,6 +157,7 @@ namespace KLTN_Web_MoonShop.Controllers
                 string ten = cs.customerName.ToString().Split(' ').Last();
                 ViewBag.name = ten;
                 ViewBag.user = cs;
+                ViewBag.quantityOrder = db.Orders.Where(n => n.customerID == cs.customerID).ToList().Count();
             }
 
             return PartialView();
@@ -185,7 +209,8 @@ namespace KLTN_Web_MoonShop.Controllers
                 string ten = cs.customerName.ToString().Split(' ').Last();
                 ViewBag.name = ten;
                 ViewBag.user = cs;
-                lst = db.Notifications.Where(n => n.receiveUserID == cs.customerID).ToList().Take(10).OrderByDescending(n => n.notiID).ToList();
+                ViewBag.quantityNotify= db.Notifications.Where(n => n.receiveUserID == cs.customerID).ToList().Count();
+                lst = db.Notifications.Where(n => n.receiveUserID == cs.customerID).OrderByDescending(n => n.notiID).Take(5).ToList();
             }
 
             return PartialView(lst);

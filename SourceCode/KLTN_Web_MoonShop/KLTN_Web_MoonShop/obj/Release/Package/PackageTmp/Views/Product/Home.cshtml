@@ -1,0 +1,171 @@
+﻿@using KLTN_Web_MoonShop.Models
+@using PagedList.Mvc
+@model PagedList.IPagedList<Product>
+@*<link rel="stylesheet" href="https://fontawesome.com/v4.7.0/assets/font-awesome/css/font-awesome.css">*@
+<div class="d-flex justify-content-center align-items-center mt-5">
+    <button class="btn btn-dark">Danh sách sản phẩm</button>
+</div>
+<div class="d-flex justify-content-center mt-3 mb-5">
+    <span class="text text-center">Các sản phẩm gợi ý hôm nay</span>
+</div>
+<main class="col-12">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-6 col-md-2">
+                    <figure class="card card-product-grid" style="min-height:350px">
+                        <div class="img-wrap">
+                            <span class="badge badge-danger"> NEW </span>
+                            <a href="@Url.Action("Detail","Product",new {id=item.productID})">
+                                <img src="~/Asset/img/product/@item.productImage" class="img-fluid">
+                            </a>
+
+                            <button class="btn-overlay" onclick="ConfirmUpdate(@item.productID)"><i class="fa fa-search-plus">Xem thêm</i></button>
+                        </div>
+                        <!-- img-wrap.// -->
+                        <figcaption class="info-wrap">
+                            <div class="fix-height">
+                                <p href="#" class="title">
+                                    @if (@item.productName.Length > 30)
+                                    {
+                                        string name = @item.productName.Substring(0, 30);
+                                        <span>
+                                            @name...
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <h6 style="height:40px">
+                                            @item.productName
+                                        </h6>
+                                    }
+                                </p>
+                                <div class="price-wrap mt-2">
+                                    <span class="price" style="color:red">@String.Format("{0:0,0 vnđ}", item.productPrice)</span>
+                                </div>
+                                @*<a class="btn btn-primary" onclick="ConfirmUpdate(@item.productID)">Sửa </a>*@
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div> <!-- col.// -->
+
+            }
+        </div> <!-- row end.// -->
+
+
+    </main>
+@*<ul class="pagination" style="margin-top:30px;margin-left:35%">
+        <li> @Html.PagedListPager(Model, page => Url.Action("Index", "Home", new { page }))</li>
+    </ul>*@
+<ul class="pagination" style="margin-top:5%;margin-left:35%">
+    <li class="mr-3"> Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) trong @Model.PageCount</li>
+    @for (int i = 1; i <= Model.PageCount; i++)
+    {
+        <li class="@(i == Model.PageNumber ? "page-item active" : "page-item")">
+            <a class="page-link" href="@Url.Action("Index","Home", new { page = i })">@i</a>
+        </li>
+
+    }
+</ul>
+<style>
+
+    .ul.pagination {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+        background-color: red;
+    }
+
+    ul.pagination li {
+        display: inline;
+    }
+
+        ul.pagination li a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+        }
+
+            ul.pagination li a.active {
+                background-color: red;
+                color: red;
+            }
+
+            ul.pagination li a:hover:not(.active) {
+                background-color: red;
+            }
+</style>
+<div id="divid" style="height:100px; width:400px" ;>
+</div>
+<input type="hidden" id="hiddenEmployeeId" />
+<script>
+     //-----------------------------------------show detail-------------------------------------------------
+      var ConfirmUpdate = function (productID) {
+
+
+        $("#hiddenEmployeeId").val(productID);
+        var empId = $("#hiddenEmployeeId").val();
+        var url = '@Url.Action("ShowDetail", "Product", new {id = "data"})';
+        $('#divid').load(url.replace('data', empId));
+
+    }
+</script>
+<style>
+    .icon-control {
+        margin-top: 5px;
+        float: right;
+        font-size: 80%;
+    }
+
+
+
+    .btn-light {
+        background-color: #fff;
+        border-color: #e4e4e4;
+    }
+
+    .list-menu {
+        list-style: none;
+        margin: 0;
+        padding-left: 0;
+    }
+
+        .list-menu a {
+            color: #343a40;
+        }
+
+    .card-product-grid .info-wrap {
+        overflow: hidden;
+        padding: 18px 20px;
+    }
+
+    [class*='card-product'] a.title {
+        color: #212529;
+        display: block;
+    }
+
+    .card-product-grid:hover .btn-overlay {
+        opacity: 1;
+    }
+
+    .card-product-grid .btn-overlay {
+        -webkit-transition: .5s;
+        transition: .5s;
+        opacity: 0;
+        left: 0;
+        bottom: 0;
+        color: #fff;
+        width: 100%;
+        padding: 5px 0;
+        text-align: center;
+        position: absolute;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .img-wrap {
+        overflow: hidden;
+        position: relative;
+    }
+</style>

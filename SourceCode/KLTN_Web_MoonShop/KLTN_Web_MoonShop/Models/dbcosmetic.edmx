@@ -80,6 +80,8 @@
           <Property Name="productType" Type="int" />
           <Property Name="isActive" Type="int" />
           <Property Name="image" Type="nchar" MaxLength="500" />
+          <Property Name="code" Type="nchar" MaxLength="100" />
+          <Property Name="cusID" Type="bigint" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -232,6 +234,16 @@
           <Property Name="statusName" Type="nvarchar" MaxLength="50" />
           <Property Name="isActive" Type="int" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityContainer Name="DBCosmeticModelStoreContainer">
           <EntitySet Name="ActionLog" EntityType="Self.ActionLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
@@ -252,6 +264,7 @@
           <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sex" EntityType="Self.Sex" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -263,7 +276,6 @@
           <EntitySet Name="CartDetails" EntityType="DBCosmeticModel.CartDetail" />
           <EntitySet Name="Customers" EntityType="DBCosmeticModel.Customer" />
           <EntitySet Name="CustomerAddresses" EntityType="DBCosmeticModel.CustomerAddress" />
-          <EntitySet Name="Discounts" EntityType="DBCosmeticModel.Discount" />
           <EntitySet Name="Employees" EntityType="DBCosmeticModel.Employee" />
           <EntitySet Name="EmployeeDetails" EntityType="DBCosmeticModel.EmployeeDetail" />
           <EntitySet Name="Notifications" EntityType="DBCosmeticModel.Notification" />
@@ -272,11 +284,13 @@
           <EntitySet Name="Positions" EntityType="DBCosmeticModel.Position" />
           <EntitySet Name="ProcessOrders" EntityType="DBCosmeticModel.ProcessOrder" />
           <EntitySet Name="Products" EntityType="DBCosmeticModel.Product" />
+          <EntitySet Name="ProductDetails" EntityType="DBCosmeticModel.ProductDetail" />
           <EntitySet Name="ProductTypes" EntityType="DBCosmeticModel.ProductType" />
           <EntitySet Name="Salaries" EntityType="DBCosmeticModel.Salary" />
           <EntitySet Name="Sexes" EntityType="DBCosmeticModel.Sex" />
           <EntitySet Name="Status" EntityType="DBCosmeticModel.Status" />
-          <EntitySet Name="ProductDetails" EntityType="DBCosmeticModel.ProductDetail" />
+          <EntitySet Name="sysdiagrams" EntityType="DBCosmeticModel.sysdiagram" />
+          <EntitySet Name="Discounts" EntityType="DBCosmeticModel.Discount" />
         </EntityContainer>
         <EntityType Name="ActionLog">
           <Key>
@@ -338,21 +352,6 @@
           <Property Name="isMain" Type="Int32" />
           <Property Name="customerMail" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
           <Property Name="isActive" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Discount">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="percentDiscount" Type="Int32" />
-          <Property Name="productID" Type="Int64" />
-          <Property Name="dateTo" Type="DateTime" Precision="3" />
-          <Property Name="dateFrom" Type="DateTime" Precision="3" />
-          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="productType" Type="Int32" />
-          <Property Name="isActive" Type="Int32" />
-          <Property Name="image" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -458,6 +457,20 @@
           <Property Name="isActive" Type="Int32" />
           <Property Name="date" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="ProductDetail">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int64" Nullable="false" />
+          <Property Name="Size" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="Color" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="img1" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="img2" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="img3" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="origin" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="brand" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="desciption" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="ProductType">
           <Key>
             <PropertyRef Name="proTypeID" />
@@ -491,19 +504,32 @@
           <Property Name="statusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="isActive" Type="Int32" />
         </EntityType>
-        <EntityType Name="ProductDetail">
+        <EntityType Name="sysdiagram">
           <Key>
-            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="ProductID" Type="Int64" Nullable="false" />
-          <Property Name="Size" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
-          <Property Name="Color" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
-          <Property Name="img1" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
-          <Property Name="img2" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
-          <Property Name="img3" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
-          <Property Name="origin" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="brand" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="desciption" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Discount">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="percentDiscount" Type="Int32" />
+          <Property Name="productID" Type="Int64" />
+          <Property Name="dateTo" Type="DateTime" Precision="3" />
+          <Property Name="dateFrom" Type="DateTime" Precision="3" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="productType" Type="Int32" />
+          <Property Name="isActive" Type="Int32" />
+          <Property Name="image" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="code" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="cusID" Type="Int64" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -573,22 +599,6 @@
                 <ScalarProperty Name="customerPhone" ColumnName="customerPhone" />
                 <ScalarProperty Name="customerAdd" ColumnName="customerAdd" />
                 <ScalarProperty Name="customerID" ColumnName="customerID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Discounts">
-            <EntityTypeMapping TypeName="DBCosmeticModel.Discount">
-              <MappingFragment StoreEntitySet="Discount">
-                <ScalarProperty Name="image" ColumnName="image" />
-                <ScalarProperty Name="isActive" ColumnName="isActive" />
-                <ScalarProperty Name="productType" ColumnName="productType" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="dateFrom" ColumnName="dateFrom" />
-                <ScalarProperty Name="dateTo" ColumnName="dateTo" />
-                <ScalarProperty Name="productID" ColumnName="productID" />
-                <ScalarProperty Name="percentDiscount" ColumnName="percentDiscount" />
-                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -705,6 +715,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProductDetails">
+            <EntityTypeMapping TypeName="DBCosmeticModel.ProductDetail">
+              <MappingFragment StoreEntitySet="ProductDetail">
+                <ScalarProperty Name="desciption" ColumnName="desciption" />
+                <ScalarProperty Name="brand" ColumnName="brand" />
+                <ScalarProperty Name="origin" ColumnName="origin" />
+                <ScalarProperty Name="img3" ColumnName="img3" />
+                <ScalarProperty Name="img2" ColumnName="img2" />
+                <ScalarProperty Name="img1" ColumnName="img1" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ProductTypes">
             <EntityTypeMapping TypeName="DBCosmeticModel.ProductType">
               <MappingFragment StoreEntitySet="ProductType">
@@ -742,18 +767,32 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProductDetails">
-            <EntityTypeMapping TypeName="DBCosmeticModel.ProductDetail">
-              <MappingFragment StoreEntitySet="ProductDetail">
-                <ScalarProperty Name="desciption" ColumnName="desciption" />
-                <ScalarProperty Name="brand" ColumnName="brand" />
-                <ScalarProperty Name="origin" ColumnName="origin" />
-                <ScalarProperty Name="img3" ColumnName="img3" />
-                <ScalarProperty Name="img2" ColumnName="img2" />
-                <ScalarProperty Name="img1" ColumnName="img1" />
-                <ScalarProperty Name="Color" ColumnName="Color" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DBCosmeticModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Discounts">
+            <EntityTypeMapping TypeName="DBCosmeticModel.Discount">
+              <MappingFragment StoreEntitySet="Discount">
+                <ScalarProperty Name="cusID" ColumnName="cusID" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="productType" ColumnName="productType" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="dateFrom" ColumnName="dateFrom" />
+                <ScalarProperty Name="dateTo" ColumnName="dateTo" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="percentDiscount" ColumnName="percentDiscount" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

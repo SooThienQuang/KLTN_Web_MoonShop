@@ -140,7 +140,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
             try
             {
                 Product pro = db.Products.ToList().FirstOrDefault(n => n.productID == id.proID);
-                CartDetail cd = db.CartDetails.FirstOrDefault(n => n.cartID == id.cartID && n.productID == id.proID);
+                CartDetail cd = db.CartDetails.FirstOrDefault(n => n.cartID == id.cartID && n.productID == id.proID&&n.isActive==1);
                 if (id.quantity==0)
                 {
                     cd.isActive = -1;

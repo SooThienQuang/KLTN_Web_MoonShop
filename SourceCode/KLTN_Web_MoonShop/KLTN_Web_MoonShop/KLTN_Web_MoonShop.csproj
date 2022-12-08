@@ -670,6 +670,7 @@
     <Content Include="css\home\navbartop.css" />
     <Content Include="css\home\product.css" />
     <Content Include="css\productDetail.css" />
+    <Content Include="css\product\demoww.css" />
     <Content Include="css\product\detail.css" />
     <Content Include="css\spinner.css" />
     <Content Include="css\style.css" />
@@ -718,12 +719,16 @@
     <Compile Include="Controllers\Admin\OrdersController.cs" />
     <Compile Include="Controllers\Admin\ProductTypeController.cs" />
     <Compile Include="Controllers\AlertController.cs" />
+    <Compile Include="Controllers\Android\CartData.cs" />
+    <Compile Include="Controllers\Android\NotifyData.cs" />
     <Compile Include="Controllers\Android\ProductData.cs" />
     <Compile Include="Controllers\Android\UserController.cs" />
     <Compile Include="Controllers\API\AddressController.cs" />
     <Compile Include="Controllers\API\CartController.cs" />
     <Compile Include="Controllers\API\CustomerController.cs" />
+    <Compile Include="Controllers\API\DiscountController.cs" />
     <Compile Include="Controllers\API\EmployeeController.cs" />
+    <Compile Include="Controllers\API\FilterController.cs" />
     <Compile Include="Controllers\API\imageController.cs" />
     <Compile Include="Controllers\API\OrderController.cs" />
     <Compile Include="Controllers\API\PayController.cs" />
@@ -807,6 +812,7 @@
     <Compile Include="Models\ProductType.cs">
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RandomUniCode.cs" />
     <Compile Include="Models\ReplaceUnitcode.cs" />
     <Compile Include="Models\Salary.cs">
       <DependentUpon>dbcosmetic.tt</DependentUpon>
@@ -816,6 +822,9 @@
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Status.cs">
+      <DependentUpon>dbcosmetic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1070,6 +1079,8 @@
     <Content Include="Views\Home\Tesst1cart.cshtml" />
     <Content Include="Views\Customer\img.cshtml" />
     <Content Include="Views\Customer\Address.cshtml" />
+    <None Include="Properties\PublishProfiles\honghac-001-site1 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\honghac-001-site1 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\thienquang-001-site1 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\thienquang-001-site1 - Web Deploy.pubxml" />
     <Content Include="Views\Product\ShowDetail.cshtml" />
@@ -1091,6 +1102,8 @@
     <Content Include="Views\Orders\Processed.cshtml" />
     <Content Include="Views\Orders\Show.cshtml" />
     <Content Include="Views\Orders\Showmore.cshtml" />
+    <Content Include="Views\Admin\Customer.cshtml" />
+    <Content Include="Views\Admin\CRUDCus.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

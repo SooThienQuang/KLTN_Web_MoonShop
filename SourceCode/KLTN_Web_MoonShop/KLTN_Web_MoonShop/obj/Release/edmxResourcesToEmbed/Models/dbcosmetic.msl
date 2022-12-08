@@ -67,22 +67,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Discounts">
-      <EntityTypeMapping TypeName="DBCosmeticModel.Discount">
-        <MappingFragment StoreEntitySet="Discount">
-          <ScalarProperty Name="image" ColumnName="image" />
-          <ScalarProperty Name="isActive" ColumnName="isActive" />
-          <ScalarProperty Name="productType" ColumnName="productType" />
-          <ScalarProperty Name="description" ColumnName="description" />
-          <ScalarProperty Name="dateFrom" ColumnName="dateFrom" />
-          <ScalarProperty Name="dateTo" ColumnName="dateTo" />
-          <ScalarProperty Name="productID" ColumnName="productID" />
-          <ScalarProperty Name="percentDiscount" ColumnName="percentDiscount" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Employees">
       <EntityTypeMapping TypeName="DBCosmeticModel.Employee">
         <MappingFragment StoreEntitySet="Employee">
@@ -195,6 +179,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ProductDetails">
+      <EntityTypeMapping TypeName="DBCosmeticModel.ProductDetail">
+        <MappingFragment StoreEntitySet="ProductDetail">
+          <ScalarProperty Name="desciption" ColumnName="desciption" />
+          <ScalarProperty Name="brand" ColumnName="brand" />
+          <ScalarProperty Name="origin" ColumnName="origin" />
+          <ScalarProperty Name="img3" ColumnName="img3" />
+          <ScalarProperty Name="img2" ColumnName="img2" />
+          <ScalarProperty Name="img1" ColumnName="img1" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ProductTypes">
       <EntityTypeMapping TypeName="DBCosmeticModel.ProductType">
         <MappingFragment StoreEntitySet="ProductType">
@@ -232,18 +231,32 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ProductDetails">
-      <EntityTypeMapping TypeName="DBCosmeticModel.ProductDetail">
-        <MappingFragment StoreEntitySet="ProductDetail">
-          <ScalarProperty Name="desciption" ColumnName="desciption" />
-          <ScalarProperty Name="brand" ColumnName="brand" />
-          <ScalarProperty Name="origin" ColumnName="origin" />
-          <ScalarProperty Name="img3" ColumnName="img3" />
-          <ScalarProperty Name="img2" ColumnName="img2" />
-          <ScalarProperty Name="img1" ColumnName="img1" />
-          <ScalarProperty Name="Color" ColumnName="Color" />
-          <ScalarProperty Name="Size" ColumnName="Size" />
-          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="DBCosmeticModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Discounts">
+      <EntityTypeMapping TypeName="DBCosmeticModel.Discount">
+        <MappingFragment StoreEntitySet="Discount">
+          <ScalarProperty Name="cusID" ColumnName="cusID" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="productType" ColumnName="productType" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="dateFrom" ColumnName="dateFrom" />
+          <ScalarProperty Name="dateTo" ColumnName="dateTo" />
+          <ScalarProperty Name="productID" ColumnName="productID" />
+          <ScalarProperty Name="percentDiscount" ColumnName="percentDiscount" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

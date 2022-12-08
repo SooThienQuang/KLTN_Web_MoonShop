@@ -240,6 +240,54 @@ namespace KLTN_Web_MoonShop.Controllers
             }
            
         }
+        //-----------------------------------------------quan ly khach hàng------------------------------------
+        public ActionResult Customer()
+        {
+            return View(db.Customers.OrderByDescending(n=>n.isActive).ToList());
+        }
+
+        public ActionResult CRUDCus(long id)
+        {
+            Customer cus = new Customer();
+            if (id!=0)
+            {
+                cus =  db.Customers.FirstOrDefault(n => n.customerID == id);
+            }    
+         
+            return View(cus);
+        }
+        MD5 md5 = new MD5();
+        [HttpPost]
+        public ActionResult CRUDCus(Customer cus, HttpPostedFileBase img)
+        {
+            if (img!=null)
+            {
+                string _FileName = Path.GetFileName(img.FileName);
+                string _path = Path.Combine(Server.MapPath("~/Asset/img/user"), _FileName);
+                img.SaveAs(_path);
+                cus.customerPhoto = _FileName;
+            }
+            if(cus.customerID!=0)
+            {
+                Customer old = db.Customers.FirstOrDefault(n => n.customerID == cus.customerID);
+                if (!old.customerPassword.Equals(cus.customerPassword))
+                {
+                    string pass = md5.CreateMD5(cus.customerPassword);
+                    cus.customerPassword = pass;
+                }
+            }
+            else
+            {
+                string acid = DateTime.Now.ToString("yyyyMMddHHmmss");
+                cus.customerID = long.Parse(acid);
+                string pass = md5.CreateMD5(cus.customerPassword);
+                cus.customerPassword = pass;
+                cus.dateCreate = DateTime.Now;
+            }
+            db.Customers.AddOrUpdate(cus);
+            db.SaveChanges();
+            return RedirectToAction("Customer");
+        }
 
     }
 }

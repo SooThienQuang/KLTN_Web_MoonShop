@@ -1,11 +1,10 @@
 ﻿@using KLTN_Web_MoonShop.Models;
+@model IEnumerable<KLTN_Web_MoonShop.Models.Order>
 @{
     ViewBag.Title = "Waiting";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     DBCosmeticEntities db = new DBCosmeticEntities();
-    List<Order> lstorder = db.Orders.ToList().OrderByDescending(n => n.createDate).ToList();
-    List<OrderDetail> lstod = db.OrderDetails.ToList();
-}
+   }
 
 <h2>Các đơn hàng chờ xử lý</h2>
 <div class="card-body">
@@ -22,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in lstorder)
+            @foreach (var item in Model)
             {
 
                 Customer cus = db.Customers.FirstOrDefault(n => n.customerID == item.customerID && n.isActive == 1);
@@ -47,11 +46,11 @@
                         else
                         if (item.status == 3)
                         {
-                        <span class="badge bg-danger">Đang giao </span>
+                            <span class="badge bg-danger">Đang giao </span>
                         }
                         else
                         {
-                        <span class="badge bg-success">Giao thành công</span>
+                            <span class="badge bg-success">Giao thành công</span>
                         }
                     </td>
                     <td>

@@ -18,6 +18,8 @@ namespace KLTN_Web_MoonShop.Controllers
             if(pd!=null)
             {
                 ViewBag.process = pd;
+                Order d = db.Orders.FirstOrDefault(n => n.orderID == id);
+                ViewBag.statusOd = d.status;
                 ViewBag.shipper = db.EmployeeDetails.FirstOrDefault(n => n.emID == pd.receiveUserID);
             }    
             List<OrderDetail> lst = db.OrderDetails.Where(n => n.orderID == id).ToList();   
