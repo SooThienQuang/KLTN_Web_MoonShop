@@ -37,7 +37,7 @@ namespace KLTN_Web_MoonShop.Controllers
                 return RedirectToAction("Index", "Admin");
             }
             string pass = md5.CreateMD5(txt_password);
-            Customer cus = db.Customers.FirstOrDefault(n => n.customerUserName.Equals(txt_email) && n.customerPassword.Equals(pass));
+            Customer cus = db.Customers.FirstOrDefault(n => n.customerUserName.Equals(txt_email) && n.customerPassword.Equals(pass)&&n.isActive==1);
             if (cus!=null)
             {
                 if(cus.isActive==1)

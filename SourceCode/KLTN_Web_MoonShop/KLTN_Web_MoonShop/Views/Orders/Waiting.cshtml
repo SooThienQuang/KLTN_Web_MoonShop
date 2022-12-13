@@ -24,7 +24,7 @@
             @foreach (var item in Model)
             {
 
-                Customer cus = db.Customers.FirstOrDefault(n => n.customerID == item.customerID && n.isActive == 1);
+                Customer cus = db.Customers.FirstOrDefault(n => n.customerID == item.customerID);
                 List<OrderDetail> lst = db.OrderDetails.Where(n => n.orderID == item.orderID).ToList();
                 var tongtien = @lst.Sum(n => n.Money);
                 OrderDetail od = db.OrderDetails.FirstOrDefault(n => n.orderID == item.orderID);

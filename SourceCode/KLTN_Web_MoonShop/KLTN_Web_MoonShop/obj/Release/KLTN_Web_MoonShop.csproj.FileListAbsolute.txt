@@ -166,7 +166,6 @@ D:\MySource\KLTN_Web_MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\obj
 D:\MySource\KLTN_Web_MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\obj\Release\KLTN_Web_MoonShop.csproj.CopyComplete
 D:\MySource\KLTN_Web_MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\obj\Release\KLTN_Web_MoonShop.dll
 D:\MySource\KLTN_Web_MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\obj\Release\KLTN_Web_MoonShop.pdb
-C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\KLTN_Web_MoonShop.dll.config
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\KLTN_Web_MoonShop.dll
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\KLTN_Web_MoonShop.pdb
@@ -184,6 +183,7 @@ C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\roslyn\Mic
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\roslyn\Microsoft.CSharp.Core.targets
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\roslyn\Microsoft.Managed.Core.targets
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\roslyn\Microsoft.VisualBasic.Core.targets
 C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\bin\roslyn\Microsoft.Win32.Primitives.dll

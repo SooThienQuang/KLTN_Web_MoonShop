@@ -108,6 +108,15 @@
           <Property Name="address" Type="nvarchar" MaxLength="500" />
           <Property Name="isActive" Type="int" />
         </EntityType>
+        <EntityType Name="image">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" />
+          <Property Name="type" Type="int" />
+          <Property Name="isActive" Type="int" />
+        </EntityType>
         <EntityType Name="Notification">
           <Key>
             <PropertyRef Name="notiID" />
@@ -253,6 +262,7 @@
           <EntitySet Name="Discount" EntityType="Self.Discount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeDetail" EntityType="Self.EmployeeDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="image" EntityType="Self.image" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
@@ -291,6 +301,7 @@
           <EntitySet Name="Status" EntityType="DBCosmeticModel.Status" />
           <EntitySet Name="sysdiagrams" EntityType="DBCosmeticModel.sysdiagram" />
           <EntitySet Name="Discounts" EntityType="DBCosmeticModel.Discount" />
+          <EntitySet Name="images" EntityType="DBCosmeticModel.image" />
         </EntityContainer>
         <EntityType Name="ActionLog">
           <Key>
@@ -530,6 +541,15 @@
           <Property Name="image" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
           <Property Name="code" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <Property Name="cusID" Type="Int64" />
+        </EntityType>
+        <EntityType Name="image">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="Int32" />
+          <Property Name="isActive" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -793,6 +813,16 @@
                 <ScalarProperty Name="percentDiscount" ColumnName="percentDiscount" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="images">
+            <EntityTypeMapping TypeName="DBCosmeticModel.image">
+              <MappingFragment StoreEntitySet="image">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

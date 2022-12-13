@@ -45,5 +45,6 @@ namespace KLTN_Web_MoonShop.Models
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Discount> Discounts { get; set; }
+        public virtual DbSet<image> images { get; set; }
     }
 }

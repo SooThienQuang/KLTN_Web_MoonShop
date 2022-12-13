@@ -57,7 +57,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
                 ms.Position = 0;
                 ms.Write(imageBytes, 0, imageBytes.Length);
                 System.Drawing.Image image = System.Drawing.Image.FromStream(ms, true);
-                var mappedPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Asset/img/user/");
+                var mappedPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Asset/img/banner/");
                 image.Save(mappedPath+ fileName);
 
 

@@ -116,6 +116,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\qrcode_moonshopApp.png" />
     <Content Include="Asset\giaohangnhanh.jpg" />
     <Content Include="Asset\img\36-365828_navbar-toggle-icon-menu-hamburger-png-white.png" />
     <Content Include="Asset\img\banner\4327ee1f7bca83cf039c03ff9e97c50b.png" />
@@ -721,8 +722,10 @@
     <Compile Include="Controllers\AlertController.cs" />
     <Compile Include="Controllers\Android\CartData.cs" />
     <Compile Include="Controllers\Android\NotifyData.cs" />
+    <Compile Include="Controllers\Android\OrderData.cs" />
     <Compile Include="Controllers\Android\ProductData.cs" />
     <Compile Include="Controllers\Android\UserController.cs" />
+    <Compile Include="Controllers\Android\UserData.cs" />
     <Compile Include="Controllers\API\AddressController.cs" />
     <Compile Include="Controllers\API\CartController.cs" />
     <Compile Include="Controllers\API\CustomerController.cs" />
@@ -785,6 +788,9 @@
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeeDetail.cs">
+      <DependentUpon>dbcosmetic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\image.cs">
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MD5.cs" />
@@ -1029,6 +1035,7 @@
     <Content Include="Content\multiselect\scss\bootstrap\_variables.scss" />
     <Content Include="Content\multiselect\scss\style.scss" />
     <Content Include="Asset\img\product\dimethicone_crosspolymer__vinyl_dimethicone_methiconesilsesquioxa__68__8e376c8f33a3461189da0b767c6c07a1_master.webp" />
+    <Content Include="App\MoonShopApp.apk" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_HomeLayout.cshtml" />
     <Content Include="vendors\.DS_Store" />
@@ -1104,6 +1111,7 @@
     <Content Include="Views\Orders\Showmore.cshtml" />
     <Content Include="Views\Admin\Customer.cshtml" />
     <Content Include="Views\Admin\CRUDCus.cshtml" />
+    <Content Include="Views\Admin\CaroselHome.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

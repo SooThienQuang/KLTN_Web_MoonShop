@@ -6,6 +6,7 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography.Xml;
 using System.Web.Http;
 using System.Web.Razor.Tokenizer.Symbols;
@@ -76,6 +77,8 @@ namespace KLTN_Web_MoonShop.Controllers.Android
         [HttpGet]
         public string signup(string fullname,string phone, string password)
         { 
+                try
+            {
                 string pass = md5.CreateMD5(password);
                 Customer customer = db.Customers.FirstOrDefault(n => n.customerUserName == phone && n.isActive == 1);
                 if (customer != null)
@@ -87,6 +90,7 @@ namespace KLTN_Web_MoonShop.Controllers.Android
                     Customer cs = new Customer();
                     long id = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
                     cs.customerID = id;
+                    cs.customerName = fullname;
                     cs.customerUserName = (phone).Trim();
                     cs.customerPassword = md5.CreateMD5(password);
                     cs.customerPhoto = "Sample_User_Icon.png".Trim();
@@ -122,8 +126,11 @@ namespace KLTN_Web_MoonShop.Controllers.Android
                     db.SaveChanges();
                     return "Đăng kí thành công";
                 }
-            return " Đăng kí thất bại";
-            
+            }
+            catch
+            {
+                return "Đăng kí thành công";
+            }
         }
         [Route("getdetailpro")]
         [HttpGet]
@@ -307,6 +314,241 @@ namespace KLTN_Web_MoonShop.Controllers.Android
             {
                 return false;
             }
+        }
+        [Route("deletecart")]
+        [HttpGet]
+        public bool delcart(string cartID,string productID)
+        {
+            long cid = long.Parse(cartID);
+            long pid = long.Parse(productID);
+            if(cid>0&&pid>0)
+            {
+                CartDetail cd = db.CartDetails.FirstOrDefault(n => n.cartID == cid && n.productID == pid && n.isActive == 1);
+                if(cd != null)
+                {
+                    cd.isActive = -1;
+                    db.CartDetails.AddOrUpdate(cd);
+                    db.SaveChanges();
+                    return true;
+                }
+              
+            }
+            return false;
+        }
+        [Route("upcart")]
+        [HttpGet]
+        public bool upcart(string cartID, string productID,string quantity)
+        {
+            long cid = long.Parse(cartID);
+            long pid = long.Parse(productID);
+            int qu=int.Parse(quantity);
+            if (cid > 0 && pid > 0)
+            {
+                CartDetail cd = db.CartDetails.FirstOrDefault(n => n.cartID == cid && n.productID == pid && n.isActive == 1);
+                if (cd != null)
+                {
+                    cd.cartQuantity=qu;
+                    db.CartDetails.AddOrUpdate(cd);
+                    db.SaveChanges();
+                    return true;
+                }
+                
+            }
+            return false;
+        }
+        [Route("getinfouser")]
+        [HttpGet]
+        public List<UserData> getinfouser(string id)
+        {
+            List<UserData> lst = new List<UserData>();
+            long cid = long.Parse(id);
+            Customer cs = db.Customers.FirstOrDefault(n => n.isActive == 1 && n.customerID == cid);
+            if(cs!=null)
+            {
+                CustomerAddress ca = db.CustomerAddresses.FirstOrDefault(n => n.customerID == cid && n.isMain == 1);
+                UserData user = new UserData();
+                user.customerID = cid;
+                user.customerPhone = cs.customerUserName;
+                user.customerName = cs.customerName;
+                user.photo = cs.customerPhoto;
+                if(ca!=null)
+                {
+                    user.customerAdd = ca.customerAdd;
+                }
+                lst.Add(user);
+                return lst;
+            }
+            return null;
+        }
+        [Route("orderOne")]
+        [HttpGet]
+        public bool orderOne(string proid,int quantity,string cusi,string address)
+        {
+               try
+            {
+                long productID = long.Parse(proid);
+                long cusID = long.Parse(cusi);
+                Order order = new Order();
+                long id = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+                order.orderID = id;
+                order.employeeID = id;
+                order.customerID = cusID;
+                order.createDate = DateTime.Now;
+                order.status = 1;
+                db.Orders.Add(order);
+                db.SaveChanges();
+                OrderDetail orderDetail = new OrderDetail();
+                OrderDetail odlast = db.OrderDetails.ToList().LastOrDefault();
+                if (odlast == null)
+                {
+                    orderDetail.orderDetailID = 0;
+                }
+                else
+                {
+                    orderDetail.orderDetailID = odlast.orderDetailID + 1;
+                }
+                Product product1 = db.Products.FirstOrDefault(n => n.isActive == 1 && n.productID == productID);
+                orderDetail.orderID = id;
+                orderDetail.productID = productID;
+                orderDetail.Quantity = quantity;
+                orderDetail.price = product1.productPrice;
+                orderDetail.Money = product1.productPrice * quantity;
+                //dia chi
+                orderDetail.idAdd = address;
+                orderDetail.statusID = 1;
+                db.OrderDetails.Add(orderDetail);
+                db.SaveChanges();
+                //thêm thông báo đăt hàng thành công
+                long idnoti = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+                Notification noti = new Notification();
+                Customer customer = db.Customers.FirstOrDefault(n => n.customerID == cusID && n.isActive == 1);
+                Product product = db.Products.FirstOrDefault(n => n.productID == productID && n.isActive == 1);
+                ProductDetail productDetail = db.ProductDetails.FirstOrDefault(n => n.ProductID == productID);
+                noti.notiID = idnoti;
+                noti.receiveUserID = cusID;
+                noti.receiveUserFullName = customer.customerName;
+                noti.title = "Bạn đã đặt hàng thành công !";
+                noti.message = "Sản phẩm bao gồm :" + product.productName.Substring(0, 30) + "..." + " (số lượng :" + quantity + ")";
+                noti.image = product.productImage;
+                noti.menutype = 2;
+                noti.isRead = 0;
+                db.Notifications.Add(noti);
+                db.SaveChanges();
+                Product pro = db.Products.FirstOrDefault(n => n.productID == productID);
+                pro.productQuantity = pro.productQuantity - quantity;
+                db.Products.AddOrUpdate(pro);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        [Route("ordermulti")]
+        [HttpGet]
+        public bool ordermulti(string cusi, string address)
+        {
+                long cusID = long.Parse(cusi);
+                Cart caar=db.Carts.FirstOrDefault(n=>n.customerID == cusID);
+                List<CartDetail> lstcartdeall = db.CartDetails.Where(n => n.cartID == caar.cartID && n.isActive == 1).ToList();
+                Order order = new Order();
+                long id = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+                order.orderID = id;
+                order.employeeID = id;
+                order.customerID = cusID;
+                order.createDate = DateTime.Now;
+                order.status = 1;
+                db.Orders.Add(order);
+                db.SaveChanges();
+                foreach (CartDetail detail in lstcartdeall)
+                {
+                    detail.isActive = -1;
+                    db.CartDetails.AddOrUpdate(detail);
+                    db.SaveChanges();
+                    OrderDetail orderDetail = new OrderDetail();
+                    OrderDetail odlast = db.OrderDetails.ToList().LastOrDefault();
+                    if (odlast == null)
+                    {
+                        orderDetail.orderDetailID = 0;
+                    }
+                    else
+                    {
+                        orderDetail.orderDetailID = odlast.orderDetailID + 1;
+                    }
+                    orderDetail.orderID = id;
+                    orderDetail.productID = detail.productID;
+                    orderDetail.Quantity = detail.cartQuantity;
+                    Product pro = db.Products.FirstOrDefault(n => n.productID == detail.productID);
+                    orderDetail.price = pro.productPrice;
+                    orderDetail.Money = orderDetail.Quantity * pro.productPrice;
+                    //dia chi
+                    orderDetail.idAdd = address;
+                    orderDetail.statusID = 1;
+                    db.OrderDetails.Add(orderDetail);
+                    db.SaveChanges();
+                    Product proupdate = db.Products.FirstOrDefault(n => n.productID == detail.productID);
+                    proupdate.productQuantity = proupdate.productQuantity - detail.cartQuantity;
+                    db.Products.AddOrUpdate(proupdate);
+                    db.SaveChanges();
+                   
+                    Product pro1 = db.Products.FirstOrDefault(n => n.productID == detail.productID);
+                    pro1.productQuantity = pro1.productQuantity - detail.cartQuantity;
+                    db.Products.AddOrUpdate(pro1);
+                    db.SaveChanges();
+            }
+            //thêm thông báo đăt hàng thành công
+            CartDetail one = lstcartdeall.FirstOrDefault();
+            long idnoti = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+            Notification noti = new Notification();
+            Customer customer = db.Customers.FirstOrDefault(n => n.customerID == cusID && n.isActive == 1);
+            Product product = db.Products.FirstOrDefault(n => n.productID == one.productID && n.isActive == 1 && n.isActive == 1);
+            ProductDetail productDetail = db.ProductDetails.FirstOrDefault(n => n.ProductID == one.productID);
+            noti.notiID = idnoti;
+            noti.receiveUserID = cusID;
+            noti.receiveUserFullName = customer.customerName;
+            noti.title = "Bạn đã đặt hàng thành công !";
+            noti.message = "Sản phẩm bao gồm :" + product.productName.Substring(0, 30) + "..." + " (số lượng :" + one.cartQuantity + "),...";
+            noti.image = product.productImage;
+            noti.menutype = 2;
+            noti.isRead = 0;
+            db.Notifications.Add(noti);
+            db.SaveChanges();
+            return true;
+            
+          
+        }
+        [Route("orrder")]
+        [HttpGet]
+        public IEnumerable<OrderData> orrder(string id)
+        {
+            long userid = long.Parse(id);
+            List<OrderData> lstnew = new List<OrderData>();
+            foreach (var cart in db.Orders.Where(n => n.customerID == userid).ToList().OrderByDescending(n=>n.status).ToList())
+            {
+                    OrderDetail item = db.OrderDetails.FirstOrDefault(n => n.orderID == cart.orderID);
+                    OrderData cd = new OrderData();
+                    cd.cartID = (long)item.orderID;
+                    cd.productID = item.productID;
+                    Product pro = db.Products.FirstOrDefault(n => n.productID == item.productID && n.isActive == 1);
+                    cd.productName = pro.productName;
+                    cd.productImage = pro.productImage;
+                    cd.productPrice = (long)pro.productPrice;
+                    cd.cartQuantity = item.Quantity;
+                    cd.cartMoney = item.Money;
+                    if (item.statusID == 1)
+                        cd.status = "Chờ xác nhận";
+                    if (item.statusID == 2)
+                        cd.status = "Đã xác nhận";
+                    if (item.statusID == 3)
+                        cd.status = "Đang vận chuyển";
+                    if (item.statusID == 4)
+                        cd.status = "Giao hàng thành công";
+                    lstnew.Add(cd);
+                
+            }
+            
+            return lstnew;
         }
     }
 }

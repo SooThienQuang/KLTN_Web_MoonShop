@@ -30,7 +30,10 @@ namespace KLTN_Web_MoonShop.Controllers
 
         public ActionResult CaroselHome()
         {
-            return PartialView();
+            image m = db.images.FirstOrDefault(n => n.type == 0&&n.isActive==1);   
+            var item = db.images.Where(n => n.type == 0&&n.id!=m.id&&n.isActive==1).ToList();
+            ViewBag.active = m;
+            return PartialView(item);
         }
         
 

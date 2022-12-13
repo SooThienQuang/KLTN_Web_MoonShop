@@ -1,0 +1,94 @@
+﻿@model KLTN_Web_MoonShop.Models.Customer
+@using KLTN_Web_MoonShop.Models;
+@{
+    ViewBag.Title = "CRUDCus";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    DBCosmeticEntities db = new DBCosmeticEntities();
+}
+
+<h2>CRUDCus</h2>
+
+@using (Html.BeginForm("CRUDCus", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Thông tin khách hàng</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.customerID)
+
+        <div class="form-group">
+           Họ tên khách hàng
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.customerName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.customerName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+           Email
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.customerMail, new { htmlAttributes = new { @class = "form-control",type="email" } })
+                @Html.ValidationMessageFor(model => model.customerMail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+           Giới tính
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.customerSex, db.Sexes.Select(x => new SelectListItem { Text = x.Name, Value = x.ID.ToString() }), new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.customerSex, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Tên đăng nhập
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.customerUserName, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+          Mật khẩu
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.customerPassword, new { htmlAttributes = new { @class = "form-control",type="password" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+          Hình ảnh
+            <div class="col-md-10">
+               <input type="file" class="form-control" name="img" id="img" accept="image/*"/>
+                <img src="~/Asset/img/user/@Model.customerPhoto" height="100" width="100">
+                @Html.EditorFor(model => model.customerPhoto, new { htmlAttributes = new { @class = "form-control", type = "hidden" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Trạng thái
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.isActive, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.isActive, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.dateCreate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.dateCreate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.dateCreate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Lưu" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Trở về", "Customer")
+</div>

@@ -103,6 +103,15 @@
     <Property Name="address" Type="nvarchar" MaxLength="500" />
     <Property Name="isActive" Type="int" />
   </EntityType>
+  <EntityType Name="image">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" />
+    <Property Name="type" Type="int" />
+    <Property Name="isActive" Type="int" />
+  </EntityType>
   <EntityType Name="Notification">
     <Key>
       <PropertyRef Name="notiID" />
@@ -248,6 +257,7 @@
     <EntitySet Name="Discount" EntityType="Self.Discount" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EmployeeDetail" EntityType="Self.EmployeeDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="image" EntityType="Self.image" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />

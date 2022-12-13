@@ -288,6 +288,12 @@ namespace KLTN_Web_MoonShop.Controllers
             db.SaveChanges();
             return RedirectToAction("Customer");
         }
-
+        public ActionResult CaroselHome()
+        {
+            var img = db.images.Where(n => n.type == 0&&n.isActive==1).ToList();
+            image im= img.FirstOrDefault();
+            ViewBag.active = im;
+            return View(img);
+        }   
     }
 }
