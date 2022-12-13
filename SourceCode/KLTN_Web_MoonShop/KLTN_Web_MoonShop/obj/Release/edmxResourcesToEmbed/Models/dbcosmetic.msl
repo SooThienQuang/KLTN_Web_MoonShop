@@ -112,17 +112,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Orders">
-      <EntityTypeMapping TypeName="DBCosmeticModel.Order">
-        <MappingFragment StoreEntitySet="Order">
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="employeeID" ColumnName="employeeID" />
-          <ScalarProperty Name="createDate" ColumnName="createDate" />
-          <ScalarProperty Name="customerID" ColumnName="customerID" />
-          <ScalarProperty Name="orderID" ColumnName="orderID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="OrderDetails">
       <EntityTypeMapping TypeName="DBCosmeticModel.OrderDetail">
         <MappingFragment StoreEntitySet="OrderDetail">
@@ -267,6 +256,18 @@
           <ScalarProperty Name="type" ColumnName="type" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="DBCosmeticModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="money" ColumnName="money" />
+          <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="customerID" ColumnName="customerID" />
+          <ScalarProperty Name="orderID" ColumnName="orderID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

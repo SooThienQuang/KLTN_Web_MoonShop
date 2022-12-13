@@ -94,7 +94,7 @@ else
                                     Product pro = db.Products.FirstOrDefault(n => n.productID == od.productID);
                                     <tr class="align-middle alert border-bottom" role="alert">
                                         <td>
-                                            <a class="btn btn-outline-success" onclick="ShowMoreOrder(@item.orderID)">Chi tiết</a>
+                                            <a class="btn text-primary" href="/Order/Details/@item.orderID">Chi tiết</a>
                                         </td>
                                         <td>
                                             <span class="text-danger">Chờ xác nhận</span>
@@ -148,7 +148,7 @@ else
                                     Product pro = db.Products.FirstOrDefault(n => n.productID == od.productID);
                                     <tr class="align-middle alert border-bottom" role="alert">
                                         <td>
-                                            <a class="btn btn-outline-success" onclick="ShowMoreOrder(@item.orderID)">Chi tiết</a>
+                                            <a class="btn text-primary" href="/Order/Details/@item.orderID">Chi tiết</a>
                                         </td>
                                         <td>
                                             <span class="text-danger">Chờ lấy hàng</span>
@@ -201,7 +201,7 @@ else
                                     Product pro = db.Products.FirstOrDefault(n => n.productID == od.productID);
                                     <tr class="align-middle alert border-bottom" role="alert">
                                         <td>
-                                            <a class="btn btn-outline-success" onclick="ShowMoreOrder(@item.orderID)">Chi tiết</a>
+                                            <a class="btn text-primary" href="/Order/Details/@item.orderID">Chi tiết</a>
                                         </td>
                                         <td>
                                             <span class="text-danger">Đang giao hàng</span>
@@ -253,7 +253,7 @@ else
                                     Product pro = db.Products.FirstOrDefault(n => n.productID == od.productID);
                                     <tr class="align-middle alert border-bottom" role="alert">
                                         <td>
-                                            <a class="btn btn-outline-success" onclick="ShowMoreOrder(@item.orderID)">Chi tiết</a>
+                                            <a class="btn text-primary" href="/Order/Details/@item.orderID">Chi tiết</a>
                                         </td>
                                         <td>
                                             <span class="text-danger">Giao thành công</span>
@@ -454,12 +454,12 @@ else
     </div>
 </div>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
-<script>
+@*<script>
     function ShowMoreOrder(id) {
            var url = '@Url.Action("Detail", "Order", new {id = "data"})';
         $('#divid').load(url.replace('data', id));
     }
-</script>
+</script>*@
 
 <!-- Button trigger modal -->
 <!-- Modal -->

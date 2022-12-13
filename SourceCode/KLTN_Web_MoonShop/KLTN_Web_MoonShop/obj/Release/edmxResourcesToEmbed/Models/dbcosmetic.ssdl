@@ -137,6 +137,7 @@
     <Property Name="customerID" Type="bigint" />
     <Property Name="createDate" Type="datetime" />
     <Property Name="employeeID" Type="bigint" />
+    <Property Name="money" Type="bigint" />
     <Property Name="status" Type="int" />
   </EntityType>
   <EntityType Name="OrderDetail">

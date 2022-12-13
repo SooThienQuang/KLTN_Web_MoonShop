@@ -9,7 +9,6 @@
     <EntitySet Name="Employees" EntityType="DBCosmeticModel.Employee" />
     <EntitySet Name="EmployeeDetails" EntityType="DBCosmeticModel.EmployeeDetail" />
     <EntitySet Name="Notifications" EntityType="DBCosmeticModel.Notification" />
-    <EntitySet Name="Orders" EntityType="DBCosmeticModel.Order" />
     <EntitySet Name="OrderDetails" EntityType="DBCosmeticModel.OrderDetail" />
     <EntitySet Name="Positions" EntityType="DBCosmeticModel.Position" />
     <EntitySet Name="ProcessOrders" EntityType="DBCosmeticModel.ProcessOrder" />
@@ -22,6 +21,7 @@
     <EntitySet Name="sysdiagrams" EntityType="DBCosmeticModel.sysdiagram" />
     <EntitySet Name="Discounts" EntityType="DBCosmeticModel.Discount" />
     <EntitySet Name="images" EntityType="DBCosmeticModel.image" />
+    <EntitySet Name="Orders" EntityType="DBCosmeticModel.Order" />
   </EntityContainer>
   <EntityType Name="ActionLog">
     <Key>
@@ -125,16 +125,6 @@
     <Property Name="image" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
     <Property Name="menutype" Type="Int64" />
     <Property Name="isRead" Type="Int32" />
-  </EntityType>
-  <EntityType Name="Order">
-    <Key>
-      <PropertyRef Name="orderID" />
-    </Key>
-    <Property Name="orderID" Type="Int64" Nullable="false" />
-    <Property Name="customerID" Type="Int64" />
-    <Property Name="createDate" Type="DateTime" Precision="3" />
-    <Property Name="employeeID" Type="Int64" />
-    <Property Name="status" Type="Int32" />
   </EntityType>
   <EntityType Name="OrderDetail">
     <Key>
@@ -270,5 +260,16 @@
     <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="type" Type="Int32" />
     <Property Name="isActive" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="orderID" />
+    </Key>
+    <Property Name="orderID" Type="Int64" Nullable="false" />
+    <Property Name="customerID" Type="Int64" />
+    <Property Name="createDate" Type="DateTime" Precision="3" />
+    <Property Name="employeeID" Type="Int64" />
+    <Property Name="money" Type="Int64" />
+    <Property Name="status" Type="Int32" />
   </EntityType>
 </Schema>

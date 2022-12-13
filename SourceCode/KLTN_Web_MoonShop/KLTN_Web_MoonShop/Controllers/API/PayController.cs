@@ -32,6 +32,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
                 order.customerID = obj.cusID;
                 order.createDate = DateTime.Now;
                 order.status = 1;
+                order.money = obj.money;
                 db.Orders.Add(order);
                 db.SaveChanges();
                 OrderDetail orderDetail = new OrderDetail();

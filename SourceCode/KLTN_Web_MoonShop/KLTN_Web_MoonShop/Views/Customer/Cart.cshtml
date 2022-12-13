@@ -7,10 +7,13 @@ else
     {
         <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
             <i class="ti-shopping-cart mx-0">&#xf07a;</i>
-            <span class='badge badge-warning' id='lblCartCount'><div class="soluongcart"></div>  </span>
+            <span class='badge badge-warning' id='lblCartCount'><span class="soluongcart"></span>  </span>
             <div class="item-content">Giỏ hàng</div>
             @*<script>$('.soluongcart').append(`` +@ViewBag.size + ``);</script>*@
-            <script>$('.soluongcart').append("@ViewBag.size");</script>
+            <script>
+                $('.soluongcart').empty();
+                $('.soluongcart').append("@ViewBag.size");
+            </script>
         </a>
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
             <p class="mb-0 font-weight-normal float-left dropdown-header">Hình ảnh</p>
@@ -21,6 +24,7 @@ else
                
             </div>
             <script>
+                $('.chitietcart').empty();
                 var trHTML = $(` 
             @foreach (var item in @ViewBag.lstCart)
                 {

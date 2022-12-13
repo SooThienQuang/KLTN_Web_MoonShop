@@ -89,5 +89,39 @@ namespace KLTN_Web_MoonShop.Controllers
         {
             return PartialView();
         }
+        public ActionResult pay(string id)
+        {
+            long productID = long.Parse(id);
+            Product pro=db.Products.FirstOrDefault(n => n.productID == productID && n.isActive==1);
+            List<Product> lst = new List<Product>();
+            lst.Add(pro);
+            return View(lst);
+        }
+        public ActionResult pays(string id)
+        {
+            
+            Customer user = Session["user"] as Customer;
+            Cart cart = db.Carts.FirstOrDefault(n => n.customerID == user.customerID);
+            List<CartDetail> cartDetails = db.CartDetails.Where(n => n.cartID == cart.cartID).ToList();
+            List<CartDetail> lst = new List<CartDetail>();
+            string[] listid = id.Split(',');
+            if(listid.Length>0)
+            {
+                ViewBag.lstProid = id;
+                foreach(string item in listid)
+                {
+                    try
+                    {
+                        long proid = long.Parse(item);
+                        lst.Add(cartDetails.FirstOrDefault(n => n.productID == proid));
+                    }
+                    catch
+                    {
+
+                    }
+                }
+            }
+            return View(lst);
+        }
     }
 }

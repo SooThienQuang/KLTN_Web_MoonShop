@@ -667,6 +667,7 @@
     <Content Include="css\caroselhome\style.css" />
     <Content Include="css\cart.css" />
     <Content Include="css\demo.css" />
+    <Content Include="css\detailsproduct.css" />
     <Content Include="css\discount\discount20%25.jpg" />
     <Content Include="css\home\navbartop.css" />
     <Content Include="css\home\product.css" />
@@ -1112,6 +1113,9 @@
     <Content Include="Views\Admin\Customer.cshtml" />
     <Content Include="Views\Admin\CRUDCus.cshtml" />
     <Content Include="Views\Admin\CaroselHome.cshtml" />
+    <Content Include="Views\Order\Details.cshtml" />
+    <Content Include="Views\Payment\pay.cshtml" />
+    <Content Include="Views\Payment\pays.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,574 @@
+﻿@model List<KLTN_Web_MoonShop.Models.CartDetail>
+@using KLTN_Web_MoonShop.Models
+@{
+    Layout = null;
+    DBCosmeticEntities db = new DBCosmeticEntities();
+    Customer user = Session["user"] as Customer;
+    CustomerAddress add = db.CustomerAddresses.FirstOrDefault(n => n.isMain == 1 && n.customerID == user.customerID);
+}
+
+<div class="card">
+    <div class="card-top border-bottom text-center">
+        <a href="/Home/index" class="text-primary"><< Trở về cửa hàng</a>
+        <span id="logo">Moon Shop Cosmetic</span>
+    </div>
+    <div class="card-body">
+        <div class="row upper">
+            <a href="/ShoppingCart/Detail"><i class="fa fa-check-circle-o"></i> Giỏ hàng</a>
+            <a href="/Customer/DetailProfile/2"><i class="fa fa-check-circle-o"></i>Danh sách đơn hàng</a>
+            <span id="payment"><span id="three">3</span>Thanh toán</span>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="left border">
+                    <div class="row">
+                        <span class="header">Thông tin giao hàng</span>
+                        <div class="icons">
+                            <img src="https://img.icons8.com/color/48/000000/visa.png" />
+                            <img src="https://img.icons8.com/color/48/000000/mastercard-logo.png" />
+                            <img src="https://img.icons8.com/color/48/000000/maestro.png" />
+                        </div>
+                    </div>
+                    <form>
+                        <span>Họ tên người nhận:</span>
+                        <input value="@user.customerName" class="form-control" disabled>
+                        <span>Số điện thoại :</span>
+                        <input value="@user.customerUserName" disabled>
+                        <div class="row">
+
+                            <b>Địa chỉ giao hàng :</b>
+                            <span class="text-muted">@add.customerAdd</span>
+
+                        </div>
+                        @if (add.customerAdd != null)
+                        {
+                            <a href="/Customer/DetailProfile/1" class="text-primary">Đổi địa chỉ</a>
+                        }
+                        else
+                        {
+                            <a class="text-primary" data-toggle="modal" data-target="#modaladdresss">Thêm địa chỉ giao hàng</a>
+
+                        }
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="right border">
+                    <div class="header">Danh sách</div>
+                    <p>@Model.Count() sản phẩm</p>
+                    @foreach (var item in Model)
+                    {
+                        Product pro = db.Products.FirstOrDefault(n => n.productID == item.productID);
+                        <div class="row item">
+                            <div class="col-4 align-self-center">
+                                <img class="img-fluid" src="~/Asset/img/product/@pro.productImage">
+                            </div>
+                            <div class="col-8">
+                                <div class="row">
+                                    Giá sản phẩm :<b style="color:red;margin-left:20px">@String.Format("{0:0,0 vnđ}", pro.productPrice)</b>
+                                </div>
+                                <div class="row">
+                                    Số lượng :<b style="color:blue">@item.cartQuantity</b>
+                                </div>
+                                <div class="row text-muted">@pro.productName</div>
+
+                            </div>
+                        </div>
+                    }
+                    <hr>
+                    <div class="row lower">
+                        <div class="input-group mb-4">
+                            <input type="text" id="txtmagiamgia" class="form-control" placeholder="NHẬP MÃ GIẢM GIÁ" />
+                            <button class="btn btn-dark w-25" type="button" onclick="checkdiscount()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row lower">
+                        <div class="col text-left"><b>Tổng <b style="color:red">@Model.Count()</b> món</b></div>
+                        <div class="col text-right text-danger">@String.Format("{0:0,0 vnđ}", @Model.Sum(n => n.cartMoney))</div>
+                    </div>
+                    <div class="row lower">
+                        <div class="col text-left">Phí vận chuyển</div>
+                        <div class="col text-right text-primary">Miễn phí</div>
+                    </div>
+                    <div class="row lower">
+                        <div class="col text-left">Giảm giá</div>
+                        <div class="col text-right text-primary" id="tiengiam">0</div>
+                    </div>
+                    <div class="row lower">
+                        <div class="col text-left"><b>Tổng tiền</b></div>
+                        <div class="col text-right">
+                            <b id="tongtienne" style="color:red;font-size:20px">@String.Format("{0:0,0 vnđ}", @Model.Sum(n => n.cartMoney))</b>
+                        </div>
+                    </div>
+
+                    <div class="row lower mt-3">
+                        <div class="col text-right">
+                            @if (add.customerAdd != null)
+                            {
+                                <button class="btn btn-danger" onclick="thanhtoan()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
+                                        <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+                                        <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z" />
+                                    </svg>
+                                    ĐẶT HÀNG NGAY
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-danger" data-toggle="modal" data-target="#modaladdresss">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
+                                        <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+                                        <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z" />
+                                    </svg>
+                                    ĐẶT HÀNG NGAY
+                                </button>
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+    </div>
+</div>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+<input type="number" id="txtmonet" value="@Model.Sum(n=>n.cartMoney)" hidden />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<input type="text" id="lsttringid" value="@ViewBag.lstProid" hidden />
+<link rel="stylesheet" href="~/css/spinner.css" />
+<div class="modal fade" tabindex="-1" role="dialog" id="spinnerModal">
+    <div class="modal-dialog modal-dialog-centered text-center" role="document">
+        @*<span class="fa fa-spinner fa-spin fa-3x w-100"></span>*@
+        <div class="loading-box">
+            <div class="loader"></div>
+        </div>
+    </div>
+</div>
+<input type="number" id="txtcusid" value="@user.customerID" hidden />
+
+
+
+<script>
+    //dia chi
+    function themdiachi() {
+        Swal.fire({
+            title: 'Bạn chưa có địa chỉ giao hàng?',
+            text: "Bạn có muốn thêm địa chỉ ?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Có thêm ngay!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $("#modaladdresss").modal("show");
+            }
+        })
+    }
+    function thanhtoan() {
+        $("#spinnerModal").modal("show");
+        var request = new Object();
+        request.cusID = document.getElementById("txtcusid").value;;
+        request.lstod = document.getElementById("lsttringid").value;
+        request.money = document.getElementById("txtmonet").value;
+        $.ajax({
+            url: '/api/Paymore/',
+            type: 'POST',
+            dataType: 'json',
+            data: request,
+            success: function (result) {
+                $("#spinnerModal").modal("hide");
+                Swal.fire({
+                    title: 'Thành công',
+                    text: "Bạn đã đặt hàng thành công",
+                    icon: 'success',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Xem đơn hàng!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/customer/detailprofile/2";
+                    }
+                })
+            },
+            error: function (err) {
+                alert(err.statusText);
+            }
+        });
+
+    }
+    //--------------------------------giam gia---------------------------
+    function checkdiscount() {
+        var text = document.getElementById("txtmagiamgia").value;
+        if (text.length == 0) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Có lỗi xảy xa',
+                text: 'Vui lòng nhập mã giảm giá!',
+                footer: '<a href="#">Bạn chưa có mã giảm giá?</a>'
+            })
+        }
+        else {
+            var discount = new Object();
+            discount.code = text;
+            $.ajax({
+                url: '/api/Discount/',
+                type: 'POST',
+                dataType: 'json',
+                data: discount,
+                success: function (data) {
+                    if (data != null) {
+                        Swal.fire({
+                            html:
+                                'Mã ' + data.code + " được giảm " + data.percent + "% cho đơn hàng hiện tại",
+                            title: data.name,
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Có, áp dụng ngay    !'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                var discount = new Object();
+                                discount.code = text;
+                                $.ajax({
+                                    url: '/api/Discount/',
+                                    type: 'PUT',
+                                    dataType: 'json',
+                                    data: discount,
+                                    success: function (data) {
+                                    }
+                                });
+
+                                Swal.fire(
+                                    'Thành công!',
+                                    'Bạn đã áp dụng thành công mã giảm',
+                                    'success'
+                                )
+                                var money = document.getElementById("txtmonet").value;
+                                document.getElementById("tiengiam").innerHTML = money * data.percent / 100;
+                                document.getElementById("tongtienne").innerHTML = money - (money * data.percent / 100);
+                                document.getElementById("txtmonet").value = money - (money * data.percent / 100);
+                            }
+                        })
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Có lỗi xảy xa',
+                            text: 'Mã giảm giá không chính xác!',
+                            footer: '<a href="#">Bạn chưa có mã giảm giá?</a>'
+                        })
+                    }
+                },
+                error: function (err) {
+                    alert(err.statusText);
+                }
+            });
+
+        }
+    }
+</script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+@*------------------------------------------------------------modal dịa chi------------------------------------------------------*@
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>*@
+<div class="modal" id="modaladdresss" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="text-right cross"> <i class="fa fa-times" data-dismiss="modal"></i> </div>
+            <h4 class="mt-1 text-md-center">Thêm địa chỉ giao hàng </h4>
+            <div class="card-body text-center mb-5">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Circle-icons-location.svg/2048px-Circle-icons-location.svg.png" height="100" width="100">
+                <div class="form-group mt-3">
+                    <div class="form-group">
+                        Tỉnh/ Thành Phố
+                        <select name="" id="province" class="form-control coupon">
+                        </select>
+                        <br />
+                        Quận/Huyện
+                        <select name="" id="district" class="form-control coupon">
+                            <option value="">chọn quận/huyện</option>
+                        </select>
+                        <br />
+                        Xã/Phường
+                        <select name="" id="ward" class="form-control coupon">
+                            <option value="">chọn xã/phường</option>
+                        </select>
+
+                        <br />
+                        Số nhà/Đường
+                        <input type="text" id="txtduong" class="form-control coupon" name="txtduong">
+                        <br />
+                        Địa chỉ đã chọn
+                        <input type="text" id="txt" class="form-control coupon" name="txt">
+                    </div>
+                    <button class="btn btn-outline-primary" onclick="diachiapi()"><p class="fa fa-floppy-o"></p>Thêm địa chỉ</button>
+
+                </div>
+                <a href="#" class="" data-dismiss="modal">Không ! Cám ơn</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    function diachiapi() {
+        // $("#modaladdresss").modal("hide");
+        var address = new Object();
+        address.cusID = document.getElementById("txtcusid").value;
+        address.diachi = document.getElementById("txtduong").value + "," + document.getElementById("txt").value;
+        $.ajax({
+            url: '/api/Address/',
+            type: 'POST',
+            dataType: 'json',
+            data: address,
+            success: function (result) {
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Thêm địa chỉ thành công',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                location.reload();
+            },
+            error: function (err) {
+                alert(err.statusText);
+            }
+        });
+    }
+    const host = "https://provinces.open-api.vn/api/";
+    var callAPI = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data, "province");
+            });
+    }
+    callAPI('https://provinces.open-api.vn/api/?depth=1');
+    var callApiDistrict = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data.districts, "district");
+            });
+    }
+    var callApiWard = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data.wards, "ward");
+            });
+    }
+
+    var renderData = (array, select) => {
+        let row = ' <option disable value="">chọn</option>';
+        array.forEach(element => {
+            row += `<option value="${element.code}">${element.name}</option>`
+        });
+        document.querySelector("#" + select).innerHTML = row
+    }
+
+    $("#province").change(() => {
+        callApiDistrict(host + "p/" + $("#province").val() + "?depth=2");
+        printResult();
+    });
+    $("#district").change(() => {
+        callApiWard(host + "d/" + $("#district").val() + "?depth=2");
+        printResult();
+    });
+    $("#ward").change(() => {
+        printResult();
+    })
+    var duong = document.getElementById("txtduong").value;
+    var printResult = () => {
+        if ($("#district").val() != "" && $("#province").val() != "" &&
+            $("#ward").val() != "") {
+            let result = $("#province option:selected").text() +
+                " | " + $("#district option:selected").text() + " | " +
+                $("#ward option:selected").text();
+
+            $("#result").text(result)
+
+            var diachi = result;
+            document.getElementById("txt").value = $("#ward option:selected").text() + "," + $("#district option:selected").text() + "," + $("#province option:selected").text();
+
+
+
+        }
+
+    }
+</script>
+@*--------------------------------------------------------------------------------edn dia chi -------------------------------*@
+<style>
+    body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: lightpink;
+        font-size: 15px;
+    }
+
+    .card {
+        max-width: 1000px;
+        margin: 2vh;
+    }
+
+    .card-top {
+        padding: 0.7rem 5rem;
+    }
+
+        .card-top a {
+            float: left;
+            margin-top: 0.7rem;
+        }
+
+    #logo {
+        font-family: 'Dancing Script';
+        font-weight: bold;
+        font-size: 1.6rem;
+    }
+
+    .card-body {
+        padding: 0 5rem 5rem 5rem;
+        background-image: url("https://i.imgur.com/4bg1e6u.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .row {
+        margin: 0;
+    }
+
+    .upper {
+        padding: 1rem 0;
+        justify-content: space-evenly;
+    }
+
+    #three {
+        border-radius: 1rem;
+        width: 22px;
+        height: 22px;
+        margin-right: 3px;
+        border: 1px solid blue;
+        text-align: center;
+        display: inline-block;
+    }
+
+    #payment {
+        margin: 0;
+        color: blue;
+    }
+
+    .icons {
+        margin-left: auto;
+    }
+
+    form span {
+        color: rgb(179, 179, 179);
+    }
+
+    form {
+        padding: 2vh 0;
+    }
+
+    input {
+        border: 1px solid rgba(0, 0, 0, 0.137);
+        padding: 1vh;
+        margin-bottom: 4vh;
+        outline: none;
+        width: 100%;
+        background-color: rgb(247, 247, 247);
+    }
+
+        input:focus::-webkit-input-placeholder {
+            color: transparent;
+        }
+
+    .header {
+        font-size: 1.5rem;
+    }
+
+    .left {
+        background-color: #ffffff;
+        padding: 2vh;
+    }
+
+        .left img {
+            width: 2rem;
+        }
+
+        .left .col-4 {
+            padding-left: 0;
+        }
+
+    .right .item {
+        padding: 0.3rem 0;
+    }
+
+    .right {
+        background-color: #ffffff;
+        padding: 2vh;
+    }
+
+    .col-8 {
+        padding: 0 1vh;
+    }
+
+    .lower {
+        line-height: 2;
+    }
+
+
+
+    a {
+        color: black;
+    }
+
+        a:hover {
+            color: black;
+            text-decoration: none;
+        }
+
+    input[type=checkbox] {
+        width: unset;
+        margin-bottom: unset;
+    }
+
+    #cvv {
+        background-image: linear-gradient(to left, rgba(255, 255, 255, 0.575), rgba(255, 255, 255, 0.541)), url("https://img.icons8.com/material-outlined/24/000000/help.png");
+        background-repeat: no-repeat;
+        background-position-x: 95%;
+        background-position-y: center;
+    }
+
+        #cvv:hover {
+        }
+</style>

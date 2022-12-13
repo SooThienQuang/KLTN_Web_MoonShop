@@ -18,6 +18,7 @@ namespace KLTN_Web_MoonShop.Models
         public Nullable<long> customerID { get; set; }
         public Nullable<System.DateTime> createDate { get; set; }
         public Nullable<long> employeeID { get; set; }
+        public Nullable<long> money { get; set; }
         public Nullable<int> status { get; set; }
     }
 }
