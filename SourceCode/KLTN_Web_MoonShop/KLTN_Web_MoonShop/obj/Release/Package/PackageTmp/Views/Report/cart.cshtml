@@ -1,0 +1,41 @@
+﻿@using KLTN_Web_MoonShop.Models;
+@{
+    ViewBag.Title = "cart";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    DBCosmeticEntities db = new DBCosmeticEntities();
+    List<Product> lstproall = db.Products.ToList();
+    List<CartDetail> lstcd = db.CartDetails.ToList();
+}
+
+<div class="card-body">
+    <h5 class="card-title">DANH MỤC THỐNG KÊ GIỎ HÀNG ĐÃ THÊM  @*<span>| Today</span>*@</h5>
+
+    <table class="table table-borderless datatable">
+        <thead>
+            <tr>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Sản phẩm</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Số lượng thêm</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in lstproall)
+            {
+                <tr>
+                    <th scope="row"><a href="#"><img src="~/Asset/img/product/@item.productImage" height="50" width="50" alt=""></a></th>
+                    <td><a href="#" class="text-primary fw-bold">@item.productName</a></td>
+                    <td>
+                        <b style="color:red">@String.Format("{0:0,0}", item.productPrice)</b>
+                    </td>
+                  <td>
+                     @lstcd.Where(n=>n.productID==item.productID).ToList().Count()
+                  </td>
+                </tr>
+            }
+        </tbody>
+
+
+    </table>
+</div>
+

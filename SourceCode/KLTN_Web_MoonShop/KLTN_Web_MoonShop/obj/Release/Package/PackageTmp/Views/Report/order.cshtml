@@ -1,0 +1,77 @@
+﻿@using KLTN_Web_MoonShop.Models;
+@{
+    ViewBag.Title = "order";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    DBCosmeticEntities db = new DBCosmeticEntities();
+    List<Order> lstorder = db.Orders.ToList();
+    var waitting = (from a in db.Orders
+                    join c in db.OrderDetails on a.orderID equals c.orderID
+                    where a.status == 1
+                    select c.Money).ToList().Sum();
+    var checkede = (from a in db.Orders
+                    join c in db.OrderDetails on a.orderID equals c.orderID
+                    where a.status == 2
+                    select c.Money).ToList().Sum();
+    var processing = (from a in db.Orders
+                    join c in db.OrderDetails on a.orderID equals c.orderID
+                    where a.status == 3
+                    select c.Money).ToList().Sum();
+    var processed = (from a in db.Orders
+                    join c in db.OrderDetails on a.orderID equals c.orderID
+                    where a.status == 4
+                    select c.Money).ToList().Sum();
+}
+<div class="col-12">
+    <div class="card recent-sales overflow-auto">
+
+        <div class="card-body">
+            <h5 class="card-title">THỐNG KÊ ĐƠN ĐẶT HÀNG  @*<span>| Today</span>*@</h5>
+
+            <table class="table table-borderless datatable">
+                <thead>
+                    <tr>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Số lượng đơn</th>
+                        <th scope="col">Tổng tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+
+                        <td><span class="badge bg-dark">Chờ xử lý</span></td>
+                        <td><span class="badge bg-dark">@lstorder.Where(n => n.status == 1).Count()</span></td>
+                        <td>
+                            <b style="color:red">@String.Format("{0:0,0 VND}", waitting)</b>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td><span class="badge bg-primary">Đã xác nhận</span></td>
+                        <td><span class="badge bg-dark">@lstorder.Where(n => n.status == 2).Count()</span></td>
+                        <td>
+                            <b style="color:red">@String.Format("{0:0,0 VND}", checkede)</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge bg-danger">Đang giao</span></td>
+                        <td><span class="badge bg-dark">@lstorder.Where(n => n.status == 3).Count()</span></td>
+                        <td>
+                            <b style="color:red">@String.Format("{0:0,0 VND}", processing)</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge bg-success">Giao thành công</span></td>
+                        <td><span class="badge bg-dark">@lstorder.Where(n => n.status == 4).Count()</span></td>
+                        <td>
+                            <b style="color:red">@String.Format("{0:0,0 VND}", processed)</b>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div><!-- End Recent Sales -->
+

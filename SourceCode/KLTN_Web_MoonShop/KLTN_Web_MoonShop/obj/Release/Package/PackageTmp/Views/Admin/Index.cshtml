@@ -12,10 +12,10 @@
     //doanh số
     //--hôm nay
     // List<Customer>
-    List<Customer> lstcusall = db.Customers.Where(n => n.isActive == 1).ToList();
+    List<Customer> lstcusall = db.Customers.ToList();
     long idod = ViewBag.idod;
-    List<Order> lstsaletoday = db.Orders.Where(n => n.orderID >= idod).ToList();
-    List<Order> lstsalemonth = db.Orders.Where(n => n.createDate >= month).ToList();
+    List<Order> lstsaletoday = lstorder.Where(n => n.orderID >= idod).ToList();
+    List<Order> lstsalemonth = lstorder.Where(n => n.createDate >= month).ToList();
     List<Customer> lstcustomertoday = lstcusall.Where(n => n.isActive == 1 && n.customerID >= idod).ToList();
     List<Customer> lstcustomermoth = lstcusall.Where(n => n.isActive == 1 && n.dateCreate >= month).ToList();
     List<Customer> lstcustomerall = lstcusall.Where(n => n.isActive == 1).ToList();
@@ -208,102 +208,7 @@
         </div><!-- End Left side columns -->
         <!-- Right side columns -->
 
-        <div class="col-12">
-            <div class="card recent-sales overflow-auto">
-
-                <div class="card-body">
-                    <h5 class="card-title">Top mua hàng  @*<span>| Today</span>*@</h5>
-
-                    <table class="table table-borderless datatable">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Họ tên khách hàng</th>
-                                <th scope="col">Sản phẩm</th>
-                                <th scope="col">Giá</th>
-                                <th scope="col">Trạng thái</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in lstorder)
-                            {
-
-                                Customer cus = db.Customers.FirstOrDefault(n => n.customerID == item.customerID);
-                                List<OrderDetail> lst = db.OrderDetails.Where(n => n.orderID == item.orderID).ToList();
-                                var tongtien = @lst.Sum(n => n.Money);
-                                OrderDetail od = db.OrderDetails.FirstOrDefault(n => n.orderID == item.orderID);
-                                Product pro = db.Products.FirstOrDefault(n => n.productID == od.productID);
-                                <tr>
-                                    <th scope="row"><a href="#">@item.orderID</a></th>
-                                    <td>@cus.customerName</td>
-                                    <td><a href="#" class="text-primary">@pro.productName.Substring(0, 20)</a></td>
-
-                                    <td>  <span style="color:red">@String.Format("{0:0,0 vnđ}", tongtien)</span></td>
-                                    @if (item.status == 1)
-                                    {
-                                        <td><span class="badge bg-dark">Chờ xử lý</span></td>
-                                    }
-                                    else
-                                        if (item.status == 2)
-                                    {
-                                        <td><span class="badge bg-primary">Đã xác nhận</span></td>
-
-                                    }
-                                    else
-                                        if (item.status == 3)
-                                    {
-                                        <td><span class="badge bg-danger">Đang giao</span></td>
-
-                                    }
-                                    else
-                                    {
-                                        <td><span class="badge bg-success">Giao thành công</span></td>
-
-                                    }
-
-                                </tr>
-                            }
-
-
-                        </tbody>
-                    </table>
-
-                </div>
-
-            </div>
-        </div><!-- End Recent Sales -->
+     
         <!-- Top Selling -->
     </div>
 </section>
-<div class="card-body">
-    <h5 class="card-title">Top bán chạy  @*<span>| Today</span>*@</h5>
-
-    <table class="table table-borderless datatable">
-        <thead>
-            <tr>
-                <th scope="col">Hình ảnh</th>
-                <th scope="col">Sản phẩm</th>
-                <th scope="col">Giá</th>
-                <th scope="col">Số lượng bán</th>
-                <th scope="col">Doanh thu</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in lstod.Select(n => n.productID).Distinct().ToList())
-            {
-                List<OrderDetail> lst = db.OrderDetails.Where(n => n.productID == item).ToList();
-                var tongtien = @lst.Sum(n => n.Money);
-                Product pro = db.Products.FirstOrDefault(n => n.productID == item);
-                <tr>
-                    <th scope="row"><a href="#"><img src="~/Asset/img/product/@pro.productImage" height="50" width="50" alt=""></a></th>
-                    <td><a href="#" class="text-primary fw-bold">@pro.productName.Substring(0, 20)</a></td>
-                    <td>@pro.productPrice</td>
-                    <td class="fw-bold">@lst.Sum(n => n.Quantity)</td>
-                    <td>@lst.Sum(n => n.Money)</td>
-                </tr>
-            }
-        </tbody>
-
-
-    </table>
-</div>

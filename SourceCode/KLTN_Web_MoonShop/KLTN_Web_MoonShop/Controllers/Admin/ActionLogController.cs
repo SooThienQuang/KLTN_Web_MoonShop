@@ -13,7 +13,7 @@ namespace KLTN_Web_MoonShop.Controllers.Admin
         DBCosmeticEntities db = new DBCosmeticEntities();
         public ActionResult List()
         {
-            return View(db.ActionLogs.ToList());
+            return View(db.ActionLogs.ToList().OrderByDescending(n=>n.actionLogID).ToList());
         }
     }
 }

@@ -1,0 +1,51 @@
+﻿@using KLTN_Web_MoonShop.Models;
+
+@{
+    ViewBag.Title = "product";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    DBCosmeticEntities db = new DBCosmeticEntities();
+    List<OrderDetail> lstod = db.OrderDetails.ToList();
+    List<Order> lstorder = db.Orders.ToList();
+    List<Product> lstproall = db.Products.ToList();
+}
+
+<div class="card-body">
+    <h5 class="card-title">DANH MỤC THỐNG KÊ SẢN PHẨM BÁN CHẠY  @*<span>| Today</span>*@</h5>
+
+    <table class="table table-borderless datatable">
+        <thead>
+            <tr>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Sản phẩm</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Số lượng bán</th>
+                <th scope="col">Số lượng tồn kho</th>
+                <th scope="col">Doanh thu</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in lstod.Select(n => n.productID).Distinct().ToList())
+            {
+                List<OrderDetail> lst = lstod.Where(n => n.productID == item).ToList();
+                var tongtien = @lst.Sum(n => n.Money);
+                Product pro = lstproall.FirstOrDefault(n => n.productID == item);
+                <tr>
+                    <th scope="row"><a href="#"><img src="~/Asset/img/product/@pro.productImage" height="50" width="50" alt=""></a></th>
+                    <td><a href="#" class="text-primary fw-bold">@pro.productName.Substring(0, 20)</a></td>
+                    <td>
+                        <b style="color:red">@String.Format("{0:0,0}", @pro.productPrice)</b>
+                    </td>
+                    <td class="fw-bold">@lst.Sum(n => n.Quantity)</td>
+                    <td class="fw-bold">@pro.productQuantity</td>
+                    <td>
+                        <b style="color:red">@String.Format("{0:0,0}", @lst.Sum(n => n.Money))</b>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+
+    </table>
+</div>
+

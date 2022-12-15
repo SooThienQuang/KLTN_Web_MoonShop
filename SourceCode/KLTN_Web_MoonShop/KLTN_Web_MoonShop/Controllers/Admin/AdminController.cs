@@ -294,6 +294,10 @@ namespace KLTN_Web_MoonShop.Controllers
             image im= img.FirstOrDefault();
             ViewBag.active = im;
             return View(img);
-        }   
+        }
+        public ActionResult imageproduct()
+        {
+            return View();
+        }
     }
 }

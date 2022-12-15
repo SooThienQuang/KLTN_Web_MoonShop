@@ -1,0 +1,53 @@
+﻿@using KLTN_Web_MoonShop.Models;
+@{
+    ViewBag.Title = "money";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    DBCosmeticEntities db = new DBCosmeticEntities();
+    var lst = (from a in db.Orders
+               join c in db.OrderDetails on a.orderID equals c.orderID
+               where a.status == 4
+               select c).ToList();
+    List<Product> proall = db.Products.ToList();
+}
+
+<div class="card-body">
+    <h5 class="card-title">DANH MỤC THỐNG DOANH THU  @*<span>| Today</span>*@</h5>
+
+    <table class="table table-borderless datatable">
+        <thead>
+            <tr>
+                <th scope="col">Mã đơn</th>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Ngày đặt</th>
+                <th scope="col">Tổng tiền</th>
+                <th scope="col">Trạng thái</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in lst)
+            {
+                Product pro = proall.FirstOrDefault(n => n.productID == item.productID);
+                <tr>
+                    <th scope="row"><a href="#">
+                        @item.orderID
+                         </a></th>
+                    <td>
+                        <img src="~/Asset/img/product/@pro.productImage" height="50" width="50" alt="">
+                    </td>
+                    <td>
+                        @db.Orders.FirstOrDefault(n=>n.orderID==item.orderID).createDate
+                    </td>
+                    <td>
+                        <b style="color:red">@String.Format("{0:0,0}", item.Money)</b>
+                    </td>
+                    <td>
+                        <b class="text-success">Hoàn thành</b>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+
+    </table>
+</div>
+

@@ -5,16 +5,17 @@
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
     DBCosmeticEntities db = new DBCosmeticEntities();
     Customer user = Session["user"] as Customer;
+    CustomerAddress add = db.CustomerAddresses.FirstOrDefault(n => n.customerID == user.customerID && n.isMain == 1);
 }
 @*<script>
-    function modal() {
-        $('#spinnerModal').modal('show');
-        setTimeout(function () {
-            console.log('hejsan');
-            $('#spinnerModal').modal('hide');
-        }, 3000);
-    }
-</script>*@
+        function modal() {
+            $('#spinnerModal').modal('show');
+            setTimeout(function () {
+                console.log('hejsan');
+                $('#spinnerModal').modal('hide');
+            }, 3000);
+        }
+    </script>*@
 @*----------------modal waiting-----------------------------------------*@
 <link rel="stylesheet" href="~/css/spinner.css" />
 <div class="modal fade" tabindex="-1" role="dialog" id="spinnerModal">
@@ -140,14 +141,28 @@ else
                 <h3 style="color:red" id="txtmoney">0</h3>
             </div>
             <div class="col-sm-4 order-md-2 text-right">
-                @*<button type="button" onclick="showSwal('success-message')" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Thanh toán</button>*@
-                <button type="button" onclick="checkOut()" class="btn btn-danger mb-4 btn-lg pl-5 pr-5">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
-                        <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
-                        <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z" />
-                    </svg>
-                    Thanh toán
-                </button>
+                @if (add.customerAdd == null)
+                {
+                    <button type="button" onclick="themdiachi()" class="btn btn-danger mb-4 btn-lg pl-5 pr-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
+                            <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+                            <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z" />
+                        </svg>
+                        Thanh toán
+                    </button>
+
+                }
+                else
+                {
+                    <button type="button" onclick="checkOut()" class="btn btn-danger mb-4 btn-lg pl-5 pr-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
+                            <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+                            <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z" />
+                        </svg>
+                        Thanh toán
+                    </button>
+                }
+
             </div>
             <div class="col-sm-4 mb-3 mb-m-1 order-md-1 text-md-left">
                 <a href="@Url.Action("Index","Home")">
@@ -171,15 +186,6 @@ else
 @*------------------------------------------------------------------mesage-------------------------------------------*@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-@*<div class="card-body">
-        <div class="wrapper text-center">
-            <h4 class="card-title">Alerts Popups</h4>
-            <p class="card-description">A success message!</p>
-            <button class="btn btn-outline-success" onclick="showSwal('success-message')">Click here!</button>
-        </div>
-    </div>*@
-<!-- Button trigger modal-->
-<!--Modal: modalConfirmDelete-->
 <div class="modal fade" id="modalCartDel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
@@ -303,7 +309,7 @@ else
                 $('#spinnerModal').modal('show');
 
             }
-            
+
             else {
                 document.getElementById("btncancelDel").onclick();
                // modalspi();
@@ -331,15 +337,29 @@ else
                 })
             }
             else {
-                var getall = "getallcartqnt";
+                var array = [];
+                $(".checkbox:checked").each(function () {
+                    array.push($(this).val());
+                });
+                window.location.href = "/payment/pays/" + array.toString();
+                @*var getall = "getallcartqnt";
                 var url = '@Url.Action("Paymore", "Payment", new {id = "data"})';
-                $('#divid').load(url.replace('data', getall));
+                $('#divid').load(url.replace('data', getall));*@
             }
 
         }
         else {
-              var url = '@Url.Action("Paymore", "Payment", new {id = "data"})';
-          $('#divid').load(url.replace('data', value));
+            var array = [];
+            $(".checkbox:checked").each(function () {
+                array.push($(this).val());
+            });
+            //var str = ",";
+            //$('input[type="checkbox"]').each(function () {
+            //    str = str + $(this).val();
+            //});
+            window.location.href = "/payment/pays/" + array.toString();
+              @*var url = '@Url.Action("Paymore", "Payment", new {id = "data"})';
+          $('#divid').load(url.replace('data', value));*@
         }
 
     }
@@ -428,6 +448,153 @@ else
 
 
 </script>
+
+@*-------------------------------------------------------------------dia chi------------------------------------------*@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<div class="modal" id="modaladdresss" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="text-right cross"> <i class="fa fa-times" data-dismiss="modal"></i> </div>
+            <h4 class="mt-1 text-md-center">Thêm địa chỉ giao hàng </h4>
+            <div class="card-body text-center mb-5">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Circle-icons-location.svg/2048px-Circle-icons-location.svg.png" height="100" width="100">
+                <div class="form-group mt-3">
+                    <div class="form-group">
+                        Tỉnh/ Thành Phố
+                        <select name="" id="province" class="form-control coupon">
+                        </select>
+                        <br />
+                        Quận/Huyện
+                        <select name="" id="district" class="form-control coupon">
+                            <option value="">chọn quận/huyện</option>
+                        </select>
+                        <br />
+                        Xã/Phường
+                        <select name="" id="ward" class="form-control coupon">
+                            <option value="">chọn xã/phường</option>
+                        </select>
+
+                        <br />
+                        Số nhà/Đường
+                        <input type="text" id="txtduong" class="form-control coupon" name="txtduong">
+                        <br />
+                        Địa chỉ đã chọn
+                        <input type="text" id="txt" class="form-control coupon" name="txt">
+                    </div>
+                    <button class="btn btn-outline-primary" onclick="diachiapi()"><p class="fa fa-floppy-o"></p>Thêm địa chỉ</button>
+
+                </div>
+                <a href="#" class="" data-dismiss="modal">Không ! Cám ơn</a>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="number" id="txtuusus" value="@user.customerID" hidden />
+<script>
+    function diachiapi() {
+        var address = new Object();
+        address.cusID = document.getElementById("txtuusus").value;
+        address.diachi = document.getElementById("txtduong").value + "," + document.getElementById("txt").value;
+        $.ajax({
+            url: '/api/Address/',
+            type: 'POST',
+            dataType: 'json',
+            data: address,
+            success: function (result) {
+                $("#modaladdresss").modal("hide");
+                Swal.fire(
+                    'Cập nhật thành công!',
+                    'Địa chỉ của bạn đã được thêm mới',
+                    'success'
+                )
+                location.reload();
+            },
+            error: function (err) {
+                alert(err.statusText);
+            }
+        });
+    }
+    function themdiachi() {
+        Swal.fire({
+            title: 'Bạn chưa có địa chỉ giao hàng?',
+            text: "Bạn có muốn thêm địa chỉ ?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Có thêm ngay!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $("#modaladdresss").modal("show");
+            }
+        })
+    }
+    //--------------------------------------dia chi-------------------------------
+    const host = "https://provinces.open-api.vn/api/";
+    var callAPI = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data, "province");
+            });
+    }
+    callAPI('https://provinces.open-api.vn/api/?depth=1');
+    var callApiDistrict = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data.districts, "district");
+            });
+    }
+    var callApiWard = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data.wards, "ward");
+            });
+    }
+
+    var renderData = (array, select) => {
+        let row = ' <option disable value="">chọn</option>';
+        array.forEach(element => {
+            row += `<option value="${element.code}">${element.name}</option>`
+        });
+        document.querySelector("#" + select).innerHTML = row
+    }
+
+    $("#province").change(() => {
+        callApiDistrict(host + "p/" + $("#province").val() + "?depth=2");
+        printResult();
+    });
+    $("#district").change(() => {
+        callApiWard(host + "d/" + $("#district").val() + "?depth=2");
+        printResult();
+    });
+    $("#ward").change(() => {
+        printResult();
+    })
+
+    var printResult = () => {
+        if ($("#district").val() != "" && $("#province").val() != "" &&
+            $("#ward").val() != "") {
+            let result = $("#province option:selected").text() +
+                " | " + $("#district option:selected").text() + " | " +
+                $("#ward option:selected").text();
+
+            $("#result").text(result)
+
+            var diachi = result;
+            document.getElementById("txt").value = $("#ward option:selected").text() + "," + $("#district option:selected").text() + "," + $("#province option:selected").text();
+
+
+
+        }
+
+    }
+</script>
+
+
+@*-----------------------------------------------------------------end dia chi---------------------------------------------*@
 <style>
     * {
         margin: 0;

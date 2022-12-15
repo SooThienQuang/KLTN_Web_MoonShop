@@ -1,0 +1,47 @@
+﻿@using KLTN_Web_MoonShop.Models;
+@{
+    ViewBag.Title = "actionuser";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    DBCosmeticEntities db = new DBCosmeticEntities();
+    List<ActionLog> lstac = db.ActionLogs.Where(n=>n.actionType==1).ToList();
+    List<Product> lstproall = db.Products.ToList();
+}
+
+<div class="card-body">
+    <h5 class="card-title">DANH MỤC THỐNG KÊ SẢN PHẨM ĐƯỢC XEM NHIỀU NHẤT  @*<span>| Today</span>*@</h5>
+
+    <table class="table table-borderless datatable">
+        <thead>
+            <tr>
+                <th scope="col">#ID</th>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Số lần xem</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in lstproall)
+            {
+                if (lstac.FirstOrDefault(n => n.idOject == item.productID)!=null)
+                {
+                    <tr>
+                        <td>@item.productID</td>
+                        <th scope="row"><a href="#"><img src="~/Asset/img/product/@item.productImage" height="50" width="50" alt=""></a></th>
+                        <td><a href="#" class="text-primary fw-bold">@item.productName</a></td>
+                        <td>
+                            <b style="color:red">@String.Format("{0:0,0}", item.productPrice)</b>
+                        </td>
+                        <td>
+                            @lstac.Where(n => n.idOject == item.productID).Count()
+                        </td>
+                    </tr>
+                }
+
+            }
+        </tbody>
+
+
+    </table>
+</div>
+

@@ -720,6 +720,7 @@
     <Compile Include="Controllers\Admin\EmployeeController.cs" />
     <Compile Include="Controllers\Admin\OrdersController.cs" />
     <Compile Include="Controllers\Admin\ProductTypeController.cs" />
+    <Compile Include="Controllers\Admin\ReportController.cs" />
     <Compile Include="Controllers\AlertController.cs" />
     <Compile Include="Controllers\Android\CartData.cs" />
     <Compile Include="Controllers\Android\NotifyData.cs" />
@@ -1116,6 +1117,12 @@
     <Content Include="Views\Order\Details.cshtml" />
     <Content Include="Views\Payment\pay.cshtml" />
     <Content Include="Views\Payment\pays.cshtml" />
+    <Content Include="Views\Report\order.cshtml" />
+    <Content Include="Views\Report\product.cshtml" />
+    <Content Include="Views\Report\cart.cshtml" />
+    <Content Include="Views\Report\money.cshtml" />
+    <Content Include="Views\Report\actionuser.cshtml" />
+    <Content Include="Views\Admin\imageproduct.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

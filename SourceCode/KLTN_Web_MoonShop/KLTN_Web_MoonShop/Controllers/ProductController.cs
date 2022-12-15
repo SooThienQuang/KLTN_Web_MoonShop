@@ -2,6 +2,7 @@
 using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -38,6 +39,23 @@ namespace KLTN_Web_MoonShop.Controllers
             ViewBag.Product = db.Products.FirstOrDefault(n => n.productID == id);
             ViewBag.ProductDetail = db.ProductDetails.FirstOrDefault(n => n.ProductID == id);
             ViewBag.ProductRecom = db.Products.Where(n => n.productTypeID == pro.productTypeID&&n.isActive==1).ToList();
+            Customer user = Session["user"] as Customer;
+            if(user!=null)
+            {
+                ActionLog acl = new ActionLog();
+                string acid = DateTime.Now.ToString("yyyyMMddHHmmss");
+                acl.actionLogID = long.Parse(acid);
+                acl.actionDate = DateTime.Now;
+                acl.userID = user.customerID;
+                acl.userName = user.customerUserName;
+                acl.idOject = id;
+                acl.actionName = "Xem";
+                acl.nameTable = "Product";
+                acl.actionType = 1;
+                acl.modun = "product/detail/"+id;
+                db.ActionLogs.AddOrUpdate(acl);
+                db.SaveChanges();
+            }    
             return View();
         }
         public ActionResult ShowDetail(long id)
