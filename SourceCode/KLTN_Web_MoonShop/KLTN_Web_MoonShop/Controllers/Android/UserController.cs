@@ -51,7 +51,7 @@ namespace KLTN_Web_MoonShop.Controllers.Android
                 lst.Add(pdd);
 
             }
-            return lst;
+            return lst.Take(30).ToList();
         }
         [Route("user")]
         [HttpGet]
@@ -98,6 +98,14 @@ namespace KLTN_Web_MoonShop.Controllers.Android
                     cs.dateCreate = DateTime.Now;
                     db.Customers.Add(cs);
                     db.SaveChanges();
+                    CustomerAddress cd = new CustomerAddress();
+                    cd.ID = long.Parse(DateTime.Now.ToString("MMddHHmmssyyyy"));
+                    cd.customerID = id;
+                    cd.isActive = 1;
+                    cd.isMain = 1;
+                    cd.customerPhone = (phone).Trim();
+                    db.CustomerAddresses.Add(cd);
+                    db.Customers.Add(customer);
                     //thông báo đăng kí thành công
                     Notification noti = new Notification();
                     long idnoti = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));

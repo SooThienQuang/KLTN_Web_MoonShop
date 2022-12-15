@@ -346,6 +346,8 @@
                         div.appendChild(i);
                         if (/\.(jpe?g|png|gif|)$/i.test(file.name)) {
                             var image = new Image();
+                            image.setAttribute('width', '100px');
+                            image.setAttribute('height', '100px');
                             //image.addEventListener("load", function () {/*image.width+'×'+image.height*/})
                             image.setAttribute('data-tippy-content', file.name + spc + '\u002f' + spc + 'file size' + spc + returnFileSize(file.size));
                             image.setAttribute('onclick', 'this.classList.toggle("Imgpreview-zoom");');

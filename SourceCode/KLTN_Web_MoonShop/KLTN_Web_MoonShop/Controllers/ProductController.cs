@@ -18,6 +18,12 @@ namespace KLTN_Web_MoonShop.Controllers
             var item = db.Products.Where(n => n.isActive == 1).ToList().ToPagedList(page, size);
             return PartialView(item);
         }
+        //------------------------------------bình luận---------------------------------------
+        public ActionResult Comment(int page = 1, int size = 3)
+        {
+            var item = db.Products.Where(n => n.isActive == 1).ToList().ToPagedList(page, size);
+            return PartialView(item);
+        }
         public ActionResult AddOrUpdate(int id)
         {
             return PartialView();

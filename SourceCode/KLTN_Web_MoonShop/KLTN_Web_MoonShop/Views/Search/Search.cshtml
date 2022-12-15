@@ -13,18 +13,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 
 </script>
-@*<div class="d-sm-flex align-items-sm-center pt-2 clear" id="viewsearch">
-        <div class="green-label font-weight-bold p-0 px-1 mx-sm-1 mx-0 my-sm-0 my-2" id="xxx" style="visibility:hidden">
-            kem duong <span class=" px-1 close" onclick="show('myCheckbox','xxx')">&times;</span>
-        </div>
-        <div class="green-label font-weight-bold p-0 px-1 mx-sm-1 mx-0 my-sm-0 my-2" id="xxx1" style="visibility:hidden">
-            son Moi <span class=" px-1 close" onclick="show('myCheckbox1','xxx1')">&times;</span>
-        </div>
-    </div>
-
-    <input type="checkbox" class="box" value="son moi" id="myCheckbox" onclick="show('myCheckbox','xxx')"> <span class="check"></span>
-    <input type="checkbox" class="box" value="kem duong" id="myCheckbox1" onclick="show('myCheckbox1','xxx1')"> <span class="check"></span>
-    <button id="disp">show</button>*@
 <script>
     $('#disp').click(function () {
         var array = [];
@@ -106,11 +94,12 @@
         <section id="sidebar">
             <div class="py-3">
                 <h5 class="font-weight-bold">Top sản phẩm</h5>
-                <ul class="list-group"> 
-                    <a href="@Url.Action("Search","Search",new {keyword=14})" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Son <span class="badge badge-primary badge-pill">@lstprod.Where(n=>n.productTypeID==14).ToList().Count()</span> </a>
-                    <a href="@Url.Action("Search","Search",new {keyword=10})" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Kem <span class="badge badge-primary badge-pill">@lstprod.Where(n => n.productTypeID == 10).ToList().Count()</span> </a>
-                    <a href="@Url.Action("Search","Search",new {keyword=3})" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Mặt nạ <span class="badge badge-primary badge-pill">@lstprod.Where(n => n.productTypeID == 3).ToList().Count()</span> </a>
-                    <a href="@Url.Action("Search","Search",new {keyword=2})" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Dưỡng da <span class="badge badge-primary badge-pill">@lstprod.Where(n => n.productTypeID == 2).ToList().Count()</span> </a>
+                <ul class="list-group">
+                    <button onclick="loctheoma('14')" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Son <span class="badge badge-primary badge-pill">@lstprod.Where(n => n.productTypeID == 14).ToList().Count()</span> </button>
+                    <button onclick="loctheoma('10')" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Kem <span class="badge badge-primary badge-pill">@lstprod.Where(n => n.productTypeID == 10).ToList().Count()</span> </button>
+                    <button onclick="loctheoma('3')" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Mặt nạ <span class="badge badge-primary badge-pill">@lstprod.Where(n => n.productTypeID == 3).ToList().Count()</span> </button>
+                    <button onclick="loctheoma('2')" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Dưỡng da <span class="badge badge-primary badge-pill">@lstprod.Where(n => n.productTypeID == 2).ToList().Count()</span> </button>
+
                 </ul>
             </div>
             <div class="py-3">
@@ -265,6 +254,52 @@
     </div>
 </div>
 <script>
+    //---------------------------------------loc ma san phâm----------------------------------------
+    function loctheoma(id) {
+        $('#spinnerModal').modal('show');
+        $('#searchprodyct').empty();
+        var gia1 = document.getElementById("txtgia1").value;
+        var gia2 = document.getElementById("txtgia2").value;
+        var datafilter = new Object();
+        datafilter.loai =id;
+        $.ajax({
+            url: '/api/Filter/',
+            type: 'POST',
+            dataType: 'json',
+            data: datafilter,
+            success: function (data) {
+                var slq = Object.keys(data).length;
+                document.getElementById("countss").innerHTML = slq;
+                $('#spinnerModal').modal('hide');
+                $.each(data, function (index, item) {
+                    var trHTL = $(
+                        `
+            <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 mt-2">
+                            <div class="card" style="height:450px">
+                                <a href="/Product/Detail/`+ item.productID + `">
+                                    <img class="card-img-top" src="/Asset/img/product/`+ item.productImage + `">
+                                </a>
+
+                                <div class="card-body">
+                                        <h6 class="font-weight-bold pt-1">`+ item.productName + `</h6>
+                                        <div class="text-muted description">`+ item.productDescribe + `</div>
+                                    <div class="d-flex align-items-center product"> <span class="fas fa-star" style="color:orange"></span> <span style="color:orange" class="fas fa-star"></span> <span style="color:orange" class="fas fa-star"></span> <span style="color:orange" class="fas fa-star"></span> <span class="far fa-star"></span> </div>
+                                    <div class="d-flex align-items-center justify-content-between pt-3">
+                                        <div class="d-flex flex-column">
+                                            <div class="h6 font-weight-bold" style="color:red">`+ price +`</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+`
+
+                    );
+                    $('#searchprodyct').append(trHTL);
+                })
+            }
+        });
+    }
     //------------------------------------------------filter theo giá-------------------------------------------
     function filterPrice() {
         // alert("cjecl");
@@ -273,7 +308,7 @@
         $('#searchprodyct').empty();
         var datafilter = new Object();
         datafilter.typeprice = loaigia;
-      
+
         $.ajax({
             url: '/filterprice/',
             type: 'POST',

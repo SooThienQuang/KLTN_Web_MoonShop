@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
@@ -279,13 +280,62 @@ namespace KLTN_Web_MoonShop.Controllers
             else
             {
                 string acid = DateTime.Now.ToString("yyyyMMddHHmmss");
+                long cusID= long.Parse(acid);
                 cus.customerID = long.Parse(acid);
                 string pass = md5.CreateMD5(cus.customerPassword);
                 cus.customerPassword = pass;
                 cus.dateCreate = DateTime.Now;
+                CustomerAddress cd = new CustomerAddress();
+                cd.ID = long.Parse(DateTime.Now.ToString("MMddHHmmssyyyy"));
+                cd.customerID = cusID;
+                cd.isActive = 1;
+                cd.isMain = 1;
+                cd.customerPhone = cus.customerUserName;
+                db.CustomerAddresses.Add(cd);
+                //thông báo đăng kí thành công
+                Notification noti = new Notification();
+                long idnoti = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+                noti.notiID = idnoti;
+                noti.receiveUserID = cusID;
+                noti.receiveUserFullName = cus.customerName;
+                noti.title = "Chúc mừng bạn đã đăng kí tài khoản thành công";
+                noti.message = "Cám ơn bạn đã tin tưởng Shop , mong bạn có một trải nghiệm tốt bằng các dịch vụ của chúng mình !";
+                noti.image = "check.jpg";
+                noti.menutype = 1;
+                noti.isRead = 0;
+                db.Notifications.Add(noti);
+                db.SaveChanges();
+                //tạo mã giảm
+                string magiam = RandomUniCode.RandomString(12);
+
+                //thông báo giảm giá khách hàng mới
+                Notification noti2 = new Notification();
+                long idnoti2 = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+                noti2.notiID = idnoti2;
+                noti2.receiveUserID = cusID;
+                noti2.receiveUserFullName = cus.customerName;
+                noti2.title = "Giảm giá cho khách hàng mới đến";
+                noti2.message = "Tặng bạn voucher giảm giá 20% : " + magiam;
+                noti2.image = "discount20.jpg";
+                noti2.menutype = 1;
+                noti2.isRead = 0;
+                db.Notifications.Add(noti2);
+                db.SaveChanges();
+                Discount dis = new Discount();
+                dis.ID = idnoti2;
+                dis.name = noti2.title;
+                dis.code = magiam;
+                dis.percentDiscount = 10;
+                dis.cusID = cusID;
+                dis.isActive = 1;
+                db.Discounts.Add(dis);
+                db.SaveChanges();
             }
+            cus.dateCreate = DateTime.Now;
+            cus.isActive = 1;
             db.Customers.AddOrUpdate(cus);
             db.SaveChanges();
+         
             return RedirectToAction("Customer");
         }
         public ActionResult CaroselHome()

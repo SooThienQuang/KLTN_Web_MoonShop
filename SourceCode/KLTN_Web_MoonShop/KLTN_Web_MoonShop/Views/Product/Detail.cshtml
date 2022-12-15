@@ -164,7 +164,6 @@
             var main_prodcut_image = document.getElementById('main_product_image');
             main_prodcut_image.src = element.src;
 
-
         }
     </script>
 
@@ -176,266 +175,267 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 @*----------------------------------------------------------------------------modal thanh toán----------------------------------------------------------------------*@
 
-<!--<div class="modal" id="checkoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="text-right">
-                    <i class="fa fa-close close" data-dismiss="modal">Đóng</i>
-                </div>
-                <div class="container-fluid" id="grad1">
-                    <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
-                        <h2 class="text-center"><strong>Thông tin đặt hàng</strong></h2>
-                        <div class="row">
-                            <form id="msform">
-                                <!-- progressbar -->
-<!--<ul id="progressbar">
-    <li class="active" id="account"><strong>Danh sách sản phẩm</strong></li>
-    <li id="personal"><strong>Thông tin khách hàng</strong></li>
-    <li id="payment"><strong>Hình thức thanh toán</strong></li>
-    <li id="confirm"><strong>Hoàn tất đặt hàng</strong></li>
-</ul>-->
-<!-- fieldsets -->
-<!--<fieldset>
-    <div class="form-card">
-        <div id="carouselExampleIndicators" class="carousel slide p-3 " data-bs-ride="carousel">
-            <div class="carousel-indicators"> <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button> <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button> <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button> </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active"> <img src="~/Asset/img/product/@ViewBag.ProductDetail.img1" class="d-block w-100 h-100" alt="..."> </div>
-                <div class="carousel-item"> <img src="~/Asset/img/product/@ViewBag.ProductDetail.img2" class="d-block w-100" alt="..."> </div>
-                <div class="carousel-item"> <img src="~/Asset/img/product/@ViewBag.ProductDetail.img3" class="d-block w-100" alt="..."> </div>
-            </div> <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span> </button> <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span> </button>
-        </div>
-        <h2 class="fs-title">  @ViewBag.Product.productName</h2>
-        <div class="card rounded-3 " style="min-width:300px; height: auto; font-family: 'Rubik', sans-serif">
-            <div class="top p-3 d-flex justify-content-between"> <i class="fa fa-heart-o"></i> </div>
-            <div class="top p-3 d-flex justify-content-between">
-                <h4 style="color:black">Giá sản phẩm</h4> : <h3 class="" style="color:red">@String.Format("{0:0,0 vnđ}", @ViewBag.Product.productPrice)</h3>
-
-            </div>-->
-@*<input type="number" min="1" class="form-control" value="1" />*@
-<!--<div class="top p-3 d-flex justify-content-between">
-    <p style="color:black">Số lượng </p>
-    <div class="input-group mt-2">
-
-        <span class="input-group-btn">
-            <button type="button" style="height:35px" class="quantity-left-minus1 btn btn-dark btn-number" data-type="minus" data-field="">
-                <span class="ti-minus"></span>
-            </button>
-        </span>
-        <input type="number" style="min-width:50px;max-width:60px;height:35px;font-size:25px;" id="quantity1" name="quantity1" class="form-control" value="1" min="1" max="100">
-        <span class="input-group-btn">
-            <button type="button" style="height:35px" class="quantity-right-plus1 btn btn-dark btn-number" data-type="plus" data-field="">
-                <span class="ti-plus"></span>
-            </button>
-        </span>
-    </div>
-</div>
-
-
-<script>
-    $(document).ready(function () {
-        /*  var quantitiy = 0;*/
-        var gia = document.getElementById("txtgiasp").value;
-        $('.quantity-right-plus1').click(function (e) {
-            e.preventDefault();
-            var quantity = parseInt($('#quantity1').val());
-            $('#quantity1').val(quantity + 1);
-            document.getElementById("price2").innerHTML = gia * (quantity + 1);
-        });
-        $('.quantity-left-minus1').click(function (e) {
-            e.preventDefault();
-            var quantity = parseInt($('#quantity1').val());
-            if (quantity > 1) {
-                $('#quantity1').val(quantity - 1);
-                document.getElementById("price2").innerHTML = gia * (quantity - 1);
-            }
-        });
-    });
-</script>
-<div class="d-flex justify-content-between align-items-center mt-1">
-    <input type="text" id="txtmagiamgia" class="form-control" placeholder="NHẬP MÃ GIẢM GIÁ" />
-    <button class="btn btn-danger w-25" type="button" onclick="checkdiscount()">Áp dụng</button>
-</div>-->
-@*-------javascript----*@
-@*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" />
-                                                <script>
-                                                    function checkdiscount() {
-                                                        var text = document.getElementById("txtmagiamgia").value;
-                                                        if (text.length==0) {
-                                                            Swal.fire({
-                                                                icon: 'error',
-                                                                title: 'Có lỗi xảy xa',
-                                                                text: 'Vui lòng nhập mã giảm giá!',
-                                                                footer: '<a href="#">Bạn chưa có mã giảm giá?</a>'
-                                                            })
-                                                        }
-                                                        else {
-                                                            var discount = new Object();
-                                                            discount.code = text;
-                                                            $.ajax({
-                                                                url: '/api/Discount/',
-                                                                type: 'POST',
-                                                                dataType: 'json',
-                                                                data: discount,
-                                                                success: function (data) {
-                                                                    if (data != null) {
-                                                                        Swal.fire({
-                                                                            html:
-                                                                                'Mã ' + data.code + " được giảm " + data.percent + "% cho đơn hàng hiện tại",
-                                                                            title: data.name,
-                                                                            icon: 'warning',
-                                                                            showCancelButton: true,
-                                                                            confirmButtonColor: '#3085d6',
-                                                                            cancelButtonColor: '#d33',
-                                                                            confirmButtonText: 'Có, áp dụng ngay    !'
-                                                                        }).then((result) => {
-                                                                            if (result.isConfirmed) {
-                                                                                var discount = new Object();
-                                                                                discount.code = text;
-                                                                                $.ajax({
-                                                                                    url: '/api/Discount/',
-                                                                                    type: 'PUT',
-                                                                                    dataType: 'json',
-                                                                                    data: discount,
-                                                                                    success: function (data) {
-                                                                                    }
-                                                                                });
-
-                                                                                Swal.fire(
-                                                                                    'Thành công!',
-                                                                                    'Bạn đã áp dụng thành công mã giảm',
-                                                                                    'success'
-                                                                                )
-                                                                                var quantity = parseInt($('#quantity1').val());
-                                                                                var gia = document.getElementById("txtgiasp").value;
-
-                                                                                document.getElementById("price2").innerHTML = (gia * quantity) - ((gia * quantity) * data.percent/100);
-                                                                            }
-                                                                        })
-                                                                    }
-                                                                    else {
-                                                                        Swal.fire({
-                                                                            icon: 'error',
-                                                                            title: 'Có lỗi xảy xa',
-                                                                            text: 'Mã giảm giá không chính xác!',
-                                                                            footer: '<a href="#">Bạn chưa có mã giảm giá?</a>'
-                                                                        })
-                                                                    }
-                                                                },
-                                                                error: function (err) {
-                                                                    alert(err.statusText);
-                                                                }
-                                                            });
-
-                                                        }
-                                                    }
-                                                </script>
-                                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                                    Giảm giá:<h2 id="" style="color:red"></h2>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <h3 style="color:black"> Thành tiền:</h3><h2 class="ml-5" id="price2" style="color:red">@String.Format("{0:0,0 vnđ}", @ViewBag.Product.productPrice) </h2>
-                                                    <input type="hidden" value="@ViewBag.Product.productPrice" id="txtgiasp">
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <input type="button" name="next" class="next action-button" value="Tiếp theo" />
-                                    </fieldset>
-                                    <fieldset>
-                                        <div class="form-card">
-                                            <h2 class="fs-title">Thông tin giao hàng</h2>
-
-                                            Địa chỉ giao hàng: <input type="text" value="@ca.customerAdd" name="fname" id="diachigiaohang" placeholder="@ca.customerAdd " disabled />
-                                            @if (ca.customerAdd == null)
-                                            {
-                                                <a class="btn btn-danger" data-dismiss="modal" onclick="themdiachi()">Thêm địa chỉ</a>
-                                            }
-                                            else
-                                            {
-                                                <a class="mt-0" href="@Url.Action("DetailProfile", "Customer", new {id=1})">Đổi địa chỉ</a>
-                                            }
-                                            <br />
-                                            Họ tên khách hàng : <input type="text" class="form-control" placeholder="first name" value="@user.customerName">
-                                            Số điện thoại:  <input type="text" class="form-control" placeholder="headline" value="@user.customerUserName" disabled>
-                                            Ghi chú thêm:  <input type="text" name="phno_2" placeholder="Ghi chú thêm" />
-
-                                        </div>
-                                        <input type="button" name="previous" class="previous action-button-previous" value="Trở về" />
-                                        <input type="button" name="next" class="next action-button" value="Tiếp theo" />
-                                    </fieldset>
-                                    <fieldset>
-                                        <div class="form-card">
-                                            <h2 class="fs-title">Phương thức thanh toán</h2>
-                                            <div class="radio-group">
-                                                <div class='radio' data-value="credit"><img src="https://images.careerbuilder.vn/employer_folders/lot9/221789/95340imgpsh_fullsize.jpg" width="180px" height="100px"></div>
-                                                <div class='radio' data-value="paypal"><img src="https://cdn.sforum.vn/sforum/wp-content/uploads/2021/05/bg-13.jpg" width="180px" height="100px"></div>
-                                                <div class='radio' data-value="paypal"><img src="https://noptien247.com.vn/wp-content/uploads/2020/03/chuyen-tien-qua-internet-banking-mat-bao-lau.png" width="180px" height="100px"></div>
-
-                                                <br>
-                                            </div>
-                                            <label class="pay">Chọn phương thức thanh toán*</label>
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option value="1">Thanh toán khi nhận hàng</option>
-                                                <option value="2">J &T</option>
-                                                <option value="3">Việt nam sport</option>
-                                            </select>
-                                        </div>
-                                        <input type="button" name="previous" class="previous action-button-previous" value="Trở về" />
-                                        @if (user != null)
-                                        {
-                                            <input type="number" id="txtuserid" value="@user.customerID" hidden />
-                                        }
-                                        @if (ca.customerAdd == null)
-                                        {
-                                            <button id="notaddress" class="btn btn-danger btn-lg" data-dismiss="modal" onclick="themdiachi()">Đặt hàng ngay</button>
-                                        }
-                                        else
-                                        {
-                                            <button class="btn btn-danger btn-lg" data-dismiss="modal" onclick="checkoutt()">Đặt hàng ngay</button>
-
-                                        }
-                                        <input type="button" name="" class="next action-button" value="Hủy" data-dismiss="modal" />
-                                    </fieldset>
-                                    <fieldset>
-                                        <div class="form-card">
-                                            <h2 class="fs-title text-center">Biên lai giao hàng !</h2>
-                                            <br><br>
-                                            <div class="row justify-content-center">
-                                                <div class="col-3">
-                                                    <img src="https://img.icons8.com/color/96/000000/ok--v2.png" class="fit-image">
-                                                </div>
-                                            </div>
-                                            <br><br>
-                                            <div class="row justify-content-center">
-                                                <div class="col-7 text-center">
-                                                    <h5>Tất cả đã hoàn thành</h5>
-                                                </div>
-                                            </div>
-                                            <input type="number" id="txtprice" value="@ViewBag.Product.productPrice" hidden />
-                                            <input type="number" id="txtproid" value="@ViewBag.Product.productID" hidden />
-
-                                        </div>
-                                    </fieldset>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                </div>
-
-            </div>
-        </div>
-    </div>-->*@
 
 @if (user != null)
 {
     <input type="number" id="txtuserid" value="@user.customerID" hidden />
 }
+@*-------------------------------------------------------comment--------------------------------------------------*@
+<h3>
+    <b>Bình luận và Đánh giá </b> 
+    <div class="d-flex flex-row">
+        <i class='bx bxs-star'></i>	
+        <i class='bx bxs-star'></i>	
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+    </div>
+</h3>
+<div class="container-fluid my-5">
+    <div class="row">
+        <div class="col-12">
+            <!--- Post Form Begins -->
+            <section class="card">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">
+                                Làm một bài đăng
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                            <div class="form-group">
+                                <label class="sr-only" for="message">post</label>
+                                <textarea class="form-control" id="message" rows="3" placeholder="Hãy nêu cảm nghĩ của bạn ..."></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary" id="btncmt" onclick="postcmt('1')">Bình luận</button>
+                    </div>
+                    <script>
+                        function postcmt(id) {
+                            var content = document.getElementById('message').value;
+                            if (content=="") {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Lỗi...',
+                                    text: 'Bạn chưa nhập bình luận!',
+                                    footer: '<a href="">Bạn cần sự trợ giúp ?</a>'
+                                })
+                            }
+                            else {
+                                var trHTL = $(
+                                    `
+                                            <div class="border p-2">
+                      <div class="row m-0">
+                                            <div class="">
+                                                <a class="text-decoration-none" href="#">
+                                                    <img class="" src="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png" width="50" height="50" alt="...">
+                                                </a>
+                                            </div>
+                                            <div class="flex-grow-1 pl-2">
+                                                <a class="text-decoration-none" href="#">
+                                                    <h2 class="text-capitalize h5 mb-0">Người dùng</h2>
+                                                </a>
+                                                <p class="small text-secondary m-0 mt-1">1 ngày trước</p>
+                                            </div>
+
+                                            <div class="dropdown">
+                                                <a class="" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-chevron-down"></i>
+                                                </a>
+
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                    <a class="dropdown-item text-primary" href="#">Sửa</a>
+                                                    <a class="dropdown-item text-primary" href="#">Xóa</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            </div>
+                                             <p class="my-2">`
+                                    + content +
+                                    ` </p>
+            <footer class="">
+                <!-- post actions -->
+                <div class="">
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item flex-fill text-center p-0 px-lg-2 border border-0">
+                            <a class="small text-decoration-none" href="#">
+                                <i class="far fa-thumbs-up"></i> 20 thích
+                            </a>
+                        </li>
+                        <li class="list-group-item flex-fill text-center p-0 px-lg-2 border border-right-0 border-top-0 border-bottom-0">
+                            <a class="small text-decoration-none" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                <i class="fas fa-comment-alt"></i> 40 Trả lời
+                            </a>
+                        </li>
+                        <li class="list-group-item flex-fill text-center p-0 px-lg-2 border border-right-0 border-top-0 border-bottom-0 ">
+                            <a class="small text-decoration-none" href="#">
+                                <i class="fas fa-share"></i> 0 Chia sẻ
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </footer>
+                                            `
+
+                                );
+                                $("#layoutcmt").prepend(trHTL).fadeIn('slow');
+                                Swal.fire({
+                                    position: 'top-center',
+                                    icon: 'success',
+                                    title: 'Bình luận thành công',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            }
+                           
+                        }
+                    </script>
+                </div>
+            </section>
+            <section class="card mt-4" id="layoutcmt">
+                <div class="border p-2">
+                    <div class="row m-0">
+                        <div class="">
+                            <a class="text-decoration-none" href="#">
+                                <img class="" src="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png" width="50" height="50" alt="...">
+                            </a>
+                        </div>
+                        <div class="flex-grow-1 pl-2">
+                            <a class="text-decoration-none" href="#">
+                                <h2 class="text-capitalize h5 mb-0">Người dùng</h2>
+                            </a>
+                            <p class="small text-secondary m-0 mt-1">1 ngày trước</p>
+                        </div>
+
+                        <div class="dropdown">
+                            <a class="" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-chevron-down"></i>
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item text-primary" href="#">Sửa</a>
+                                <a class="dropdown-item text-primary" href="#">Xóa</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- post body -->
+                    <div class="commnent">
+                        <div class="d-flex flex-row">
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                        </div>
+                        <p class="my-2">
+                            Lần thứ 2 mua em son này, màu chuẩn xinh xỉu😗
+                            Shipper thân thiện.
+                        </p>
+                    </div>
+                    <hr class="my-1">
+                    <!-- post footer begins -->
+                    <footer class="">
+                        <!-- post actions -->
+                        <div class="">
+                            <ul class="list-group list-group-horizontal">
+                                <li class="list-group-item flex-fill text-center p-0 px-lg-2 border border-0">
+                                    <a class="small text-decoration-none" href="#">
+                                        <i class="far fa-thumbs-up"></i> 20 thích
+                                    </a>
+                                </li>
+                                <li class="list-group-item flex-fill text-center p-0 px-lg-2 border border-right-0 border-top-0 border-bottom-0">
+                                    <a class="small text-decoration-none" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                        <i class="fas fa-comment-alt"></i> 40 Trả lời
+                                    </a>
+                                </li>
+                                <li class="list-group-item flex-fill text-center p-0 px-lg-2 border border-right-0 border-top-0 border-bottom-0 ">
+                                    <a class="small text-decoration-none" href="#">
+                                        <i class="fas fa-share"></i> 90 Chia sẻ
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                        <!-- collapsed comments begins -->
+                        <div class="collapse" id="collapseExample">
+                            <div class="card border border-right-0 border-left-0 border-bottom-0 mt-1">
+                                <!-- new comment form -->
+                                <section class="mt-3">
+                                    <form action="">
+                                        <div class="input-group input-group">
+                                            <input type="text" class="form-control" placeholder="Viết bình luận" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                            <div class="input-group-append">
+                                                <a class="text-decoration-none text-white btn btn-primary" href="#" role="button">Bình luận</a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </section>
+                                <!-- comment card bgins -->
+                                <section>
+                                    <div class="card p-2 mt-3">
+                                        <!-- comment header -->
+                                        <div class="d-flex">
+                                            <div class="">
+                                                <a class="text-decoration-none" href="#">
+                                                    <img class="profile-pic" src="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png" width="40" height="40" alt="...">
+                                                </a>
+                                            </div>
+                                            <div class="flex-grow-1 pl-2">
+                                                <a class="text-decoration-none text-capitalize h6 m-0" href="#">Tarzan</a>
+                                                <p class="small m-0 text-muted">27 mins ago</p>
+                                            </div>
+                                            <div>
+                                                <div class="dropdown">
+                                                    <a class="" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fas fa-chevron-down"></i>
+                                                    </a>
+
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                        <a class="dropdown-item text-primary" href="#">Sửa</a>
+                                                        <a class="dropdown-item text-primary" href="#">Xóa</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- comment header -->
+                                        <!-- comment body -->
+                                        <div class="card-body p-0">
+                                            <p class="card-text h7 mb-1">
+                                                Dạ chào bạn. Cảm ơn bạn đã quan tâm và tin dùng sản phẩm của Merzy tại Moon Shop. Nếu có bất kỳ thắc mắc nào cần hỗ trợ, bạn đừng ngần ngại nhắn tin cho shop để shop hỗ trợ cho bạn ạ. MoonShop hi vọng bạn vẫn sẽ tiếp tục ủng hộ và yêu thương shop nhé ♡
+                                            </p>
+                                            <a class="card-link small" href="#">
+                                                <i class="far fa-thumbs-up"></i> 20 Like
+                                            </a>
+                                        </div>
+                                    </div>
+                                </section>
+                                <!-- comment card ends -->
+
+                            </div>
+                        </div>
+                        <!-- collapsed comments ends -->
+                    </footer>
+                    <!-- post footer ends -->
+                </div>
+            </section>
+            <!-- Post Ends -->
+        </div>
+    </div>
+</div>
+
 @*-----------------------------check out----------------------------\*@
+
 <div class="container" id="divmota" style="text-align:left;padding:3%">
     <div class="row">
         <h2>Mô tả sản phẩm</h2>
@@ -838,7 +838,7 @@
                         className: "btn btn-primary"
                     }
                 })
-               
+
                 var slq = Object.keys(data).length;
                 $('.soluongcart').empty();
                 $(".soluongcart").append(`` + slq + ``);
