@@ -2,7 +2,7 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <LastActiveSolutionConfig>Release|Any CPU</LastActiveSolutionConfig>
-    <NameOfLastUsedPublishProfile>C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\Properties\PublishProfiles\thienquang-001-site1 - FTP.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>C:\GitLab\MoonShop\SourceCode\KLTN_Web_MoonShop\KLTN_Web_MoonShop\Properties\PublishProfiles\honghac-001-site1 - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />

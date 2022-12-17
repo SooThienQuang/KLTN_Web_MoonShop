@@ -5,7 +5,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Contexts;
 using System.Web.Http;
+using System.Web.UI.WebControls;
 
 namespace KLTN_Web_MoonShop.Controllers.API
 {
@@ -16,15 +18,23 @@ namespace KLTN_Web_MoonShop.Controllers.API
         public long gia2 { get; set; }
         public int typeprice { get; set; }   
     }
-  
+    public class product2
+    {
+        public long productID { get; set; }
+        public string productName { get; set; }
+        public Nullable<long> productQuantity { get; set; }
+        public Nullable<long> productPrice { get; set; }
+        public string productDescribe { get; set; }
+        public string productImage { get; set; }
+    }
     public class FilterController : ApiController
     {
         DBCosmeticEntities db = new DBCosmeticEntities();
         ReplaceUnitcode replace = new ReplaceUnitcode();
         [HttpPost]
-        public List<Product> Filter(datafilter data)
+        public List<product2> Filter(datafilter data)
         {
-            var lsttam=db.Products.Where(n=>n.isActive==1).ToList();
+            var lsttam = db.Products.Where(n => n.isActive == 1).ToList();
             List<Product> lst = new List<Product>();
             foreach (var item in lsttam)
             {
@@ -40,14 +50,14 @@ namespace KLTN_Web_MoonShop.Controllers.API
                 lst.Add(d);
             }
             List<Product> main = new List<Product>();
-            foreach(var item in lst)
+            foreach (var item in lst)
             {
-                string[] mang =null;
-                if (data.loai!=null)
+                string[] mang = null;
+                if (data.loai != null)
                 {
-                   mang  = data.loai.Split(',');
+                    mang = data.loai.Split(',');
                 }
-                if (mang!=null)
+                if (mang != null)
                 {
                     foreach (string s in mang)
                     {
@@ -72,23 +82,34 @@ namespace KLTN_Web_MoonShop.Controllers.API
                             }
                         }
                     }
-                }  
+                }
             }
-            if(data.gia2>0&&data.gia1==0)
+            if (data.gia2 > 0 && data.gia1 == 0)
             {
                 main = main.Where(n => n.productPrice <= data.gia2).ToList();
-            }    
-            if(data.gia1>=0&&data.gia2>0)
+            }
+            if (data.gia1 >= 0 && data.gia2 > 0)
             {
-                main = main.Where(n => n.productPrice <= data.gia2&&n.productPrice>=data.gia1).ToList();
-            }    
-            return main;
+                main = main.Where(n => n.productPrice <= data.gia2 && n.productPrice >= data.gia1).ToList();
+            }
+
+            var mm = main.Select(x => new product2
+            {
+                productID = x.productID,
+                productName = x.productName,
+                productDescribe = x.productDescribe,
+                productImage = x.productImage,
+                productQuantity=x.productQuantity,
+                productPrice=x.productPrice
+            }
+            ).ToList();
+            return mm;
         }
 
-
+     
         [Route("filterprice")]
         [HttpPost]
-        public List<Product>filterprice(datafilter da)
+        public List<product2>filterprice(datafilter da)
         {
             var lsttam = db.Products.Where(n => n.isActive == 1).ToList();
             List<Product> lst = new List<Product>();
@@ -111,7 +132,17 @@ namespace KLTN_Web_MoonShop.Controllers.API
             }   
             if(da.typeprice==2)
                 lst = lst.OrderByDescending(n => n.productPrice).ToList();
-            return lst;
+            var mm = lst.Select(x => new product2
+            {
+                productID = x.productID,
+                productName = x.productName,
+                productDescribe = x.productDescribe,
+                productImage = x.productImage,
+                productQuantity = x.productQuantity,
+                productPrice = x.productPrice
+            }
+          ).ToList();
+            return mm;
         }
     }
 }
