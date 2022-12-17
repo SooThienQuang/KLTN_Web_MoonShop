@@ -1,54 +1,10 @@
 diff a/SourceCode/KLTN_Web_MoonShop/KLTN_Web_MoonShop/Views/Search/Search.cshtml b/SourceCode/KLTN_Web_MoonShop/KLTN_Web_MoonShop/Views/Search/Search.cshtml	(rejected hunks)
-@@ -254,6 +254,52 @@
-     </div>
- </div>
- <script>
-+    //---------------------------------------loc ma san phâm----------------------------------------
-+    function loctheoma(id) {
-+        $('#spinnerModal').modal('show');
-+        $('#searchprodyct').empty();
-+        var gia1 = document.getElementById("txtgia1").value;
-+        var gia2 = document.getElementById("txtgia2").value;
-+        var datafilter = new Object();
-+        datafilter.loai =id;
-+        $.ajax({
-+            url: '/api/Filter/',
-+            type: 'POST',
-+            dataType: 'json',
-+            data: datafilter,
-+            success: function (data) {
-+                var slq = Object.keys(data).length;
-+                document.getElementById("countss").innerHTML = slq;
-+                $('#spinnerModal').modal('hide');
-+                $.each(data, function (index, item) {
-+                    var trHTL = $(
-+                        `
-+            <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 mt-2">
-+                            <div class="card" style="height:450px">
-+                                <a href="/Product/Detail/`+ item.productID + `">
-+                                    <img class="card-img-top" src="/Asset/img/product/`+ item.productImage + `">
-+                                </a>
+@@ -308,7 +308,7 @@
+         $('#searchprodyct').empty();
+         var datafilter = new Object();
+         datafilter.typeprice = loaigia;
+-      
 +
-+                                <div class="card-body">
-+                                        <h6 class="font-weight-bold pt-1">`+ item.productName + `</h6>
-+                                        <div class="text-muted description">`+ item.productDescribe + `</div>
-+                                    <div class="d-flex align-items-center product"> <span class="fas fa-star" style="color:orange"></span> <span style="color:orange" class="fas fa-star"></span> <span style="color:orange" class="fas fa-star"></span> <span style="color:orange" class="fas fa-star"></span> <span class="far fa-star"></span> </div>
-+                                    <div class="d-flex align-items-center justify-content-between pt-3">
-+                                        <div class="d-flex flex-column">
-+                                            <div class="h6 font-weight-bold" style="color:red">`+ price +`</div>
-+                                        </div>
-+                                    </div>
-+                                </div>
-+                            </div>
-+                        </div>
-+`
-+
-+                    );
-+                    $('#searchprodyct').append(trHTL);
-+                })
-+            }
-+        });
-+    }
-     //------------------------------------------------filter theo giá-------------------------------------------
-     function filterPrice() {
-         // alert("cjecl");
+         $.ajax({
+             url: '/filterprice/',
+             type: 'POST',

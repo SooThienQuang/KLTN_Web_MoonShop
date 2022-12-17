@@ -13,6 +13,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 
 </script>
+@*<div class="d-sm-flex align-items-sm-center pt-2 clear" id="viewsearch">
+        <div class="green-label font-weight-bold p-0 px-1 mx-sm-1 mx-0 my-sm-0 my-2" id="xxx" style="visibility:hidden">
+            kem duong <span class=" px-1 close" onclick="show('myCheckbox','xxx')">&times;</span>
+        </div>
+        <div class="green-label font-weight-bold p-0 px-1 mx-sm-1 mx-0 my-sm-0 my-2" id="xxx1" style="visibility:hidden">
+            son Moi <span class=" px-1 close" onclick="show('myCheckbox1','xxx1')">&times;</span>
+        </div>
+    </div>
+
+    <input type="checkbox" class="box" value="son moi" id="myCheckbox" onclick="show('myCheckbox','xxx')"> <span class="check"></span>
+    <input type="checkbox" class="box" value="kem duong" id="myCheckbox1" onclick="show('myCheckbox1','xxx1')"> <span class="check"></span>
+    <button id="disp">show</button>*@
 <script>
     $('#disp').click(function () {
         var array = [];
@@ -94,12 +106,11 @@
         <section id="sidebar">
             <div class="py-3">
                 <h5 class="font-weight-bold">Top sản phẩm</h5>
-                <ul class="list-group">
-                    <button onclick="loctheoma('14')" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Son <span class="badge badge-primary badge-pill">@lstprod.Where(n => n.productTypeID == 14).ToList().Count()</span> </button>
-                    <button onclick="loctheoma('10')" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Kem <span class="badge badge-primary badge-pill">@lstprod.Where(n => n.productTypeID == 10).ToList().Count()</span> </button>
-                    <button onclick="loctheoma('3')" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Mặt nạ <span class="badge badge-primary badge-pill">@lstprod.Where(n => n.productTypeID == 3).ToList().Count()</span> </button>
-                    <button onclick="loctheoma('2')" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Dưỡng da <span class="badge badge-primary badge-pill">@lstprod.Where(n => n.productTypeID == 2).ToList().Count()</span> </button>
-
+                <ul class="list-group"> 
+                    <a href="@Url.Action("Search","Search",new {keyword=14})" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Son <span class="badge badge-primary badge-pill">@lstprod.Where(n=>n.productTypeID==14).ToList().Count()</span> </a>
+                    <a href="@Url.Action("Search","Search",new {keyword=10})" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Kem <span class="badge badge-primary badge-pill">@lstprod.Where(n => n.productTypeID == 10).ToList().Count()</span> </a>
+                    <a href="@Url.Action("Search","Search",new {keyword=3})" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Mặt nạ <span class="badge badge-primary badge-pill">@lstprod.Where(n => n.productTypeID == 3).ToList().Count()</span> </a>
+                    <a href="@Url.Action("Search","Search",new {keyword=2})" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Dưỡng da <span class="badge badge-primary badge-pill">@lstprod.Where(n => n.productTypeID == 2).ToList().Count()</span> </a>
                 </ul>
             </div>
             <div class="py-3">
