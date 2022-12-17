@@ -256,7 +256,6 @@
 <script>
     //---------------------------------------loc ma san phâm----------------------------------------
     function loctheoma(id) {
-        $('#spinnerModal').modal('show');
         $('#searchprodyct').empty();
         var gia1 = document.getElementById("txtgia1").value;
         var gia2 = document.getElementById("txtgia2").value;
@@ -270,7 +269,6 @@
             success: function (data) {
                 var slq = Object.keys(data).length;
                 document.getElementById("countss").innerHTML = slq;
-                $('#spinnerModal').modal('hide');
                 $.each(data, function (index, item) {
                     var trHTL = $(
                         `
@@ -308,7 +306,7 @@
         $('#searchprodyct').empty();
         var datafilter = new Object();
         datafilter.typeprice = loaigia;
-
+      
         $.ajax({
             url: '/filterprice/',
             type: 'POST',

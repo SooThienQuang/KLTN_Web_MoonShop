@@ -19,5 +19,7 @@ namespace KLTN_Web_MoonShop.Models
         public Nullable<long> salary1 { get; set; }
         public Nullable<long> bonus { get; set; }
         public Nullable<System.DateTime> dateUpdate { get; set; }
+    
+        public virtual EmployeeDetail EmployeeDetail { get; set; }
     }
 }

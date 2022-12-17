@@ -22,5 +22,10 @@ namespace KLTN_Web_MoonShop.Models
         public Nullable<long> Money { get; set; }
         public string idAdd { get; set; }
         public Nullable<int> statusID { get; set; }
+        public Nullable<long> emID { get; set; }
+    
+        public virtual Employee Employee { get; set; }
+        public virtual Order Order { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

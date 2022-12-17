@@ -5,27 +5,46 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="ba18c8623b5a4ea4a30d9a7324123b50" Name="Diagram1" ZoomLevel="59">
-        <EntityTypeShape EntityType="DBCosmeticModel.ActionLog" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.Cart" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.CartDetail" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.Customer" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.CustomerAddress" Width="1.5" PointX="4.75" PointY="4.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.Employee" Width="1.5" PointX="6.75" PointY="4.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.EmployeeDetail" Width="1.5" PointX="0.75" PointY="7.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.Notification" Width="1.5" PointX="6.75" PointY="7.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.OrderDetail" Width="1.5" PointX="2.75" PointY="8.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.Position" Width="1.5" PointX="8.75" PointY="3.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.ProcessOrder" Width="1.5" PointX="8.75" PointY="6.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.Product" Width="1.5" PointX="10.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.ProductDetail" Width="1.5" PointX="10.75" PointY="4.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.ProductType" Width="1.5" PointX="10.75" PointY="8.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.Salary" Width="1.5" PointX="8.75" PointY="11.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.Sex" Width="1.5" PointX="10.75" PointY="11.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.Status" Width="1.5" PointX="12.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.sysdiagram" Width="1.5" PointX="0.75" PointY="12.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.Discount" Width="1.5" PointX="3.375" PointY="12.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.image" Width="1.5" PointX="5.375" PointY="12.75" />
-        <EntityTypeShape EntityType="DBCosmeticModel.Order" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DBCosmeticModel.ActionLog" Width="1.5" PointX="5.25" PointY="14.5" />
+        <EntityTypeShape EntityType="DBCosmeticModel.Cart" Width="1.5" PointX="0.75" PointY="10.375" />
+        <EntityTypeShape EntityType="DBCosmeticModel.CartDetail" Width="1.5" PointX="3" PointY="15.125" />
+        <EntityTypeShape EntityType="DBCosmeticModel.Customer" Width="1.5" PointX="3" PointY="9.5" />
+        <EntityTypeShape EntityType="DBCosmeticModel.CustomerAddress" Width="1.5" PointX="0.75" PointY="6.25" />
+        <EntityTypeShape EntityType="DBCosmeticModel.Discount" Width="1.5" PointX="5.25" PointY="9.625" />
+        <EntityTypeShape EntityType="DBCosmeticModel.Employee" Width="1.5" PointX="8.25" PointY="6.375" />
+        <EntityTypeShape EntityType="DBCosmeticModel.EmployeeDetail" Width="1.5" PointX="10.5" PointY="3.5" />
+        <EntityTypeShape EntityType="DBCosmeticModel.image" Width="1.5" PointX="2.75" PointY="6" />
+        <EntityTypeShape EntityType="DBCosmeticModel.Notification" Width="1.5" PointX="10.5" PointY="13.875" />
+        <EntityTypeShape EntityType="DBCosmeticModel.Order" Width="1.5" PointX="8.25" PointY="10" />
+        <EntityTypeShape EntityType="DBCosmeticModel.OrderDetail" Width="1.5" PointX="10.5" PointY="8.875" />
+        <EntityTypeShape EntityType="DBCosmeticModel.Position" Width="1.5" PointX="5.75" PointY="2.25" />
+        <EntityTypeShape EntityType="DBCosmeticModel.ProcessOrder" Width="1.5" PointX="6" PointY="18.5" />
+        <EntityTypeShape EntityType="DBCosmeticModel.Product" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="DBCosmeticModel.ProductDetail" Width="1.5" PointX="0.75" PointY="2.25" />
+        <EntityTypeShape EntityType="DBCosmeticModel.ProductType" Width="1.5" PointX="0.75" PointY="18.875" />
+        <EntityTypeShape EntityType="DBCosmeticModel.Salary" Width="1.5" PointX="12.75" PointY="4.375" />
+        <EntityTypeShape EntityType="DBCosmeticModel.Sex" Width="1.5" PointX="4.75" PointY="6" />
+        <EntityTypeShape EntityType="DBCosmeticModel.Status" Width="1.5" PointX="3.75" PointY="19.625" />
+        <EntityTypeShape EntityType="DBCosmeticModel.sysdiagram" Width="1.5" PointX="7.75" PointY="1" />
+        <AssociationConnector Association="DBCosmeticModel.FK_ActionLog_Customer" />
+        <AssociationConnector Association="DBCosmeticModel.FK_CartDetail_Cart" />
+        <AssociationConnector Association="DBCosmeticModel.FK_Customer_Cart" />
+        <AssociationConnector Association="DBCosmeticModel.FK_Customer_CustomerAddress" />
+        <AssociationConnector Association="DBCosmeticModel.FK_Discount_Customer" />
+        <AssociationConnector Association="DBCosmeticModel.FK_Order_Customer" />
+        <AssociationConnector Association="DBCosmeticModel.FK_Discount_Product" />
+        <AssociationConnector Association="DBCosmeticModel.FK_EmployeeDetail_Employee" />
+        <AssociationConnector Association="DBCosmeticModel.FK_OrderDetail_Employee" />
+        <AssociationConnector Association="DBCosmeticModel.FK_EmployeeDetail_Position" />
+        <AssociationConnector Association="DBCosmeticModel.FK_EmployeeDetail_Position1" />
+        <AssociationConnector Association="DBCosmeticModel.FK_Salary_EmployeeDetail" />
+        <AssociationConnector Association="DBCosmeticModel.FK_Notification_Order" />
+        <AssociationConnector Association="DBCosmeticModel.FK_Order_ProcessOrder" />
+        <AssociationConnector Association="DBCosmeticModel.FK_OrderDetail_Order" />
+        <AssociationConnector Association="DBCosmeticModel.FK_OrderDetail_Product" />
+        <AssociationConnector Association="DBCosmeticModel.FK_ProcessOrder_Status" />
+        <AssociationConnector Association="DBCosmeticModel.FK_Product_ProductDetail" />
+        <AssociationConnector Association="DBCosmeticModel.FK_Product_ProductType" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

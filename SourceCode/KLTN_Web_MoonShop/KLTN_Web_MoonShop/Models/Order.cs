@@ -14,11 +14,26 @@ namespace KLTN_Web_MoonShop.Models
     
     public partial class Order
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Order()
+        {
+            this.Notifications = new HashSet<Notification>();
+            this.OrderDetails = new HashSet<OrderDetail>();
+        }
+    
         public long orderID { get; set; }
         public Nullable<long> customerID { get; set; }
         public Nullable<System.DateTime> createDate { get; set; }
         public Nullable<long> employeeID { get; set; }
         public Nullable<long> money { get; set; }
         public Nullable<int> status { get; set; }
+        public Nullable<long> idProcess { get; set; }
+    
+        public virtual Customer Customer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Notification> Notifications { get; set; }
+        public virtual ProcessOrder ProcessOrder { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

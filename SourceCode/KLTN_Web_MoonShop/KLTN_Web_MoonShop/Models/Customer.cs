@@ -14,6 +14,14 @@ namespace KLTN_Web_MoonShop.Models
     
     public partial class Customer
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Customer()
+        {
+            this.ActionLogs = new HashSet<ActionLog>();
+            this.Discounts = new HashSet<Discount>();
+            this.Orders = new HashSet<Order>();
+        }
+    
         public long customerID { get; set; }
         public string customerName { get; set; }
         public string customerMail { get; set; }
@@ -21,7 +29,18 @@ namespace KLTN_Web_MoonShop.Models
         public string customerUserName { get; set; }
         public string customerPassword { get; set; }
         public string customerPhoto { get; set; }
-        public Nullable<int> isActive { get; set; }
+        public Nullable<long> idAddress { get; set; }
+        public Nullable<long> cartID { get; set; }
         public Nullable<System.DateTime> dateCreate { get; set; }
+        public Nullable<int> isActive { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ActionLog> ActionLogs { get; set; }
+        public virtual Cart Cart { get; set; }
+        public virtual CustomerAddress CustomerAddress { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Discount> Discounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

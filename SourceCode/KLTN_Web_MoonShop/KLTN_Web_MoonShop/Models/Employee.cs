@@ -14,9 +14,19 @@ namespace KLTN_Web_MoonShop.Models
     
     public partial class Employee
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Employee()
+        {
+            this.OrderDetails = new HashSet<OrderDetail>();
+        }
+    
         public long emID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public Nullable<System.DateTime> dateCreate { get; set; }
+    
+        public virtual EmployeeDetail EmployeeDetail { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

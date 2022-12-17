@@ -23,5 +23,7 @@ namespace KLTN_Web_MoonShop.Models
         public string origin { get; set; }
         public string brand { get; set; }
         public string desciption { get; set; }
+    
+        public virtual Product Product { get; set; }
     }
 }

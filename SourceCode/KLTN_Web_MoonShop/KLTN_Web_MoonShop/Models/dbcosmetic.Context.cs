@@ -30,9 +30,12 @@ namespace KLTN_Web_MoonShop.Models
         public virtual DbSet<CartDetail> CartDetails { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<CustomerAddress> CustomerAddresses { get; set; }
+        public virtual DbSet<Discount> Discounts { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<EmployeeDetail> EmployeeDetails { get; set; }
+        public virtual DbSet<image> images { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Position> Positions { get; set; }
         public virtual DbSet<ProcessOrder> ProcessOrders { get; set; }
@@ -43,8 +46,5 @@ namespace KLTN_Web_MoonShop.Models
         public virtual DbSet<Sex> Sexes { get; set; }
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Discount> Discounts { get; set; }
-        public virtual DbSet<image> images { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
     }
 }

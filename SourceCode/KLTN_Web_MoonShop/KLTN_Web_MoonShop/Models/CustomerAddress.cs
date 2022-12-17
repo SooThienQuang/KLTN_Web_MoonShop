@@ -14,12 +14,21 @@ namespace KLTN_Web_MoonShop.Models
     
     public partial class CustomerAddress
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CustomerAddress()
+        {
+            this.Customers = new HashSet<Customer>();
+        }
+    
         public long ID { get; set; }
-        public Nullable<long> customerID { get; set; }
+        public long customerID { get; set; }
         public string customerAdd { get; set; }
         public string customerPhone { get; set; }
         public Nullable<int> isMain { get; set; }
         public string customerMail { get; set; }
         public Nullable<int> isActive { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Customer> Customers { get; set; }
     }
 }

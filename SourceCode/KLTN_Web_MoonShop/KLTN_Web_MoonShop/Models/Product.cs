@@ -14,6 +14,13 @@ namespace KLTN_Web_MoonShop.Models
     
     public partial class Product
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Product()
+        {
+            this.Discounts = new HashSet<Discount>();
+            this.OrderDetails = new HashSet<OrderDetail>();
+        }
+    
         public long productID { get; set; }
         public string productName { get; set; }
         public Nullable<long> productQuantity { get; set; }
@@ -23,5 +30,12 @@ namespace KLTN_Web_MoonShop.Models
         public Nullable<int> productTypeID { get; set; }
         public Nullable<int> isActive { get; set; }
         public Nullable<System.DateTime> date { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Discount> Discounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ProductDetail ProductDetail { get; set; }
+        public virtual ProductType ProductType { get; set; }
     }
 }

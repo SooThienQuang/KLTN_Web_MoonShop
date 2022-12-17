@@ -14,7 +14,19 @@ namespace KLTN_Web_MoonShop.Models
     
     public partial class Position
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Position()
+        {
+            this.EmployeeDetails = new HashSet<EmployeeDetail>();
+            this.EmployeeDetails1 = new HashSet<EmployeeDetail>();
+        }
+    
         public int posID { get; set; }
         public string posName { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeDetail> EmployeeDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeDetail> EmployeeDetails1 { get; set; }
     }
 }

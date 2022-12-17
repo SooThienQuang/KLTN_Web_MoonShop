@@ -14,8 +14,17 @@ namespace KLTN_Web_MoonShop.Models
     
     public partial class ProductType
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ProductType()
+        {
+            this.Products = new HashSet<Product>();
+        }
+    
         public int proTypeID { get; set; }
         public string proTypeName { get; set; }
         public Nullable<int> isActive { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

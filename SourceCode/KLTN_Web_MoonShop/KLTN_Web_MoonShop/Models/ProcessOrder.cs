@@ -14,6 +14,12 @@ namespace KLTN_Web_MoonShop.Models
     
     public partial class ProcessOrder
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ProcessOrder()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
         public long processID { get; set; }
         public Nullable<long> objectID { get; set; }
         public string shippingName { get; set; }
@@ -27,5 +33,9 @@ namespace KLTN_Web_MoonShop.Models
         public Nullable<int> status { get; set; }
         public string description { get; set; }
         public Nullable<int> isActive { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual Status Status1 { get; set; }
     }
 }

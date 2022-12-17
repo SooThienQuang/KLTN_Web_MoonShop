@@ -33,8 +33,8 @@
             <PropertyRef Name="cartDetailID" />
           </Key>
           <Property Name="cartDetailID" Type="int" Nullable="false" />
-          <Property Name="cartID" Type="bigint" />
-          <Property Name="productID" Type="bigint" />
+          <Property Name="cartID" Type="bigint" Nullable="false" />
+          <Property Name="productID" Type="bigint" Nullable="false" />
           <Property Name="cartQuantity" Type="int" />
           <Property Name="cartMoney" Type="bigint" />
           <Property Name="createTime" Type="datetime" />
@@ -51,15 +51,17 @@
           <Property Name="customerUserName" Type="nchar" MaxLength="100" />
           <Property Name="customerPassword" Type="nchar" MaxLength="100" />
           <Property Name="customerPhoto" Type="nchar" MaxLength="1000" />
-          <Property Name="isActive" Type="int" />
+          <Property Name="idAddress" Type="bigint" />
+          <Property Name="cartID" Type="bigint" />
           <Property Name="dateCreate" Type="datetime" />
+          <Property Name="isActive" Type="int" />
         </EntityType>
         <EntityType Name="CustomerAddress">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" Nullable="false" />
-          <Property Name="customerID" Type="bigint" />
+          <Property Name="customerID" Type="bigint" Nullable="false" />
           <Property Name="customerAdd" Type="nvarchar" MaxLength="500" />
           <Property Name="customerPhone" Type="nchar" MaxLength="10" />
           <Property Name="isMain" Type="int" />
@@ -144,6 +146,7 @@
           <Property Name="employeeID" Type="bigint" />
           <Property Name="money" Type="bigint" />
           <Property Name="status" Type="int" />
+          <Property Name="idProcess" Type="bigint" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -157,6 +160,7 @@
           <Property Name="Money" Type="bigint" />
           <Property Name="idAdd" Type="nvarchar" MaxLength="500" />
           <Property Name="statusID" Type="int" />
+          <Property Name="emID" Type="bigint" />
         </EntityType>
         <EntityType Name="Position">
           <Key>
@@ -254,6 +258,234 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <Association Name="FK_ActionLog_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="ActionLog" Type="Self.ActionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customerID" />
+            </Principal>
+            <Dependent Role="ActionLog">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartDetail_Cart">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
+          <End Role="CartDetail" Type="Self.CartDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="cartID" />
+            </Principal>
+            <Dependent Role="CartDetail">
+              <PropertyRef Name="cartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Cart">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="cartID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="cartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_CustomerAddress">
+          <End Role="CustomerAddress" Type="Self.CustomerAddress" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerAddress">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="idAddress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Discount_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Discount" Type="Self.Discount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customerID" />
+            </Principal>
+            <Dependent Role="Discount">
+              <PropertyRef Name="cusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Discount_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Discount" Type="Self.Discount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="productID" />
+            </Principal>
+            <Dependent Role="Discount">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeDetail_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="EmployeeDetail" Type="Self.EmployeeDetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="emID" />
+            </Principal>
+            <Dependent Role="EmployeeDetail">
+              <PropertyRef Name="emID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeDetail_Position">
+          <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
+          <End Role="EmployeeDetail" Type="Self.EmployeeDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="posID" />
+            </Principal>
+            <Dependent Role="EmployeeDetail">
+              <PropertyRef Name="posID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeDetail_Position1">
+          <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
+          <End Role="EmployeeDetail" Type="Self.EmployeeDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="posID" />
+            </Principal>
+            <Dependent Role="EmployeeDetail">
+              <PropertyRef Name="posID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="orderID" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="objectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customerID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="customerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_ProcessOrder">
+          <End Role="ProcessOrder" Type="Self.ProcessOrder" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProcessOrder">
+              <PropertyRef Name="processID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="idProcess" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="emID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="emID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="orderID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="orderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="productID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcessOrder_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="ProcessOrder" Type="Self.ProcessOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="statusID" />
+            </Principal>
+            <Dependent Role="ProcessOrder">
+              <PropertyRef Name="status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ProductDetail">
+          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ProductDetail">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ProductType">
+          <End Role="ProductType" Type="Self.ProductType" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductType">
+              <PropertyRef Name="proTypeID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="productTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Salary_EmployeeDetail">
+          <End Role="EmployeeDetail" Type="Self.EmployeeDetail" Multiplicity="0..1" />
+          <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeDetail">
+              <PropertyRef Name="emID" />
+            </Principal>
+            <Dependent Role="Salary">
+              <PropertyRef Name="emID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DBCosmeticModelStoreContainer">
           <EntitySet Name="ActionLog" EntityType="Self.ActionLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
@@ -276,6 +508,82 @@
           <EntitySet Name="Sex" EntityType="Self.Sex" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ActionLog_Customer" Association="Self.FK_ActionLog_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="ActionLog" EntitySet="ActionLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartDetail_Cart" Association="Self.FK_CartDetail_Cart">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="CartDetail" EntitySet="CartDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Cart" Association="Self.FK_Customer_Cart">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_CustomerAddress" Association="Self.FK_Customer_CustomerAddress">
+            <End Role="CustomerAddress" EntitySet="CustomerAddress" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Discount_Customer" Association="Self.FK_Discount_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Discount" EntitySet="Discount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Discount_Product" Association="Self.FK_Discount_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Discount" EntitySet="Discount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeDetail_Employee" Association="Self.FK_EmployeeDetail_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="EmployeeDetail" EntitySet="EmployeeDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeDetail_Position" Association="Self.FK_EmployeeDetail_Position">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="EmployeeDetail" EntitySet="EmployeeDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeDetail_Position1" Association="Self.FK_EmployeeDetail_Position1">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="EmployeeDetail" EntitySet="EmployeeDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_Order" Association="Self.FK_Notification_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_ProcessOrder" Association="Self.FK_Order_ProcessOrder">
+            <End Role="ProcessOrder" EntitySet="ProcessOrder" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Employee" Association="Self.FK_OrderDetail_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Order" Association="Self.FK_OrderDetail_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Product" Association="Self.FK_OrderDetail_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcessOrder_Status" Association="Self.FK_ProcessOrder_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="ProcessOrder" EntitySet="ProcessOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductDetail" Association="Self.FK_Product_ProductDetail">
+            <End Role="ProductDetail" EntitySet="ProductDetail" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductType" Association="Self.FK_Product_ProductType">
+            <End Role="ProductType" EntitySet="ProductType" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Salary_EmployeeDetail" Association="Self.FK_Salary_EmployeeDetail">
+            <End Role="EmployeeDetail" EntitySet="EmployeeDetail" />
+            <End Role="Salary" EntitySet="Salary" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -287,9 +595,12 @@
           <EntitySet Name="CartDetails" EntityType="DBCosmeticModel.CartDetail" />
           <EntitySet Name="Customers" EntityType="DBCosmeticModel.Customer" />
           <EntitySet Name="CustomerAddresses" EntityType="DBCosmeticModel.CustomerAddress" />
+          <EntitySet Name="Discounts" EntityType="DBCosmeticModel.Discount" />
           <EntitySet Name="Employees" EntityType="DBCosmeticModel.Employee" />
           <EntitySet Name="EmployeeDetails" EntityType="DBCosmeticModel.EmployeeDetail" />
+          <EntitySet Name="images" EntityType="DBCosmeticModel.image" />
           <EntitySet Name="Notifications" EntityType="DBCosmeticModel.Notification" />
+          <EntitySet Name="Orders" EntityType="DBCosmeticModel.Order" />
           <EntitySet Name="OrderDetails" EntityType="DBCosmeticModel.OrderDetail" />
           <EntitySet Name="Positions" EntityType="DBCosmeticModel.Position" />
           <EntitySet Name="ProcessOrders" EntityType="DBCosmeticModel.ProcessOrder" />
@@ -300,9 +611,82 @@
           <EntitySet Name="Sexes" EntityType="DBCosmeticModel.Sex" />
           <EntitySet Name="Status" EntityType="DBCosmeticModel.Status" />
           <EntitySet Name="sysdiagrams" EntityType="DBCosmeticModel.sysdiagram" />
-          <EntitySet Name="Discounts" EntityType="DBCosmeticModel.Discount" />
-          <EntitySet Name="images" EntityType="DBCosmeticModel.image" />
-          <EntitySet Name="Orders" EntityType="DBCosmeticModel.Order" />
+          <AssociationSet Name="FK_ActionLog_Customer" Association="DBCosmeticModel.FK_ActionLog_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="ActionLog" EntitySet="ActionLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartDetail_Cart" Association="DBCosmeticModel.FK_CartDetail_Cart">
+            <End Role="Cart" EntitySet="Carts" />
+            <End Role="CartDetail" EntitySet="CartDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Cart" Association="DBCosmeticModel.FK_Customer_Cart">
+            <End Role="Cart" EntitySet="Carts" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_CustomerAddress" Association="DBCosmeticModel.FK_Customer_CustomerAddress">
+            <End Role="CustomerAddress" EntitySet="CustomerAddresses" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Discount_Customer" Association="DBCosmeticModel.FK_Discount_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Discount" EntitySet="Discounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Customer" Association="DBCosmeticModel.FK_Order_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Discount_Product" Association="DBCosmeticModel.FK_Discount_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Discount" EntitySet="Discounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeDetail_Employee" Association="DBCosmeticModel.FK_EmployeeDetail_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="EmployeeDetail" EntitySet="EmployeeDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Employee" Association="DBCosmeticModel.FK_OrderDetail_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeDetail_Position" Association="DBCosmeticModel.FK_EmployeeDetail_Position">
+            <End Role="Position" EntitySet="Positions" />
+            <End Role="EmployeeDetail" EntitySet="EmployeeDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeDetail_Position1" Association="DBCosmeticModel.FK_EmployeeDetail_Position1">
+            <End Role="Position" EntitySet="Positions" />
+            <End Role="EmployeeDetail" EntitySet="EmployeeDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Salary_EmployeeDetail" Association="DBCosmeticModel.FK_Salary_EmployeeDetail">
+            <End Role="EmployeeDetail" EntitySet="EmployeeDetails" />
+            <End Role="Salary" EntitySet="Salaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_Order" Association="DBCosmeticModel.FK_Notification_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_ProcessOrder" Association="DBCosmeticModel.FK_Order_ProcessOrder">
+            <End Role="ProcessOrder" EntitySet="ProcessOrders" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Order" Association="DBCosmeticModel.FK_OrderDetail_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Product" Association="DBCosmeticModel.FK_OrderDetail_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcessOrder_Status" Association="DBCosmeticModel.FK_ProcessOrder_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="ProcessOrder" EntitySet="ProcessOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductDetail" Association="DBCosmeticModel.FK_Product_ProductDetail">
+            <End Role="ProductDetail" EntitySet="ProductDetails" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductType" Association="DBCosmeticModel.FK_Product_ProductType">
+            <End Role="ProductType" EntitySet="ProductTypes" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ActionLog">
           <Key>
@@ -317,6 +701,7 @@
           <Property Name="actionDate" Type="DateTime" Precision="3" />
           <Property Name="idOject" Type="Int64" />
           <Property Name="nameTable" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="DBCosmeticModel.FK_ActionLog_Customer" FromRole="ActionLog" ToRole="Customer" />
         </EntityType>
         <EntityType Name="Cart">
           <Key>
@@ -326,18 +711,21 @@
           <Property Name="customerID" Type="Int64" />
           <Property Name="createDate" Type="DateTime" Precision="3" />
           <Property Name="isActive" Type="Int32" />
+          <NavigationProperty Name="CartDetails" Relationship="DBCosmeticModel.FK_CartDetail_Cart" FromRole="Cart" ToRole="CartDetail" />
+          <NavigationProperty Name="Customers" Relationship="DBCosmeticModel.FK_Customer_Cart" FromRole="Cart" ToRole="Customer" />
         </EntityType>
         <EntityType Name="CartDetail">
           <Key>
             <PropertyRef Name="cartDetailID" />
           </Key>
           <Property Name="cartDetailID" Type="Int32" Nullable="false" />
-          <Property Name="cartID" Type="Int64" />
-          <Property Name="productID" Type="Int64" />
+          <Property Name="cartID" Type="Int64" Nullable="false" />
+          <Property Name="productID" Type="Int64" Nullable="false" />
           <Property Name="cartQuantity" Type="Int32" />
           <Property Name="cartMoney" Type="Int64" />
           <Property Name="createTime" Type="DateTime" Precision="3" />
           <Property Name="isActive" Type="Int32" />
+          <NavigationProperty Name="Cart" Relationship="DBCosmeticModel.FK_CartDetail_Cart" FromRole="CartDetail" ToRole="Cart" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -350,20 +738,47 @@
           <Property Name="customerUserName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <Property Name="customerPassword" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <Property Name="customerPhoto" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
-          <Property Name="isActive" Type="Int32" />
+          <Property Name="idAddress" Type="Int64" />
+          <Property Name="cartID" Type="Int64" />
           <Property Name="dateCreate" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Int32" />
+          <NavigationProperty Name="ActionLogs" Relationship="DBCosmeticModel.FK_ActionLog_Customer" FromRole="Customer" ToRole="ActionLog" />
+          <NavigationProperty Name="Cart" Relationship="DBCosmeticModel.FK_Customer_Cart" FromRole="Customer" ToRole="Cart" />
+          <NavigationProperty Name="CustomerAddress" Relationship="DBCosmeticModel.FK_Customer_CustomerAddress" FromRole="Customer" ToRole="CustomerAddress" />
+          <NavigationProperty Name="Discounts" Relationship="DBCosmeticModel.FK_Discount_Customer" FromRole="Customer" ToRole="Discount" />
+          <NavigationProperty Name="Orders" Relationship="DBCosmeticModel.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
         </EntityType>
         <EntityType Name="CustomerAddress">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" />
-          <Property Name="customerID" Type="Int64" />
+          <Property Name="customerID" Type="Int64" Nullable="false" />
           <Property Name="customerAdd" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="customerPhone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="isMain" Type="Int32" />
           <Property Name="customerMail" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
           <Property Name="isActive" Type="Int32" />
+          <NavigationProperty Name="Customers" Relationship="DBCosmeticModel.FK_Customer_CustomerAddress" FromRole="CustomerAddress" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Discount">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="percentDiscount" Type="Int32" />
+          <Property Name="productID" Type="Int64" />
+          <Property Name="dateTo" Type="DateTime" Precision="3" />
+          <Property Name="dateFrom" Type="DateTime" Precision="3" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="productType" Type="Int32" />
+          <Property Name="isActive" Type="Int32" />
+          <Property Name="image" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="code" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="cusID" Type="Int64" />
+          <NavigationProperty Name="Customer" Relationship="DBCosmeticModel.FK_Discount_Customer" FromRole="Discount" ToRole="Customer" />
+          <NavigationProperty Name="Product" Relationship="DBCosmeticModel.FK_Discount_Product" FromRole="Discount" ToRole="Product" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -373,6 +788,8 @@
           <Property Name="UserName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <Property Name="dateCreate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="EmployeeDetail" Relationship="DBCosmeticModel.FK_EmployeeDetail_Employee" FromRole="Employee" ToRole="EmployeeDetail" />
+          <NavigationProperty Name="OrderDetails" Relationship="DBCosmeticModel.FK_OrderDetail_Employee" FromRole="Employee" ToRole="OrderDetail" />
         </EntityType>
         <EntityType Name="EmployeeDetail">
           <Key>
@@ -388,6 +805,19 @@
           <Property Name="posID" Type="Int32" />
           <Property Name="roleID" Type="Int32" />
           <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Int32" />
+          <NavigationProperty Name="Employee" Relationship="DBCosmeticModel.FK_EmployeeDetail_Employee" FromRole="EmployeeDetail" ToRole="Employee" />
+          <NavigationProperty Name="Position" Relationship="DBCosmeticModel.FK_EmployeeDetail_Position" FromRole="EmployeeDetail" ToRole="Position" />
+          <NavigationProperty Name="Position1" Relationship="DBCosmeticModel.FK_EmployeeDetail_Position1" FromRole="EmployeeDetail" ToRole="Position" />
+          <NavigationProperty Name="Salaries" Relationship="DBCosmeticModel.FK_Salary_EmployeeDetail" FromRole="EmployeeDetail" ToRole="Salary" />
+        </EntityType>
+        <EntityType Name="image">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="Int32" />
           <Property Name="isActive" Type="Int32" />
         </EntityType>
         <EntityType Name="Notification">
@@ -406,6 +836,23 @@
           <Property Name="image" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
           <Property Name="menutype" Type="Int64" />
           <Property Name="isRead" Type="Int32" />
+          <NavigationProperty Name="Order" Relationship="DBCosmeticModel.FK_Notification_Order" FromRole="Notification" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="orderID" />
+          </Key>
+          <Property Name="orderID" Type="Int64" Nullable="false" />
+          <Property Name="customerID" Type="Int64" />
+          <Property Name="createDate" Type="DateTime" Precision="3" />
+          <Property Name="employeeID" Type="Int64" />
+          <Property Name="money" Type="Int64" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="idProcess" Type="Int64" />
+          <NavigationProperty Name="Customer" Relationship="DBCosmeticModel.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="Notifications" Relationship="DBCosmeticModel.FK_Notification_Order" FromRole="Order" ToRole="Notification" />
+          <NavigationProperty Name="ProcessOrder" Relationship="DBCosmeticModel.FK_Order_ProcessOrder" FromRole="Order" ToRole="ProcessOrder" />
+          <NavigationProperty Name="OrderDetails" Relationship="DBCosmeticModel.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -419,6 +866,10 @@
           <Property Name="Money" Type="Int64" />
           <Property Name="idAdd" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="statusID" Type="Int32" />
+          <Property Name="emID" Type="Int64" />
+          <NavigationProperty Name="Employee" Relationship="DBCosmeticModel.FK_OrderDetail_Employee" FromRole="OrderDetail" ToRole="Employee" />
+          <NavigationProperty Name="Order" Relationship="DBCosmeticModel.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="DBCosmeticModel.FK_OrderDetail_Product" FromRole="OrderDetail" ToRole="Product" />
         </EntityType>
         <EntityType Name="Position">
           <Key>
@@ -426,6 +877,8 @@
           </Key>
           <Property Name="posID" Type="Int32" Nullable="false" />
           <Property Name="posName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EmployeeDetails" Relationship="DBCosmeticModel.FK_EmployeeDetail_Position" FromRole="Position" ToRole="EmployeeDetail" />
+          <NavigationProperty Name="EmployeeDetails1" Relationship="DBCosmeticModel.FK_EmployeeDetail_Position1" FromRole="Position" ToRole="EmployeeDetail" />
         </EntityType>
         <EntityType Name="ProcessOrder">
           <Key>
@@ -444,6 +897,8 @@
           <Property Name="status" Type="Int32" />
           <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="isActive" Type="Int32" />
+          <NavigationProperty Name="Orders" Relationship="DBCosmeticModel.FK_Order_ProcessOrder" FromRole="ProcessOrder" ToRole="Order" />
+          <NavigationProperty Name="Status1" Relationship="DBCosmeticModel.FK_ProcessOrder_Status" FromRole="ProcessOrder" ToRole="Status" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -458,6 +913,10 @@
           <Property Name="productTypeID" Type="Int32" />
           <Property Name="isActive" Type="Int32" />
           <Property Name="date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Discounts" Relationship="DBCosmeticModel.FK_Discount_Product" FromRole="Product" ToRole="Discount" />
+          <NavigationProperty Name="OrderDetails" Relationship="DBCosmeticModel.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
+          <NavigationProperty Name="ProductDetail" Relationship="DBCosmeticModel.FK_Product_ProductDetail" FromRole="Product" ToRole="ProductDetail" />
+          <NavigationProperty Name="ProductType" Relationship="DBCosmeticModel.FK_Product_ProductType" FromRole="Product" ToRole="ProductType" />
         </EntityType>
         <EntityType Name="ProductDetail">
           <Key>
@@ -472,6 +931,7 @@
           <Property Name="origin" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="brand" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="desciption" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="DBCosmeticModel.FK_Product_ProductDetail" FromRole="ProductDetail" ToRole="Product" />
         </EntityType>
         <EntityType Name="ProductType">
           <Key>
@@ -480,6 +940,7 @@
           <Property Name="proTypeID" Type="Int32" Nullable="false" />
           <Property Name="proTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="isActive" Type="Int32" />
+          <NavigationProperty Name="Products" Relationship="DBCosmeticModel.FK_Product_ProductType" FromRole="ProductType" ToRole="Product" />
         </EntityType>
         <EntityType Name="Salary">
           <Key>
@@ -490,6 +951,7 @@
           <Property Name="salary1" Type="Int64" />
           <Property Name="bonus" Type="Int64" />
           <Property Name="dateUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="EmployeeDetail" Relationship="DBCosmeticModel.FK_Salary_EmployeeDetail" FromRole="Salary" ToRole="EmployeeDetail" />
         </EntityType>
         <EntityType Name="Sex">
           <Key>
@@ -505,6 +967,7 @@
           <Property Name="statusID" Type="Int32" Nullable="false" />
           <Property Name="statusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="isActive" Type="Int32" />
+          <NavigationProperty Name="ProcessOrders" Relationship="DBCosmeticModel.FK_ProcessOrder_Status" FromRole="Status" ToRole="ProcessOrder" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -516,43 +979,234 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="Discount">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="percentDiscount" Type="Int32" />
-          <Property Name="productID" Type="Int64" />
-          <Property Name="dateTo" Type="DateTime" Precision="3" />
-          <Property Name="dateFrom" Type="DateTime" Precision="3" />
-          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="productType" Type="Int32" />
-          <Property Name="isActive" Type="Int32" />
-          <Property Name="image" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
-          <Property Name="code" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="cusID" Type="Int64" />
-        </EntityType>
-        <EntityType Name="image">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int64" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="type" Type="Int32" />
-          <Property Name="isActive" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Order">
-          <Key>
-            <PropertyRef Name="orderID" />
-          </Key>
-          <Property Name="orderID" Type="Int64" Nullable="false" />
-          <Property Name="customerID" Type="Int64" />
-          <Property Name="createDate" Type="DateTime" Precision="3" />
-          <Property Name="employeeID" Type="Int64" />
-          <Property Name="money" Type="Int64" />
-          <Property Name="status" Type="Int32" />
-        </EntityType>
+        <Association Name="FK_ActionLog_Customer">
+          <End Type="DBCosmeticModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="DBCosmeticModel.ActionLog" Role="ActionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customerID" />
+            </Principal>
+            <Dependent Role="ActionLog">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartDetail_Cart">
+          <End Type="DBCosmeticModel.Cart" Role="Cart" Multiplicity="1" />
+          <End Type="DBCosmeticModel.CartDetail" Role="CartDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="cartID" />
+            </Principal>
+            <Dependent Role="CartDetail">
+              <PropertyRef Name="cartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Cart">
+          <End Type="DBCosmeticModel.Cart" Role="Cart" Multiplicity="0..1" />
+          <End Type="DBCosmeticModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="cartID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="cartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_CustomerAddress">
+          <End Type="DBCosmeticModel.CustomerAddress" Role="CustomerAddress" Multiplicity="0..1" />
+          <End Type="DBCosmeticModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerAddress">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="idAddress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Discount_Customer">
+          <End Type="DBCosmeticModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="DBCosmeticModel.Discount" Role="Discount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customerID" />
+            </Principal>
+            <Dependent Role="Discount">
+              <PropertyRef Name="cusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Customer">
+          <End Type="DBCosmeticModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="DBCosmeticModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customerID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="customerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Discount_Product">
+          <End Type="DBCosmeticModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="DBCosmeticModel.Discount" Role="Discount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="productID" />
+            </Principal>
+            <Dependent Role="Discount">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeDetail_Employee">
+          <End Type="DBCosmeticModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="DBCosmeticModel.EmployeeDetail" Role="EmployeeDetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="emID" />
+            </Principal>
+            <Dependent Role="EmployeeDetail">
+              <PropertyRef Name="emID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Employee">
+          <End Type="DBCosmeticModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="DBCosmeticModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="emID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="emID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeDetail_Position">
+          <End Type="DBCosmeticModel.Position" Role="Position" Multiplicity="0..1" />
+          <End Type="DBCosmeticModel.EmployeeDetail" Role="EmployeeDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="posID" />
+            </Principal>
+            <Dependent Role="EmployeeDetail">
+              <PropertyRef Name="posID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeDetail_Position1">
+          <End Type="DBCosmeticModel.Position" Role="Position" Multiplicity="0..1" />
+          <End Type="DBCosmeticModel.EmployeeDetail" Role="EmployeeDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="posID" />
+            </Principal>
+            <Dependent Role="EmployeeDetail">
+              <PropertyRef Name="posID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Salary_EmployeeDetail">
+          <End Type="DBCosmeticModel.EmployeeDetail" Role="EmployeeDetail" Multiplicity="0..1" />
+          <End Type="DBCosmeticModel.Salary" Role="Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeDetail">
+              <PropertyRef Name="emID" />
+            </Principal>
+            <Dependent Role="Salary">
+              <PropertyRef Name="emID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_Order">
+          <End Type="DBCosmeticModel.Order" Role="Order" Multiplicity="0..1" />
+          <End Type="DBCosmeticModel.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="orderID" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="objectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_ProcessOrder">
+          <End Type="DBCosmeticModel.ProcessOrder" Role="ProcessOrder" Multiplicity="0..1" />
+          <End Type="DBCosmeticModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProcessOrder">
+              <PropertyRef Name="processID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="idProcess" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Order">
+          <End Type="DBCosmeticModel.Order" Role="Order" Multiplicity="0..1" />
+          <End Type="DBCosmeticModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="orderID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="orderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Product">
+          <End Type="DBCosmeticModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="DBCosmeticModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="productID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcessOrder_Status">
+          <End Type="DBCosmeticModel.Status" Role="Status" Multiplicity="0..1" />
+          <End Type="DBCosmeticModel.ProcessOrder" Role="ProcessOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="statusID" />
+            </Principal>
+            <Dependent Role="ProcessOrder">
+              <PropertyRef Name="status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ProductDetail">
+          <End Type="DBCosmeticModel.ProductDetail" Role="ProductDetail" Multiplicity="1" />
+          <End Type="DBCosmeticModel.Product" Role="Product" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ProductDetail">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ProductType">
+          <End Type="DBCosmeticModel.ProductType" Role="ProductType" Multiplicity="0..1" />
+          <End Type="DBCosmeticModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductType">
+              <PropertyRef Name="proTypeID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="productTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -600,8 +1254,10 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="DBCosmeticModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
+                <ScalarProperty Name="cartID" ColumnName="cartID" />
+                <ScalarProperty Name="idAddress" ColumnName="idAddress" />
                 <ScalarProperty Name="customerPhoto" ColumnName="customerPhoto" />
                 <ScalarProperty Name="customerPassword" ColumnName="customerPassword" />
                 <ScalarProperty Name="customerUserName" ColumnName="customerUserName" />
@@ -621,6 +1277,24 @@
                 <ScalarProperty Name="customerPhone" ColumnName="customerPhone" />
                 <ScalarProperty Name="customerAdd" ColumnName="customerAdd" />
                 <ScalarProperty Name="customerID" ColumnName="customerID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Discounts">
+            <EntityTypeMapping TypeName="DBCosmeticModel.Discount">
+              <MappingFragment StoreEntitySet="Discount">
+                <ScalarProperty Name="cusID" ColumnName="cusID" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="productType" ColumnName="productType" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="dateFrom" ColumnName="dateFrom" />
+                <ScalarProperty Name="dateTo" ColumnName="dateTo" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="percentDiscount" ColumnName="percentDiscount" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -652,6 +1326,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="images">
+            <EntityTypeMapping TypeName="DBCosmeticModel.image">
+              <MappingFragment StoreEntitySet="image">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Notifications">
             <EntityTypeMapping TypeName="DBCosmeticModel.Notification">
               <MappingFragment StoreEntitySet="Notification">
@@ -670,9 +1354,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="DBCosmeticModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="idProcess" ColumnName="idProcess" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="money" ColumnName="money" />
+                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="customerID" ColumnName="customerID" />
+                <ScalarProperty Name="orderID" ColumnName="orderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="OrderDetails">
             <EntityTypeMapping TypeName="DBCosmeticModel.OrderDetail">
               <MappingFragment StoreEntitySet="OrderDetail">
+                <ScalarProperty Name="emID" ColumnName="emID" />
                 <ScalarProperty Name="statusID" ColumnName="statusID" />
                 <ScalarProperty Name="idAdd" ColumnName="idAdd" />
                 <ScalarProperty Name="Money" ColumnName="Money" />
@@ -786,46 +1484,6 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Discounts">
-            <EntityTypeMapping TypeName="DBCosmeticModel.Discount">
-              <MappingFragment StoreEntitySet="Discount">
-                <ScalarProperty Name="cusID" ColumnName="cusID" />
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="image" ColumnName="image" />
-                <ScalarProperty Name="isActive" ColumnName="isActive" />
-                <ScalarProperty Name="productType" ColumnName="productType" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="dateFrom" ColumnName="dateFrom" />
-                <ScalarProperty Name="dateTo" ColumnName="dateTo" />
-                <ScalarProperty Name="productID" ColumnName="productID" />
-                <ScalarProperty Name="percentDiscount" ColumnName="percentDiscount" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="images">
-            <EntityTypeMapping TypeName="DBCosmeticModel.image">
-              <MappingFragment StoreEntitySet="image">
-                <ScalarProperty Name="isActive" ColumnName="isActive" />
-                <ScalarProperty Name="type" ColumnName="type" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="DBCosmeticModel.Order">
-              <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="money" ColumnName="money" />
-                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
-                <ScalarProperty Name="createDate" ColumnName="createDate" />
-                <ScalarProperty Name="customerID" ColumnName="customerID" />
-                <ScalarProperty Name="orderID" ColumnName="orderID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

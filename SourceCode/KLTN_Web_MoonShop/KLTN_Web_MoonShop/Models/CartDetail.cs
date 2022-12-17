@@ -15,11 +15,13 @@ namespace KLTN_Web_MoonShop.Models
     public partial class CartDetail
     {
         public int cartDetailID { get; set; }
-        public Nullable<long> cartID { get; set; }
-        public Nullable<long> productID { get; set; }
+        public long cartID { get; set; }
+        public long productID { get; set; }
         public Nullable<int> cartQuantity { get; set; }
         public Nullable<long> cartMoney { get; set; }
         public Nullable<System.DateTime> createTime { get; set; }
         public Nullable<int> isActive { get; set; }
+    
+        public virtual Cart Cart { get; set; }
     }
 }

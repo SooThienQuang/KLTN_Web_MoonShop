@@ -23,5 +23,7 @@ namespace KLTN_Web_MoonShop.Models
         public Nullable<System.DateTime> actionDate { get; set; }
         public Nullable<long> idOject { get; set; }
         public string nameTable { get; set; }
+    
+        public virtual Customer Customer { get; set; }
     }
 }

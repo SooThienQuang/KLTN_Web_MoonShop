@@ -28,8 +28,8 @@
       <PropertyRef Name="cartDetailID" />
     </Key>
     <Property Name="cartDetailID" Type="int" Nullable="false" />
-    <Property Name="cartID" Type="bigint" />
-    <Property Name="productID" Type="bigint" />
+    <Property Name="cartID" Type="bigint" Nullable="false" />
+    <Property Name="productID" Type="bigint" Nullable="false" />
     <Property Name="cartQuantity" Type="int" />
     <Property Name="cartMoney" Type="bigint" />
     <Property Name="createTime" Type="datetime" />
@@ -46,15 +46,17 @@
     <Property Name="customerUserName" Type="nchar" MaxLength="100" />
     <Property Name="customerPassword" Type="nchar" MaxLength="100" />
     <Property Name="customerPhoto" Type="nchar" MaxLength="1000" />
-    <Property Name="isActive" Type="int" />
+    <Property Name="idAddress" Type="bigint" />
+    <Property Name="cartID" Type="bigint" />
     <Property Name="dateCreate" Type="datetime" />
+    <Property Name="isActive" Type="int" />
   </EntityType>
   <EntityType Name="CustomerAddress">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="bigint" Nullable="false" />
-    <Property Name="customerID" Type="bigint" />
+    <Property Name="customerID" Type="bigint" Nullable="false" />
     <Property Name="customerAdd" Type="nvarchar" MaxLength="500" />
     <Property Name="customerPhone" Type="nchar" MaxLength="10" />
     <Property Name="isMain" Type="int" />
@@ -139,6 +141,7 @@
     <Property Name="employeeID" Type="bigint" />
     <Property Name="money" Type="bigint" />
     <Property Name="status" Type="int" />
+    <Property Name="idProcess" Type="bigint" />
   </EntityType>
   <EntityType Name="OrderDetail">
     <Key>
@@ -152,6 +155,7 @@
     <Property Name="Money" Type="bigint" />
     <Property Name="idAdd" Type="nvarchar" MaxLength="500" />
     <Property Name="statusID" Type="int" />
+    <Property Name="emID" Type="bigint" />
   </EntityType>
   <EntityType Name="Position">
     <Key>
@@ -249,6 +253,234 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <Association Name="FK_ActionLog_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="ActionLog" Type="Self.ActionLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="customerID" />
+      </Principal>
+      <Dependent Role="ActionLog">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CartDetail_Cart">
+    <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
+    <End Role="CartDetail" Type="Self.CartDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cart">
+        <PropertyRef Name="cartID" />
+      </Principal>
+      <Dependent Role="CartDetail">
+        <PropertyRef Name="cartID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Cart">
+    <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cart">
+        <PropertyRef Name="cartID" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="cartID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_CustomerAddress">
+    <End Role="CustomerAddress" Type="Self.CustomerAddress" Multiplicity="0..1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerAddress">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="idAddress" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Discount_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Discount" Type="Self.Discount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="customerID" />
+      </Principal>
+      <Dependent Role="Discount">
+        <PropertyRef Name="cusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Discount_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Discount" Type="Self.Discount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="productID" />
+      </Principal>
+      <Dependent Role="Discount">
+        <PropertyRef Name="productID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeDetail_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="EmployeeDetail" Type="Self.EmployeeDetail" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="emID" />
+      </Principal>
+      <Dependent Role="EmployeeDetail">
+        <PropertyRef Name="emID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeDetail_Position">
+    <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
+    <End Role="EmployeeDetail" Type="Self.EmployeeDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Position">
+        <PropertyRef Name="posID" />
+      </Principal>
+      <Dependent Role="EmployeeDetail">
+        <PropertyRef Name="posID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeDetail_Position1">
+    <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
+    <End Role="EmployeeDetail" Type="Self.EmployeeDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Position">
+        <PropertyRef Name="posID" />
+      </Principal>
+      <Dependent Role="EmployeeDetail">
+        <PropertyRef Name="posID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notification_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+    <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="orderID" />
+      </Principal>
+      <Dependent Role="Notification">
+        <PropertyRef Name="objectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="customerID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="customerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_ProcessOrder">
+    <End Role="ProcessOrder" Type="Self.ProcessOrder" Multiplicity="0..1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProcessOrder">
+        <PropertyRef Name="processID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="idProcess" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="emID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="emID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="orderID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="orderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="productID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="productID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProcessOrder_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+    <End Role="ProcessOrder" Type="Self.ProcessOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="statusID" />
+      </Principal>
+      <Dependent Role="ProcessOrder">
+        <PropertyRef Name="status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_ProductDetail">
+    <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ProductDetail">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="productID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_ProductType">
+    <End Role="ProductType" Type="Self.ProductType" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductType">
+        <PropertyRef Name="proTypeID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="productTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Salary_EmployeeDetail">
+    <End Role="EmployeeDetail" Type="Self.EmployeeDetail" Multiplicity="0..1" />
+    <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeeDetail">
+        <PropertyRef Name="emID" />
+      </Principal>
+      <Dependent Role="Salary">
+        <PropertyRef Name="emID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="DBCosmeticModelStoreContainer">
     <EntitySet Name="ActionLog" EntityType="Self.ActionLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
@@ -271,5 +503,81 @@
     <EntitySet Name="Sex" EntityType="Self.Sex" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ActionLog_Customer" Association="Self.FK_ActionLog_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="ActionLog" EntitySet="ActionLog" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CartDetail_Cart" Association="Self.FK_CartDetail_Cart">
+      <End Role="Cart" EntitySet="Cart" />
+      <End Role="CartDetail" EntitySet="CartDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Cart" Association="Self.FK_Customer_Cart">
+      <End Role="Cart" EntitySet="Cart" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_CustomerAddress" Association="Self.FK_Customer_CustomerAddress">
+      <End Role="CustomerAddress" EntitySet="CustomerAddress" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Discount_Customer" Association="Self.FK_Discount_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Discount" EntitySet="Discount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Discount_Product" Association="Self.FK_Discount_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Discount" EntitySet="Discount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeDetail_Employee" Association="Self.FK_EmployeeDetail_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="EmployeeDetail" EntitySet="EmployeeDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeDetail_Position" Association="Self.FK_EmployeeDetail_Position">
+      <End Role="Position" EntitySet="Position" />
+      <End Role="EmployeeDetail" EntitySet="EmployeeDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeDetail_Position1" Association="Self.FK_EmployeeDetail_Position1">
+      <End Role="Position" EntitySet="Position" />
+      <End Role="EmployeeDetail" EntitySet="EmployeeDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notification_Order" Association="Self.FK_Notification_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="Notification" EntitySet="Notification" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_ProcessOrder" Association="Self.FK_Order_ProcessOrder">
+      <End Role="ProcessOrder" EntitySet="ProcessOrder" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_Employee" Association="Self.FK_OrderDetail_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_Order" Association="Self.FK_OrderDetail_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_Product" Association="Self.FK_OrderDetail_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProcessOrder_Status" Association="Self.FK_ProcessOrder_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="ProcessOrder" EntitySet="ProcessOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_ProductDetail" Association="Self.FK_Product_ProductDetail">
+      <End Role="ProductDetail" EntitySet="ProductDetail" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_ProductType" Association="Self.FK_Product_ProductType">
+      <End Role="ProductType" EntitySet="ProductType" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Salary_EmployeeDetail" Association="Self.FK_Salary_EmployeeDetail">
+      <End Role="EmployeeDetail" EntitySet="EmployeeDetail" />
+      <End Role="Salary" EntitySet="Salary" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>
