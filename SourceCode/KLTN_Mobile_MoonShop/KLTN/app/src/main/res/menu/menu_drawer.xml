@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single"
+
+        >
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_baseline_person_outline_24"
+            android:title="THÔNG TIN CÁ NHÂN" />
+
+        <item
+            android:id="@+id/navchangepass"
+            android:icon="@drawable/ic_baseline_vpn_key_24"
+            android:title="ĐỔI PASSWORD" />
+        <item
+            android:id="@+id/navlogout"
+            android:icon="@drawable/ic_baseline_power_settings_new_24"
+            android:title="ĐĂNG XUẤT" />
+    </group>
+</menu>

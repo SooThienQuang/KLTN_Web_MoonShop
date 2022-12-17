@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/cart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvcart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/lntongtien"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_above="@id/btnthanhtoan"
+        android:layout_below="@id/cart"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tổng tiền"
+            android:textSize="28dp"
+
+            android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/carttongtien"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="111"
+            android:textColor="@color/red_holo"
+            android:textSize="20dp"></TextView>
+    </LinearLayout>
+    <Button
+        android:layout_alignParentBottom="true"
+        android:text="THANH TOÁN"
+        android:id="@+id/btnthanhtoan"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/red_holo"
+        android:textSize="18dp"
+        app:cornerRadius="20dp">
+    </Button>
+</RelativeLayout>

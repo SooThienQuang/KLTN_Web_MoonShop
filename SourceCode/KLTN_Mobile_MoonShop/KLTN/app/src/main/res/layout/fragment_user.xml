@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<!--    <ImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:id="@+id/imguser"-->
+<!--        android:layout_height="wrap_content">-->
+<!--    </ImageView>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/lninfo"
+        android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/parent_layout"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="50dp">
+
+            <ImageView
+                android:id="@+id/imguser"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:cardCornerRadius="50dp"
+                android:scaleType="centerCrop" />
+
+        </androidx.cardview.widget.CardView>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:id="@+id/txtfullname"
+                android:text="Họ tên :Trần Thị Hồng Hạc">
+            </TextView>
+            <TextView
+                android:layout_below="@id/txtfullname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:id="@+id/txtdiachi"
+                android:text="Họ tên :Trần Thị Hồng Hạc">
+            </TextView>
+            <TextView
+                android:layout_below="@id/txtdiachi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:id="@+id/txtsdt"
+                android:text="Số điện thoại :0909188321">
+            </TextView>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+<Button
+    android:layout_width="match_parent"
+    android:id="@+id/btnlgout"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/lninfo"
+    android:textAlignment="center"
+    android:backgroundTint="@color/red_holo"
+    android:text="Đăng xuất">
+</Button>
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/hshs"
+        android:layout_below="@id/btnlgout"
+        android:text="THEO DÕI ĐƠN HÀNG"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:layout_height="wrap_content">
+
+    </TextView>
+<androidx.recyclerview.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/hshs"
+    android:id="@+id/rvod">
+
+</androidx.recyclerview.widget.RecyclerView>
+</RelativeLayout>

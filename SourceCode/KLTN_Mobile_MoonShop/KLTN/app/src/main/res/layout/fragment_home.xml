@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/gray_holo"
+    android:layout_height="match_parent"
+    >
+    <ScrollView
+        style="@style/parent">
+        <RelativeLayout
+            style="@style/parent">
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPagerMain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ViewFlipper
+                android:id="@+id/viewfliperslide"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@color/pink_holo"></ViewFlipper>
+
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvproducer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/viewfliperslide"
+                android:background="@color/pink_holo">
+
+            </androidx.recyclerview.widget.RecyclerView>
+            <ImageView
+                android:id="@+id/pad"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_below="@id/rvproducer"
+                android:src="@drawable/padding2">
+            </ImageView>
+
+            <TextView
+                android:id="@+id/sphot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_below="@id/pad"
+                android:text="SẢN PHẨM BÁN CHẠY GẦN ĐÂY"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold">
+
+            </TextView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/rvsphot"
+                android:layout_below="@id/sphot"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+<!--            <TextView-->
+<!--                android:id="@+id/spkhac"-->
+<!--                android:layout_below="@id/rvsphot"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="20dp"-->
+<!--                android:gravity="center"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:text="">-->
+
+<!--            </TextView>-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvproduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rvsphot"
+                android:layout_marginTop="10dp"
+               >
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>
+

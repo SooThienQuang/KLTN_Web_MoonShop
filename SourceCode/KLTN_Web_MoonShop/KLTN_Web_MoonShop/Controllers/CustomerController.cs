@@ -110,7 +110,7 @@ namespace KLTN_Web_MoonShop.Controllers
                     //thông báo giảm giá khách hàng mới
                     Notification noti2 = new Notification();
                     long idnoti2 = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
-                    noti2.notiID = idnoti2;
+                    noti2.notiID = idnoti2+1;
                     noti2.receiveUserID = id;
                     noti2.receiveUserFullName = firstname + " " + lastname;
                     noti2.title = "Giảm giá cho khách hàng mới đến";
