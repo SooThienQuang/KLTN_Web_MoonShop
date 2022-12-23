@@ -25,29 +25,30 @@
             color:orange;
         }
     </style>
+
 </head>
 <body id="bodyall">
+    @Html.Action("NavbarTop", "PartialView")
+    <div style="padding:15px 50px 15px 50px">
         <div class="row">
-            @Html.Action("NavbarTop", "PartialView")
+            @RenderBody()
         </div>
-  
-    <div class="row">
-        @RenderBody()
     </div>
+
     @*@Html.Action("Whatsapp", "PartialView")*@
-<div class="container-fluid justify-content-center px-0 " >
-    <footer>
-        <div class="row justify-content-around mb-0 pt-5 mx-4">
-            <div class="col-xl-2 col-md-4 order-xl-1 order-4 mr-xl-0 my-auto">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.062407860602!2d106.626673013976!3d10.806532261594265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752be2853ce7cd%3A0x4111b3b3c2aca14a!2zMTQwIEzDqiBUcuG7jW5nIFThuqVuLCBTxqFuIEvhu7MsIFTDom4gUGjDuiwgVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1671102003536!5m2!1svi!2s"  style="border:0;margin-left:0;width:250px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div class="container-fluid justify-content-center px-0 ">
+        <footer>
+            <div class="row justify-content-around mb-0 pt-5 mx-4">
+                <div class="col-xl-2 col-md-4 order-xl-1 order-4 mr-xl-0 my-auto">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.062407860602!2d106.626673013976!3d10.806532261594265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752be2853ce7cd%3A0x4111b3b3c2aca14a!2zMTQwIEzDqiBUcuG7jW5nIFThuqVuLCBTxqFuIEvhu7MsIFTDom4gUGjDuiwgVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1671102003536!5m2!1svi!2s" style="border:0;margin-left:0;width:250px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="col-xl-2 col-md-3 pt-4 order-2"><ul class="list-unstyled"><li class="mt-md-0 mt-4">Dành cho bạn</li><li>An toàn tuyệt đối </li><li>Dịch vụ tiện lợi</li><li>Tiện ích phổ biến</li><li>Nhanh chóng</li></ul></div>
+                <div class="col-xl-auto col-md-3 pt-4 my-sm-0 order-md-3 order-sm-1 "><ul class="list-unstyled"><li class="mt-md-0 mt-4">Chăm sóc khách hàng</li><li>Trung tâm trợ giúp </li><li>Hướng dẫn mua hàng</li><li>Trả và hoàn tiền</li><li>Chính sách bảo hành</li></ul></div>
+                <div class="col-xl-auto col-md-6 col-12  pt-4 my-sm-0 order-6  "><div class="form-group "><label for="email" class="mb-3"><b>Đăng kí ngay để nhận voucher giảm 10%</b></label><input type="email" class="form-control form-control-lg" placeholder="tranthihonghac12a10.2019@gmail.com" id="email"></div><button type="button" class="btn btn-primary btn-lg btn-block my-2 Subscribe mt-4 mb-3">Gửi ý kiến</button></div>
             </div>
-            <div class="col-xl-2 col-md-3 pt-4 order-2"><ul class="list-unstyled"><li class="mt-md-0 mt-4">Dành cho bạn</li><li>An toàn tuyệt đối </li><li>Dịch vụ tiện lợi</li><li>Tiện ích phổ biến</li><li>Nhanh chóng</li></ul></div>
-            <div class="col-xl-auto col-md-3 pt-4 my-sm-0 order-md-3 order-sm-1 "><ul class="list-unstyled"><li class="mt-md-0 mt-4">Chăm sóc khách hàng</li><li>Trung tâm trợ giúp </li><li>Hướng dẫn mua hàng</li><li>Trả và hoàn tiền</li><li>Chính sách bảo hành</li></ul></div>
-            <div class="col-xl-auto col-md-6 col-12  pt-4 my-sm-0 order-6  "><div class="form-group "><label for="email" class="mb-3"><b>Đăng kí ngay để nhận voucher giảm 10%</b></label><input type="email" class="form-control form-control-lg" placeholder="tranthihonghac12a10.2019@gmail.com" id="email"></div><button type="button" class="btn btn-primary btn-lg btn-block my-2 Subscribe mt-4 mb-3">Gửi ý kiến</button></div>
-        </div>
-        <div class="row justify-content-center px-3 py-3 pt-5"><div class="col text-center"><p class="mb-0">*Chúng tôi cam kết sản phẩm đảm bảo an toàn tuyệt đối.</p><p>Sản phẩm của chúng tôi có nguồn gốc rõ ràng , chịu mọi trách nhiệm về chúng ! Cám ơn.</p></div></div>
-    </footer>
-</div>
+            <div class="row justify-content-center px-3 py-3 pt-5"><div class="col text-center"><p class="mb-0">*Chúng tôi cam kết sản phẩm đảm bảo an toàn tuyệt đối.</p><p>Sản phẩm của chúng tôi có nguồn gốc rõ ràng , chịu mọi trách nhiệm về chúng ! Cám ơn.</p></div></div>
+        </footer>
+    </div>
     <script src="~/vendors/base/vendor.bundle.base.js"></script>
     <script src="~/vendors/chart.js/Chart.min.js"></script>
     <script src="~/js/jquery.cookie.js" type="text/javascript"></script>

@@ -1,67 +1,131 @@
-﻿<script>
+﻿@using KLTN_Web_MoonShop.Models
+@{
+    DBCosmeticEntities db = new DBCosmeticEntities();
+    List<ProductType> lstprotype = db.ProductTypes.Where(n => n.isActive == 1).ToList().Take(10).ToList();
+}
+<script>
     var input = document.getElementById("myInput");
     var keyword = input.val();
     // Execute a function when the user presses a key on the keyboard
     input.addEventListener("keypress", function (event) {
         // If the user presses the "Enter" key on the keyboard
         if (event.key === "Enter") {
-              $.ajax({
+            $.ajax({
                 type: "GET",
-                  url: "/Search/Search/",
-                  data: { keyword: keyword }
-        });
+                url: "/Search/Search/",
+                data: { keyword: keyword }
+            });
         }
     });
 </script>
-<nav class="navbar col-lg-12 col-12 p-0 d-flex flex-row">
-    <img src="~/Asset/img/banner/bannertop.png" width="100%" height="40px" style="margin-bottom:auto">
-    <div class="col-sm-2">
-        <a class="navbar-brand brand-logo ml-4" href="@Url.Action("Index","Home")">
-            <img src="~/Asset/img/logo/f9a5893e92b154ef0da0.jpg" height="130" width="150" />
-
-        </a>
-
-    </div>
-    <div class="col-sm">
-        <form action="@Url.Action("Search","Search")">
-            <div class="nav-item nav-search">
-                <div class="input-group">
-                    <input type="search" list="list-timezone" id="input-datalist" style="border-radius:52px;min-width:100px" class="form-control" placeholder="Nhập từ khóa..." aria-label="search" aria-describedby="search" name="keyword">
-                    <script>
-                        document.addEventListener('DOMContentLoaded', e => {
-                            $('#input-datalist').autocomplete()
-                        }, false);
-                    </script>
-                    <button class="btn btn-outline-danger ml-2" style="border-radius:52px;width:70px;height:38px;color:lightpink;margin:0px 0px 0px 8px;padding:10px 12px">
-                        <span class="ti-search" style="font-size:16px" type="submit">Tìm</span>
-                    </button>
+<header class="section-header" style="padding:0px;background-color:violet">
+    <nav class="navbar navbar-light navbar-expand" style="height:40px">
+        <ul class="navbar-nav d-none d-md-flex mr-auto">
+            <li class="nav-item"><a class="nav-link text-white" href="#" data-abc="true">Liên hệ</a></li>
+            <li class="nav-item">
+                <div class="dropdown nav-link">
+                    <div class="d-flex d-none d-md-flex flex-row align-items-center">
+                        <div class="d-flex flex-column ms-2 text-white">
+                            Tải ứng dụng
+                        </div>
+                    </div>
+                    @*<button class="dropbtn">Dropdown</button>*@
+                    <div class="dropdown-content mt-2">
+                        <a href="#">
+                            <img src="~/App/qrcode_moonshopApp.png" height="100" width="100" />
+                        </a>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link text-white" href="#" data-abc="true">Trợ giúp</a>
+            </li>
 
-    </div>
-    <img src="~/App/qrcode_moonshopApp.png" height="50" width="50" class="ml-3" />
-    <div class="col-sm-4" style="padding-left:2px">
-        <div class="navbar-menu-wrapper">
-            <ul class="navbar-nav">
-                @*------------------------------------------gio hang----------------------------*@
-                <li class="nav-item dropdown" style="margin-left:80px">
-                    @Html.Action("Cart", "Customer")
-                </li>
-                @*<li class="nav-item dropdown">
-            @Html.Action("Order", "Customer")
-        </li>*@
-                @*----------------------------------thông báo--------------------------------*@
-                <li class="nav-item dropdown">
-                    @Html.Action("Notifications", "Customer")
-                </li>
-                @*----------------------thông tin cá nhân---------------------------------*@
-                <li class="nav-item nav-profile dropdown">
-                    @Html.Action("Profile", "Customer")
-                </li>
+        </ul>
+        <ul class="navbar-nav d-flex align-items-center">
+            <li class="nav-item">
+                <div class="navbar-menu-wrapper" style="max-height:40px;background-color:violet">
+                    <ul class="navbar-nav text-white">
+                        <li class="nav-item nav-profile dropdown">
+                            @Html.Action("Notifications", "Customer")
+                        </li>
+                        <li class="nav-item nav-profile dropdown">
+                            @Html.Action("Profile", "Customer")
+                        </li>
 
-            </ul>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div class="row align-items-center" style="height:80px;padding:0px;background-color:white">
+        <a class="col-2 col-md-2" href="/home/index">
+            <img class="d-none d-md-flex" src="~/Asset/img/logo/logo2.png" style="height:80px;width:100px;margin-left:20px;border-radius:52px">
+        </a>
+        <div class="col-8 col-md-8">
+            <form action="@Url.Action("Search","Search")">
+                <div class="d-flex input-group">
+                    <input class="form-control" type="text" style="border-top-left-radius:52px;border-bottom-left-radius:52px;border-color:lightpink;height:40px;margin-top:2px" placeholder="Nhập để tìm kiếm..." id="keyword" name="keyword">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-danger" type="submit" style="border-top-right-radius: 52px; border-bottom-right-radius: 52px; border-color: lightpink; width: 41px; height: 40px; margin-left: 0; margin-top: 2px">
+                            <span class="fa fa-search fa-sm" style="color:lightpink"></span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <div class="col-2 col-md-2">
+            @Html.Action("Cart", "Customer")
         </div>
     </div>
-</nav>
 
+    @*<section class="header-main border-bottom border-top" style="height:100px">
+            <div class="container">
+            </div>
+        </section>*@
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding:0">
+        <div class="container-fluid ml-5">
+            <a class="navbar-brand d-md-none d-md-flex" href="#"> <span class="navbar-toggler-icon"></span>Danh mục</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    @foreach (var item in lstprotype)
+                    {
+                        <li class="nav-item ml-2">
+                            <a class="nav-link active" aria-current="page" href="@Url.Action("search", "search", new {keyword=item.proTypeID})"> @item.proTypeName</a>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<style>
+    .form-inputs {
+        position: relative;
+    }
+
+        .form-inputs .form-control {
+            height: 45px;
+        }
+
+            .form-inputs .form-control:focus {
+                box-shadow: none;
+                border: 1px solid #000;
+            }
+
+        .form-inputs i {
+            position: absolute;
+            right: 10px;
+            top: 15px;
+        }
+
+    .qty {
+        font-size: 12px;
+    }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />

@@ -70,7 +70,6 @@ else
                 <th style="width:30%">Sản phẩm</th>
                 <th style="width:15%">Giá thành</th>
                 <th style="width:15%">Số lượng</th>
-                <th style="width:15%">Tổng tiền</th>
                 <th style="width:15%">Xóa/Lưu</th>
                 </thead>
                 <tbody>
@@ -114,9 +113,6 @@ else
                             </td>
                             <td class="d-">
                                 <input class="form-control" id="txtcartquantity" name="txtcartquantity" type="number" value="@item.cartQuantity" min="0">
-                            </td>
-                            <td>
-                                @item.cartMoney
                             </td>
                             <td>
                                 <div class="btn">
@@ -218,7 +214,7 @@ else
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     function updateCart(proid, cartid) {
-        $('#spinnerModal').modal('show');
+       // $('#spinnerModal').modal('show');
         var userid = document.getElementById('txtuserid').value;
         var sl = document.getElementById('txtcartquantity').value;
         var person = new Object();
@@ -232,7 +228,7 @@ else
             dataType: 'json',
             data: person,
             success: function (result) {
-                $('#spinnerModal').modal('hide');
+                //$('#spinnerModal').modal('hide');
                 $(".table").load(location.href + " .table");
                 Swal.fire({
                     position: 'top-center',
@@ -272,7 +268,7 @@ else
             dataType: 'json',
             data: person,
             success: function (result) {
-                $('#spinnerModal').modal('hide');
+                //$('#spinnerModal').modal('hide');
                 $(".table").load(location.href + " .table");
                 Swal.fire(
                     'Xóa thành công!',
@@ -306,7 +302,7 @@ else
         }).then((result) => {
             if (result.isConfirmed) {
                 document.getElementById("btdelCart").onclick();
-                $('#spinnerModal').modal('show');
+                //$('#spinnerModal').modal('show');
 
             }
 

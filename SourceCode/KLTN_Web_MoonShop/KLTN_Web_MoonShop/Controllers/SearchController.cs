@@ -17,7 +17,7 @@ namespace KLTN_Web_MoonShop.Controllers
             ViewBag.ProductType = db.ProductTypes.Where(n => n.isActive == 1).OrderBy(n => n.proTypeName).ToList();
           
             List<Product> lstpro = new List<Product>();
-            if (keyword != "")
+            if (keyword != ""&&keyword.Length>0)
             {
                   try
                 {

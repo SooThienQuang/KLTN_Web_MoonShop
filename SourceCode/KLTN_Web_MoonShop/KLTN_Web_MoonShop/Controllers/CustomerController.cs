@@ -1,4 +1,5 @@
-﻿using KLTN_Web_MoonShop.Models;
+﻿using KLTN_Web_MoonShop.Controllers.API;
+using KLTN_Web_MoonShop.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
@@ -222,9 +223,12 @@ namespace KLTN_Web_MoonShop.Controllers
         }
         public ActionResult Cart()
         {
+
+
            int sl= db.Carts.Count();
             db = new DBCosmeticEntities();
             Customer cs = Session["user"] as Customer;
+
             if (cs != null)
             {
                 string ten = cs.customerName.ToString().Split(' ').Last();
@@ -258,6 +262,39 @@ namespace KLTN_Web_MoonShop.Controllers
                 }
                 ViewBag.size = lst.Count;
             }
+            else
+            {
+                if (Request.Cookies["CartCookie"] != null)
+                {
+                    List<cartTam> lstt = new List<cartTam>();
+                    string chuoi = Request.Cookies["CartCookie"].Value.ToString();
+                    string[] lst = chuoi.Split('|');
+                    for (int i = 0; i < lst.Length; i++)
+                    {
+                        try
+                        {
+                            string[] l = lst[i].Split(',');
+                            long proid = long.Parse(l[0]);
+                            int quantity = int.Parse(l[1]);
+                            cartTam c = new cartTam();
+                            c.id = (long)proid;
+                            Product pro = db.Products.ToList().FirstOrDefault(n => n.productID == proid);
+                            c.name = pro.productName;
+                            c.img = pro.productImage;
+                            c.price = (long)pro.productPrice;
+                            c.quantity = (long)quantity;
+                            c.money = (long)pro.productPrice*quantity;
+                            lstt.Add(c);
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+                    ViewBag.lstCart = lstt.Take(5);
+                    ViewBag.size = lstt.Count;
+                }    
+            }    
 
             return PartialView();
 

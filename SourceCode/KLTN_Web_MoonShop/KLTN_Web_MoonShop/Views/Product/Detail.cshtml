@@ -122,7 +122,7 @@
                 <div class="buttons mt-5">
                     @if (user == null)
                     {
-                        <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-success w-50 btn-rounded" style="border-radius:25px">
+                        <button type="button"onclick="addtocartcookie(@ViewBag.Product.productID)" class="btn btn-success w-50 btn-rounded" style="border-radius:25px">
                             <i class="ti-shopping-cart"></i> Thêm giỏ hàng
                         </button>
                         <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-danger w-50 btn-rounded btn-block" style="border-radius:25px">
@@ -159,6 +159,22 @@
 
 
     <script>
+        function addtocartcookie(id) {
+            swal({
+                title: 'Thành công!',
+                text: 'Bấm vào icon giỏ hàng để xem chi tiết',
+                type: 'success',
+                button: {
+                    text: "Continue",
+                    value: true,
+                    visible: true,
+                    className: "btn btn-primary"
+                }
+            })
+            var sl = document.getElementById("quantity").value;
+            location.href = `/shoppingcart/addtocart?productId=` + id + `&quantity=` +sl ;
+        }
+
         function changeImage(element) {
 
             var main_prodcut_image = document.getElementById('main_product_image');
@@ -814,7 +830,7 @@
     //----------------------------------------------------------------them vao gio hang-----------------------------------
     @*$(".soluongcart").append(`<p>` + @quantitycart + `<p/>`);*@
     var ConfirmDelete = function (productID, cusID) {
-        $('#spinnerModal').modal('show');
+        //$('#spinnerModal').modal('show');
         var sl = document.getElementById("quantity").value;
         var person = new Object();
         person.proID = productID;
@@ -826,7 +842,7 @@
             dataType: 'json',
             data: person,
             success: function (data, textStatus, xhr) {
-                $('#spinnerModal').modal('hide');
+                //$('#spinnerModal').modal('hide');
                 swal({
                     title: 'Thành công!',
                     text: 'Bấm vào icon giỏ hàng để xem chi tiết',
