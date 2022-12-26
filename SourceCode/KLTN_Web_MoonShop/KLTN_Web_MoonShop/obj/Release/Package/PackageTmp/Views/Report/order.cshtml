@@ -13,14 +13,106 @@
                     where a.status == 2
                     select c.Money).ToList().Sum();
     var processing = (from a in db.Orders
-                    join c in db.OrderDetails on a.orderID equals c.orderID
-                    where a.status == 3
-                    select c.Money).ToList().Sum();
+                      join c in db.OrderDetails on a.orderID equals c.orderID
+                      where a.status == 3
+                      select c.Money).ToList().Sum();
     var processed = (from a in db.Orders
-                    join c in db.OrderDetails on a.orderID equals c.orderID
-                    where a.status == 4
-                    select c.Money).ToList().Sum();
+                     join c in db.OrderDetails on a.orderID equals c.orderID
+                     where a.status == 4
+                     select c.Money).ToList().Sum();
 }
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Line Chart</h5>
+
+                <!-- Line Chart -->
+                <canvas id="lineChart" style="max-height: 400px;"></canvas>
+                <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                        new Chart(document.querySelector('#lineChart'), {
+                            type: 'line',
+                            data: {
+                                labels: ['Chờ xử lý', 'Đã xác nhận', 'Đang giao', 'Giao thành công'],
+                                datasets: [{
+                                    label: 'Line Chart',
+                                    data: [@waitting, @checkede, @processing,@processed],
+                                    fill: false,
+                                    borderColor: 'rgb(75, 192, 192)',
+                                    tension: 0.1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    });
+                </script>
+                <!-- End Line CHart -->
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Bar CHart</h5>
+
+                <!-- Bar Chart -->
+                <canvas id="barChart" style="max-height: 400px;"></canvas>
+                <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                        new Chart(document.querySelector('#barChart'), {
+                            type: 'bar',
+                            data: {
+                                labels: ['Chờ xử lý', 'Đã xác nhận', 'Đang giao', 'Giao thành công'],
+                                datasets: [{
+                                    label: 'Bar Chart',
+                                    data: [@waitting, @checkede, @processing,@processed],
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 0.2)',
+                                        'rgba(255, 159, 64, 0.2)',
+                                        'rgba(255, 205, 86, 0.2)',
+                                        'rgba(75, 192, 192, 0.2)',
+                                        'rgba(54, 162, 235, 0.2)',
+                                        'rgba(153, 102, 255, 0.2)',
+                                        'rgba(201, 203, 207, 0.2)'
+                                    ],
+                                    borderColor: [
+                                        'rgb(255, 99, 132)',
+                                        'rgb(255, 159, 64)',
+                                        'rgb(255, 205, 86)',
+                                        'rgb(75, 192, 192)',
+                                        'rgb(54, 162, 235)',
+                                        'rgb(153, 102, 255)',
+                                        'rgb(201, 203, 207)'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    });
+                </script>
+                <!-- End Bar CHart -->
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="col-12">
     <div class="card recent-sales overflow-auto">
 
@@ -74,4 +166,3 @@
 
     </div>
 </div><!-- End Recent Sales -->
-

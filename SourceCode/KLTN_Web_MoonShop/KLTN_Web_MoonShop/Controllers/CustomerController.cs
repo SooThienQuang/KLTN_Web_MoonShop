@@ -210,7 +210,7 @@ namespace KLTN_Web_MoonShop.Controllers
                 string ten = cs.customerName.ToString().Split(' ').Last();
                 ViewBag.name = ten;
                 ViewBag.user = cs;
-                ViewBag.quantityNotify= db.Notifications.Where(n => n.receiveUserID == cs.customerID).ToList().Count();
+                ViewBag.quantityNotify= db.Notifications.Where(n => n.receiveUserID == cs.customerID&&n.isRead==0).ToList().Count();
                 lst = db.Notifications.Where(n => n.receiveUserID == cs.customerID).OrderByDescending(n => n.notiID).Take(5).ToList();
             }
 

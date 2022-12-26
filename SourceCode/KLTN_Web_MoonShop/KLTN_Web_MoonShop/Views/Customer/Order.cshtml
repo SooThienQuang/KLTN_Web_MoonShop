@@ -3,10 +3,11 @@
 @{
     DBCosmeticEntities db = new DBCosmeticEntities();
     Customer cs = Session["user"] as Customer;
-    List<Order> waiting = db.Orders.Where(n => n.customerID == cs.customerID && n.status == 1).OrderByDescending(n => n.orderID).ToList();
-    List<Order> comfimed = db.Orders.Where(n => n.customerID == cs.customerID && n.status == 2).OrderByDescending(n => n.orderID).ToList();
-    List<Order> processing = db.Orders.Where(n => n.customerID == cs.customerID && n.status == 3).OrderByDescending(n => n.orderID).ToList();
-    List<Order> processed = db.Orders.Where(n => n.customerID == cs.customerID && n.status == 4).OrderByDescending(n => n.orderID).ToList();
+    List<Order> lstall = db.Orders.Where(n => n.customerID == cs.customerID).ToList();
+    List<Order> waiting = lstall.Where(n => n.customerID == cs.customerID && n.status == 1).OrderByDescending(n => n.orderID).ToList();
+    List<Order> comfimed = lstall.Where(n => n.customerID == cs.customerID && n.status == 2).OrderByDescending(n => n.orderID).ToList();
+    List<Order> processing = lstall.Where(n => n.customerID == cs.customerID && n.status == 3).OrderByDescending(n => n.orderID).ToList();
+    List<Order> processed = lstall.Where(n => n.customerID == cs.customerID && n.status == 4).OrderByDescending(n => n.orderID).ToList();
 
 }
 @if (Model == null)
@@ -41,31 +42,31 @@ else
     <div class="row">
         <ul class="nav mt-1">
             <li class="nav-item">
-                <a class="btn btn-outline-dark" style="min-width:220px" id="home-vertical-tab1" data-toggle="tab" href="#home-vertical1" role="tab" aria-controls="home" aria-selected="true">
-                    <img src="https://cdn5.vectorstock.com/i/1000x1000/18/39/two-color-waiting-icon-from-user-interface-vector-25751839.jpg" height="50" width="50" />
-                    Đang chờ xác nhận
-                    <span class='badge badge-warning' id='lblCartCount'>@waiting.Count()</span>
+                <a class="btn btn-outline-dark"  id="home-vertical-tab1" data-toggle="tab" href="#home-vertical1" role="tab" aria-controls="home" aria-selected="true">
+                    @*<img src="https://cdn5.vectorstock.com/i/1000x1000/18/39/two-color-waiting-icon-from-user-interface-vector-25751839.jpg" height="50" width="50" />*@
+                    Chờ xác nhận
+                    <span class='badge badge-warning ml-2' id='lblCartCount'>@waiting.Count()</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="btn btn-outline-dark" style="min-width:220px" id="profile-vertical-tab1" data-toggle="tab" href="#profile-vertical1" role="tab" aria-controls="profile" aria-selected="false">
-                    <img src="~/Asset/img/cholayhang.png" height="50" width="50" />
-                    Chờ lấy hàng&nbsp;&nbsp;
-                    <span class='badge badge-warning' id='lblCartCount'>@comfimed.Count()</span>
+                <a class="btn btn-outline-dark"  id="profile-vertical-tab1" data-toggle="tab" href="#profile-vertical1" role="tab" aria-controls="profile" aria-selected="false">
+                    @*<img src="~/Asset/img/cholayhang.png" height="50" width="50" />*@
+                    Chờ lấy hàng
+                    <span class='badge badge-warning ml-2' id='lblCartCount'>@comfimed.Count()</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="btn btn-outline-dark" style="min-width:220px" id="profile-vertical-tab2" data-toggle="tab" href="#profile-vertical2" role="tab" aria-controls="profile" aria-selected="false">
-                    <img src="https://batos.vn/Content/images/empty-cart.png" height="50" width="50" />
-                    Đang giao
-                    <span class='badge badge-warning' id='lblCartCount'>@processing.Count()</span>
+                <a class="btn btn-outline-dark"  id="profile-vertical-tab2" data-toggle="tab" href="#profile-vertical2" role="tab" aria-controls="profile" aria-selected="false">
+                    @*<img src="https://batos.vn/Content/images/empty-cart.png" height="50" width="50" />*@
+                    Đang giao hàng
+                    <span class='badge badge-warning ml-2' id='lblCartCount'>@processing.Count()</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="btn btn-outline-dark" style="min-width:220px" id="profile-vertical-tab3" data-toggle="tab" href="#profile-vertical3" role="tab" aria-controls="profile" aria-selected="false">
-                    <img src="~/Asset/img/star.jpg" height="50" width="50" />
-                    Đánh giá
-                    <span class='badge badge-warning' id='lblCartCount'>@processed.Count()</span>
+                <a class="btn btn-outline-dark"  id="profile-vertical-tab3" data-toggle="tab" href="#profile-vertical3" role="tab" aria-controls="profile" aria-selected="false">
+                    @*<img src="~/Asset/img/star.jpg" height="50" width="50" />*@
+                    Đánh giá ngay
+                    <span class='badge badge-warning ml-2' id='lblCartCount'>@processed.Count()</span>
                 </a>
             </li>
         </ul>

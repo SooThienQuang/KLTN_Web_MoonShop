@@ -5,7 +5,102 @@
     DBCosmeticEntities db = new DBCosmeticEntities();
     List<Product> lstproall = db.Products.ToList();
     List<CartDetail> lstcd = db.CartDetails.ToList();
+    List<long> list = lstproall.Select(n => n.productID).ToList();
+   
 }
+<h2 >@list.FirstOrDefault()</h2>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Giỏ hàng Line Chart</h5>
+
+                <!-- Line Chart -->
+                <canvas id="lineChart" style="max-height: 400px;"></canvas>
+                <script>
+                    var aaa = ["âmm", "adhj"];
+                    document.addEventListener("DOMContentLoaded", () => {
+                        new Chart(document.querySelector('#lineChart'), {
+                            type: 'line',
+                            data: {
+                                labels: [aaa],
+                                datasets: [{
+                                    label: 'Line Chart',
+                                    data: [],
+                                    fill: false,
+                                    borderColor: 'rgb(75, 192, 192)',
+                                    tension: 0.1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    });
+                </script>
+                <!-- End Line CHart -->
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Giỏ hàng Bar CHart</h5>
+
+            <!-- Bar Chart -->
+            <canvas id="barChart" style="max-height: 400px;"></canvas>
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    new Chart(document.querySelector('#barChart'), {
+                        type: 'bar',
+                        data: {
+                            labels: ['Chờ xử lý', 'Đã xác nhận', 'Đang giao', 'Giao thành công'],
+                            datasets: [{
+                                label: 'Bar Chart',
+                                data: [1, 2, 4, 5],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)',
+                                    'rgba(255, 205, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(201, 203, 207, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgb(255, 99, 132)',
+                                    'rgb(255, 159, 64)',
+                                    'rgb(255, 205, 86)',
+                                    'rgb(75, 192, 192)',
+                                    'rgb(54, 162, 235)',
+                                    'rgb(153, 102, 255)',
+                                    'rgb(201, 203, 207)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                });
+            </script>
+            <!-- End Bar CHart -->
+
+        </div>
+    </div>
+</div>
 
 <div class="card-body">
     <h5 class="card-title">DANH MỤC THỐNG KÊ GIỎ HÀNG ĐÃ THÊM  @*<span>| Today</span>*@</h5>
@@ -28,9 +123,9 @@
                     <td>
                         <b style="color:red">@String.Format("{0:0,0}", item.productPrice)</b>
                     </td>
-                  <td>
-                     @lstcd.Where(n=>n.productID==item.productID).ToList().Count()
-                  </td>
+                    <td>
+                        @lstcd.Where(n => n.productID == item.productID).ToList().Count()
+                    </td>
                 </tr>
             }
         </tbody>

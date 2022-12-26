@@ -104,5 +104,15 @@ namespace KLTN_Web_MoonShop.Controllers.API
                 return "Mở khóa thành công";
             }    
         }
+        [Route("readnotify")]
+        [HttpPost]
+        public string isReadNoti(requestCustomer id)
+        {
+            Notification noti = db.Notifications.FirstOrDefault(n => n.notiID == id.id);
+            noti.isRead = 1;
+            db.Notifications.AddOrUpdate(noti);
+            db.SaveChanges();
+            return "success";
+        }
     }
 }

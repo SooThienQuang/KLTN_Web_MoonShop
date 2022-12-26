@@ -5,7 +5,12 @@
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
     DBCosmeticEntities db = new DBCosmeticEntities();
     Customer user = Session["user"] as Customer;
-    CustomerAddress add = db.CustomerAddresses.FirstOrDefault(n => n.customerID == user.customerID && n.isMain == 1);
+    CustomerAddress add = new CustomerAddress();
+    if (user != null)
+    {
+        add = db.CustomerAddresses.FirstOrDefault(n => n.customerID == user.customerID && n.isMain == 1);
+
+    }
 }
 @*<script>
         function modal() {
@@ -59,115 +64,131 @@
 }
 else
 {
-    <div class="container">
-        <div class="table-wrap">
-            <table class="table table-responsive table-borderless">
-                <thead>
-                <th>
-                    <input type="checkbox" onclick="checkall()" id="checkall" />
-                </th>
-                <th>&nbsp;</th>
-                <th style="width:30%">Sản phẩm</th>
-                <th style="width:15%">Giá thành</th>
-                <th style="width:15%">Số lượng</th>
-                <th style="width:15%">Xóa/Lưu</th>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        KLTN_Web_MoonShop.Models.Product pro = db.Products.FirstOrDefault(n => n.productID == item.productID);
-                        <tr class="align-middle alert border-bottom" role="alert">
-                            <td>
-                                <input class="checkbox" type="checkbox" value="@item.productID" id="checkbox" onclick="setVal(@pro.productID,@item.cartMoney)">
-                            </td>
-                            <td class="text-center">
-                                <img class="pic"
-                                     src="~/Asset/img/product/@pro.productImage"
-                                     alt="">
-                            </td>
-                            <td>
-                                <div>
-                                    @if (pro.productName.Length > 30)
+        <div class="container">
+            <div class="table-wrap">
+                <table class="table table-responsive table-borderless">
+                    <thead>
+                    <th>
+                        <input type="checkbox" onclick="checkall()" id="checkall" />
+                    </th>
+                    <th>&nbsp;</th>
+                    <th style="width:30%">Sản phẩm</th>
+                    <th style="width:15%">Giá thành</th>
+                    <th style="width:15%">Số lượng</th>
+                    <th style="width:15%">Xóa/Lưu</th>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            KLTN_Web_MoonShop.Models.Product pro = db.Products.FirstOrDefault(n => n.productID == item.productID);
+                            var tien = pro.productPrice * item.cartQuantity;
+                            <tr class="align-middle alert border-bottom" role="alert">
+                                <td>
+                                    <input class="checkbox" type="checkbox" value="@item.productID" id="checkbox" onclick="setVal(@pro.productID,@tien)">
+                                </td>
+                                <td class="text-center">
+                                    <img class="pic"
+                                         src="~/Asset/img/product/@pro.productImage"
+                                         alt="">
+                                </td>
+                                <td>
+                                    <div>
+                                        @if (pro.productName.Length > 30)
+                                        {
+                                            string name = pro.productName.Substring(0, 30);
+                                            <p class="m-0 fw-bold">@name ...</p>
+                                        }
+                                        else
+                                        {
+                                            <p class="m-0 fw-bold">@pro.productName</p>
+                                        }
+
+                                        @if (pro.productDescribe.Length > 50)
+                                        {
+                                            string name = pro.productDescribe.Substring(0, 50);
+                                            <p class="m-0 fw-bold">@name ...</p>
+                                        }
+                                        else
+                                        {
+                                            <p class="m-0 fw-bold">@pro.productDescribe</p>
+                                        }
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="fw-600">@pro.productPrice</div>
+                                </td>
+                                <td class="d-">
+                                    <input class="form-control" id="txtcartquantity" name="txtcartquantity" type="number" value="@item.cartQuantity" min="0">
+                                </td>
+                                <td>
+                                    <div class="btn">
+                                        <span onclick="showDel(@item.productID)" class="fas fa-times" data-toggle="tooltip" data-placement="bottom" title="Xóa"></span>
+                                    </div>
+                                    @if (user != null)
                                     {
-                                        string name = pro.productName.Substring(0, 30);
-                                        <p class="m-0 fw-bold">@name ...</p>
-                                    }
-                                    else
-                                    {
-                                        <p class="m-0 fw-bold">@pro.productName</p>
+                                        <div class="btn" id="divsave">
+                                            <span class="ti-save" onclick="updateCart(@item.productID,@item.cartID)" style="color:green" data-toggle="tooltip" data-placement="bottom" title="Lưu"></span>
+                                        </div>
                                     }
 
-                                    @if (pro.productDescribe.Length > 50)
-                                    {
-                                        string name = pro.productDescribe.Substring(0, 50);
-                                        <p class="m-0 fw-bold">@name ...</p>
-                                    }
-                                    else
-                                    {
-                                        <p class="m-0 fw-bold">@pro.productDescribe</p>
-                                    }
-                                </div>
-                            </td>
-                            <td>
-                                <div class="fw-600">@pro.productPrice</div>
-                            </td>
-                            <td class="d-">
-                                <input class="form-control" id="txtcartquantity" name="txtcartquantity" type="number" value="@item.cartQuantity" min="0">
-                            </td>
-                            <td>
-                                <div class="btn">
-                                    <span onclick="showDel(@item.productID)" class="fas fa-times" data-toggle="tooltip" data-placement="bottom" title="Xóa"></span>
-                                </div>
-                                <div class="btn" id="divsave">
-                                    <span class="ti-save" onclick="updateCart(@item.productID,@item.cartID)" style="color:green" data-toggle="tooltip" data-placement="bottom" title="Lưu"></span>
-                                </div>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="row mt-4 d-flex align-items-center">
+                <div class="col-sm-2 order-md-2">
+                    <h3>Tổng tiền :</h3>
+                </div>
+                <div class="col-sm-2 order-md-2">
+                    <h3 style="color:red" id="txtmoney">0</h3>
+                </div>
+                <div class="col-sm-4 order-md-2 text-right">
+                    @if (add.customerAdd == null && user == null)
+                    {
+                        <button type="button" onclick="checkoutCookie()" class="btn btn-danger mb-4 btn-lg pl-5 pr-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
+                                <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+                                <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z" />
+                            </svg>
+                            Thanh toán
+                        </button>
+                    }
+                    else
+                    if (add.customerAdd == null)
+                    {
+                        <button type="button" onclick="themdiachi()" class="btn btn-danger mb-4 btn-lg pl-5 pr-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
+                                <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+                                <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z" />
+                            </svg>
+                            Thanh toán
+                        </button>
+
+                    }
+                    else
+                    {
+                        <button type="button" onclick="checkOut()" class="btn btn-danger mb-4 btn-lg pl-5 pr-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
+                                <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+                                <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z" />
+                            </svg>
+                            Thanh toán
+                        </button>
                     }
 
+                </div>
+                <div class="col-sm-4 mb-3 mb-m-1 order-md-1 text-md-left">
+                    <a href="@Url.Action("Index","Home")">
+                        <i class="ti-back-left"></i> Tiếp tục mua hàng
+                    </a>
+                </div>
 
-                </tbody>
-            </table>
+            </div>
         </div>
-        <div class="row mt-4 d-flex align-items-center">
-            <div class="col-sm-2 order-md-2">
-                <h3>Tổng tiền :</h3>
-            </div>
-            <div class="col-sm-2 order-md-2">
-                <h3 style="color:red" id="txtmoney">0</h3>
-            </div>
-            <div class="col-sm-4 order-md-2 text-right">
-                @if (add.customerAdd == null)
-                {
-                    <button type="button" onclick="themdiachi()" class="btn btn-danger mb-4 btn-lg pl-5 pr-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
-                            <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
-                            <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z" />
-                        </svg>
-                        Thanh toán
-                    </button>
-
-                }
-                else
-                {
-                    <button type="button" onclick="checkOut()" class="btn btn-danger mb-4 btn-lg pl-5 pr-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
-                            <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
-                            <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z" />
-                        </svg>
-                        Thanh toán
-                    </button>
-                }
-
-            </div>
-            <div class="col-sm-4 mb-3 mb-m-1 order-md-1 text-md-left">
-                <a href="@Url.Action("Index","Home")">
-                    <i class="ti-back-left"></i> Tiếp tục mua hàng
-                </a>
-            </div>
-
-        </div>
-    </div>
     @*@Html.Action("Paymore", "Payment")*@
 }
 <input type="number" id="txttongtien" hidden value="@Model.Sum(n=>n.cartMoney)" />
@@ -177,6 +198,7 @@ else
 <input type="number" id="txtiddel" hidden />
 @if (user != null)
 {
+    <input type="number" id="txtuusus" value="@user.customerID" hidden />
     <input type="number" id="txtuserid" value="@user.customerID" hidden />
 }
 @*------------------------------------------------------------------mesage-------------------------------------------*@
@@ -213,6 +235,22 @@ else
 <button id="btncancelDel" onclick="CloseDel()" hidden></button>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+    //------------------------------chua dang nhap-------------------------
+    function checkoutCookie() {
+        //footer: '<a href="">Why do I have this issue?</a>'
+        Swal.fire({
+            title: 'Bạn chưa đăng nhập?',
+            text: "Vui lòng đăng nhập để mua hàng!",
+            icon: 'error',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Đăng nhập!',
+            footer: '<a href="/customer/register">Bạn chưa có tài khoản? Đăng kí ngay !</a>'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.href = "/customer/login";
+            }
+        })
+    }
     function updateCart(proid, cartid) {
        // $('#spinnerModal').modal('show');
         var userid = document.getElementById('txtuserid').value;
@@ -388,7 +426,6 @@ else
 
     }
 
-
     (function ($) {
         showSwal = function (type) {
             'use strict';
@@ -488,7 +525,6 @@ else
         </div>
     </div>
 </div>
-<input type="number" id="txtuusus" value="@user.customerID" hidden />
 <script>
     function diachiapi() {
         var address = new Object();

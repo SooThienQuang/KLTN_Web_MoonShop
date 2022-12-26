@@ -21,19 +21,41 @@ else
                 }
             </script>
             @*<button class="dropbtn">Dropdown</button>*@
-        <div class="dropdown-content dropdown-menu-lg-right ">
-                <p class="font-weight-normal float-left dropdown-header mt-0">Thông báo</p>
-                @foreach (var item in Model)
-                {
-                    <a class="dropdown-item" style="border-bottom:medium" href="@Url.Action("DetailProfile","Customer",new {id=item.menutype})">
-                        <div class="item-content">
-                            <div class="row">
-                                <div class="col-2">
-                                    <img src="~/Asset/img/product/@item.image">
+        <div class="dropdown-content dropdown-menu-right ">
+            <p class="font-weight-normal float-left dropdown-header mt-0">Thông báo</p>
+            <a class="mb-0 font-weight-normal float-sm-right dropdown-header" href="@Url.Action("DetailProfile","Customer",new {id=3})">Xem tất cả</a>
+            @foreach (var item in Model)
+            {
+                
+                <a class="dropdown-item" onclick="isReadNotify(@item.notiID)" style="border-bottom:double" href="@Url.Action("DetailProfile","Customer",new {id=item.menutype})">
+                    <div class="item-content">
+                        <div class="row">
+                            <div class="col-2">
+                                <img src="~/Asset/img/product/@item.image">
 
-                                </div>
-                                <div class="col">
-                                    <h6 class="font-weight">
+                            </div>
+                            <div class="col">
+                                @if (item.isRead == 0)
+                                {
+                                    <b class="font-weight">
+                                        @if (item.title.Length > 45)
+                                        {
+                                            @item.title.Substring(0, 45)
+                                        }
+                                        else
+                                        {
+                                            @item.title
+                                        }
+
+                                        <img src="~/Asset/img/discount/hot-sale.png" height="20" width="20" />
+                                    </b>
+                                    <p class="font-weight-light small-text mb-0">
+                                        @item.message
+                                    </p>
+                                }
+                                else
+                                {
+                                    <h6 class="font-weight text-muted">
                                         @if (item.title.Length > 45)
                                         {
                                             @item.title.Substring(0, 45)
@@ -48,15 +70,36 @@ else
                                     <p class="font-weight-light small-text mb-0 text-muted">
                                         @item.message
                                     </p>
-                                </div>
+                                }
+
+
                             </div>
-                           
                         </div>
-                    </a>
-                }
-                <a class="mb-0 font-weight-normal float-sm-right dropdown-header" href="@Url.Action("DetailProfile","Customer",new {id=3})">Xem tất cả</a>
-            </div>
+
+                    </div>
+                </a>
+            }
+            <a class="mb-0 font-weight-normal float-sm-right dropdown-header" href="@Url.Action("DetailProfile","Customer",new {id=3})">Xem tất cả</a>
         </div>
+        </div>
+        <script>
+            function isReadNotify(id) {
+                var requestCustomer = new Object();
+                requestCustomer.id = id;
+                $.ajax({
+                    url: '/readnotify/',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: requestCustomer,
+                    success: function (result) {
+                      
+                    },
+                    error: function (err) {
+                        alert(err.statusText);
+                    }
+                });
+            }
+        </script>
 
     }
     else

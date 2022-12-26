@@ -86,10 +86,15 @@ namespace KLTN_Web_MoonShop.Controllers.API
             }
             if (data.gia2 > 0 && data.gia1 == 0)
             {
-                main = main.Where(n => n.productPrice <= data.gia2).ToList();
+                if(main.Count()==0)
+                    main = lst.Where(n => n.productPrice <= data.gia2).ToList();
+                
             }
             if (data.gia1 >= 0 && data.gia2 > 0)
             {
+                if(main.Count()==0)
+                    main = lst.Where(n => n.productPrice <= data.gia2 && n.productPrice >= data.gia1).ToList();
+                else
                 main = main.Where(n => n.productPrice <= data.gia2 && n.productPrice >= data.gia1).ToList();
             }
 

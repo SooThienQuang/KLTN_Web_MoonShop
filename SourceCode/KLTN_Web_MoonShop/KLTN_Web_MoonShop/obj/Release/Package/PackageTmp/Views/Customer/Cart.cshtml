@@ -3,19 +3,39 @@
 
     <div class="dropdown">
         <div class="d-flex d-none d-md-flex flex-row align-items-center">
-            <a class="btn shop-bag" href="#" style=" background-color: #000; color: #fff; height: 50px; width: 50px; font-size: 25px; display: flex; border-radius: 50%; align-items: center; justify-content: center;"><i class='bx bxs-shopping-bag'></i></a>
+            <a class="btn shop-bag" href="/shoppingcart/detail" style=" background-color: #000; color: #fff; height: 50px; width: 50px; font-size: 25px; display: flex; border-radius: 50%; align-items: center; justify-content: center;"><i class='bx bxs-shopping-bag'></i></a>
             <div class="d-flex flex-column ms-2">
                 <span class="qty">
-                    <span class='badge badge-warning' id='lblCartCount'><span class="soluongcart"></span> 0 </span>
+                    <span class='badge badge-warning' id='lblCartCount'><span class="soluongcart">0</span>  </span>
                 </span>
-                <span class="fw-bold">0 vnđ</span>
+                <span class="tongtiencart">Giỏ hàng</span>
             </div>
         </div>
-        @*<button class="dropbtn">Dropdown</button>*@
-        <div class="dropdown-content">
-            <a href="#">Chưa có sản phẩm trong giỏ hàng</a>
+        <script>
+                        $('.soluongcart').empty();
+                        $('.soluongcart').append("@ViewBag.size");
+        </script>
+        <div class="dropdown-content dropdown-menu-right">
+            <div class="chitietcart">
+            </div>
+            <a class="mb-0 font-weight-bold float-sm-end dropdown-header" href="@Url.Action("Detail", "ShoppingCart")">Xem tất cả<p class="ti-arrow-circle-right"> </p></a>
         </div>
     </div>
+    <script>
+                    $('.chitietcart').empty();
+                    var trHTML = $(`
+                @foreach (var item in @ViewBag.lstCart)
+                    {
+                        <a class="dropdown-item" href="/product/detail/@item.id" id="dropcart">
+                         <img src="~/Asset/img/product/@item.img" height="50" width="50" />
+                            <h6 class="font-weight-normal">
+                                @item.name.Substring(0, 30)
+                            </h6>
+                            <h6 class="font-weight-normal text-danger">Số lượng : @item.quantity</h6>
+                        </a>
+                    }
+    `);
+                    $('.chitietcart').append(trHTML);</script>
 }
 else
 {
@@ -82,7 +102,7 @@ else
                         $('.soluongcart').append("@ViewBag.size");
                     $('.chitietcart').empty();
                     var trHTML = $(`
-             
+
                         <a class="dropdown-item" href="#" id="dropcart">
                         Chưa có sản phẩm ?
                         </a>
