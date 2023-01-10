@@ -142,8 +142,10 @@
     <Content Include="Asset\img\discount\discount20.jpg" />
     <Content Include="Asset\img\discount\hot-sale.png" />
     <Content Include="Asset\img\logo\f9a5893e92b154ef0da0.jpg" />
+    <Content Include="Asset\img\logo\logo2.jpg" />
     <Content Include="Asset\img\logo\logo2.png" />
     <Content Include="Asset\img\logo\MoonShop.png" />
+    <Content Include="Asset\img\logo\Screenshot 2023-01-03 113409.png" />
     <Content Include="Asset\img\producer\bongtaytrang.jpg" />
     <Content Include="Asset\img\producer\caylaymun.jpg" />
     <Content Include="Asset\img\producer\cotrangdiem.jpg" />
@@ -658,6 +660,7 @@
     <Content Include="css\admin\assets\vendor\tinymce\themes\silver\theme.min.js" />
     <Content Include="css\admin\assets\vendor\tinymce\tinymce.js" />
     <Content Include="css\admin\assets\vendor\tinymce\tinymce.min.js" />
+    <Content Include="css\admin\dma.css" />
     <Content Include="css\alert\notlogin.css" />
     <Content Include="css\bootstrap4\bootstrap-grid.css" />
     <Content Include="css\bootstrap4\bootstrap-grid.min.css" />
@@ -672,11 +675,13 @@
     <Content Include="css\discount\discount20%25.jpg" />
     <Content Include="css\home\navbartop.css" />
     <Content Include="css\home\product.css" />
+    <Content Include="css\notify.css" />
     <Content Include="css\productDetail.css" />
     <Content Include="css\product\demoww.css" />
     <Content Include="css\product\detail.css" />
     <Content Include="css\spinner.css" />
     <Content Include="css\style.css" />
+    <Content Include="css\test\countdown.css" />
     <Content Include="Global.asax" />
     <Content Include="js\bootstrap4\bootstrap.bundle.js" />
     <Content Include="js\bootstrap4\bootstrap.bundle.min.js" />
@@ -831,9 +836,6 @@
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Status.cs">
-      <DependentUpon>dbcosmetic.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>dbcosmetic.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1125,6 +1127,13 @@
     <Content Include="Views\Report\actionuser.cshtml" />
     <Content Include="Views\Admin\imageproduct.cshtml" />
     <Content Include="Views\ShoppingCart\AddToCart.cshtml" />
+    <Content Include="Views\Order\List.cshtml" />
+    <Content Include="Views\Orders\detail.cshtml" />
+    <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Payment\paynotlogin.cshtml" />
+    <Content Include="Views\Search\florder.cshtml" />
+    <Content Include="Views\Order\fl.cshtml" />
+    <Content Include="Views\Admin\notify.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -562,7 +562,6 @@
       
     });
     function comfimUpdateOrder() {
-        $('#spinnerModalv1').modal('show');
         var orderRequest = new Object();
         orderRequest.orderID = document.getElementById("txtOrderid").value;
         orderRequest.status = document.getElementById("cbbstatus").value;
@@ -576,9 +575,8 @@
             dataType: 'json',
             data: orderRequest,
             success: function (result) {
-                $('#spinnerModalv1').modal('hide');
                 /*location.reload();*/
-                $(".table").load(location.href + " .table");
+                location.reload();
                 Swal.fire('Lưu thành công!', '', 'success');
 
             },

@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -9,232 +8,335 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    @using (Html.BeginForm())
-    {
-        <div>
-           
-            <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
-                <div class="card card0 border-0">
-                    <div class="row d-flex">
-                        <div class="col-lg-6">
-                            <div class="card1 pb-5">
-                                <a href="@Url.Action("Index","Home")">
-                                    <div class="row"> <img src="~/Asset/img/logo/MoonShop.png" class="logo"> </div>
-                                </a>
-                              
-                                <div class="row px-3 justify-content-center mt-4 mb-5 border-line"> <img src="https://i.imgur.com/uNGdWHi.png" class="image"> </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="card2 card border-0 px-4 py-5">
-                                <div class="row mb-4 px-3">
-                                    <h6 class="mb-0 mr-4 mt-2">Đăng nhập với</h6>
-                                    <div class="facebook text-center mr-3">
-                                        <div class="fa fa-facebook"></div>
-                                    </div>
-                                    <div class="twitter text-center mr-3">
-                                        <div class="fa fa-twitter"></div>
-                                    </div>
-                                    <div class="linkedin text-center mr-3">
-                                        <div class="fa fa-linkedin"></div>
-                                    </div>
-                                </div>
-                                <div class="row px-3 mb-4">
-                                    <div class="line"></div> <small class="or text-center">Or</small>
-                                    <div class="line"></div>
-                                </div>
-                                <div class="row px-3">
-                                    <label class="mb-1">
-                                        <h6 class="mb-0 text-sm">Số điện thoại</h6>
-                                    </label> <input class="mb-4" type="text" name="txt_email" required autofocus placeholder="Nhập vào số điện thoại đăng nhập">
-                                </div>
-                                <h6 style="color:red">@ViewBag.ErrorUserPass</h6>
+    <div class="container" id="container">
 
+        <div class="form-container sign-up-container">
+            <form action="/customer/login" method="post">
+                <h1>Đăng kí</h1>
+                <div class="social-container">
+                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <span>hoặc sử dụng email của bạn</span>
+                <input type="text" required placeholder="Họ chữ điệm" name="firstname" />
+                <input type="number" required hidden name="txt_type" value="0" />
+                <input type="text" required placeholder="Tên" name="lastname" />
+                <input type="number" required placeholder="Số điện thoại" name="phone" />
+                <input type="password" required placeholder="Mật khẩu" name="password" />
+                <input type="password" required placeholder="Nhập lại mật khẩu" name="repassword" />
+                <span style="color:red">@ViewBag.message</span>
+                <button type="submit">Đăng kí</button>
 
-                                <div class="row px-3">
-                                    <label class="mb-1">
-                                        <h6 class="mb-0 text-sm">Mật khẩu</h6>
-                                    </label> <input type="password" name="txt_password" required autofocus placeholder="Nhập vào mật khẩu">
-                                </div>
-                                <h6 style="color:red">
-                                    @ViewBag.LoginFail
-                                </h6>
-                                <div class="row px-3 mb-4">
-                                    <div class="custom-control custom-checkbox custom-control-inline"> <input id="chk1" type="checkbox" name="chk" class="custom-control-input"> <label for="chk1" class="custom-control-label text-sm">Lưu mật khẩu</label> </div> <a href="#" class="ml-auto mb-0 text-sm">Quên mật khẩu ?</a>
-                                </div>
-                                <div class="row mb-3 px-3"> <button type="submit" class="btn btn-blue text-center">Đăng nhập</button> </div>
-                                <div class="row mb-4 px-3"> <small class="font-weight-bold">Bạn đã có tài khoản ? <a href="@Url.Action("Register","Customer")" class="text-danger ">Đăng kí</a></small> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-blue py-4">
-                        <div class="row px-3">
-                            <small class="ml-4 ml-sm-5 mb-2">Copyright &copy; 2019. All rights reserved.</small>
-                            <div class="social-contact ml-4 ml-sm-auto"> <span class="fa fa-facebook mr-4 text-sm"></span> <span class="fa fa-google-plus mr-4 text-sm"></span> <span class="fa fa-linkedin mr-4 text-sm"></span> <span class="fa fa-twitter mr-4 mr-sm-5 text-sm"></span> </div>
-                        </div>
-                    </div>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form action="/customer/login" method="post">
+                <h1>Đăng nhập</h1>
+                <div class="social-container">
+                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <span>hoặc tài khoản của bạn</span>
+                <input type="text" placeholder="Tên đăng nhập" name="txt_email" />
+                <input type="password" placeholder="Mật khẩu" name="txt_password" />
+                <input type="number" hidden name="txt_type" value="1" />
+                <h6 style="color:red">
+                    @ViewBag.LoginFail
+                </h6>
+                <a href="#">Quên mật khẩu?</a>
+                <button type="submit">Đăng nhập</button>
+                <a href="/home/index" style="color:blue"> Trở về trang chủ </a>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Chào mừng trở lại!</h1>
+                    <p>Để giữ kết nối với chúng tôi, vui lòng đăng nhập bằng thông tin cá nhân của bạn</p>
+                    <button class="ghost" id="signIn">Đăng nhập</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Chào , Bạn!</h1>
+                    <p>Nhập thông tin cá nhân của bạn và bắt đầu cuộc hành trình với chúng tôi</p>
+                    <button class="ghost" id="signUp">Đăng kí</button>
                 </div>
             </div>
-
         </div>
-    }
+    </div>
 
-</body>
-</html>
-<style>
-    body {
-        color: #000;
-        overflow-x: hidden;
-        height: 100%;
-        background-color: #B0BEC5;
-        background-repeat: no-repeat
-    }
+    <footer>
+        <p>
+            Được tạo  <i class="fa fa-heart"></i> bởi
+            <a target="_blank" href="https://florin-pop.com">Quang và Hạc</a>
+            -Kết nối cùng chúng tôi
+            <a target="_blank" href="/home/index">Tại đây</a>.
+        </p>
+    </footer>
+    <link rel="stylesheet" href="/home/index" />
+    <input type="text" id="viewlogin" value="@ViewBag.Signup" hidden />
+    <script>
+        const signUpButton = document.getElementById('signUp');
+        const signInButton = document.getElementById('signIn');
+        const container = document.getElementById('container');
 
-    .card0 {
-        box-shadow: 0px 4px 8px 0px #757575;
-        border-radius: 0px
-    }
+        signUpButton.addEventListener('click', () => {
+            container.classList.add("right-panel-active");
+        });
 
-    .card2 {
-        margin: 0px 40px
-    }
-
-    .logo {
-        width: 200px;
-        height: 100px;
-        margin-top: 20px;
-        margin-left: 35px
-    }
-
-    .image {
-        width: 360px;
-        height: 280px
-    }
-
-    .border-line {
-        border-right: 1px solid #EEEEEE
-    }
-
-    .facebook {
-        background-color: #3b5998;
-        color: #fff;
-        font-size: 18px;
-        padding-top: 5px;
-        border-radius: 50%;
-        width: 35px;
-        height: 35px;
-        cursor: pointer
-    }
-
-    .twitter {
-        background-color: #1DA1F2;
-        color: #fff;
-        font-size: 18px;
-        padding-top: 5px;
-        border-radius: 50%;
-        width: 35px;
-        height: 35px;
-        cursor: pointer
-    }
-
-    .linkedin {
-        background-color: #2867B2;
-        color: #fff;
-        font-size: 18px;
-        padding-top: 5px;
-        border-radius: 50%;
-        width: 35px;
-        height: 35px;
-        cursor: pointer
-    }
-
-    .line {
-        height: 1px;
-        width: 45%;
-        background-color: #E0E0E0;
-        margin-top: 10px
-    }
-
-    .or {
-        width: 10%;
-        font-weight: bold
-    }
-
-    .text-sm {
-        font-size: 14px !important
-    }
-
-    ::placeholder {
-        color: #BDBDBD;
-        opacity: 1;
-        font-weight: 300
-    }
-
-    :-ms-input-placeholder {
-        color: #BDBDBD;
-        font-weight: 300
-    }
-
-    ::-ms-input-placeholder {
-        color: #BDBDBD;
-        font-weight: 300
-    }
-
-    input,
-    textarea {
-        padding: 10px 12px 10px 12px;
-        border: 1px solid lightgrey;
-        border-radius: 2px;
-        margin-bottom: 5px;
-        margin-top: 2px;
-        width: 100%;
-        box-sizing: border-box;
-        color: #2C3E50;
-        font-size: 14px;
-        letter-spacing: 1px
-    }
-
-        input:focus,
-        textarea:focus {
-            -moz-box-shadow: none !important;
-            -webkit-box-shadow: none !important;
-            box-shadow: none !important;
-            border: 1px solid #304FFE;
-            outline-width: 0
+        signInButton.addEventListener('click', () => {
+            container.classList.remove("right-panel-active");
+        });
+        var ty = document.getElementById("viewlogin").value;
+        if (ty == "OKE") {
+            container.classList.add("right-panel-active");
         }
 
-    button:focus {
-        -moz-box-shadow: none !important;
-        -webkit-box-shadow: none !important;
-        box-shadow: none !important;
-        outline-width: 0
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+
+</body>
+
+</html>
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        background: #f6f5f7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-family: 'Montserrat', sans-serif;
+        height: 100vh;
+        margin: -20px 0 50px;
+    }
+
+    h1 {
+        font-weight: bold;
+        margin: 0;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    p {
+        font-size: 14px;
+        font-weight: 100;
+        line-height: 20px;
+        letter-spacing: 0.5px;
+        margin: 20px 0 30px;
+    }
+
+    span {
+        font-size: 12px;
     }
 
     a {
-        color: inherit;
-        cursor: pointer
+        color: #333;
+        font-size: 14px;
+        text-decoration: none;
+        margin: 15px 0;
     }
 
-    .btn-blue {
-        background-color: #1A237E;
-        width: 150px;
-        color: #fff;
-        border-radius: 2px
+    button {
+        border-radius: 20px;
+        border: 1px solid #FF4B2B;
+        background-color: deeppink;
+        color: #FFFFFF;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 12px 45px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: transform 80ms ease-in;
     }
 
-        .btn-blue:hover {
-            background-color: #000;
-            cursor: pointer
+        button:active {
+            transform: scale(0.95);
         }
 
-    .bg-blue {
-        color: #fff;
-        background-color: #1A237E
+        button:focus {
+            outline: none;
+        }
+
+        button.ghost {
+            background-color: transparent;
+            border-color: #FFFFFF;
+        }
+
+    form {
+        background-color: #FFFFFF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 50px;
+        height: 100%;
+        text-align: center;
     }
+
+    input {
+        background-color: #eee;
+        border: none;
+        padding: 12px 15px;
+        margin: 8px 0;
+        width: 100%;
+    }
+
+    .container {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        position: relative;
+        overflow: hidden;
+        width: 768px;
+        max-width: 100%;
+        min-height: 480px;
+    }
+
+    .form-container {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        transition: all 0.6s ease-in-out;
+    }
+
+    .sign-in-container {
+        left: 0;
+        width: 50%;
+        z-index: 2;
+    }
+
+    .container.right-panel-active .sign-in-container {
+        transform: translateX(100%);
+    }
+
+    .sign-up-container {
+        left: 0;
+        width: 50%;
+        opacity: 0;
+        z-index: 1;
+    }
+
+    .container.right-panel-active .sign-up-container {
+        transform: translateX(100%);
+        opacity: 1;
+        z-index: 5;
+        animation: show 0.6s;
+    }
+
+    .overlay-container {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+        transition: transform 0.6s ease-in-out;
+        z-index: 100;
+    }
+
+    .container.right-panel-active .overlay-container {
+        transform: translateX(-100%);
+    }
+
+    .overlay {
+        background: #FF416C;
+        background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
+        background:#FF416C;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 0 0;
+        color: pink;
+        position: relative;
+        left: -100%;
+        height: 100%;
+        width: 200%;
+        transform: translateX(0);
+        transition: transform 0.6s ease-in-out;
+    }
+
+    .container.right-panel-active .overlay {
+        transform: translateX(50%);
+    }
+
+    .overlay-panel {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 40px;
+        text-align: center;
+        top: 0;
+        height: 100%;
+        width: 50%;
+        transform: translateX(0);
+        transition: transform 0.6s ease-in-out;
+    }
+
+    .overlay-left {
+        transform: translateX(-20%);
+    }
+
+    .container.right-panel-active .overlay-left {
+        transform: translateX(0);
+    }
+
+    .overlay-right {
+        right: 0;
+        transform: translateX(0);
+    }
+
+    .container.right-panel-active .overlay-right {
+        transform: translateX(20%);
+    }
+
+    .social-container {
+        margin: 20px 0;
+    }
+
+        .social-container a {
+            border: 1px solid #DDDDDD;
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 5px;
+            height: 40px;
+            width: 40px;
+        }
+
+    footer {
+        background-color: #222;
+        color: #fff;
+        font-size: 14px;
+        bottom: 0;
+        position: fixed;
+        left: 0;
+        right: 0;
+        text-align: center;
+        z-index: 999;
+    }
+
+        footer p {
+            margin: 10px 0;
+        }
+
+        footer i {
+            color: red;
+        }
+
+        footer a {
+            color: #3c97bf;
+            text-decoration: none;
+        }
 </style>

@@ -1,79 +1,105 @@
-﻿@using KLTN_Web_MoonShop.Models;
-@model IEnumerable<KLTN_Web_MoonShop.Models.Order>
+﻿@using KLTN_Web_MoonShop.Models
+@using PagedList.Mvc
+@model PagedList.IPagedList<Order>
 @{
     ViewBag.Title = "Waiting";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     DBCosmeticEntities db = new DBCosmeticEntities();
-   }
+}
+<div class="container">
+    <div class="row">
+        <div class="list">
+            <div class="heading">
+                <h4>Danh sách đơn hàng <span style="color:@ViewBag.stt.color">@ViewBag.stt.statusName</span> </h4>
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+            <form>
+                <input type="text" placeholder="Nhập vào tên ">
+                <input type="phone" placeholder="Nhập vào số điện thoại">
+                <input type="submit" value="Search">
+            </form>
+            <div class="main">
+                <input type="checkbox">
+                <span class="image">
+                    <span>Mã</span>
+                </span>
+                <span class="image ml-lg-5">
+                    <span> Hình</span>
+                </span>
+                <span class="menu ml-5">
+                    <span>Tên</span>
+                </span>
+                <span class="customer">
+                    <span>Tên khách hàng</span>
+                </span>
+                <span class="quantity">
+                    <span>&nbsp; Số lượng</span>
+                </span>
+                <span class="amount">
+                    <span>Giá thành</span>
+                </span>
 
-<h2>Các đơn hàng chờ xử lý</h2>
+                <span class="phone">
+                    <span>Trạng thái</span>
+                </span>
 
-<div class="card-body">
-    <h5 class="card-title">Top mua hàng  <span>| Today</span></h5>
-
-    <table class="table table-borderless datatable">
-        <thead style="background-color:yellowgreen">
-            <tr>
-                <th scope="col">Mã vận đơn</th>
-                <th scope="col">Họ tên khách hàng</th>
-                <th scope="col">Ngày đặt</th>
-                <th scope="col">Trạng thái</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-
-                Customer cus = db.Customers.FirstOrDefault(n => n.customerID == item.customerID);
-                List<OrderDetail> lst = db.OrderDetails.Where(n => n.orderID == item.orderID).ToList();
-                if (lst.Count > 0)
+            </div>
+            <div class="items">
+                @foreach (var item in Model)
                 {
-                    var tongtien = @lst.Sum(n => n.Money);
-                    OrderDetail od = db.OrderDetails.FirstOrDefault(n => n.orderID == item.orderID);
-                    Product pro = db.Products.FirstOrDefault(n => n.productID == od.productID);
-                    <tr>
-                        <th scope="row"><a href="#">@item.orderID</a></th>
-                        <td>@cus.customerName</td>
-                        <td>@item.createDate</td>
-                        <td>
-                            @if (item.status == 1)
+
+                    Customer cus = db.Customers.FirstOrDefault(n => n.customerID == item.customerID);
+                    List<OrderDetail> lst = db.OrderDetails.Where(n => n.orderID == item.orderID).ToList();
+                    if (lst.Count > 0)
+                    {
+                        OrderDetail fi = lst.FirstOrDefault();
+                        Product pro = db.Products.FirstOrDefault(n => n.productID == fi.productID);
+                        <a class="item btn">
+                            <span style="color:blue" onclick="detail(@item.orderID)">#@item.orderID</span>
+                            <img src="~/Asset/img/product/@pro.productImage" class="ml-0">
+                            <span style="color:black">@pro.productName</span>
+                            @if (cus != null)
                             {
-                                <span class="badge bg-dark">Chờ xác nhận</span>
+                                <span class="ml-4" style="color:black">@cus.customerName</span>
                             }
-                            else
-                                if (item.status == 2)
+
+                            <span class="ml-5" style="color:black">@fi.Quantity</span>
+                            <span class="ml-3" style="color:black">@pro.productPrice</span>
+                            <span style="color:@db.Status.FirstOrDefault(n=>n.statusID==item.status).color">@db.Status.FirstOrDefault(n => n.statusID == item.status).statusName</span>
+                            @if (item.status != 4)
                             {
-                                <span class="badge bg-primary">Đã xác nhận</span>
+                                <button><i class="bi bi-pencil-fill text-danger" onclick="ShowMoreOrder(@item.orderID)">Chỉnh sửa</i></button>
                             }
-                            else
-                            if (item.status == 3)
-                            {
-                                <span class="badge bg-danger">Đang giao </span>
-                            }
-                            else
-                            {
-                                <span class="badge bg-success">Giao thành công</span>
-                            }
-                        </td>
-                        <td>
-                            <button class="btn btn-outline-danger" onclick="ShowMoreOrder(@item.orderID)">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-                                </svg>
-                                Cập nhật
-                            </button>
-                        </td>
-                    </tr>
+
+                        </a>
+                       
+                    }
+
                 }
 
+
+            </div>
+        </div>
+    </div>
+    <script>
+        function detail(id) {
+            location.href = "/orders/detail?id=" + id + "&cumb=@ViewBag.id";
+        }
+    </script>
+    <div class="row">
+        <ul class="pagination" style="margin-top:60%;margin-left:20%">
+            <li class="mr-3"> Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) trong @Model.PageCount</li>
+            @for (int i = 1; i <= Model.PageCount; i++)
+            {
+                <li class="@(i == Model.PageNumber ? "page-item active" : "page-item")">
+                    <a class="page-link" href="@Url.Action("waiting","orders", new {id=@ViewBag.id, page = i })">@i</a>
+                </li>
+
             }
-
-
-        </tbody>
-    </table>
-
+        </ul>
+    </div>
 </div>
+
 <div id="divid1" style="height:100px; width:400px" ;>
 </div>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
@@ -84,6 +110,10 @@
     }
 </script>
 <style>
+    span {
+        color: black;
+    }
+
     .bs4-order-tracking {
         margin-bottom: 30px;
         overflow: hidden;
@@ -309,4 +339,344 @@
             border-color: #ff2b00;
             border-radius: 1px
         }
+</style>
+
+
+<style>
+    * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+    }
+
+    body {
+        background-color: white;
+        font-family: Arial, Tahoma;
+    }
+
+    .list {
+        width: 980px;
+        height: 630px;
+        padding: 27px;
+        margin: 10px auto;
+        background-color: #FFF;
+        color: black;
+    }
+
+        .list .heading {
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+            .list .heading h4 {
+                float: left;
+            }
+
+            .list .heading i {
+                float: right;
+                color: #BEBEBE;
+            }
+
+        .list form {
+            margin-bottom: 20px;
+        }
+
+            .list form input[type="search"],
+            .list form input[type="text"],
+            .list form input[type="phone"] {
+                width: 145px;
+                padding: 10px 10px;
+                margin-right: 15px;
+                font-style: italic;
+                font-weight: bold;
+                font-size: 12px;
+                border: 0;
+                background-color: #F0F1F3;
+            }
+
+            .list form input[type="text"] {
+                width: 355px;
+            }
+
+            .list form input[type="phone"] {
+                width: 270px;
+            }
+
+            .list form input[type="submit"] {
+                padding: 11px 25px;
+                border: 0;
+                border-radius: 4px;
+                font-size: 11px;
+                font-weight: bold;
+                text-transform: uppercase;
+                color: #FFF;
+                background: linear-gradient(90deg, rgba(9,9,121,1) 0%, rgba(94,18,164,1) 58%);
+            }
+
+        /* Start Main */
+
+        .list .main {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #DDD;
+        }
+
+            .list .main input[type="checkbox"] {
+                cursor: pointer;
+                margin-right: 5px;
+            }
+
+            .list .main span {
+                font-size: 14px;
+            }
+
+            .list .main .invoice {
+                margin-right: 20px;
+            }
+
+            .list .main .image {
+                margin-right: 33px;
+            }
+
+            .list .main .menu {
+                position: relative;
+                margin-right: 90px;
+            }
+
+                .list .main .menu i {
+                    position: absolute;
+                    top: 1px;
+                    left: 40px;
+                }
+
+            .list .main .customer {
+                position: relative;
+                margin-right: 30px;
+            }
+
+                .list .main .customer i {
+                    position: absolute;
+                    top: 1px;
+                    left: 110px;
+                }
+
+            .list .main .quantity {
+                margin-right: 35px;
+            }
+
+            .list .main .amount {
+                position: relative;
+                margin-right: 40px;
+            }
+
+                .list .main .amount i {
+                    position: absolute;
+                    top: 1px;
+                    left: 55px;
+                }
+
+            .list .main .status {
+                position: relative;
+                margin-right: 40px;
+            }
+
+                .list .main .status i {
+                    position: absolute;
+                    top: 1px;
+                    left: 85px;
+                }
+
+            .list .main .phone {
+                margin-right: 30px;
+                position: relative;
+            }
+
+                .list .main .phone i {
+                    position: absolute;
+                    top: 1px;
+                    left: 50px;
+                }
+
+    /* End Main */
+
+    /* Start item */
+
+    .items .item {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        align-items: center;
+        padding-bottom: 12px;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #e8e8e8;
+    }
+
+        .items .item:first-of-type span {
+            color: #444;
+        }
+
+        .items .item:first-of-type .check {
+            position: relative;
+            display: block;
+            cursor: pointer;
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+
+        .items .item input[type="checkbox"] {
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .items .item:first-of-type .check .geekmark {
+            position: absolute;
+            left: 0;
+            top: 3px;
+            width: 15px;
+            height: 16px;
+            border-radius: 2px;
+            background: linear-gradient(90deg, rgba(9,9,121,1) 0%, rgba(94,18,164,1) 58%);
+        }
+
+        .items .item span {
+            color: #9a9a9a;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 27px;
+        }
+
+        .items .item img {
+            width: 6%;
+            margin-right: 28px;
+        }
+
+        .items .item span:nth-of-type(2) {
+            margin-right: 56px;
+        }
+
+        .items .item span:nth-of-type(3) {
+            margin-right: 80px;
+        }
+
+        .items .item span:nth-of-type(4) {
+            width: 34px;
+            height: 27px;
+            line-height: 27px;
+            margin-right: 55px;
+            text-align: center;
+            border-radius: 3px;
+            border: 1px solid #DDD;
+        }
+
+        .items .item span:nth-of-type(5) {
+            margin-right: 50px;
+            font-size: 13px;
+        }
+
+        .items .item button {
+            background-color: #36E6C2;
+            color: #FFF;
+            border: 0;
+            padding: 6px 0;
+            width: 70px;
+            border-radius: 5px;
+            margin-right: 50px;
+        }
+
+        .items .item span:nth-of-type(6) {
+            font-size: 13px;
+            margin-right: 80px;
+        }
+
+        .items .item i {
+            color: #BEBEBE
+        }
+
+        .items .item:nth-of-type(2) span:nth-of-type(2),
+        .items .item:nth-of-type(5) span:nth-of-type(2) {
+            margin-right: 70px;
+        }
+
+        .items .item:nth-of-type(2) span:nth-of-type(3),
+        .items .item:nth-of-type(5) span:nth-of-type(3) {
+            margin-right: 60px;
+        }
+
+        .items .item:nth-of-type(2) button,
+        .items .item:nth-of-type(5) button {
+            background-color: #FFB74D;
+            color: #FFF;
+            border: 0;
+            padding: 6px 0;
+            width: 70px;
+            border-radius: 5px;
+            margin-right: 50px;
+        }
+
+        .items .item:nth-of-type(2) span:nth-of-type(6),
+        .items .item:nth-of-type(3) span:nth-of-type(6),
+        .items .item:nth-of-type(4) span:nth-of-type(6),
+        .items .item:nth-of-type(5) span:nth-of-type(6),
+        .items .item:nth-of-type(6) span:nth-of-type(6) {
+            color: #868686;
+        }
+
+        .items .item:nth-of-type(3) span:nth-of-type(2),
+        .items .item:nth-of-type(6) span:nth-of-type(2) {
+            margin-right: 48px;
+        }
+
+        .items .item:nth-of-type(4) span:nth-of-type(2) {
+            margin-right: 51px;
+        }
+
+        .items .item:nth-of-type(3) span:nth-of-type(3),
+        .items .item:nth-of-type(6) span:nth-of-type(3) {
+            margin-right: 43px;
+        }
+
+        .items .item:nth-of-type(4) span:nth-of-type(3) {
+            margin-right: 42px;
+        }
+
+    /* End item */
+
+    /* Start Bottom */
+
+    .list .bottom {
+        color: #9a9a9a;
+        font-size: 12px;
+        font-weight: bold;
+        margin-top: 25px;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+        .list .bottom .number span:nth-of-type(2) {
+            padding: 5px 9px;
+            margin-left: 10px;
+            font-size: 16px;
+            border-radius: 3px;
+            border: 1px solid #5e12a4;
+            color: #FFF;
+            background: linear-gradient(90deg, rgba(9,9,121,1) 0%, rgba(94,18,164,1) 58%);
+        }
+
+        .list .bottom .number span:nth-of-type(3),
+        .list .bottom .number span:nth-of-type(4),
+        .list .bottom .number span:nth-of-type(5) {
+            color: #AFAFAF;
+            font-size: 16px;
+            padding: 5px 9px;
+            border-radius: 3px;
+            border: 1px solid #ded9d9;
+        }
+
+        .list .bottom .number span:nth-of-type(5) {
+            margin-right: 10px;
+        }
+
+    /* End Bottom */
 </style>

@@ -1,0 +1,785 @@
+﻿@using KLTN_Web_MoonShop.Models
+@model IEnumerable<KLTN_Web_MoonShop.Models.Product>
+@using (Html.BeginForm())
+{
+    <div class="card">
+        <div class="card-top border-bottom text-center">
+            <a href="/home/index"> Trở về trang chủ</a>
+            <span id="logo">Moonshop</span>
+        </div>
+        <div class="card-body">
+            <div class="row upper">
+                <span><i class="fa fa-check-circle-o"></i> Shopping bag</span>
+                <span><i class="fa fa-check-circle-o"></i> Chi tiết đơn hàng</span>
+                <span id="payment"><span id="three">3</span>Thanh toán</span>
+            </div>
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="left border">
+                        <div class="row">
+                            <h6 class="header">Thông tin đặt hàng</h6>
+                            <div class="icons">
+                                <img src="https://img.icons8.com/color/48/000000/visa.png" />
+                                <img src="https://img.icons8.com/color/48/000000/mastercard-logo.png" />
+                                <img src="https://img.icons8.com/color/48/000000/maestro.png" />
+                            </div>
+                        </div>
+                        <form>
+                            <div class="card-body">
+                                Họ và tên :
+                                <input name="txthoten" required>
+                               Số điện thoại
+                                <input type="number" required name="txtsdt">
+                                <h5>Địa chỉ giao hàng</h5>
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                Tỉnh/ Thành Phố
+                                                <select name="" id="province" class="form-control coupon">
+                                                </select>
+                                            </div>
+                                            <div class="col-6">
+                                                Quận/Huyện
+                                                <select name="" id="district" class="form-control coupon ">
+                                                    <option value="">chọn quận/huyện</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                Xã/Phường
+                                                <select name="" id="ward" class="form-control coupon">
+                                                    <option value="">chọn xã/phường</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-6">
+                                                Số nhà/Đường
+                                                <input type="text" id="txtduong" class="form-control coupon" name="txtduong" required>
+                                            </div>
+                                        </div>
+                                        Địa chỉ đã chọn
+                                        <input type="text" id="txt" class="form-control coupon" name="txt" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="right border">
+                        <div class="header">Sản phẩm thanh toán</div>
+                        <div class="row">
+                            <div class="col">
+                                <p>Sản phẩm</p>
+
+                            </div>
+                            <div class="col">
+
+                                <p>Giá</p>
+
+                            </div>
+                            <div class="col">
+                                <p>Số lượng</p>
+                            </div>
+                            <div class="col">
+                                <p>Tổng</p>
+                            </div>
+                        </div>
+
+                        @*@foreach (var item in Model)
+        {
+            <div class="row item">
+
+                <div class="col-4 align-self-center">
+                <img class="img-fluid" src="~/Asset/img/product/@item.productImage">
+                </div>
+                <div class="col-8">
+                    <div class="row"><b>@String.Format("{0:0,0 vnđ}", item.productPrice)</b></div>
+                    <div class="row text-muted">@item.productName</div>
+                    <div class="row">Số lượng:1</div>
+                </div>
+            </div>
+        }*@
+                        @foreach (var item in Model)
+                        {
+                            <div class="row">
+                                <div class="product">
+                                    <div class="product-image">
+                                        <img src="~/Asset/img/product/@item.productImage" height="50" width="50">
+                                    </div>
+                                    <div class="product-details">
+
+                                        @if (item.productName.Length > 50)
+                                        {
+                                            <p class="product-description">
+                                                @item.productName.Substring(0, 50)
+                                            </p>
+                                        }
+                                        else
+                                        {
+                                            <p class="product-description">
+                                                @item.productName
+                                            </p>
+                                        }
+
+                                    </div>
+                                    <div class="product-price w-auto">@item.productPrice</div>
+                                    <div class="product-quantity ml-5 mr-5">
+                                        <input type="number" class="num" value="@item.productQuantity" min="1" id="@item.productID">
+                                    </div>
+                                    <div class="product-line-price w-auto text-danger">@item.productPrice</div>
+                                </div>
+                            </div>
+
+                        } 
+
+                        <input id="txtstrsl" name="txtstrsl" hidden />
+                        <input id="txttongtien" name="txttongtien" hidden />
+                        <hr>
+                        <div class="row lower">
+                            <div class="col text-left">Phí vận chuyển</div>
+                            <div class="col text-right text-primary">Miễn phí</div>
+                        </div>
+                        <div class="row lower">
+                            <div class="col text-left"><b>Tổng tiền :</b></div>
+                            <div class="col text-right">
+                                <div class="totals">
+                                    <div class="totals-item">
+                                        <h3 class="totals-value text-danger" id="cart-subtotal">@Model.Sum(n => n.productPrice * n.productQuantity)</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row justify-content-center">
+                            <button class="btn btn-danger" onclick="checkout()" type="submit">Thanh toán</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input id="message" value="@ViewBag.message" />
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            var mess = document.getElementById("message").value;
+            if (mess != "") {
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Đặt hàng thành công',
+                    showConfirmButton: true,
+                    timer: 2500
+                })
+                location.href = "/home/index";
+            }
+            function checkout() {
+                var valueArr = [];
+                document.querySelectorAll('.num').forEach(function (el) {
+                    valueArr.push(el.value);
+                });
+                document.getElementById("txtstrsl").value = valueArr;
+                document.getElementById("txttongtien").value = +document.getElementById("cart-subtotal").innerHTML;
+            }
+        </script>
+        <div>
+        </div>
+       
+    </div>
+}
+
+@*----------------------------------------------------------------------------------dia  chi----------------------------*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var elements = document.getElementsByTagName("INPUT");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].oninvalid = function (e) {
+                e.target.setCustomValidity("");
+                if (!e.target.validity.valid) {
+                    e.target.setCustomValidity("Vui lòng nhập đầy đủ thông tin");
+                }
+            };
+            elements[i].oninput = function (e) {
+                e.target.setCustomValidity("");
+            };
+        }
+    })
+    $("#txtduong").on('change keydown paste input', function () {
+        var diachi = document.getElementById("txt").value;
+        var tenduong = document.getElementById("txtduong").value;
+        document.getElementById("txt").value = tenduong + "," + $("#ward option:selected").text() + "," + $("#district option:selected").text() + "," + $("#province option:selected").text()
+    });
+
+
+    const host = "https://provinces.open-api.vn/api/";
+    var callAPI = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data, "province");
+            });
+    }
+    callAPI('https://provinces.open-api.vn/api/?depth=1');
+    var callApiDistrict = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data.districts, "district");
+            });
+    }
+    var callApiWard = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data.wards, "ward");
+            });
+    }
+
+    var renderData = (array, select) => {
+        let row = ' <option disable value="">chọn</option>';
+        array.forEach(element => {
+            row += `<option value="${element.code}">${element.name}</option>`
+        });
+        document.querySelector("#" + select).innerHTML = row
+    }
+
+    $("#province").change(() => {
+        callApiDistrict(host + "p/" + $("#province").val() + "?depth=2");
+        printResult();
+    });
+    $("#district").change(() => {
+        callApiWard(host + "d/" + $("#district").val() + "?depth=2");
+        printResult();
+    });
+    $("#ward").change(() => {
+        printResult();
+    })
+    var duong = document.getElementById("txtduong").value;
+    var printResult = () => {
+        if ($("#district").val() != "" && $("#province").val() != "" &&
+            $("#ward").val() != "") {
+            let result = $("#province option:selected").text() +
+                " | " + $("#district option:selected").text() + " | " +
+                $("#ward option:selected").text();
+
+            $("#result").text(result)
+
+            var diachi = result;
+            document.getElementById("txt").value = $("#ward option:selected").text() + "," + $("#district option:selected").text() + "," + $("#province option:selected").text();
+
+
+
+        }
+
+    }
+</script>
+<style>
+    body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgb(0, 0, 34);
+        font-size: 0.8rem;
+    }
+
+    .card {
+        max-width: 1000px;
+        margin: 2vh;
+    }
+
+    .card-top {
+        padding: 0.7rem 5rem;
+    }
+
+        .card-top a {
+            float: left;
+            margin-top: 0.7rem;
+        }
+
+    #logo {
+        font-family: 'Dancing Script';
+        font-weight: bold;
+        font-size: 1.6rem;
+    }
+
+    .card-body {
+        padding: 0 5rem 5rem 5rem;
+        /*background-image: url("https://i.imgur.com/4bg1e6u.jpg");*/
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    media(max-width:768px) {
+        .card-body
+
+    {
+        padding: 0 1rem 1rem 1rem;
+        background-image: url("https://i.imgur.com/4bg1e6u.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .card-top {
+        padding: 0.7rem 1rem;
+    }
+
+    }
+
+    .row {
+        margin: 0;
+    }
+
+    .upper {
+        padding: 1rem 0;
+        justify-content: space-evenly;
+    }
+
+    #three {
+        border-radius: 1rem;
+        width: 22px;
+        height: 22px;
+        margin-right: 3px;
+        border: 1px solid blue;
+        text-align: center;
+        display: inline-block;
+    }
+
+    #payment {
+        margin: 0;
+        color: blue;
+    }
+
+    .icons {
+        margin-left: auto;
+    }
+
+    form span {
+        color: rgb(179, 179, 179);
+    }
+
+    form {
+        padding: 2vh 0;
+    }
+
+    input {
+        border: 1px solid rgba(0, 0, 0, 0.137);
+        padding: 1vh;
+        margin-bottom: 4vh;
+        outline: none;
+        width: 100%;
+        /*background-color: rgb(247, 247, 247);*/
+    }
+
+        input:focus::-webkit-input-placeholder {
+            color: transparent;
+        }
+
+    .header {
+        font-size: 1.5rem;
+    }
+
+    .left {
+        background-color: #ffffff;
+        padding: 2vh;
+    }
+
+        .left img {
+            width: 2rem;
+        }
+
+        .left .col-4 {
+            padding-left: 0;
+        }
+
+    .right .item {
+        padding: 0.3rem 0;
+    }
+
+    .right {
+        background-color: #ffffff;
+        padding: 2vh;
+    }
+
+    .col-8 {
+        padding: 0 1vh;
+    }
+
+    .lower {
+        line-height: 2;
+    }
+
+    a {
+        color: black;
+    }
+
+        a:hover {
+            color: black;
+            text-decoration: none;
+        }
+
+    input[type=checkbox] {
+        width: unset;
+        margin-bottom: unset;
+    }
+
+    #cvv {
+        background-image: linear-gradient(to left, rgba(255, 255, 255, 0.575), rgba(255, 255, 255, 0.541)), url("https://img.icons8.com/material-outlined/24/000000/help.png");
+        background-repeat: no-repeat;
+        background-position-x: 95%;
+        background-position-y: center;
+    }
+
+        #cvv:hover {
+        }
+</style>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+
+
+
+
+
+@*------------------------------------------sosos luong------------------------------------------*@
+
+
+<style>
+    import "compass/css3";
+
+/*
+I wanted to go with a mobile first approach, but it actually lead to more verbose CSS in this case, so I've gone web first. Can't always force things...
+
+Side note: I know that this style of nesting in SASS doesn't result in the most performance efficient CSS code... but on the OCD/organizational side, I like it. So for CodePen purposes, CSS selector performance be damned.
+*/
+
+/* Global settings */
+$color-border: #eee;
+$color-label: #aaa;
+$font-default: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-bold: 'HelveticaNeue-Medium', 'Helvetica Neue Medium';
+
+
+/* Global "table" column settings */
+.product-image { float: left; width: 20%; }
+.product-details { float: left; width: 37%; }
+.product-price { float: left; width: 12%; }
+.product-quantity { float: left; width: 10%; }
+.product-removal { float: left; width: 9%; }
+.product-line-price { float: left; width: 12%; text-align: right; }
+
+
+/* This is used as the traditional .clearfix class */
+.group:before,
+.group:after {
+    content: '';
+    display: table;
+}
+.group:after {
+    clear: both;
+}
+.group {
+    zoom: 1;
+}
+
+
+/* Apply clearfix in a few places */
+.shopping-cart, .column-labels, .product, .totals-item {
+  extend .group;
+}
+
+
+/* Apply dollar signs */
+.product .product-price:before, .product .product-line-price:before, .totals-value:before {
+
+}
+
+
+/* Body/Header stuff */
+body {
+  padding: 0px 30px 30px 20px;
+  font-family: $font-default;
+  font-weight: 100;
+}
+
+h1 {
+  font-weight: 100;
+}
+
+label {
+  color: $color-label;
+}
+
+.shopping-cart {
+  margin-top: -45px;
+}
+
+
+/* Column headers */
+.column-labels {
+  label {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid $color-border;
+  }
+
+  .product-image, .product-details, .product-removal {
+    text-indent: -9999px;
+  }
+}
+
+
+/* Product entries */
+.product {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $color-border;
+
+  .product-image {
+    text-align: center;
+    img {
+      width: 100px;
+    }
+  }
+
+  .product-details {
+    .product-title {
+      margin-right: 20px;
+      font-family: $font-bold;
+    }
+    .product-description {
+      margin: 5px 20px 5px 0;
+      line-height: 1.4em;
+    }
+  }
+
+  .product-quantity {
+    input {
+      width: 40px;
+
+    }
+  }
+
+  .remove-product {
+    border: 0;
+    padding: 4px 8px;
+    background-color: #c66;
+    color: #fff;
+    font-family: $font-bold;
+    font-size: 12px;
+    border-radius: 3px;
+  }
+
+  .remove-product:hover {
+    background-color: #a44;
+  }
+}
+
+
+/* Totals section */
+.totals {
+  .totals-item {
+    float: right;
+    clear: both;
+    width: 100%;
+    margin-bottom: 10px;
+
+    label {
+      float: left;
+      clear: both;
+      width: 79%;
+      text-align: right;
+    }
+
+    .totals-value {
+      float: right;
+      width: 21%;
+      text-align: right;
+    }
+  }
+
+  .totals-item-total {
+    font-family: $font-bold;
+  }
+}
+
+.checkout {
+  float: right;
+  border: 0;
+  margin-top: 20px;
+  padding: 6px 25px;
+  background-color: #6b6;
+  color: #fff;
+  font-size: 25px;
+  border-radius: 3px;
+}
+
+.checkout:hover {
+  background-color: #494;
+}
+
+/* Make adjustments for tablet */
+media screen and (max-width: 650px) {
+
+  .shopping-cart {
+    margin: 0;
+    padding-top: 20px;
+    border-top: 1px solid $color-border;
+  }
+
+  .column-labels {
+    display: none;
+  }
+
+  .product-image {
+    float: right;
+    width: auto;
+    img {
+      margin: 0 0 10px 10px;
+    }
+  }
+
+  .product-details {
+    float: none;
+    margin-bottom: 10px;
+    width: auto;
+  }
+
+  .product-price {
+    clear: both;
+    width: 70px;
+  }
+
+  .product-quantity {
+    width: 100px;
+    input {
+      margin-left: 20px;
+    }
+  }
+
+  .product-quantity:before {
+    content: 'x';
+  }
+
+  .product-removal {
+    width: auto;
+  }
+
+  .product-line-price {
+    float: right;
+    width: 70px;
+  }
+
+}
+
+
+/* Make more adjustments for phone */media screen and (max-width: 350px) {
+
+  .product-removal {
+    float: right;
+  }
+
+  .product-line-price {
+    float: right;
+    clear: left;
+    width: auto;
+    margin-top: 10px;
+  }
+
+  .product .product-line-price:before {
+    content: 'Item Total: $';
+  }
+
+  .totals {
+    .totals-item {
+      label {
+        width: 60%;
+      }
+
+      .totals-value {
+        width: 40%;
+      }
+    }
+  }
+}
+</style>
+<script>
+    /* Set rates + misc */
+    var taxRate =0;
+    var shippingRate =0;
+    var fadeTime = 300;
+
+
+    /* Assign actions */
+    $('.product-quantity input').change(function () {
+        updateQuantity(this);
+    });
+
+    $('.product-removal button').click(function () {
+        removeItem(this);
+    });
+
+
+    /* Recalculate cart */
+    function recalculateCart() {
+        var subtotal = 0;
+
+        /* Sum up row totals */
+        $('.product').each(function () {
+            subtotal += parseInt($(this).children('.product-line-price').text());
+        });
+
+        /* Calculate totals */
+        var tax = subtotal * taxRate;
+        var shipping = (subtotal > 0 ? shippingRate : 0);
+        var total = subtotal + tax + shipping;
+
+        /* Update totals display */
+        $('.totals-value').fadeOut(fadeTime, function () {
+            $('#cart-subtotal').html(subtotal.toFixed(0));
+            $('#cart-tax').html(tax.toFixed(0));
+            $('#cart-shipping').html(shipping.toFixed(0));
+            $('#cart-total').html(total.toFixed(0));
+            if (total == 0) {
+                $('.checkout').fadeOut(fadeTime);
+            } else {
+                $('.checkout').fadeIn(fadeTime);
+            }
+            $('.totals-value').fadeIn(fadeTime);
+        });
+    }
+
+
+    /* Update quantity */
+    function updateQuantity(quantityInput) {
+        /* Calculate line price */
+        var productRow = $(quantityInput).parent().parent();
+        var price = parseFloat(productRow.children('.product-price').text());
+        var quantity = $(quantityInput).val();
+        var linePrice = price * quantity;
+
+        /* Update line price display and recalc cart totals */
+        productRow.children('.product-line-price').each(function () {
+            $(this).fadeOut(fadeTime, function () {
+                $(this).text(linePrice.toFixed(0));
+                recalculateCart();
+                $(this).fadeIn(fadeTime);
+            });
+        });
+    }
+
+
+    /* Remove item from cart */
+    function removeItem(removeButton) {
+        /* Remove row from DOM and recalc cart total */
+        var productRow = $(removeButton).parent().parent();
+        productRow.slideUp(fadeTime, function () {
+            productRow.remove();
+            recalculateCart();
+        });
+    }
+</script>

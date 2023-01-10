@@ -21,6 +21,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
     public class product2
     {
         public long productID { get; set; }
+        public int productTypeID { get; set; }
         public string productName { get; set; }
         public Nullable<long> productQuantity { get; set; }
         public Nullable<long> productPrice { get; set; }
@@ -105,7 +106,8 @@ namespace KLTN_Web_MoonShop.Controllers.API
                 productDescribe = x.productDescribe,
                 productImage = x.productImage,
                 productQuantity=x.productQuantity,
-                productPrice=x.productPrice
+                productPrice=x.productPrice,
+                productTypeID= (int)x.productTypeID,
             }
             ).ToList();
             return mm;
@@ -144,7 +146,8 @@ namespace KLTN_Web_MoonShop.Controllers.API
                 productDescribe = x.productDescribe,
                 productImage = x.productImage,
                 productQuantity = x.productQuantity,
-                productPrice = x.productPrice
+                productPrice = x.productPrice,
+                productTypeID= (int)x.productTypeID
             }
           ).ToList();
             return mm;

@@ -27,8 +27,8 @@
                 {
                     <tr>
                         <td>@item.productID</td>
-                        <th scope="row"><a href="#"><img src="~/Asset/img/product/@item.productImage" height="50" width="50" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">@item.productName</a></td>
+                        <th scope="row"><a href="/product/detail/@item.productID"><img src="~/Asset/img/product/@item.productImage" height="50" width="50" alt=""></a></th>
+                        <td><a href="/product/detail/@item.productID" class="text-primary fw-bold">@item.productName</a></td>
                         <td>
                             <b style="color:red">@String.Format("{0:0,0}", item.productPrice)</b>
                         </td>

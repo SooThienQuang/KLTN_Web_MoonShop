@@ -1,41 +1,78 @@
 ﻿@if (@ViewBag.user == null)
 {
-
-    <div class="dropdown">
-        <div class="d-flex d-none d-md-flex flex-row align-items-center">
-            <a class="btn shop-bag" href="/shoppingcart/detail" style=" background-color: #000; color: #fff; height: 50px; width: 50px; font-size: 25px; display: flex; border-radius: 50%; align-items: center; justify-content: center;"><i class='bx bxs-shopping-bag'></i></a>
-            <div class="d-flex flex-column ms-2">
-                <span class="qty">
-                    <span class='badge badge-warning' id='lblCartCount'><span class="soluongcart">0</span>  </span>
-                </span>
-                <span class="tongtiencart">Giỏ hàng</span>
+    if (ViewBag.lstCart != null)
+    {
+        <div class="dropdown">
+            <div class="d-flex d-none d-md-flex flex-row align-items-center">
+                <a class="btn shop-bag" href="/shoppingcart/detail" style=" background-color: #000; color: #fff; height: 50px; width: 50px; font-size: 25px; display: flex; border-radius: 50%; align-items: center; justify-content: center;"><i class='bx bxs-shopping-bag'></i></a>
+                <div class="d-flex flex-column ms-2">
+                    <span class="qty">
+                        <span class='badge badge-warning' id='lblCartCount'><span class="soluongcart">@ViewBag.size</span>  </span>
+                    </span>
+                    <span class="tongtiencart">Giỏ hàng</span>
+                </div>
             </div>
-        </div>
-        <script>
+            @*<script>
                         $('.soluongcart').empty();
                         $('.soluongcart').append("@ViewBag.size");
-        </script>
-        <div class="dropdown-content dropdown-menu-right">
-            <div class="chitietcart">
-            </div>
-            <a class="mb-0 font-weight-bold float-sm-end dropdown-header" href="@Url.Action("Detail", "ShoppingCart")">Xem tất cả<p class="ti-arrow-circle-right"> </p></a>
-        </div>
-    </div>
-    <script>
-                    $('.chitietcart').empty();
-                    var trHTML = $(`
-                @foreach (var item in @ViewBag.lstCart)
+            </script>*@
+            <div class="dropdown-content dropdown-menu-right">
+                <div class="chitietcart">
+                    @foreach (var item in @ViewBag.lstCart)
                     {
                         <a class="dropdown-item" href="/product/detail/@item.id" id="dropcart">
-                         <img src="~/Asset/img/product/@item.img" height="50" width="50" />
+                            <img src="~/Asset/img/product/@item.img" height="50" width="50" />
                             <h6 class="font-weight-normal">
                                 @item.name.Substring(0, 30)
                             </h6>
                             <h6 class="font-weight-normal text-danger">Số lượng : @item.quantity</h6>
                         </a>
                     }
+                </div>
+                <a class="mb-0 font-weight-bold float-sm-end dropdown-header" href="@Url.Action("Detail", "ShoppingCart")">Xem tất cả<p class="ti-arrow-circle-right"> </p></a>
+            </div>
+        </div>
+        @*<script>
+                    $('.chitietcart').empty();
+                    var trHTML = $(`
+              
     `);
-                    $('.chitietcart').append(trHTML);</script>
+                    $('.chitietcart').append(trHTML);</script>*@
+
+    }
+    else
+    {
+        <div class="dropdown">
+            <div class="d-flex d-none d-md-flex flex-row align-items-center">
+                <a class="btn shop-bag" href="/shoppingcart/detail" style=" background-color: #000; color: #fff; height: 50px; width: 50px; font-size: 25px; display: flex; border-radius: 50%; align-items: center; justify-content: center;"><i class='bx bxs-shopping-bag'></i></a>
+                <div class="d-flex flex-column ms-2">
+                    <span class="qty">
+                        <span class='badge badge-warning' id='lblCartCount'><span class="soluongcart">@ViewBag.size</span>  </span>
+                    </span>
+                    <span class="tongtiencart">Giỏ hàng</span>
+                </div>
+            </div>
+            @*<script>
+                        $('.soluongcart').empty();
+                        $('.soluongcart').append("@ViewBag.size");
+            </script>*@
+        <div class="dropdown-content dropdown-menu-right">
+
+            Chưa có sản phẩm trong giỏ hàng 
+        </div>
+        </div>
+        @*<script>
+                    $('.chitietcart').empty();
+                    var trHTML = $(`
+               
+                        <a class="" id="dropcart">
+                        Bạn chưa có sản phẩm ?
+                        </a>
+                    
+    `);
+                    $('.chitietcart').append(trHTML);</script>*@
+    }
+
 }
 else
 {

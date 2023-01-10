@@ -45,6 +45,5 @@ namespace KLTN_Web_MoonShop.Models
         public virtual DbSet<Salary> Salaries { get; set; }
         public virtual DbSet<Sex> Sexes { get; set; }
         public virtual DbSet<Status> Status { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

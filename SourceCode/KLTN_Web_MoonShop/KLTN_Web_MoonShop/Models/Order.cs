@@ -28,6 +28,8 @@ namespace KLTN_Web_MoonShop.Models
         public Nullable<long> money { get; set; }
         public Nullable<int> status { get; set; }
         public Nullable<long> idProcess { get; set; }
+        public string phone { get; set; }
+        public string reason { get; set; }
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

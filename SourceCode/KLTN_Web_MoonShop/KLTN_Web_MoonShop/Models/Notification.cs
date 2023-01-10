@@ -18,6 +18,8 @@ namespace KLTN_Web_MoonShop.Models
         public Nullable<long> sendUserID { get; set; }
         public string sendUserFullName { get; set; }
         public Nullable<long> receiveUserID { get; set; }
+        public Nullable<long> receiveGroupID { get; set; }
+        public string receiveGroupName { get; set; }
         public string receiveUserFullName { get; set; }
         public Nullable<long> objectID { get; set; }
         public Nullable<long> objectTypeID { get; set; }

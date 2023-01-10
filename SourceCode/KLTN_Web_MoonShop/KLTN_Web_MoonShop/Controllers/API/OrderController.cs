@@ -33,10 +33,10 @@ namespace KLTN_Web_MoonShop.Controllers.API
     public class OrderController : ApiController
     {
         DBCosmeticEntities db = new DBCosmeticEntities();
-        public order get(long orderid,long proid)
+        [HttpDelete]
+        public string get(orderRequest d)
         {
-            order d = new order();
-            return d;
+            return "Thành công";
         }
         [HttpPut]
         public string put(orderRequest d)
@@ -76,6 +76,10 @@ namespace KLTN_Web_MoonShop.Controllers.API
                 noti.menutype = 2;
                 noti.isRead = 0;
                 db.Notifications.Add(noti);
+                db.SaveChanges();
+                Notification ni = db.Notifications.FirstOrDefault(n => n.objectID == order.orderID&&n.receiveGroupID!=null);
+                ni.isRead = 1;
+                db.Notifications.AddOrUpdate(ni);
                 db.SaveChanges();
                 return "Thành công";
             }

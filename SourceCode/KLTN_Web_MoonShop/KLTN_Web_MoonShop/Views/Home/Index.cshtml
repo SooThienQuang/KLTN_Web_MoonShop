@@ -1,14 +1,54 @@
-﻿@{
+﻿@using KLTN_Web_MoonShop.Models;
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    DBCosmeticEntities db = new DBCosmeticEntities();
+    Order od = Session["order"] as Order;
+
 }
-@*-------------------------------carosel trang chủ các hình banner-----------------------------*@   
+@*-------------------------------carosel trang chủ các hình banner-----------------------------*@
+@if (od != null)
+{
+    <script>
+        $(document).ready(function () {
+                $("#huongdantracuu").modal("show");
+          
+        });
+        function clodd() {
+            $(document).ready(function () {
+                $("#huongdantracuu").modal("hide");
+            });
+        }
+    </script>
+}
+<div class="modal fade" id="huongdantracuu" tabindex="-1" role="dialog" aria-labelledby="huongdantracuu" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Hướng dẫn tra cứu đơn hàng</h5>
+                <button type="button" class="close" onclick="clodd()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <b> Bước 1:</b> Nhập số điện thoại vào ô tìm kiếm<br />
+
+                                                                 <b>  Bước 2:</b> Tiến hành tìm kiếm đơn hàng<br />
+                <img src="~/Asset/img/logo/Screenshot 2023-01-03 113409.png" style="height:100%;width:100%;margin-top:5px" />
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" onclick="clodd()" data-dismiss="modal">Đã hiểu</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row" style="padding:0 30px 0 30px">
     @Html.Action("CaroselHome", "PartialView")
 </div>
 <div class="container">
     @*@Html.Action("NavbarProducer", "PartialView")*@
-   
+
     @*----------------loại sản phẩm :như son môi,phấn mắt...-------------------------------------*@
 
     @Html.Action("CaroselProductHome", "Product")

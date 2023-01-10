@@ -117,13 +117,34 @@ else
                                 <td>
                                     <div class="fw-600">@pro.productPrice</div>
                                 </td>
-                                <td class="d-">
-                                    <input class="form-control" id="txtcartquantity" name="txtcartquantity" type="number" value="@item.cartQuantity" min="0">
-                                </td>
+                                @if (user == null)
+                                {
+                                    <td class="d-">
+                                        <input class="form-control" id="txtcartquantity" name="txtcartquantity" type="number" value="@item.cartQuantity" min="0" disabled>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="d-">
+                                        <input class="form-control" id="txtcartquantity" name="txtcartquantity" type="number" value="@item.cartQuantity" min="0">
+                                    </td>
+                                }
+
                                 <td>
-                                    <div class="btn">
-                                        <span onclick="showDel(@item.productID)" class="fas fa-times" data-toggle="tooltip" data-placement="bottom" title="Xóa"></span>
-                                    </div>
+                                    @if (user == null)
+                                    {
+
+                                        <div class="btn">
+                                            <span onclick="showDelCok(@item.productID,@item.cartQuantity)" class="fas fa-times" data-toggle="tooltip" data-placement="bottom" title="Xóa"></span>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="btn">
+                                            <span onclick="showDel(@item.productID)" class="fas fa-times" data-toggle="tooltip" data-placement="bottom" title="Xóa"></span>
+                                        </div>
+                                    }
+
                                     @if (user != null)
                                     {
                                         <div class="btn" id="divsave">
@@ -235,21 +256,59 @@ else
 <button id="btncancelDel" onclick="CloseDel()" hidden></button>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    //------------------------------chua dang nhap-------------------------
-    function checkoutCookie() {
-        //footer: '<a href="">Why do I have this issue?</a>'
+    function showDelCok(id,sl) {
         Swal.fire({
-            title: 'Bạn chưa đăng nhập?',
-            text: "Vui lòng đăng nhập để mua hàng!",
-            icon: 'error',
+            title: 'Bạn có chắc chắn muốn xóa?',
+            text: "Thao tác sẽ không hoàn lại được",
+            icon: 'warning',
+            showCancelButton: true,
             confirmButtonColor: '#3085d6',
-            confirmButtonText: 'Đăng nhập!',
-            footer: '<a href="/customer/register">Bạn chưa có tài khoản? Đăng kí ngay !</a>'
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Có!'
         }).then((result) => {
             if (result.isConfirmed) {
-                location.href = "/customer/login";
+                Swal.fire(
+                    'Xóa thành công!',
+                    'Dữ liệu đã bị xóa',
+                    'success'
+                )
+                location.href = "/shoppingcart/removeCartCookie?id=" + id+"&sl="+sl;
             }
         })
+    }
+    //------------------------------chua dang nhap-------------------------
+    function checkoutCookie() {
+        if (@Model.Count()> 0) {
+          
+            location.href = "/payment/paynotlogin/0";
+        }
+        else {
+            Swal.fire({
+                title: 'Bạn chưa có sản phẩm nào?',
+                text: "Vui lòng chọn sản phẩm trước khi đặt hàng!",
+                icon: 'error',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Đăng nhập!',
+                footer: '<a href="/customer/register">Bạn chưa có tài khoản? Đăng kí ngay !</a>'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    location.href = "/customer/login";
+                }
+            })
+        }
+        //footer: '<a href="">Why do I have this issue?</a>'
+        //Swal.fire({
+        //    title: 'Bạn chưa đăng nhập?',
+        //    text: "Vui lòng đăng nhập để mua hàng!",
+        //    icon: 'error',
+        //    confirmButtonColor: '#3085d6',
+        //    confirmButtonText: 'Đăng nhập!',
+        //    footer: '<a href="/customer/register">Bạn chưa có tài khoản? Đăng kí ngay !</a>'
+        //}).then((result) => {
+        //    if (result.isConfirmed) {
+        //        location.href = "/customer/login";
+        //    }
+        //})
     }
     function updateCart(proid, cartid) {
        // $('#spinnerModal').modal('show');

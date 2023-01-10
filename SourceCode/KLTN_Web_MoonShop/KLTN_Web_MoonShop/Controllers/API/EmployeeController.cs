@@ -44,24 +44,26 @@ namespace KLTN_Web_MoonShop.Controllers.API
             //thêm mới nhân viên
             if(data.create==true)
             {
+                string fileName = "";
                 string[] arrten = data.fullName.Split(' ');
-                Uri uri = new Uri(data.img);
-                string[] arrimg = uri.ToString().Split('/');
-                string fileName = arrimg[arrimg.Length - 1];
+                if(data.img!=null)
+                {
+                    Uri uri = new Uri(data.img);
+                    string[] arrimg = uri.ToString().Split('/');
+                    fileName = arrimg[arrimg.Length - 1];
+                   
+                    //save img
+                    string imgbase6 = data.imgbase64.Substring(data.imgbase64.LastIndexOf(',') + 1);
+                    byte[] imageBytes = Convert.FromBase64String(imgbase6);
+                    MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+                    ms.Flush();
+                    ms.Position = 0;
+                    ms.Write(imageBytes, 0, imageBytes.Length);
+                    System.Drawing.Image image = System.Drawing.Image.FromStream(ms, true);
+                    var mappedPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Asset/img/banner/");
+                    image.Save(mappedPath + fileName);
+                }
                 string nametam = arrten[arrten.Length - 1];
-                //save img
-                string imgbase6 = data.imgbase64.Substring(data.imgbase64.LastIndexOf(',') + 1);
-                byte[] imageBytes = Convert.FromBase64String(imgbase6);
-                MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
-                ms.Flush();
-                ms.Position = 0;
-                ms.Write(imageBytes, 0, imageBytes.Length);
-                System.Drawing.Image image = System.Drawing.Image.FromStream(ms, true);
-                var mappedPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Asset/img/banner/");
-                image.Save(mappedPath+ fileName);
-
-
-
                 for (int i = 0; i < arrten.Length - 1; i++)
                 {
                     nametam = nametam + arrten[i].Substring(0, 1);

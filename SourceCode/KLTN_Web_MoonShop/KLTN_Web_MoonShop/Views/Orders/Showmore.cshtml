@@ -154,31 +154,22 @@
                                                         {
                                                             <option value="1" selected>Chờ xác nhận</option>
                                                             <option value="2">Đã xác nhận</option>
-                                                            <option value="3">Đang giao</option>
-                                                            <option value="4">Giao thành công</option>
                                                         }
                                                         else
                                                             if (order.status == 2)
                                                         {
-                                                            <option value="1">Chờ xác nhận</option>
                                                             <option value="2" selected>Đã xác nhận</option>
                                                             <option value="3">Đang giao</option>
-                                                            <option value="4">Giao thành công</option>
                                                         }
                                                         else
                                                             if (order.status == 3)
                                                         {
-                                                            <option value="1">Chờ xác nhận</option>
-                                                            <option value="2">Đã xác nhận</option>
                                                             <option value="3" selected>Đang giao</option>
                                                             <option value="4">Giao thành công</option>
                                                         }
                                                         else
                                                             if (order.status == 4)
                                                         {
-                                                            <option value="1">Chờ xác nhận</option>
-                                                            <option value="2">Đã xác nhận</option>
-                                                            <option value="3">Đang giao</option>
                                                             <option value="4" selected>Giao thành công</option>
                                                         }
 
@@ -193,6 +184,7 @@
                                                     <input type="date" id="senddate" />
                                                 </div>
                                             </div>
+
                                             <div class="row">
                                                 <div class="col-3">
                                                     <label class="pay">Ước tính thời gian giao*</label>
@@ -562,7 +554,6 @@
       
     });
     function comfimUpdateOrder() {
-        $('#spinnerModalv1').modal('show');
         var orderRequest = new Object();
         orderRequest.orderID = document.getElementById("txtOrderid").value;
         orderRequest.status = document.getElementById("cbbstatus").value;
@@ -576,9 +567,8 @@
             dataType: 'json',
             data: orderRequest,
             success: function (result) {
-                $('#spinnerModalv1').modal('hide');
                 /*location.reload();*/
-                $(".table").load(location.href + " .table");
+                location.reload();
                 Swal.fire('Lưu thành công!', '', 'success');
 
             },

@@ -17,6 +17,7 @@ namespace KLTN_Web_MoonShop.Controllers.API
             public string name { get; set; }
             public string img { get; set; }
             public int percent { get; set; }
+            public long cusID { get; set; }
         }
         DBCosmeticEntities db = new DBCosmeticEntities();
         [HttpPost]
@@ -29,12 +30,47 @@ namespace KLTN_Web_MoonShop.Controllers.API
             }    
             else
             {
-                discount d = new discount();
-                d.code = code.code;
-                d.percent = (int)item.percentDiscount;
-                d.name = item.name;
-                d.img = item.image;
-                return d;
+                if(item.cusID!=null)
+                    {
+                    discount d = new discount();
+                    d.code = code.code;
+                    d.percent = (int)item.percentDiscount;
+                    d.name = item.name;
+                    d.img = item.image;
+                    return d;
+                 }
+                else
+                if(item.cusID==null)
+                {
+                    if (item.cusIDs == null)
+                    {
+                        discount d = new discount();
+                        d.code = code.code;
+                        d.percent = (int)item.percentDiscount;
+                        d.name = item.name;
+                        d.img = item.image;
+                        return d;
+                    }
+                    else
+                    if (item.cusIDs != null && !item.cusIDs.Contains(code.cusID.ToString()))
+                    {
+                        discount d = new discount();
+                        d.code = code.code;
+                        d.percent = (int)item.percentDiscount;
+                        d.name = item.name;
+                        d.img = item.image;
+                        return d;
+                    }
+                    else
+                        return null;
+
+                   
+                }    
+                else
+                {
+                    return null;
+                }    
+             
             }    
            
         }
@@ -44,7 +80,19 @@ namespace KLTN_Web_MoonShop.Controllers.API
            try
             {
                 var item = db.Discounts.FirstOrDefault(n => n.code.Equals(code.code) && n.isActive == 1);
-                item.isActive = -1;
+                if(item.cusIDs!=null)
+                {
+                    item.cusIDs = item.cusIDs + code.cusID + ";";
+                }    
+                if(item.cusIDs==null)
+                {
+                    item.cusIDs =code.cusID + ";";
+                }    
+                else
+                {
+                    item.isActive = -1;
+                }    
+             
                 db.Discounts.AddOrUpdate(item);
                 db.SaveChanges();
                 return true;

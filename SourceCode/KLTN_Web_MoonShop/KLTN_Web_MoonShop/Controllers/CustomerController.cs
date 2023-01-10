@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebSockets;
 
 namespace KLTN_Web_MoonShop.Controllers
 {
@@ -31,30 +32,212 @@ namespace KLTN_Web_MoonShop.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(string txt_email,string txt_password)
+        public ActionResult Login(string txt_email,string txt_password,string txt_type, string firstname, string lastname, string phone, string password, string repassword)
         {
-            if(txt_email.Equals("admin@gmail.com")&&txt_password.Equals("123"))
+            if (txt_type.Equals("1"))
             {
-                return RedirectToAction("Index", "Admin");
-            }
-            string pass = md5.CreateMD5(txt_password);
-            Customer cus = db.Customers.FirstOrDefault(n => n.customerUserName.Equals(txt_email) && n.customerPassword.Equals(pass)&&n.isActive==1);
-            if (cus!=null)
-            {
-                if(cus.isActive==1)
+                if (txt_email.Equals("admin@gmail.com") && txt_password.Equals("123"))
                 {
-                    Session["user"] = cus;
-                    return RedirectToAction("Index", "Home");
-                }    
+                    return RedirectToAction("Index", "Admin");
+                }
+                string pass = md5.CreateMD5(txt_password);
+                Customer cus = db.Customers.FirstOrDefault(n => n.customerUserName.Equals(txt_email) && n.customerPassword.Equals(pass) && n.isActive == 1);
+                if (cus != null)
+                {
+                    if (cus.isActive == 1)
+                    {
+                        Session["user"] = cus;
+                        if (Request.Cookies["CartCookie"] != null)
+                        {
+                            string chuoi = Request.Cookies["CartCookie"].Value.ToString();
+                            string[] lst = chuoi.Split('|');
+                            for (int i = 0; i < lst.Length; i++)
+                            {
+                                try
+                                {
+                                    string[] l = lst[i].Split(',');
+                                    long proid = long.Parse(l[0]);
+                                    int sl = int.Parse(l[1]);
+                                    Cart cart = db.Carts.FirstOrDefault(n => n.customerID == cus.customerID);
+                                    int last = db.CartDetails.ToList().LastOrDefault().cartDetailID+1;
+                                    CartDetail cdd = db.CartDetails.FirstOrDefault(n => n.cartID == cart.cartID && n.productID == proid && n.isActive == 1);
+                                   
+                                    if (cart != null)
+                                    {
+                                        if (cdd != null)
+                                        {
+                                            cdd.cartQuantity = cdd.cartQuantity + sl;
+                                            db.CartDetails.AddOrUpdate(cdd);
+                                            db.SaveChanges();
+                                        }
+                                        else
+                                        {
+                                            Product pro = db.Products.FirstOrDefault(n => n.productID == proid&&n.isActive==1);
+                                            CartDetail cd = new CartDetail();
+                                            cd.cartID = cart.cartID;
+                                            cd.productID = proid;
+                                            cd.cartQuantity = sl;
+                                            cd.createTime = DateTime.Now;
+                                            cd.isActive = 1;
+                                            cd.cartDetailID = last+1;
+                                            cd.cartMoney = pro.productPrice * sl;
+                                            db.CartDetails.AddOrUpdate(cd);
+                                            db.SaveChanges();
+                                        }
+                                       
+                                    }    
+                                   
+                                }
+                                catch
+                                {
+
+                                }
+                            }
+                        }
+                        Response.Cookies["CartCookie"].Value = null;
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ViewBag.LoginFail = "Tài khoản của bạn đã bị khóa!";
+                    }
+
+                }
                 else
                 {
-                    ViewBag.LoginFail = "Tài khoản của bạn đã bị khóa!";
-                }    
-               
-            }   
+                    ViewBag.LoginFail = "Tài khoản hoặc mật khẩu chưa chính xác!";
+                }
+                ViewBag.Signup = null;
+            }
             else
             {
-                ViewBag.LoginFail = "Tài khoản hoặc mật khẩu chưa chính xác!";
+                if (!password.Equals(repassword))
+                {
+                    ViewBag.ErrorPassword = "Lỗi nhập sai mật khẩu ? Vui lòng thử lại !";
+                }
+                try
+                {
+
+                    if (db.Customers.FirstOrDefault(n => n.customerUserName.Equals(phone)) == null)
+                    {
+                        Customer customer = new Customer();
+                        long id = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+                        customer.customerID = id;
+                        customer.customerName = (firstname + " " + lastname);
+                        customer.customerUserName = (phone).Trim();
+                        customer.customerPassword = md5.CreateMD5(password);
+                        customer.customerPhoto = "Sample_User_Icon.png".Trim();
+                        customer.isActive = 1;
+                        customer.dateCreate = DateTime.Now;
+                        CustomerAddress cd = new CustomerAddress();
+                        cd.ID = long.Parse(DateTime.Now.ToString("MMddHHmmssyyyy"));
+                        cd.customerID = id;
+                        cd.isActive = 1;
+                        cd.isMain = 1;
+                        cd.customerPhone = (phone).Trim();
+                        db.CustomerAddresses.Add(cd);
+                        db.Customers.Add(customer);
+                        ViewBag.message = "Tạo tài khoản thành công";
+                        //thông báo đăng kí thành công
+                        Notification noti = new Notification();
+                        long idnoti = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+                        noti.notiID = idnoti;
+                        noti.receiveUserID = id;
+                        noti.receiveUserFullName = firstname + " " + lastname;
+                        noti.title = "Chúc mừng bạn đã đăng kí tài khoản thành công";
+                        noti.message = "Cám ơn bạn đã tin tưởng Shop , mong bạn có một trải nghiệm tốt bằng các dịch vụ của chúng mình !";
+                        noti.image = "check.jpg";
+                        noti.menutype = 1;
+                        noti.isRead = 0;
+                        db.Notifications.Add(noti);
+                        db.SaveChanges();
+                        //tạo mã giảm
+                        string magiam = RandomUniCode.RandomString(12);
+
+                        //thông báo giảm giá khách hàng mới
+                        Notification noti2 = new Notification();
+                        long idnoti2 = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+                        noti2.notiID = idnoti2 + 1;
+                        noti2.receiveUserID = id;
+                        noti2.receiveUserFullName = firstname + " " + lastname;
+                        noti2.title = "Giảm giá cho khách hàng mới đến";
+                        noti2.message = "Tặng bạn voucher giảm giá 20% : " + magiam;
+                        noti2.image = "discount20.jpg";
+                        noti2.menutype = 1;
+                        noti2.isRead = 0;
+                        db.Notifications.Add(noti2);
+                        db.SaveChanges();
+                        Discount dis = new Discount();
+                        dis.ID = idnoti2;
+                        dis.name = noti2.title;
+                        dis.code = magiam;
+                        dis.percentDiscount = 10;
+                        dis.cusID = id;
+                        dis.isActive = 1;
+                        db.Discounts.Add(dis);
+                        db.SaveChanges();
+                        if (Request.Cookies["CartCookie"] != null)
+                        {
+                            string chuoi = Request.Cookies["CartCookie"].Value.ToString();
+                            string[] lst = chuoi.Split('|');
+                            for (int i = 0; i < lst.Length; i++)
+                            {
+                                try
+                                {
+                                    string[] l = lst[i].Split(',');
+                                    long proid1 = long.Parse(l[0]);
+                                    int sl = int.Parse(l[1]);
+                                    Cart cart1 = db.Carts.FirstOrDefault(n => n.customerID == id);
+                                    int last = db.CartDetails.ToList().LastOrDefault().cartDetailID + 1;
+                                    CartDetail cdd = db.CartDetails.FirstOrDefault(n => n.cartID == cart1.cartID && n.productID == proid1 && n.isActive == 1);
+
+                                    if (cart1 != null)
+                                    {
+                                        if (cdd != null)
+                                        {
+                                            cdd.cartQuantity = cdd.cartQuantity + sl;
+                                            db.CartDetails.AddOrUpdate(cdd);
+                                            db.SaveChanges();
+                                        }
+                                        else
+                                        {
+                                            Product pro = db.Products.FirstOrDefault(n => n.productID == proid1 && n.isActive == 1);
+                                            CartDetail cd1 = new CartDetail();
+                                            cd1.cartID = cart1.cartID;
+                                            cd1.productID = proid1;
+                                            cd1.cartQuantity = sl;
+                                            cd1.createTime = DateTime.Now;
+                                            cd1.isActive = 1;
+                                            cd1.cartDetailID = last + 1;
+                                            cd1.cartMoney = pro.productPrice * sl;
+                                            db.CartDetails.AddOrUpdate(cd1);
+                                            db.SaveChanges();
+                                        }
+
+                                    }
+
+                                }
+                                catch
+                                {
+
+                                }
+                            }
+                        }
+                        Response.Cookies["CartCookie"].Value = null;
+                        return RedirectToAction("login");
+                    }
+                    else
+                    {
+                        ViewBag.message = "Tài khoản đã bị trùng vui lòng thử lại";
+                        ViewBag.Signup = "OKE";
+                    }
+                    
+                    return View();
+                }
+                catch
+                {
+                }
+            
             }
             return View();
         }
@@ -139,11 +322,11 @@ namespace KLTN_Web_MoonShop.Controllers
                     ViewBag.CreateFail = "Tài khoản đã bị trùng vui lòng thử lại";
                 }    
               
-                return View();
+                return RedirectToAction("login");
             }
             catch
             {
-                return View();
+                return RedirectToAction("login");
             }
         }
 

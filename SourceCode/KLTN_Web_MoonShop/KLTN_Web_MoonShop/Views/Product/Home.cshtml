@@ -1,6 +1,10 @@
 ﻿@using KLTN_Web_MoonShop.Models
 @using PagedList.Mvc
 @model PagedList.IPagedList<Product>
+@{ 
+    DBCosmeticEntities db = new DBCosmeticEntities();
+    
+}
 @*<link rel="stylesheet" href="https://fontawesome.com/v4.7.0/assets/font-awesome/css/font-awesome.css">*@
 <div class="d-flex justify-content-center align-items-center mt-5">
     <button class="btn btn-dark">Danh sách sản phẩm</button>
@@ -8,52 +12,242 @@
 <div class="d-flex justify-content-center mt-3 mb-5">
     <span class="text text-center">Các sản phẩm gợi ý hôm nay</span>
 </div>
-<main class="col-12">
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="col-6 col-md-2">
-                    <figure class="card card-product-grid" style="min-height:350px">
-                        <div class="img-wrap">
-                            <span class="badge badge-danger"> NEW </span>
-                            <a href="@Url.Action("Detail","Product",new {id=item.productID})">
-                                <img src="~/Asset/img/product/@item.productImage" class="img-fluid">
-                            </a>
+<style>
+        div.catCard {
+            border: solid 5px lightpink;
+            background:#ffffff;
+            width: 100%;
+            height: 400px;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
 
-                            <button class="btn-overlay" onclick="ConfirmUpdate(@item.productID)"><i class="fa fa-search-plus">Xem thêm</i></button>
-                        </div>
-                        <!-- img-wrap.// -->
-                        <figcaption class="info-wrap">
-                            <div class="fix-height">
-                                <p href="#" class="title">
-                                    @if (@item.productName.Length > 30)
-                                    {
-                                        string name = @item.productName.Substring(0, 30);
-                                        <span>
-                                            @name...
-                                        </span>
-                                    }
-                                    else
-                                    {
-                                        <h6 style="height:40px">
-                                            @item.productName
-                                        </h6>
-                                    }
-                                </p>
-                                <div class="price-wrap mt-2">
-                                    <span class="price" style="color:red">@String.Format("{0:0,0 vnđ}", item.productPrice)</span>
-                                </div>
-                                @*<a class="btn btn-primary" onclick="ConfirmUpdate(@item.productID)">Sửa </a>*@
-                            </div>
-                        </figcaption>
-                    </figure>
-                </div> <!-- col.// -->
+        div.lowerCatCard {
+            position: absolute;
+            background: #ffffff;
+            padding: 5px 5px;
+            height: 200px;
+            -webkit-transition: all 0.6s ease;
+            -moz-transition: all 0.6s ease;
+            -o-transition: all 0.6s ease;
+            transition: all 0.6s ease;
+        }
 
+            div.lowerCatCard:hover {
+                opacity: 0.95;
+                bottom: 0;
+                height: 390px;
             }
-        </div> <!-- row end.// -->
+
+        div.catCard div.lowerCatCard {
+            left: 0;
+            bottom: -3%;
+            width: 100%;
+        }
+
+        div.catCard:hover div.lowerCatCard {
+            bottom: 0;
+        }
+
+        li.catCardList {
+            width: 100%;
+            display: inline-block;
+            margin-right: 19px;
+            margin-top: 25px;
+        }
+
+        li.catCardList-last {
+            margin-right: 0;
+            width: 225px;
+            display: inline-block;
+        }
+
+        ul.catCardList {
+            margin: 0;
+        }
+
+        #catCardButton {
+            position: absolute;
+            width: 96%;
+            bottom: 5px;
+            -webkit-transition: all 0.6s ease;
+            -moz-transition: all 0.6s ease;
+            -o-transition: all 0.6s ease;
+        }
+
+        div.lowerCatCard:hover #catCardButton {
+            bottom: 5px;
+        }
+
+        .startingPrice span {
+            font-size: 16px;
+            color: #c90c12;
+            font-weight: 300;
+        }
+
+        div.startingPrice {
+            margin-bottom: 5px;
+            color: #000;
+            font-weight: 300;
+        }
+
+        .catCard img {
+            border: 1px solid #dddddd;
+            width: 100%;
+            height: 198px;
+        }
+
+            .catCard img:hover {
+                border: 1px solid #bababa;
+            }
+
+        /* Button
+    .......................................................................*/
+        .button {
+            cursor: pointer;
+            font-size: 14px !important;
+            color: #ffffff;
+            padding: 7px 10px !important;
+            text-decoration: none !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0 !important;
+            background-color:lightpink;
+            border: none;
+            border-bottom: solid 1px #c90c12;
+            text-align: center;
+            margin-top: 10px;
+            width:auto;
+            align-content:center;
+            width:100%;
+        }
+
+            .button:hover {
+                background-color: #c90c12;
+                border: none;
+                border-bottom: solid 1px #000;
+                box-shadow: 0 2px 3px #a8a8a8;
+                transform: scale(1.04);
+                -webkit-transform: scale(1.04);
+                -moz-transform: scale(1.04);
+                -o-transform: scale(1.04);
+                -ms-transform: scale(1.04);
+            }
+
+            .button:active {
+                background: #000;
+            }
+
+            .button a {
+                color: #ffffff;
+                padding: 7px 30px !important;
+                text-decoration: none;
+            }
+
+                .button a:hover {
+                    color: #ffffff;
+                }
+
+            .button:hover {
+                color: #fff;
+            }
+</style>
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            ProductDetail pd = db.ProductDetails.FirstOrDefault(n => n.ProductID == item.productID);
+            <div class="col-6 col-md-3 mt-5">
+                <div class="catCardList card card-product-grid">
+                    <div class="catCard">
+                        <a href="@Url.Action("Detail","Product",new {id=item.productID})">
+                            <img src="~/Asset/img/product/@item.productImage" class="img-fluid">
+                        </a>
+                        <div class="lowerCatCard">
+                            @if (@item.productName.Length > 30)
+                            {
+                                string name = @item.productName.Substring(0, 30);
+                                <b>
+                                    @name...
+                                </b>
+                            }
+                            else
+                            {
+                                <b style="height:40px">
+                                    @item.productName
+                                </b>
+                            }
+                        <div class="star-rating" style="height:20px">
+                            <ul class="list-inline">
+                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                <li class="list-inline-item">
+                                    <span>@db.OrderDetails.Where(n=>n.productID==item.productID).Count() đã bán</span>
+                                </li>
+                            </ul>
+                        </div>
+                            <div class="startingPrice">Giá sản phẩm : <span style="color:red;">@String.Format("{0:0,0 vnđ}", item.productPrice)</span></div>
+                            <p>
+                                @item.productDescribe
+                            </p>
+                            <b>Xuất xứ :@pd.origin</b>
+                            <div id="catCardButton" class="button"><a href="/product/detail/@item.productID">Xem thêm</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@*<main class="col-12">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-6 col-md-2">
+                <figure class="card card-product-grid" style="min-height:350px">
+                    <div class="img-wrap">
+                        <span class="badge badge-danger"> NEW </span>
+                        <a href="@Url.Action("Detail","Product",new {id=item.productID})">
+                            <img src="~/Asset/img/product/@item.productImage" class="img-fluid">
+                        </a>
+
+                        <button class="btn-overlay" onclick="ConfirmUpdate(@item.productID)"><i class="fa fa-search-plus">Xem thêm</i></button>
+                    </div>
+                    <figcaption class="info-wrap">
+                        <div class="fix-height">
+                            <p href="#" class="title">
+                                @if (@item.productName.Length > 30)
+                                {
+                                    string name = @item.productName.Substring(0, 30);
+                                    <span>
+                                        @name...
+                                    </span>
+                                }
+                                else
+                                {
+                                    <h6 style="height:40px">
+                                        @item.productName
+                                    </h6>
+                                }
+                            </p>
+                            <div class="price-wrap mt-2">
+                                <span class="price" style="color:red">@String.Format("{0:0,0 vnđ}", item.productPrice)</span>
+                            </div>
+                        </div>
+                    </figcaption>
+                </figure>
+            </div>
+
+        }
+    </div>
 
 
-    </main>
+</main>*@
 @*<ul class="pagination" style="margin-top:30px;margin-left:35%">
         <li> @Html.PagedListPager(Model, page => Url.Action("Index", "Home", new { page }))</li>
     </ul>*@

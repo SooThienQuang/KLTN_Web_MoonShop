@@ -21,6 +21,36 @@ namespace KLTN_Web_MoonShop.Controllers
             ViewBag.idod=idod;
             return View();
         }
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(string username,string password)
+        {
+            if (username.Length == 0 || password.Length == 0)
+                ViewBag.message = "Vui lòng nhập tài khoản mật khẩu";
+            string pass = md5.CreateMD5(password);
+            Employee em2=db.Employees.Where(n=>n.Password==pass&&n.UserName==username).FirstOrDefault();
+            if (username.Equals("admin@gmail.com") && password.Equals("123"))
+            {
+                Employee em = new Employee();
+                em.UserName = "admin";
+                Session["employee"] = em;
+                return RedirectToAction("index");
+            }
+            if(em2!=null)
+            {
+                EmployeeDetail emd = db.EmployeeDetails.FirstOrDefault(n => n.emID == em2.emID && n.isActive == 1);
+                Session["employee"] = emd;
+                return RedirectToAction("index");
+            }
+            else
+            {
+                ViewBag.message = "Tài khoản hoặc mật khẩu không chính xác";
+                return View();
+            }
+        }
         public ActionResult Product()
         {
             return View(db.Products.Where(n=>n.isActive==1).OrderByDescending(n=>n.productID).ToList());
@@ -348,6 +378,11 @@ namespace KLTN_Web_MoonShop.Controllers
         public ActionResult imageproduct()
         {
             return View();
+        }
+        public ActionResult notify()
+        {
+            List<Notification> lst = db.Notifications.Where(n => n.receiveGroupName != null).ToList();
+            return View(lst);
         }
     }
 }

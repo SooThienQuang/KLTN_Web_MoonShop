@@ -8,6 +8,7 @@
     Order order = db.Orders.FirstOrDefault(n => n.orderID == d.orderID);
     List<EmployeeDetail> lstshipper = db.EmployeeDetails.Where(n => n.posID == 6).ToList();
     var giamgia = Model.Sum(n => n.price * n.Quantity) - Model.Sum(n => n.Money);
+    List<image> lstimg = db.images.Where(n => n.objectID == order.orderID).ToList();
 }
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js">
@@ -17,16 +18,27 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 <div class="d-flex flex-column justify-content-center align-items-center" id="order-heading">
+    <div class="h4">Moonshop</div>
     <div class="text-uppercase">
         <p>Chi tiết đặt hàng</p>
     </div>
     <div class="h4">@order.createDate</div>
     <div class="pt-1">
-        <p>Đơn đặt #@order.orderID hiện tại<b class="text-danger"> @ViewBag.statusOd</b></p>
+        <p>Đơn đặt #@order.orderID hiện tại<b class="text-danger"> @db.Status.FirstOrDefault(n => n.statusID == order.status).statusName</b></p>
     </div>
-    <a class="btn close text-white" href="/Customer/DetailProfile/2">
-        &times;
-    </a>
+    @if (ViewBag.sdt != null)
+    {
+        <a class="btn close text-black" style="background-color:red" href="/Search/florder?sdt=@ViewBag.sdt">
+            &times; Trở về
+        </a>
+    }
+    else
+    {
+        <a class="btn close text-white" href="/Customer/DetailProfile/2">
+            &times;
+        </a>
+    }
+
 </div>
 <div class="wrapper bg-white">
     <div class="table-responsive">
@@ -69,91 +81,304 @@
         </a>
     }
 
-
-
-    <div class="pt-2 border-bottom mb-3"></div>
-    <div class="d-flex justify-content-start align-items-center pl-3">
-        <div class="text-muted">Hình thức thanh toán</div>
-        <div class="ml-auto">
-            @*<img src="https://www.freepnglogos.com/uploads/mastercard-png/mastercard-logo-logok-15.png" alt=""
-                width="30" height="30">*@
-            <label>Thanh toán trực tiếp khi nhận hàng</label>
-        </div>
-    </div>
-    <div class="d-flex justify-content-start align-items-center py-1 pl-3">
-        <div class="text-muted">Phí vận chuyển</div>
-        <div class="ml-auto">
-            <label class="text-primary">Miễn phí</label>
-        </div>
-    </div>
-    <div class="d-flex justify-content-start align-items-center pb-4 pl-3 border-bottom">
-        <div class="text-muted">
-            <button class="text-white btn"> Giảm giá</button>
-        </div>
-        <div class="ml-auto price" id="giamgia">
-            @giamgia
-        </div>
-    </div>
-    <div class="d-flex justify-content-start align-items-center pl-3 py-3 mb-4 border-bottom">
-        <div class="text-muted">
-            Tổng tiền tất cả
-        </div>
-        <div class="ml-auto h5 text-danger">
-            @String.Format("{0:0,0 vnđ}", @Model.Sum(n => n.Money))
-        </div>
-    </div>
-    <div class="row border rounded p-1 my-3">
-        <div class="col-md-6 py-3">
-            <div class="d-flex flex-column align-items start">
-                <b>Địa chỉ thanh toán</b>
-                <p class="text-justify pt-2">@d.idAdd</p>
+    @if (order.status == 6)
+    {
+        <div class="d-flex justify-content-start align-items-center pl-3 mt-5 ">
+            <div class="text-muted">Trạng thái đơn hàng</div>
+            <div class="ml-auto">
+                @*<img src="https://www.freepnglogos.com/uploads/mastercard-png/mastercard-logo-logok-15.png" alt=""
+                    width="30" height="30">*@
+                <label>Trả hàng</label>
             </div>
         </div>
-        <div class="col-md-6 py-3">
-            <div class="d-flex flex-column align-items start">
-                <b>Địa chỉ giao hàng</b>
-                <p class="text-justify pt-2">@d.idAdd</p>
+        <div class="d-flex justify-content-start align-items-center pl-3 mt-5 ">
+            <div class="text-muted">Lý do trả hàng</div>
+            <div class="ml-auto">
+                @*<img src="https://www.freepnglogos.com/uploads/mastercard-png/mastercard-logo-logok-15.png" alt=""
+                    width="30" height="30">*@
+                <label>@order.reason</label>
             </div>
         </div>
-    </div>
-    <div class="row border rounded p-1 my-3">
-        <div class="col-md-6 py-3">
-            <div class="d-flex flex-column align-items start">
-                <b>Giao hàng bởi</b>
-                <p class="text-justify pt-2">
-                    @if (ViewBag.shipper != null)
+        <div class="d-flex justify-content-start align-items-center pl-3 mt-5 ">
+            <div class="text-muted">Hình ảnh trả hàng</div>
+            <div class="ml-auto">
+                @if (lstimg != null)
+                {
+                    foreach (var item in lstimg)
                     {
-                        @ViewBag.shipper.fullName
+                        <img src="~/Asset/img/user/@item.name" height="200" width="250" class="ml-2" />
                     }
-                </p>
+                }
             </div>
         </div>
-        <div class="col-md-6 py-3">
-            <div class="d-flex flex-column align-items start">
-                <b>Thông tin</b>
-                <p class="text-justify pt-2">
-                    @if (ViewBag.shipper != null)
-                    {
-                        @ViewBag.shipper.phone
-                    }
-                </p>
+    }
+    else
+    {
+        <div class="pt-2 border-bottom mb-3"></div>
+        <div class="d-flex justify-content-start align-items-center pl-3">
+            <div class="text-muted">Hình thức thanh toán</div>
+            <div class="ml-auto">
+                @*<img src="https://www.freepnglogos.com/uploads/mastercard-png/mastercard-logo-logok-15.png" alt=""
+                    width="30" height="30">*@
+                <label>Thanh toán trực tiếp khi nhận hàng</label>
             </div>
         </div>
-    </div>
+        <div class="d-flex justify-content-start align-items-center py-1 pl-3">
+            <div class="text-muted">Phí vận chuyển</div>
+            <div class="ml-auto">
+                <label class="text-primary">Miễn phí</label>
+            </div>
+        </div>
+        <div class="d-flex justify-content-start align-items-center pb-4 pl-3 border-bottom">
+            <div class="text-muted">
+                <button class="text-white btn"> Giảm giá</button>
+            </div>
+            <div class="ml-auto price" id="giamgia">
+                @giamgia
+            </div>
+        </div>
+        <div class="d-flex justify-content-start align-items-center pl-3 py-3 mb-4 border-bottom">
+            <div class="text-muted">
+                Tổng tiền tất cả
+            </div>
+            <div class="ml-auto h5 text-danger">
+                @String.Format("{0:0,0 vnđ}", @Model.Sum(n => n.Money))
+            </div>
+        </div>
+        <div class="row border rounded p-1 my-3">
+            <div class="col-md-6 py-3">
+                <div class="d-flex flex-column align-items start">
+                    <b>Địa chỉ thanh toán</b>
+                    <p class="text-justify pt-2">@d.idAdd</p>
+                </div>
+            </div>
+            <div class="col-md-6 py-3">
+                <div class="d-flex flex-column align-items start">
+                    <b>Địa chỉ giao hàng</b>
+                    <p class="text-justify pt-2">@d.idAdd</p>
+                </div>
+            </div>
+        </div>
+        <div class="row border rounded p-1 my-3">
+            <div class="col-md-6 py-3">
+                <div class="d-flex flex-column align-items start">
+                    <b>Giao hàng bởi</b>
+                    <p class="text-justify pt-2">
+                        @if (ViewBag.shipper != null)
+                        {
+                            @ViewBag.shipper.fullName
+                        }
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 py-3">
+                <div class="d-flex flex-column align-items start">
+                    <b>Thông tin</b>
+                    <p class="text-justify pt-2">
+                        @if (ViewBag.shipper != null)
+                        {
+                            @ViewBag.shipper.phone
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
 
-    <div class="pl-3 font-weight-bold">Thời gian dự kiến giao hàng</div>
-    <div class="d-sm-flex justify-content-between rounded my-3 subscriptions">
-        <div>
-            <b>#@order.orderID</b>
+        <div class="pl-3 font-weight-bold">Thời gian dự kiến giao hàng</div>
+        <div class="d-sm-flex justify-content-between rounded my-3 subscriptions">
+            <div>
+                <b>#@order.orderID</b>
+            </div>
+            <div>May 22, 2017</div>
+            <div>Trạng thái: @ViewBag.statusOd</div>
+            <div>
+                <b></b>
+            </div>
         </div>
-        <div>May 22, 2017</div>
-        <div>Trạng thái: @ViewBag.statusOd</div>
-        <div>
-            <b></b>
-        </div>
-    </div>
-    <a class="btn btn-danger" href="/Customer/DetailProfile/2">Trở về</a>
+    }
+
+
+    @if (ViewBag.sdt != null)
+    {
+        <a class="btn btn-danger mt-5" href="/Search/florder?sdt=@ViewBag.sdt">
+            Trở về
+        </a>
+    }
+    else
+    {
+        if (order.status <= 2)
+        {
+            <a class="btn btn-danger w-100 text-white" data-toggle="modal" data-target="#exampleModal"> Hủy đơn hàng</a>
+
+        }
+        if (order.status == 4)
+        {
+            <a class="btn btn-danger w-100 text-white" data-toggle="modal" data-target="#exampleModal2"> Trả hàng</a>
+
+        }
+        <a class="btn btn-outline-danger mt-5" href="/Customer/DetailProfile/2">Trở về</a>
+    }
+
 </div>
+@using (Html.BeginForm("returnOrder", "Search", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Trả hàng</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <input name="idkk" value="@order.orderID" hidden/>
+                <div class="modal-body" id="myform">
+                    <div class="row">
+                        <div class="col ml-5">
+                            <img src="https://i.imgur.com/uBx4f4L.png" height="200">
+                        </div>
+
+                    </div>
+                    <h6 class="text-muted">Lý do trả hàng</h6>
+                    <textarea class="w-100" id="return" name="txtreturn" required></textarea>
+                    <h6 class="text-muted">Hình ảnh đính kèm</h6>
+                    <input type="file" id="img1" name="img1" accept="image/*" /><img id="hinh1" height="100" width="150" />
+                    <input type="file" id="img2" name="img2" accept="image/*" /><img id="hinh2" height="100" width="150" />
+                    <input type="file" id="img3" name="img3" accept="image/*" /><img id="hinh3" height="100" width="150" />
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" data-dismiss="modal">Đóng</a>
+                    <button class="btn btn-danger" type="submit" onclick="setVa()">Trả hàng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
 <script>
-    
+    function setVa() {
+        document.getElementById("stdkk").value = document.getElementById("sdt").value;
+        document.getElementById("idkk").value = document.getElementById("idod").value;
+
+    }
+    document.getElementById('img1').onchange = function (evt) {
+        var tgt = evt.target || window.event.srcElement,
+            files = tgt.files;
+
+        // FileReader support
+        if (FileReader && files && files.length) {
+            var fr = new FileReader();
+            fr.onload = function () {
+                document.getElementById("hinh1").src = fr.result;
+            }
+            fr.readAsDataURL(files[0]);
+        }
+    }
+    document.getElementById('img2').onchange = function (evt) {
+        var tgt = evt.target || window.event.srcElement,
+            files = tgt.files;
+
+        // FileReader support
+        if (FileReader && files && files.length) {
+            var fr = new FileReader();
+            fr.onload = function () {
+                document.getElementById("hinh2").src = fr.result;
+            }
+            fr.readAsDataURL(files[0]);
+        }
+    }
+    document.getElementById('img3').onchange = function (evt) {
+        var tgt = evt.target || window.event.srcElement,
+            files = tgt.files;
+
+        // FileReader support
+        if (FileReader && files && files.length) {
+            var fr = new FileReader();
+            fr.onload = function () {
+                document.getElementById("hinh3").src = fr.result;
+            }
+            fr.readAsDataURL(files[0]);
+        }
+    }
 </script>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Hủy đơn hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="myform">
+                <div class="row">
+                    <div class="col ml-5">
+                        <img src="https://i.imgur.com/uBx4f4L.png" height="200">
+                    </div>
+
+                </div>
+                <h5>Lý do hủy đơn</h5>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="Sản phẩm không phù hợp">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Sản phẩm không phù hợp
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value=" Tôi tìm được sản phẩm khác tốt hơn">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Tôi tìm được sản phẩm khác tốt hơn
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked value=" Đổi ý không muốn mua nữa">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Đổi ý không muốn mua nữa
+                    </label>
+                </div>
+                <h6 class="text-muted">Ghi chú thêm</h6>
+                <textarea class="w-100" id="more"></textarea>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-secondary" data-dismiss="modal">Đóng</a>
+                <a class="btn btn-danger" data-dismiss="modal" onclick="revokeOrder(@order.orderID)">Hủy đơn</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function revokeOrder(id) {
+        Swal.fire({
+            title: 'Bạn có chắc chắn?',
+            text: "Muốn hủy đơn hàng này!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Có!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Thành công!',
+                    'Đơn hàng đã được hủy.',
+                    'success'
+                )
+                var thought = $('#more').val();
+                var reason = $('input[name="flexRadioDefault"]:checked').val();
+                setTimeout(function () { location.href = "/order/revoke?id=" + id + "&reason=" + reason + "&more=" + thought }, 2000);
+            }
+        })
+    }
+</script>
+@*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">*@
+
+<!-- jQuery library -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>

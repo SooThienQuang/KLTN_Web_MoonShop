@@ -6,6 +6,7 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Policy;
 using System.Web.Http;
 
 namespace KLTN_Web_MoonShop.Controllers.API
@@ -66,6 +67,32 @@ namespace KLTN_Web_MoonShop.Controllers.API
                 csmain.customerAdd = d.diachi;
                 csmain.isMain = 1;
                 db.CustomerAddresses.AddOrUpdate(csmain);
+                db.SaveChanges();
+                return "Cập nhật địa chỉ thành công";
+            }
+            catch
+            {
+                return "Cập nhật thất bại";
+            }
+
+        }
+        [Route("themdiachimoi")]
+        [HttpPost]
+        public string themdia(address d)
+        {
+            try
+            {
+                CustomerAddress csmain = db.CustomerAddresses.FirstOrDefault(n => n.customerID == d.cusID && n.isMain == 1);
+                csmain.isMain = 0;
+                db.CustomerAddresses.AddOrUpdate(csmain);
+                db.SaveChanges();
+                CustomerAddress cd = new CustomerAddress();
+                cd.ID = long.Parse(DateTime.Now.ToString("MMddHHmmssyyyy"));
+                cd.customerID=d.cusID;
+                cd.customerAdd = d.diachi;
+                cd.isActive = 1;
+                cd.isMain = 1;
+                db.CustomerAddresses.Add(cd);
                 db.SaveChanges();
                 return "Cập nhật địa chỉ thành công";
             }

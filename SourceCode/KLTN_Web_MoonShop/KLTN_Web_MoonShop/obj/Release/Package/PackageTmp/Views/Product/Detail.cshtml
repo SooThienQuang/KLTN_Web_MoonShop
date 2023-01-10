@@ -12,8 +12,57 @@
 
         ca = db.CustomerAddresses.FirstOrDefault(n => n.customerID == user.customerID && n.isMain == 1);
     }
-
+    int idtype = ViewBag.Product.productTypeID;
+    string nametype = db.ProductTypes.FirstOrDefault(n => n.proTypeID == idtype).proTypeName;
 }
+<div class="row">
+    <ul class="breadcrumb">
+        <li><a href="/home/index">Trang chủ</a></li>
+
+        @if (ViewBag.cumname == null)
+        {
+            <li><a href="/search/search?keyword=@idtype">@nametype</a></li>
+        }
+        else
+        {
+            <li><a href="/search/search?keyword=@ViewBag.cumid">@ViewBag.cumname</a></li>
+        }
+    </ul>
+  
+</div>
+<style>
+    /* Style the list */
+    ul.breadcrumb {
+        padding: 10px 16px;
+        list-style: none;
+        background-color: white;
+    }
+
+        /* Display list items side by side */
+        ul.breadcrumb li {
+            display: inline;
+            font-size: 18px;
+        }
+
+            /* Add a slash symbol (/) before/behind each list item */
+            ul.breadcrumb li + li:before {
+                padding: 8px;
+                color: black;
+                content: "/\00a0";
+            }
+
+            /* Add a color to all links inside the list */
+            ul.breadcrumb li a {
+                color: #0275d8;
+                text-decoration: none;
+            }
+
+                /* Add a color on mouse-over */
+                ul.breadcrumb li a:hover {
+                    color: #01447e;
+                    text-decoration: underline;
+                }
+</style>
 <div class="container mb-5">
     <div class="card">
         <div class="row g-0">
@@ -125,9 +174,9 @@
                         <button type="button"onclick="addtocartcookie(@ViewBag.Product.productID)" class="btn btn-success w-50 btn-rounded" style="border-radius:25px">
                             <i class="ti-shopping-cart"></i> Thêm giỏ hàng
                         </button>
-                        <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-danger w-50 btn-rounded btn-block" style="border-radius:25px">
+                        <a type="button" href="/payment/paynotlogin/@ViewBag.Product.productID"  class="btn btn-danger w-50 btn-rounded btn-block" style="border-radius:25px">
                             <i class="ti-truck"></i> Chọn mua
-                        </button>
+                        </a>
                     }
                     else
                     {
@@ -638,17 +687,24 @@
             data: address,
             success: function (result) {
                 $("#modaladdresss").modal("hide");
-                Swal.fire(
-                    'Cập nhật thành công!',
-                    'Địa chỉ của bạn đã được thêm mới',
-                    'success'
-                )
-                location.reload();
+                swal({
+                    title: 'Thành công!',
+                    text: 'Bấm vào cá nhân để theo dõi đơn hàng',
+                    type: 'success',
+                    button: {
+                        text: "Continue",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-primary"
+                    }
+                })
+               
             },
             error: function (err) {
                 alert(err.statusText);
             }
         });
+        location.reload();
     }
     function themdiachi() {
         Swal.fire({

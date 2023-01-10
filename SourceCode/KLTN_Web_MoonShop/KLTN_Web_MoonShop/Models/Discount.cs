@@ -26,6 +26,7 @@ namespace KLTN_Web_MoonShop.Models
         public string image { get; set; }
         public string code { get; set; }
         public Nullable<long> cusID { get; set; }
+        public string cusIDs { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Product Product { get; set; }

@@ -44,52 +44,56 @@ namespace KLTN_Web_MoonShop.Controllers.API
         [HttpPost]
         public string post(List<dataImage>lstimg)
         {
-            if (lstimg.Count() > 1 )
+           try
             {
-                dataImage last = lstimg.LastOrDefault();
-                //type =0 la carosel trang chủ
-                if(last!=null&&last.type==0)
+                if (lstimg.Count() > 1)
                 {
-                    string[] hinh = last.chuoiname.Split(',');
-                    foreach(string h in hinh)
+                    dataImage last = lstimg.LastOrDefault();
+                    //type =0 la carosel trang chủ
+                    if (last != null && last.type == 0)
                     {
-                        if(h!="")
+                        string[] hinh = last.chuoiname.Split(',');
+                        foreach (string h in hinh)
                         {
-                            foreach (dataImage di in lstimg)
+                            if (h != "")
                             {
-                                if (di.name.Equals(h))
+                                foreach (dataImage di in lstimg)
                                 {
-                                    
-                                    //save img
-                                    string imgbase6 = di.b64.Substring(di.b64.LastIndexOf(',') + 1);
-                                    byte[] imageBytes = Convert.FromBase64String(imgbase6);
-                                    MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
-                                    ms.Flush();
-                                    ms.Position = 0;
-                                    ms.Write(imageBytes, 0, imageBytes.Length);
-                                    System.Drawing.Image image = System.Drawing.Image.FromStream(ms, true);
-                                    var mappedPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Asset/img/banner/");
-                                    image.Save(mappedPath + h);
-                                    image imk = db.images.ToList().LastOrDefault();
-                                    KLTN_Web_MoonShop.Models.image img = new image();
-                                    img.id = imk.id+1;
-                                    img.name=h;
-                                    img.type = 0;
-                                    img.isActive = 1;
-                                    db.images.Add(img);
-                                    db.SaveChanges();
+                                    if (di.name.Equals(h))
+                                    {
+
+                                        //save img
+                                        string imgbase6 = di.b64.Substring(di.b64.LastIndexOf(',') + 1);
+                                        byte[] imageBytes = Convert.FromBase64String(imgbase6);
+                                        MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+                                        ms.Flush();
+                                        ms.Position = 0;
+                                        ms.Write(imageBytes, 0, imageBytes.Length);
+                                        System.Drawing.Image image = System.Drawing.Image.FromStream(ms, true);
+                                        var mappedPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Asset/img/banner/");
+                                        image.Save(mappedPath + h);
+                                        image imk = db.images.ToList().LastOrDefault();
+                                        KLTN_Web_MoonShop.Models.image img = new image();
+                                        img.id = imk.id + 1;
+                                        img.name = h;
+                                        img.type = 0;
+                                        img.isActive = 1;
+                                        db.images.Add(img);
+                                        db.SaveChanges();
+                                    }
                                 }
                             }
-                        }    
-                        
-                    }    
-                }    
-                return "Thành công";
+
+                        }
+                    }
+                    return "Thành công";
+                }
+                else
+                {
+                    return "Vui lòng chọn hình ảnh";
+                }
             }
-            else
-            {
-                return "Vui lòng chọn hình ảnh";
-            }
+            catch { return "Vui lòng chọn hình ảnh"; }
            
 
         }

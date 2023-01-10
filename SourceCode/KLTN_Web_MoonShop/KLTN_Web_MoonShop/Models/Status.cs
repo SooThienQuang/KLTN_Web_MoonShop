@@ -23,6 +23,7 @@ namespace KLTN_Web_MoonShop.Models
         public int statusID { get; set; }
         public string statusName { get; set; }
         public Nullable<int> isActive { get; set; }
+        public string color { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProcessOrder> ProcessOrders { get; set; }

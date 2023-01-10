@@ -4,8 +4,13 @@
     Layout = null;
     DBCosmeticEntities db = new DBCosmeticEntities();
     Customer user = Session["user"] as Customer;
-    CustomerAddress add = db.CustomerAddresses.FirstOrDefault(n => n.isMain == 1 && n.customerID == user.customerID);
+    List<CustomerAddress> lstaddall = db.CustomerAddresses.Where(n => n.customerID == user.customerID && n.isActive == 1).ToList().OrderByDescending(n => n.isMain).ToList();
+    CustomerAddress add = lstaddall.FirstOrDefault(n => n.isMain == 1 && n.customerID == user.customerID);
+    List<Discount> lstdis = db.Discounts.Where(n => n.cusID == null).ToList();
 }
+<!-- Dev. by munkgorn -->
+<!-- Use This! #just fix width+height IMG  -->
+<!-- End This -->
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
@@ -53,7 +58,12 @@
                             <span class="text-muted">@add.customerAdd</span>
 
                         </div>
-                        <a href="/Customer/DetailProfile/1" class="text-primary">Đổi địa chỉ</a>
+                        <div class="container d-flex ">
+                            <a class="btn" style="color:blue" data-toggle="modal" data-target="#modalNotLogin">
+                                <i class="fa fa-check"></i>
+                                Đổi địa chỉ
+                            </a>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -80,11 +90,40 @@
                     <hr>
                     <input type="hidden" value="@Model.FirstOrDefault().productPrice" id="txtgiasp">
                     <div class="row lower">
-                        <div class="input-group">
-                            <input type="text" id="txtmagiamgia" class="form-control" placeholder="NHẬP MÃ GIẢM GIÁ" />
-                            <button class="btn btn-danger w-25" type="button" onclick="checkdiscount()">Chọn</button>
-                        </div>
+                        <div class="mm-dropdown">
+                            <div class="input-group">
+                                <input type="text" id="txtmagiamgia" class="textfirst form-control" placeholder="NHẬP MÃ GIẢM GIÁ" />
+                                <button class="btn btn-danger w-25" type="button" onclick="checkdiscount()">Chọn</button>
+                            </div>
+                            <ul>
+                                @if (lstdis != null)
+                                {
+                                    foreach (var item in lstdis)
+                                    {
+                                        if (item.cusIDs != null && !item.cusIDs.Contains(user.customerID.ToString()))
+                                        {
 
+                                        }
+                                        else
+                                            if (item.cusIDs == null)
+                                        {
+                                            <li class="input-option" data-value="@item.code">
+                                                <img src="~/Asset/img/discount/discount20.jpg" alt="" width="20" height="20" />@item.name
+                                            </li>
+                                        }
+
+                                    }
+
+                                }
+                                else
+                                {
+                                    <li class="input-option" data-value="">
+                                        <img src="~/Asset/img/discount/discount20.jpg" alt="" width="20" height="20" />Bạn chưa có mã giảm giá
+                                    </li>
+                                }
+                            </ul>
+                            <input type="hidden" class="option" name="namesubmit" value="" />
+                        </div>
                     </div>
                     Số lượng
                     <div class="row lower">
@@ -145,9 +184,283 @@
     <div>
     </div>
 </div>
+
+@*------------------------------------------------------dropdown--------------------------------------------*@
+<style>
+    div.mm-dropdown {
+        border: 1px solid #ddd;
+        width: 100%;
+        border-radius: 3px;
+    }
+
+        div.mm-dropdown ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border: 0;
+        }
+
+            div.mm-dropdown ul li,
+            div.mm-dropdown div.textfirst {
+                padding: 0;
+                color: #333;
+                border-bottom: 1px solid #ddd;
+                padding: 5px 15px;
+            }
+
+                div.mm-dropdown div.textfirst img.down {
+                    float: right;
+                    margin-top: 5px
+                }
+
+                div.mm-dropdown ul li:last-child {
+                    border-bottom: 0;
+                }
+
+            div.mm-dropdown ul li {
+                display: none;
+                padding-left: 25px;
+            }
+
+                div.mm-dropdown ul li.main {
+                    display: block;
+                }
+
+                div.mm-dropdown ul li img {
+                    width: 20px;
+                    height: 20px;
+                }
+</style>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script>
+    $(function () {
+        // Set
+        var main = $('div.mm-dropdown .textfirst')
+        var li = $('div.mm-dropdown > ul > li.input-option')
+        var inputoption = $("div.mm-dropdown .option")
+        var default_text = 'MÃ<img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-b-128.png" width="10" height="10" class="down" />';
+
+        // Animation
+        main.click(function () {
+            main.html(default_text);
+            li.toggle('fast');
+
+        });
+
+        // Insert Data
+        li.click(function () {
+            // hide
+            li.toggle('fast');
+            var livalue = $(this).data('value');
+            var lihtml = $(this).html();
+            main.html(lihtml);
+            document.getElementById("txtmagiamgia").value = livalue;
+        });
+    });
+</script>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<div class="modal fade" id="modalNotLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="text-right cross"> <i class="fa fa-times" data-dismiss="modal"></i> </div>
+            <h4 class="mt-1 text-md-center">Địa chỉ giao hàng</h4>
+            <div class="row">
+                <div class="col">
+                    Thêm mới địa chỉ
+                    <div class="card-body text-center mb-5">
+                        <div class="form-group mt-3">
+                            <div class="form-group">
+                                Tỉnh/ Thành Phố
+                                <select name="" id="province" class="form-control coupon">
+                                </select>
+                                <br />
+                                Quận/Huyện
+                                <select name="" id="district" class="form-control coupon">
+                                    <option value="">chọn quận/huyện</option>
+                                </select>
+                                <br />
+                                Xã/Phường
+                                <select name="" id="ward" class="form-control coupon">
+                                    <option value="">chọn xã/phường</option>
+                                </select>
+
+                                <br />
+                                Số nhà/Đường
+                                <input type="text" id="txtduong" class="form-control coupon" name="txtduong">
+                                <br />
+                                Địa chỉ đã chọn
+                                <input type="text" id="txt" class="form-control coupon" name="txt">
+                            </div>
+                            <button class="btn btn-outline-primary" onclick="diachiapi(@user.customerID)"><p class="fa fa-floppy-o"></p>Thêm địa chỉ</button>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    Địa chỉ của bạn
+                    <div class="form-check">
+
+
+                        @foreach (var item in lstaddall)
+                        {
+
+                            <label class="form-check-label mt-3 radio">
+                                @item.customerAdd
+                                @if (item.isMain == 1)
+                                {
+                                    <span>(Mặc định)</span>
+                                }
+                                else
+                                {
+
+                                    <a class="btn" style="color:blue" onclick="updateAdd(@item.ID)">(Đặt làm mặc định)</a>
+                                    <a class="btn" style="color:red" onclick="deleteAdd(@item.ID)"><span class="ti-close">Xóa</span></a>
+                                }
+                            </label>
+
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button id="up" onclick="up()" hidden></button>
+<input type="number" id="txtidadd" hidden />
+<input type="number" id="txtcussid" hidden  value="@user.customerID"/>
+<script>
+    function up() {
+        var address = new Object();
+        address.id = document.getElementById("txtidadd").value;
+        address.cusID = document.getElementById("txtcussid").value;
+        $.ajax({
+            url: '/api/Address/',
+            type: 'PUT',
+            dataType: 'json',
+            data: address,
+            success: function (result) {
+                Swal.fire(
+                    'Thành công!',
+                    'Địa chỉ đã được cập nhật.',
+                    'success'
+                )
+            },
+            error: function (err) {
+                alert(err.statusText);
+            }
+        });
+        location.reload();
+    }
+
+    function updateAdd(id) {
+        document.getElementById("txtidadd").value = id;
+        Swal.fire({
+            title: 'Bạn có chắc chắn?',
+            text: "Muốn thực hiện thao tác này!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Có'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById("up").onclick();
+
+            }
+        })
+    }
+
+    function diachiapi(id) {
+        var address = new Object();
+        address.cusID = id;
+        address.diachi = document.getElementById("txtduong").value + "," + document.getElementById("txt").value;
+        $.ajax({
+            url: '/themdiachimoi/',
+            type: 'POST',
+            dataType: 'json',
+            data: address,
+            success: function (result) {
+                $("#modalNotLogin").modal("hide");
+                Swal.fire(
+                    'Cập nhật thành công!',
+                    'Địa chỉ của bạn đã được thêm mới',
+                    'success'
+                )
+                location.reload();
+            },
+            error: function (err) {
+                alert(err.statusText);
+            }
+        });
+    }
+
+    const host = "https://provinces.open-api.vn/api/";
+    var callAPI = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data, "province");
+            });
+    }
+    callAPI('https://provinces.open-api.vn/api/?depth=1');
+    var callApiDistrict = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data.districts, "district");
+            });
+    }
+    var callApiWard = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data.wards, "ward");
+            });
+    }
+
+    var renderData = (array, select) => {
+        let row = ' <option disable value="">chọn</option>';
+        array.forEach(element => {
+            row += `<option value="${element.code}">${element.name}</option>`
+        });
+        document.querySelector("#" + select).innerHTML = row
+    }
+
+    $("#province").change(() => {
+        callApiDistrict(host + "p/" + $("#province").val() + "?depth=2");
+        printResult();
+    });
+    $("#district").change(() => {
+        callApiWard(host + "d/" + $("#district").val() + "?depth=2");
+        printResult();
+    });
+    $("#ward").change(() => {
+        printResult();
+    })
+    var duong = document.getElementById("txtduong").value;
+    var printResult = () => {
+        if ($("#district").val() != "" && $("#province").val() != "" &&
+            $("#ward").val() != "") {
+            let result = $("#province option:selected").text() +
+                " | " + $("#district option:selected").text() + " | " +
+                $("#ward option:selected").text();
+
+            $("#result").text(result)
+
+            var diachi = result;
+            document.getElementById("txt").value = $("#ward option:selected").text() + "," + $("#district option:selected").text() + "," + $("#province option:selected").text();
+
+
+
+        }
+
+    }
+</script>
 @*-----------------------------------------giam gia-------------------------------------*@
 @if (user != null)
 {
@@ -191,10 +504,6 @@
                     title: 'Thành công',
                     text: "Bạn đã đặt hàng thành công",
                     icon: 'success',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Xem đơn hàng!'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         window.location.href = "/customer/detailprofile/2";
@@ -205,6 +514,7 @@
                 alert(err.statusText);
             }
         });
+        window.location.href = "/customer/detailprofile/2";
     }
 
 
@@ -222,6 +532,7 @@
         else {
             var discount = new Object();
             discount.code = text;
+            discount.cusID = document.getElementById("txtuserid").value;
             $.ajax({
                 url: '/api/Discount/',
                 type: 'POST',
@@ -242,6 +553,7 @@
                             if (result.isConfirmed) {
                                 var discount = new Object();
                                 discount.code = text;
+                                discount.cusID = document.getElementById("txtuserid").value;
                                 $.ajax({
                                     url: '/api/Discount/',
                                     type: 'PUT',

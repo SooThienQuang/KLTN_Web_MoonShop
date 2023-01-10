@@ -103,8 +103,22 @@ namespace KLTN_Web_MoonShop.Controllers.API
                     noti.image = product.productImage;
                     noti.menutype = 2;
                     noti.isRead = 0;
+                    noti.objectID = orderid;
                     db.Notifications.Add(noti);
                     db.SaveChanges();
+                    Notification noti1 = new Notification();
+                    noti1.notiID = idnoti+1;
+                    noti1.receiveGroupID = 1;
+                    noti1.receiveGroupName ="Quản trị";
+                    noti1.title = customer.customerName+ " vừa đã đặt hàng!";
+                    noti1.message = "Tổng đơn hàng có " + lstid.Count() + " món " + "sản phẩm bao gồm :" + product.productName.Substring(0, 30) + "...";
+                    noti1.image = product.productImage;
+                    noti1.menutype = 2;
+                    noti1.isRead = 0;
+                    noti1.objectID = orderid;
+                    db.Notifications.Add(noti1);
+                    db.SaveChanges();
+
                 }
                 catch { }
             }    

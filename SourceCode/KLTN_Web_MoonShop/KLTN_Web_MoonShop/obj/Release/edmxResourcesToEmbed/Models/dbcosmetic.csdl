@@ -21,7 +21,6 @@
     <EntitySet Name="Salaries" EntityType="DBCosmeticModel.Salary" />
     <EntitySet Name="Sexes" EntityType="DBCosmeticModel.Sex" />
     <EntitySet Name="Status" EntityType="DBCosmeticModel.Status" />
-    <EntitySet Name="sysdiagrams" EntityType="DBCosmeticModel.sysdiagram" />
     <AssociationSet Name="FK_ActionLog_Customer" Association="DBCosmeticModel.FK_ActionLog_Customer">
       <End Role="Customer" EntitySet="Customers" />
       <End Role="ActionLog" EntitySet="ActionLogs" />
@@ -188,6 +187,7 @@
     <Property Name="image" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
     <Property Name="code" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
     <Property Name="cusID" Type="Int64" />
+    <Property Name="cusIDs" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Customer" Relationship="DBCosmeticModel.FK_Discount_Customer" FromRole="Discount" ToRole="Customer" />
     <NavigationProperty Name="Product" Relationship="DBCosmeticModel.FK_Discount_Product" FromRole="Discount" ToRole="Product" />
   </EntityType>
@@ -227,6 +227,7 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int64" Nullable="false" />
+    <Property Name="objectID" Type="Int64" />
     <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="type" Type="Int32" />
     <Property Name="isActive" Type="Int32" />
@@ -239,6 +240,8 @@
     <Property Name="sendUserID" Type="Int64" />
     <Property Name="sendUserFullName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="receiveUserID" Type="Int64" />
+    <Property Name="receiveGroupID" Type="Int64" />
+    <Property Name="receiveGroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="receiveUserFullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="objectID" Type="Int64" />
     <Property Name="objectTypeID" Type="Int64" />
@@ -260,6 +263,8 @@
     <Property Name="money" Type="Int64" />
     <Property Name="status" Type="Int32" />
     <Property Name="idProcess" Type="Int64" />
+    <Property Name="phone" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+    <Property Name="reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Customer" Relationship="DBCosmeticModel.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
     <NavigationProperty Name="Notifications" Relationship="DBCosmeticModel.FK_Notification_Order" FromRole="Order" ToRole="Notification" />
     <NavigationProperty Name="ProcessOrder" Relationship="DBCosmeticModel.FK_Order_ProcessOrder" FromRole="Order" ToRole="ProcessOrder" />
@@ -378,17 +383,8 @@
     <Property Name="statusID" Type="Int32" Nullable="false" />
     <Property Name="statusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="isActive" Type="Int32" />
+    <Property Name="color" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <NavigationProperty Name="ProcessOrders" Relationship="DBCosmeticModel.FK_ProcessOrder_Status" FromRole="Status" ToRole="ProcessOrder" />
-  </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <Association Name="FK_ActionLog_Customer">
     <End Type="DBCosmeticModel.Customer" Role="Customer" Multiplicity="0..1" />

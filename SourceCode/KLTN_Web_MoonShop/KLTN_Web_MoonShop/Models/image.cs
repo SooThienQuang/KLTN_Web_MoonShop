@@ -15,6 +15,7 @@ namespace KLTN_Web_MoonShop.Models
     public partial class image
     {
         public long id { get; set; }
+        public Nullable<long> objectID { get; set; }
         public string name { get; set; }
         public Nullable<int> type { get; set; }
         public Nullable<int> isActive { get; set; }

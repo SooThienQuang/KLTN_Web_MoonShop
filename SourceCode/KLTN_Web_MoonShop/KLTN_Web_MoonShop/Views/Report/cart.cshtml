@@ -6,27 +6,34 @@
     List<Product> lstproall = db.Products.ToList();
     List<CartDetail> lstcd = db.CartDetails.ToList();
     List<long> list = lstproall.Select(n => n.productID).ToList();
-   
+    List<string> listname = lstproall.Select(n => n.productName).ToList();
+    List<KLTN_Web_MoonShop.Controllers.cartTam> lsttam=new List<KLTN_Web_MoonShop.Controllers.cartTam>();
+    foreach(var item in ViewBag.chart)
+    {
+        KLTN_Web_MoonShop.Controllers.cartTam cd = new KLTN_Web_MoonShop.Controllers.cartTam();
+        cd.id = item.id;
+        cd.name = item.name;
+        cd.quantity = item.quantity;
+        lsttam.Add(cd);
+    }
 }
-<h2 >@list.FirstOrDefault()</h2>
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Giỏ hàng Line Chart</h5>
+                <h5 class="card-title">Sản phẩm thêm giỏ hàng nhiều nhất</h5>
 
                 <!-- Line Chart -->
                 <canvas id="lineChart" style="max-height: 400px;"></canvas>
                 <script>
-                    var aaa = ["âmm", "adhj"];
                     document.addEventListener("DOMContentLoaded", () => {
                         new Chart(document.querySelector('#lineChart'), {
                             type: 'line',
                             data: {
-                                labels: [aaa],
+                                labels: [`@lsttam[0].name`, `@lsttam[1].name`, `@lsttam[2].name`, `@lsttam[3].name`],
                                 datasets: [{
-                                    label: 'Line Chart',
-                                    data: [],
+                                    label: 'Top 4 sản phẩm',
+                                    data: [@lsttam[0].quantity, @lsttam[1].quantity, @lsttam[2].quantity,@lsttam[3].quantity],
                                     fill: false,
                                     borderColor: 'rgb(75, 192, 192)',
                                     tension: 0.1
@@ -52,7 +59,7 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Giỏ hàng Bar CHart</h5>
+            <h5 class="card-title">Top 10 sản phẩm</h5>
 
             <!-- Bar Chart -->
             <canvas id="barChart" style="max-height: 400px;"></canvas>
@@ -61,10 +68,10 @@
                     new Chart(document.querySelector('#barChart'), {
                         type: 'bar',
                         data: {
-                            labels: ['Chờ xử lý', 'Đã xác nhận', 'Đang giao', 'Giao thành công'],
+                            labels: [`@lsttam[0].name`, `@lsttam[1].name`, `@lsttam[2].name`, `@lsttam[3].name`,`@lsttam[4].name`,`@lsttam[5].name`,`@lsttam[6].name`,`@lsttam[7].name`,`@lsttam[8].name`],
                             datasets: [{
-                                label: 'Bar Chart',
-                                data: [1, 2, 4, 5],
+                                label: 'Thống kê theo ID',
+                                data: [@lsttam[0].quantity, @lsttam[1].quantity, @lsttam[2].quantity,@lsttam[3].quantity,@lsttam[4].quantity,@lsttam[5].quantity,@lsttam[6].quantity,@lsttam[7].quantity,@lsttam[8].quantity],
                                 backgroundColor: [
                                     'rgba(255, 99, 132, 0.2)',
                                     'rgba(255, 159, 64, 0.2)',

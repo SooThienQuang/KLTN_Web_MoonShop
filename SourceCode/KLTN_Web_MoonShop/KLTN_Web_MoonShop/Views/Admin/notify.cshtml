@@ -1,0 +1,161 @@
+﻿@model IEnumerable<KLTN_Web_MoonShop.Models.Notification>
+
+@{
+    Layout = null;
+}
+<div class="container">
+    <div class="notify-header">
+        <h2>Thông báo <span>@Model.Count()</span></h2>
+        <p class="mark">Mark all as read</p>
+    </div>
+    <ul class="notify-list">
+        @foreach (var item in Model)
+        {
+            var sent = "";
+            if(item.isRead==0)
+            {
+                sent = " not-read";
+            }
+            <li class="notify @sent">
+                <a class="avatar" href="/orders/detail?id=@item.objectID&cumb=&notiID=@item.notiID.ToString()">
+                    <img src="~/Asset/img/cart.png" alt="" />
+                </a>
+                <div class="user-info">
+                    <p>
+                        <span class="username"> @item.title</span>
+                        <span class="post">@item.message</span>
+                    </p>
+                    <p class="notify-time">1m ago</p>
+                </div>
+            </li>
+
+        }
+    </ul>
+</div>
+<style>
+    import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;800&display=swap");
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+html,
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  width: 100%;
+  color: hsl(219, 14%, 63%);
+}
+
+
+.container {
+  width: 60%;
+  margin: 20px auto;
+  box-shadow:rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 20px;
+  border-radius:20px;
+}
+
+.notify-header {
+  display: flex;
+  align-items: center;
+  gap:10px;
+  margin-top: 10px;
+}
+
+.notify-header h2 {
+  font-weight: bold;
+  font-size: 24px;
+  color:black;
+}
+
+.notify-header span {
+  padding: 5px 12px;
+  background-color: hsl(219, 85%, 26%);
+  color: white;
+  display: inline-block;
+  border-radius: 10px;
+  margin-left: 5px;
+}
+
+.notify-header .mark {
+  color: hsl(219, 14%, 63%);
+  margin-left: auto;
+  font-weight:600
+}
+.notify-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.notify {
+  display: flex;
+  gap:20px;
+  margin-top: 30px;
+  padding: 20px;
+}
+
+.notify.not-read {
+  background: hsl(205, 33%, 90%);
+  border-radius: 20px;
+}
+
+.notify .avatar img {
+  border-radius:50%;
+  width: 90px;
+  height: 90px;
+}
+
+.notify .user-info {
+  padding: 5px;
+}
+.notify .user-info .username {
+  font-weight: bold;
+  color:black;
+}
+
+.notify .notify-time {
+  color: hsl(219, 14%, 63%);
+  margin-top:8px;
+}
+
+.comment {
+  margin-left: auto;
+}
+
+.comment img {
+  width: 90px;
+  height: 90px;
+  border-radius:20px;
+}
+
+.priv-message {
+  padding: 20px 15px;
+  margin-top: 20px;
+  border: 1px solid hsl(219, 14%, 63%);
+  border-radius: 20px;
+}
+
+.user-info span.group {
+  color: hsl(219, 85%, 26%);
+  font-weight: bold;
+}
+
+.post {
+  font-weight: bold;
+  color:hsl(219, 14%, 40%)
+}
+
+media (min-width: 320px) and (max-width: 760px) {
+  .container {
+    width: 90%;
+  }
+
+}
+</style>

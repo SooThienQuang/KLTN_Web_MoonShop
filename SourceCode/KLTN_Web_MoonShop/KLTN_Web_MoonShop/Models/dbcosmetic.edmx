@@ -84,6 +84,7 @@
           <Property Name="image" Type="nchar" MaxLength="500" />
           <Property Name="code" Type="nchar" MaxLength="100" />
           <Property Name="cusID" Type="bigint" />
+          <Property Name="cusIDs" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -115,6 +116,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="objectID" Type="bigint" />
           <Property Name="name" Type="nvarchar(max)" />
           <Property Name="type" Type="int" />
           <Property Name="isActive" Type="int" />
@@ -127,6 +129,8 @@
           <Property Name="sendUserID" Type="bigint" />
           <Property Name="sendUserFullName" Type="nvarchar" MaxLength="500" />
           <Property Name="receiveUserID" Type="bigint" />
+          <Property Name="receiveGroupID" Type="bigint" />
+          <Property Name="receiveGroupName" Type="nvarchar" MaxLength="50" />
           <Property Name="receiveUserFullName" Type="nvarchar" MaxLength="50" />
           <Property Name="objectID" Type="bigint" />
           <Property Name="objectTypeID" Type="bigint" />
@@ -147,6 +151,8 @@
           <Property Name="money" Type="bigint" />
           <Property Name="status" Type="int" />
           <Property Name="idProcess" Type="bigint" />
+          <Property Name="phone" Type="char" MaxLength="11" />
+          <Property Name="reason" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -247,16 +253,7 @@
           <Property Name="statusID" Type="int" Nullable="false" />
           <Property Name="statusName" Type="nvarchar" MaxLength="50" />
           <Property Name="isActive" Type="int" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
+          <Property Name="color" Type="char" MaxLength="100" />
         </EntityType>
         <Association Name="FK_ActionLog_Customer">
           <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
@@ -507,7 +504,6 @@
           <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sex" EntityType="Self.Sex" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ActionLog_Customer" Association="Self.FK_ActionLog_Customer">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="ActionLog" EntitySet="ActionLog" />
@@ -610,7 +606,6 @@
           <EntitySet Name="Salaries" EntityType="DBCosmeticModel.Salary" />
           <EntitySet Name="Sexes" EntityType="DBCosmeticModel.Sex" />
           <EntitySet Name="Status" EntityType="DBCosmeticModel.Status" />
-          <EntitySet Name="sysdiagrams" EntityType="DBCosmeticModel.sysdiagram" />
           <AssociationSet Name="FK_ActionLog_Customer" Association="DBCosmeticModel.FK_ActionLog_Customer">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="ActionLog" EntitySet="ActionLogs" />
@@ -777,6 +772,7 @@
           <Property Name="image" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
           <Property Name="code" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <Property Name="cusID" Type="Int64" />
+          <Property Name="cusIDs" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Customer" Relationship="DBCosmeticModel.FK_Discount_Customer" FromRole="Discount" ToRole="Customer" />
           <NavigationProperty Name="Product" Relationship="DBCosmeticModel.FK_Discount_Product" FromRole="Discount" ToRole="Product" />
         </EntityType>
@@ -816,6 +812,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="objectID" Type="Int64" />
           <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="type" Type="Int32" />
           <Property Name="isActive" Type="Int32" />
@@ -828,6 +825,8 @@
           <Property Name="sendUserID" Type="Int64" />
           <Property Name="sendUserFullName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="receiveUserID" Type="Int64" />
+          <Property Name="receiveGroupID" Type="Int64" />
+          <Property Name="receiveGroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="receiveUserFullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="objectID" Type="Int64" />
           <Property Name="objectTypeID" Type="Int64" />
@@ -849,6 +848,8 @@
           <Property Name="money" Type="Int64" />
           <Property Name="status" Type="Int32" />
           <Property Name="idProcess" Type="Int64" />
+          <Property Name="phone" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Name="reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Customer" Relationship="DBCosmeticModel.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="Notifications" Relationship="DBCosmeticModel.FK_Notification_Order" FromRole="Order" ToRole="Notification" />
           <NavigationProperty Name="ProcessOrder" Relationship="DBCosmeticModel.FK_Order_ProcessOrder" FromRole="Order" ToRole="ProcessOrder" />
@@ -967,17 +968,8 @@
           <Property Name="statusID" Type="Int32" Nullable="false" />
           <Property Name="statusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="isActive" Type="Int32" />
+          <Property Name="color" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="ProcessOrders" Relationship="DBCosmeticModel.FK_ProcessOrder_Status" FromRole="Status" ToRole="ProcessOrder" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="FK_ActionLog_Customer">
           <End Type="DBCosmeticModel.Customer" Role="Customer" Multiplicity="0..1" />
@@ -1284,6 +1276,7 @@
           <EntitySetMapping Name="Discounts">
             <EntityTypeMapping TypeName="DBCosmeticModel.Discount">
               <MappingFragment StoreEntitySet="Discount">
+                <ScalarProperty Name="cusIDs" ColumnName="cusIDs" />
                 <ScalarProperty Name="cusID" ColumnName="cusID" />
                 <ScalarProperty Name="code" ColumnName="code" />
                 <ScalarProperty Name="image" ColumnName="image" />
@@ -1332,6 +1325,7 @@
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="objectID" ColumnName="objectID" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1347,6 +1341,8 @@
                 <ScalarProperty Name="objectTypeID" ColumnName="objectTypeID" />
                 <ScalarProperty Name="objectID" ColumnName="objectID" />
                 <ScalarProperty Name="receiveUserFullName" ColumnName="receiveUserFullName" />
+                <ScalarProperty Name="receiveGroupName" ColumnName="receiveGroupName" />
+                <ScalarProperty Name="receiveGroupID" ColumnName="receiveGroupID" />
                 <ScalarProperty Name="receiveUserID" ColumnName="receiveUserID" />
                 <ScalarProperty Name="sendUserFullName" ColumnName="sendUserFullName" />
                 <ScalarProperty Name="sendUserID" ColumnName="sendUserID" />
@@ -1357,6 +1353,8 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="DBCosmeticModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="idProcess" ColumnName="idProcess" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="money" ColumnName="money" />
@@ -1470,20 +1468,10 @@
           <EntitySetMapping Name="Status">
             <EntityTypeMapping TypeName="DBCosmeticModel.Status">
               <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="color" ColumnName="color" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="statusName" ColumnName="statusName" />
                 <ScalarProperty Name="statusID" ColumnName="statusID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="DBCosmeticModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

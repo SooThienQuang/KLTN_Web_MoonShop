@@ -36,6 +36,7 @@ namespace KLTN_Web_MoonShop.Controllers
             if (user != null)
             {
                 Cart cart = db.Carts.FirstOrDefault(n => n.customerID == user.customerID);
+                if(cart!=null)
                 lst = db.CartDetails.Where(n => n.cartID == cart.cartID && n.isActive == 1).ToList();
                 return PartialView(lst);
             }
@@ -109,8 +110,19 @@ namespace KLTN_Web_MoonShop.Controllers
             }    
             Response.Cookies["CartCookie"].Value =lstvcatnew;
            Response.Cookies["CartCookie"].Expires = DateTime.Now.AddYears(30);
-            return RedirectToAction("index","home");
+            return RedirectToAction("detail", "product", new {id=productId});
         }
 
+        public ActionResult removeCartCookie(long id,int sl)
+        {
+            if (Request.Cookies["CartCookie"] != null)
+            {
+
+                string chuoi = Request.Cookies["CartCookie"].Value.ToString();
+                chuoi = chuoi.Replace(id.ToString()+","+sl+"|", "");
+                Response.Cookies["CartCookie"].Value=chuoi;
+            }
+            return RedirectToAction("detail");
+        }
     }
 }
